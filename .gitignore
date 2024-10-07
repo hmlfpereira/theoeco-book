@@ -52,7 +52,9 @@ rsconnect/
 # added by hmlfpereira
 # for Quarto
 /.quarto/
-/_site/
+/_book/
+/_freeze/
+QTDublinIrish.otf
 
 #for Mac OS
 .DS_Store
