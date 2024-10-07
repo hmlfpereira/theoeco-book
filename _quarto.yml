@@ -1,0 +1,45 @@
+project:
+  type: book
+
+book:
+  title: "Ecological theory for the biodiversity crisis"
+  author: "Henrique Miguel Pereira"
+  date: today
+  chapters:
+    - index.qmd
+    - part: "Ecology of individuals"
+      chapters:
+        - ecophysiology.qmd
+    - part: "Ecology of populations"
+      chapters:
+        - demography.qmd
+  appendices:
+    - intro_to_R.qmd
+  #  - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    cover-image: "ValeCastroPanoramaBook.jpg"
+  titlepage-pdf:
+    documentclass: book
+    classoption: ["oneside", "open=any"]
+    number-sections: true
+    coverpage: true
+    coverpage-bg-image: "ValeCastroPanoramaBook.jpg"
+    coverpage-theme:
+      title-fontstyle: ["bfseries"]
+      title-fontsize: 50
+      title-bottom: "0.9\\paperheight"
+      author-style: "plain"
+      author-bottom: "0.65\\paperheight"
+      author-sep: "newline"
+      author-fontsize: 30
+    titlepage: false
+
+editor: visual
+
+execute:
+  freeze: auto
