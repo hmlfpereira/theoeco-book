@@ -47,3 +47,9 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+
+# added by hmlfpereira
+# for Quarto
+/.quarto/
+/_site/
