@@ -53,3 +53,6 @@ rsconnect/
 # for Quarto
 /.quarto/
 /_site/
+
+#for Mac OS
+.DS_Store
