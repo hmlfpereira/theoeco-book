@@ -1,0 +1,742 @@
+# A brief R tutorial {.unnumbered}
+
+If you are new to **R** you can have a short dive into its main features by working through this tutorial. If you had learnt programming in another computer language, you will be able to skim over this tutorial to find the main differences from what you have learnt to how things are done in **R.**
+
+## Variables, vectors and matrices
+
+```{r}
+# Introduction to variables
+# Variables can be any sequence of letter and numbers, but 
+# it cannot start with a number
+x = 2
+x <- 4
+2+2 
+y <- x^5
+y
+
+
+# Introduction to vectors
+v1 <- c(2,3,6,12)
+v2 <- 1:100
+length(v2)
+v2
+v3 <- seq(1,100,5)  # call without naming arguments
+v3
+v3 <- seq(from=1,to=100,by=5) # call with names of arguments
+v3
+v3 <- seq(to=100,by=5) # call skipping the first argument
+#and using the default value 1 - see help(seq)
+v3
+v3 <- seq(by=5,to=100) # call by arguments and change order or arguments
+
+# Indexing vectors
+v3[3] #uses square brackets to obtain the third element of the vector
+v3>20 # produce a vector of boolean values that are TRUE when
+      #v3 is greater than 20
+v3[v3>20] # select from v3 all the values that are greater than 20
+v4<-c(1,2,3,4,5)
+v4[c(FALSE,TRUE,FALSE,TRUE,FALSE)] #select from v4 the second and fourth element
+v3[1:10] # first ten elements
+v3[-1] # dropping first element
+
+head(v2) # prints the first few elements of v2
+tail(v2) # prints the last few elements of v2
+which(v3 == 26) # returns the position of v3 that equals 26
+
+#Numerical operations with vectors
+2^v2
+log(v2)
+v5 <- 101:200
+v5-v2
+v5/v2
+v1/v2
+
+#Using strings in R
+mystring <- "Ecology"
+vstrg <- c("Anna", "Peter", "Xavier")
+vstrg[2]
+
+#making plots in R
+plot(v2,v2)
+plot(v2,v2^2)
+plot(v2,v2^2,type="l")
+plot(v2,v2^2,type="l",col="red")
+plot(v2,v2^2,type="l",col="red",main="My beautiful plot")
+plot(v2,v2^2,type="l",col="red",main="My beautiful plot",xlab="x",
+     ylab="x^2")
+lines(v2,v2^3,col="blue")
+
+# Matrices in R
+m <- matrix(5,3,2)
+m
+m2 <- matrix(1:6,3,2)
+m2
+t(m2) # transposes matrix
+
+x <- 1:4
+y <- 5:8
+
+m3<-cbind(x,y)
+m3
+m4<-rbind(x,y)
+m4
+
+# Indexing matrices
+m3[3,2] #element in row 3 and column 2
+m3[1,] #entire first row
+m3[,1] #entire first column
+colnames(m3)<-c("col1","col2")
+m3
+m3[,"col2"]
+
+
+# Lists in R
+mylist <- list(elem1=m,elem2=v2,elem3="my list")
+mylist$elem2
+
+# Dataframes
+df <- as.data.frame(m3)
+df$col1
+```
+
+## Iterations and conditional expressions
+
+```{r}
+# FOR loops
+
+for (k in 1:10)  # for k =1, 2, 3, 4, 5,...10
+  print (k^2)   #do this
+
+R <- 1.2
+n <- 1
+print(n[1])
+for (t in 1:100)
+{
+  n[t+1] <- R*n[t]
+  print(n[t+1])
+}
+
+
+R <- 1.2
+n <- 1
+for (t in 1:100)
+  n[t+1] <- R*n[t]
+
+# IF conditional statement
+
+# logical operators
+# == equal to
+# > greater than
+# < smaller than
+# >= greater or equal
+# <= smaller or equal
+# != different from
+# && and
+# || or
+
+if (3>2) print ("yes")
+if (3==2) print ("yes") else print("no")
+
+if ((3>2)&&(4>5)) print ("yes")
+
+for (k in 1:10)  # for k =1, 2, 3, 4, 5,...10
+  if (k^2>20) print (k^2)  
+```
+
+## Writing functions
+
+```{r}
+# creating FUNCTIONS in r
+
+pythagoras <- function (c1,c2)
+{
+  h <- sqrt (c1^2 + c2^2)
+  return (h)
+}
+
+pythagoras(1,1)
+
+pythagoras(5,5)
+pythagoras(10,1)
+
+# regression in R
+
+help(lm)
+x <- c(1,2,3,4)
+y <- c(1.1,2.3,2.9,4.1)
+plot(x,y)
+myreg<-lm(y ~ x)
+summary(myreg)
+abline(myreg)
+```
+
+## Random numbers and statistical distributions
+
+```{r}
+
+random1d<-function(tmax)
+{
+x<-0
+for (t in 1:tmax)
+{
+  r<-runif(1)
+  if (r<1/2)
+    x[t+1]<-x[t]+1 else
+      x[t+1]<-x[t]-1
+}
+return(x)
+}
+
+plot(random1d(100))
+
+tmax<-10000
+lastx<-0
+for (i in 1:1000)
+{
+  x<-random1d(tmax)
+  lastx[i]<-x[tmax]
+}
+
+hist(lastx)
+mean(lastx)
+d<-sqrt(lastx^2)
+hist(d)
+mean(d)
+median(d)
+max(d)
+hist(d[d<20],breaks=c(1:20))
+```
+
+## Spatial analysis
+
+### Shapefiles and Raster (Isabel Rosa)
+
+When you work with spatial data, essentially you use two types of data:
+
+1)  vector data (i.e., shapefiles): stores the geometric location and attribute information of geographic features. These can be represented by points, lines, or polygons (areas).
+2)  matricial data (i.e., raster): consists of a matrix of cells (or pixels) organized into rows and columns (or a grid) where each cell contains a value representing information. They can be categorical or continuous and have multiple bands.
+
+For more information on the tree cover datasets, please see: <https://earthenginepartners.appspot.com/science-2013-global-forest/download_v1.2.html>
+
+```{r echo=TRUE, eval=FALSE}
+
+# read in shapefile using rgdal
+sc <- readOGR(".", "SantaCatarina")
+
+# import municipalities and settlements shapefiles
+sc_mun <- readOGR(".", "SantaCatarina_mun")
+br_sett <- readOGR(".", "Brazil_settlements")
+
+# always good to check the contents of your dat
+#str(br_sett)
+
+# visualize one of the variables
+spplot(sc_mun, z="Shape_Area", main = "Municipality Area (km2)")
+
+# read in raster
+tc<-raster("tree_cover.tif")
+
+# import loss and gain rasters here
+tl<-raster("loss.tif")
+tg<-raster("gain.tif")
+
+# for multiple band rasters, you can choose to import just one or all bands
+#r2 <- raster("tree_cover_multi.tif", band=2)
+
+# note that the value 255, which is Hansen's nodata value was not recognized as such
+NAvalue(tg) # check first
+NAvalue(tc)<-255 #fix it by forcing 255 to be the nodata
+NAvalue(tl)<-255 #fix it by forcing 255 to be the nodata
+NAvalue(tg)<-255 #fix it by forcing 255 to be the nodata
+
+# visualize one of the rasters
+par(mfrow=c(1,3))
+plot(tc, main = "Tree Cover (%)")
+plot(tl, main = "Tree Cover Loss (binary)")
+plot(tg, main = "Tree Cover Gain (binary)")
+
+```
+
+### Reference systems
+
+Coordinate systems are essential to understand when working with spatial data. Some reading material on this can be found here: Essentially, if one wants to know which position of the Earth we refer to, coordinates of geospatial data require a reference system:
+
+1)  geodesic/geographic coordinates need an order (lat/long), a unit (e.g., degrees) and a datum (a reference ellipsoid: e.g. WGS84)
+2)  cartesian/projected coordinates (e.g. UTM, web Mercator) need also measurement units (e.g., meters), and some way of encoding how they relate to geodesic coordinates, in which datum (this is handled by the GIS system)
+
+```{r echo=FALSE, eval=FALSE}
+
+# check the coordinate system of your shapefile
+proj4string(sc)
+proj4string(sc_mun)
+proj4string(br_sett)
+# they should all be the same! 
+
+#if missing: assign coordinates
+#proj4string(s1) <- CRS("+proj=utm +zone=19 +ellps=GRS80 +datum=NAD83")
+
+#if different: transforms coordinates
+#sc.wgs <- spTransform(sc, CRS("+proj=longlat +datum=WGS84"))
+
+# check the coordinate system of the rasters
+proj4string(tc)
+proj4string(tl)
+proj4string(tg)
+
+```
+
+### Operations with Shapefiles
+
+Clip: in R you can clip using the command "intersect", so that intersect(feature to be clipped, clip feature) Select: you can use a boolean selection to subset the features of your shapefile, for instance if you just want to look at settlements with a mininum number of habitants, so that Population \> median(Population) There are several options, have a look at this great tutorial: <http://www.rspatial.org/spatial/rst/7-vectmanip.html>
+
+```{r echo=TRUE, eval=FALSE}
+
+# Clip the settlement features using the Santa Catarina shapefile
+sc_sett<-intersect(br_sett, sc)
+
+#sc_sett$med <- sc_sett$population > median(sc_sett$population) # oops! annoyingly our population values have been stored as factors
+
+# convert to original numerical values
+sc_sett$population<-as.numeric(as.vector(sc_sett$population))
+# careful! applying as.numeric alone it will not work!!
+
+# visualize results
+plot(sc_sett, main = "Settlements in Santa Catarina")
+spplot(sc_sett, z="population", main = "Population per Settlement (people)")
+
+# select settlements larger then the median value
+sc_sett$med <- sc_sett$population > median(sc_sett$population)
+sc_largesett <- sc_sett[sc_sett$med == 1, ]
+
+# visualize results
+par(mfrow=c(1,2))
+plot(sc_sett, main = "All Settlements")
+plot(sc_largesett, main = "Largest Settlements")
+
+
+```
+
+### Operations with Rasters
+
+There are many operations you can do with rasters, and these are more frequently used in spatial analyses than shapefiles. Here I will just illustrate a couple of simple operations: - Global/Raster statistics - obtain a value that summarizes the whole raster layer - Cell statistics (pixel-by-pixel operation): obtains a value per pixel - Focal statistics (operation that takes into account neighborhood of central cell) - results in raster of same of different size - Zonal statistics - calculates summary statistics of a give raster (e.g., elevation) based on pre-defined zones (e.g., admnistrative boundaries, biomes). Outputs a table with the values per zone. For more great examples, have a look here: <http://www.rspatial.org/spatial/rst/8-rastermanip.html>
+
+```{r echo=TRUE, eval=FALSE}
+
+# sum the loss and gain rasters to know where there was simultaneous loss and gain in Santa Catarina
+tclg<-tl+tg 
+par(mfrow=c(1,3))
+plot(tl, main = "Forest Loss")
+plot(tg, main = "Forest Gain")
+plot(tclg, main = "Forest Loss and Gain")
+
+# you can also try to create three new rasters and work with them
+# create a new raster
+r <- raster(ncol=10, nrow=10, xmx=-80, xmn=-150, ymn=20, ymx=60)
+values(r) <- runif(ncell(r)) # assign random values
+#plot(r)
+
+# create two more rasters based on the first one
+r2 <- r * r
+r3  <- sqrt(r)
+
+# either stack or brick them
+s <- stack(r, r2, r3)
+#b <- brick(s)
+
+# Raster statistics - calculate several statistics per raster layer (i.e., sum, mean, median)
+cellStats(s, "sum") # outputs a value per raster
+
+# Cell statistics - calculate several statistics per pixel  (i.e., sum, mean, median)
+par(mfrow=c(2,2))
+plot(r, main ="Random 1")
+plot(r2, main ="Random 2")
+plot(r3, main ="Random 3")
+plot(overlay(s, fun="mean"), main="Average Values") # outputs a new raster
+
+# Focal statistics - calculate mean accounting for the neighborhood values, compare with previous outcome 
+f1 <- focal(tc, w=matrix(1,nrow=5,ncol=5) , fun=mean)
+plot(f1, main = "Average forest cover 5x5")
+# sum the loss, vary window size
+f2 <- focal(tl, w=matrix(1,nrow=5,ncol=5) , fun=sum)
+plot(f2, main = "Total forest loss 5x5")
+# sum the gain, vary window size
+f3 <- focal(tg, w=matrix(1,nrow=5,ncol=5) , fun=sum)
+plot(f3, main = "Total forest gain 5x5")
+
+# plot 4 maps with different window sizes
+par(mfrow=c(2,2))
+for(i in c(5,15,25,55)){
+  f_w <- focal(tc, w=matrix(1,nrow=i,ncol=i) , fun=sum)
+  plot(f_w, main = paste0("Window size: ", i))
+}
+
+# Zonal Statistics - using two rasters
+sc_tc_mean_loss <- zonal(tc, tl, fun=mean) #average tree cover in loss areas
+sc_tc_mean_gain <- zonal(tc, tg, fun=mean) #average tree cover in gain areas
+
+# average tree cover loss
+sc_tc_mean_loss
+
+# average tree cover gain
+sc_tc_mean_gain
+  
+```
+
+### Operations with both Rasters and Shapefiles
+
+Here I'll show a couple of examples of operation that use feature data as inputs and output rasters: Distance to features - calculates the euclidean distance from each cell/pixel to the closest feature (e.g., roads, settlements). Outputs a raster file with these distances. Interpolation: a world in itself! Very vey short example provided here (based on a single method, IDW), please see more here: <http://www.rspatial.org/analysis/rst/4-interpolation.html> To better understand interpolation I advise you to read first about spatial autocorrelation: <http://www.rspatial.org/analysis/rst/3-spauto.html>
+
+To use interpolation metrics you need to load another packaged called gstat Inverse distance weighted (IDW) - See more also here: <http://desktop.arcgis.com/en/arcmap/10.3/tools/3d-analyst-toolbox/how-idw-works.htm>
+
+```{r echo=TRUE, eval=FALSE}
+
+# create an empty raster (little trick using existing raster)
+dist_sett<-tc*0
+# or you can create an empty one like before
+# dist_sett <- raster(ncol=ncol(tc), nrow=nrow(tc), xmx=extent(tc)@xmax, xmn=extent(tc)@xmin, ymn=extent(tc)@ymin, ymx=extent(tc)@ymax)
+
+# Distance to points
+dist_sett <- distanceFromPoints(dist_sett, sc_sett)
+
+# you can then mask the outside area of Santa Catarina
+dist_sett <- mask(dist_sett, tc)
+
+# plot results
+plot(dist_sett, main = "Distance to settlements (m)")
+
+# load gstat
+library(gstat)
+idw_sett<-tc*0
+
+# compute the model, see reference for more detail
+gs <- gstat(formula=population~1, locations=sc_sett, nmax=5, set=list(idp = 2))
+idw_out <- interpolate(idw_sett, gs)
+
+## [inverse distance weighted interpolation]
+sc_pop <- mask(idw_out, tc)
+plot(sc_pop, main = "Santa Catarina Population")
+
+```
+
+### Export Shapefiles and Rasters
+
+It's very easy to export both shapefiles and rasters from R to be visualized in QGIS or ArcMap.
+
+```{r echo=TRUE, eval=FALSE}
+
+# Save feature layers (point, polygon, polyline) to shapefile 
+writeOGR(sc_largesett, dsn=".", layer="SC_largeSett", driver="ESRI Shapefile" )
+
+# or 
+#shapefile(sc_largesett, "SC_largeSett.shp", overwrite=TRUE) 
+
+#Exporting raster
+writeRaster(sc_pop, filename="SC_popmap", format="GTiff" )
+
+```
+
+## Working with biodiversity data: GBIF, EBV Portal (Corey Callaghan, Luise Quoss)First we load the library rgbif.
+
+```{r eval=FALSE}
+library(rgbif)
+library(tidyverse)
+```
+
+Now we will download observations of a species. Let's download observations of the common toad "Bufo bufo".
+
+```{r eval=FALSE}
+matbufobufo<-occ_search(scientificName="Bufo bufo", limit=500, hasCoordinate = TRUE, hasGeospatialIssue = FALSE)
+```
+
+Let's examine the object *matbufobufo*
+
+```{r eval=FALSE}
+class(matbufobufo)
+matbufobufo
+```
+
+Let's download data about octupusses. They are in the order "Octopoda". First we need to find the GBIF search key for Octopoda.
+
+```{r eval=FALSE}
+a<-name_suggest(q="Octopoda",rank="Order")
+key<-a$data$key
+```
+
+```{r eval=FALSE}
+
+octopusses<-occ_search(orderKey=key,limit=2000, hasCoordinate = TRUE, hasGeospatialIssue = FALSE)
+```
+
+Show the result
+
+```{r eval=FALSE}
+octmat<-octopusses$data
+head(octmat)
+```
+
+Count the number of observations per species using tidyverse and pipes
+
+```{r eval=FALSE}
+#class(octmat)
+octmat %>% 
+  group_by(scientificName) %>% 
+  summarise(sample_size=n()) %>%
+  arrange(desc(sample_size)) %>% 
+  mutate(sample_size_log=log(sample_size,2)) %>% 
+  ggplot(aes(x = sample_size_log)) + geom_histogram() 
+```
+
+Plot the records on an interactive map. First load the leaflet package.
+
+```{r eval=FALSE}
+library(leaflet)
+leaflet(data=octmat) %>% addTiles() %>%
+  addCircleMarkers(lat= ~decimalLatitude, lng = ~decimalLongitude,popup=~scientificName)
+```
+
+### Version 2 (Isabel Rosa)
+
+Here are the packages we'll need.
+
+```{r packaes, message=FALSE, warning=FALSE, eval=FALSE}
+library(rgbif)
+library(tidyverse)
+library(raster)
+library(maps)
+library(leaflet)
+library(sdmpredictors)
+```
+
+First let's pick an example species to download data for. We will only download 500 observations to keep it simple for now. If you were doing this for real, you would download all data for that species (see notes at the end). I will choose the European Robin: <https://en.wikipedia.org/wiki/European_robin.>
+
+```{r, eval=FALSE}
+species <- occ_search(scientificName="Erithacus rubecula", limit=500, hasCoordinate = TRUE, hasGeospatialIssue=FALSE)
+
+```
+
+What does this object look like?
+
+```{r, eval=FALSE}
+class(species)
+
+species
+
+```
+
+It is a special object of class `gbif` which allows for the metadata and the actual data to all be included, as well as taxonomic hierarchy data, and media metadata. We won't worry too much about the details of this object now. But we do want to get a dataframe we can work with! To do this, we have one extra step.
+
+```{r, eval=FALSE}
+sp_dat <- species$data
+
+class(sp_dat)
+
+head(sp_dat)
+
+```
+
+So this was just for one species. Lets broaden this out a little bit. What if we were interested in many species of a given order/class? Here, we will choose an entire order to download. I will choose owls! <https://en.wikipedia.org/wiki/Owl.> First, we need to find the 'key' that gbif uses for that order and then pass it to our GBIF download function. Again, we are only getting a small number of records for illustration purposes.
+
+```{r, eval=FALSE}
+a <- name_suggest(q='Strigiformes')
+
+key <- a$data$key
+
+order <- occ_search(orderKey=key, limit=1000, hasCoordinate = TRUE, hasGeospatialIssue=FALSE) 
+```
+
+What kind of object is 'order'? As with species, we need to turn it into a dataframe to work with.
+
+```{r, eval=FALSE}
+order_dat <- order$data
+
+class(order_dat)
+
+head(order_dat)
+```
+
+Count the number of observations by species
+
+```{r, eval=FALSE}
+order_dat %>%
+  group_by(scientificName) %>%
+  summarize(sample_size=n()) %>%
+  arrange(desc(sample_size))
+```
+
+Plot the records on an interactive map. First for our chosen species.
+
+```{r, eval=FALSE}
+leaflet(data = sp_dat) %>%
+    addTiles() %>%
+    addCircleMarkers(lat = ~decimalLatitude, lng = ~decimalLongitude,popup = ~scientificName)
+```
+
+Then for the order we chose.
+
+```{r, eval=FALSE}
+leaflet(data = order_dat) %>%
+    addTiles() %>%
+    addCircleMarkers(lat = ~decimalLatitude, lng = ~decimalLongitude, popup = ~scientificName)
+```
+
+## Climate data
+
+Let's play with some global climate data and overlay that with our GBIF observations.
+
+```{r, eval=FALSE}
+mean_temp_map <- getData(name="worldclim", res=10, var="tmean")
+plot(mean_temp_map)
+```
+
+Each month has separate values for each cell. To combine to a yearly value, we just take the mean.
+
+```{r, eval=FALSE}
+annual_mean_temp <- mean(mean_temp_map)/10 #data comes as degrees * 10
+```
+
+Now plot this.
+
+```{r, eval=FALSE}
+plot(annual_mean_temp)
+```
+
+To get out the values for the organism of interest, we use `extract`.
+
+```{r, eval=FALSE}
+org_temp <- extract(annual_mean_temp, cbind(x=sp_dat$decimalLongitude, y=sp_dat$decimalLatitude))
+```
+
+Now we will visualize how the global distribution of temperature values compares with the species' distribution of temperature values. This shows the distribution of temps where robins are found versus the global distribution of temps.
+
+```{r eval=FALSE}
+temp <- tibble(mean_temp=getValues(annual_mean_temp)) %>%
+  filter(!is.na(mean_temp))
+
+temp_org <- tibble(organism_temp=org_temp) %>%
+  filter(!is.na(organism_temp))
+
+ggplot(temp, aes(x=mean_temp))+
+  geom_density(fill="blue")+
+  geom_density(data=temp_org, aes(x=organism_temp), fill="red")+
+  theme_bw()
+```
+
+## Intro to apply, pipes, ggplot2, tidyverse.
+
+### Introduction to gpplot
+
+```{r cars , eval=FALSE}
+cars
+library(ggplot2)
+
+ggplot(data=cars, mapping=aes(x=speed,y=dist)) + geom_point(colour="red")
+```
+
+```{r , eval=FALSE}
+plot(cars$speed,cars$dist)
+```
+
+```{r, eval=FALSE}
+#Introduction to R - 9
+
+
+# a recursive function that calculates a factorial
+myfun <- function(x)
+{
+  if (x==1)
+    return (1)
+  else return(x*myfun(x-1))
+}
+
+myfun(1:10) # does not work
+
+#option1 - with a for loop
+start_time <- Sys.time()
+y<-0
+for (i in 1:100)
+  y[i]<-myfun(i)
+end_time <- Sys.time()
+end_time-start_time
+y
+plot(y,type="l")
+
+#option 2 - with apply
+start_time <- Sys.time()
+y<-sapply(1:100,myfun)
+end_time <- Sys.time()
+end_time-start_time
+y
+
+# selecting a subset from a matrix and applying a function to a column of that subset
+
+setwd("~/iDiv Dropbox/Henrique Pereira/Teaching/Spatial Ecology/Spatial Ecology 2022/2_Lab_assignments")
+Florida <- read.csv("Florida.csv")
+
+# number of species for year 1970 and route 20
+tapply(Florida$Abundance,Florida$Route==20 & Florida$Year==1970, length)
+
+# matrix with number of species per route and per year
+out<-tapply(Florida$Abundance,list(Florida$Route,Florida$Year), length)
+
+names(out[,1])
+plot(out[10,])
+plot(out[20,])
+
+
+shannon<-function(x)
+{
+  p<-x/sum(x)
+  - sum(p*log(p))
+}
+
+out<-tapply(Florida$Abundance,list(Florida$Route,Florida$Year), shannon)
+plot(out[10,])
+
+library(tidyverse)
+
+#our first pipe
+x<-rnorm(1000)
+hist(x)
+
+rnorm(1000) %>%  hist
+
+t<-1:ncol(out)
+myreg<-lm(out[10,]~t)
+summary(myreg)
+plot(out[10,])
+abline(myreg)
+
+lm(out[10,]~t) %>% summary 
+plot(out[10,])
+lm(out[10,]~t) %>% abline 
+
+#ggplot
+mat=cbind(t,out[10,])
+data(cars)
+colnames(mat)<-c("time","shannon")
+mat<-as.data.frame(mat)
+
+myplot <-  ggplot(mat, aes(time,shannon))+
+  geom_point()
+myplot
+
+myplot <-  ggplot(mat, aes(time,shannon))+
+  geom_line()
+myplot
+
+data(cars)
+myplot <-  ggplot(cars, aes(speed,dist))+
+  geom_point()+geom_line()
+myplot
+
+data(cars)
+myplot <-  ggplot(cars, aes(speed,dist))+
+  geom_point()+geom_smooth(method="lm")
+myplot
+
+data(cars)
+myplot <-  ggplot(cars, aes(speed,dist))+
+  geom_point()+geom_smooth(method="lm")+scale_x_log10()+scale_y_log10()
+myplot
+
+```
