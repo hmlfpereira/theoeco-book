@@ -55,6 +55,8 @@ rsconnect/
 /_book/
 /_freeze/
 QTDublinIrish.otf
+/data/
+
 
 #for Mac OS
 .DS_Store
