@@ -127,7 +127,7 @@ polygon(X,Y,col="green")
 Now that we have the climate space we can plot on top of it some empirical data of how the conditions are in the field during the day. We can for instance consider two micro-habitats, a rock (in the sun) and a bush (in the shade). Suppose we obtain some data from temperature loggers that were installed in each micro-habitat , recording every three hours the values of temperature and radiation as tabled below.
 
 | Time (hh:mm) | Radiation rock (cal/h) | Radiation bush (cal/h) | Temperature (ºC) |
-|--------------|------------------------|------------------------|------------------|
+|-----------------|--------------------|--------------------|-----------------|
 | 00:00        | 150                    | 150                    | 18               |
 | 03:00        | 150                    | 150                    | 13               |
 | 06:00        | 800                    | 450                    | 10               |
