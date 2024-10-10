@@ -1,5 +1,3 @@
-
-
 # LAB.1 -- Climate space of an ectotherm
 
 **THE HEAT FLUX EQUATION**
