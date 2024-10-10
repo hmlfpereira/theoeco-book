@@ -38,30 +38,39 @@ $$f = q\ –h*(b - a)$$
 3.  ***Air Temperature and solar radiation throughout the day in two
     locations***
     1.  Plot the following values of air temperature and solar radiation
-        that are available throughout a day in two locations. For: -
-        Times of the day
+        that are available throughout a day in two locations. For:
 
-        ``` r
-        t = c("00:00","03:00","06:00","09:00","12:00","15:00","18:00","21:00","00:00")
-        ```
+        - Times of the day
 
-    2.  ``` r
-        t = c("00:00","03:00","06:00","09:00","12:00","15:00","18:00","21:00","00:00")
-        ```
-4.  Solar radiation in the rock habitat
+          ``` r
+          t = c("00:00","03:00","06:00","09:00","12:00",
+            "15:00","18:00","21:00","00:00")
+          ```
 
-> *rock_q = c(150,150,800,1100,1300,1200,800,400,150)*
+        - Solar radiation in the rock habitat
 
-- Air temperature in the rock habitat
+          ``` r
+          rock_q = c(150,150,800,1100,1300,1200,800,400,150)
+          ```
 
-> *rock_a = c(18,13,10,14,21,24,22,20,18)*
+        - Air temperature in the rock habitat
 
-- Solar radiation in the bush habitat
+          ``` r
+          rock_a = c(18,13,10,14,21,24,22,20,18)
+          ```
 
-> *bush_q = c(150,150,450,600,650,650,350,200,150)*
+        - Solar radiation in the bush habitat
 
-- Air temperature in the bush habitat
+          ``` r
+          bush_q = c(150,150,450,600,650,650,350,200,150)
+          ```
 
-> bush_a = c(18,13,10,14,21,24,22,20,18)
+        - Air temperature in the bush habitat
 
-      b. At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
+          ``` r
+          bush_a = c(18,13,10,14,21,24,22,20,18)
+          ```
+
+    2.  At which time of the day is the lizard on the rock, and at which
+        time is it at the bush? Is there any time when the lizard cannot
+        be at any of the locations?

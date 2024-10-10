@@ -1,6 +1,5 @@
 ---
 format:
-  html: default
   gfm: default
 code-overflow: wrap 
 ---
@@ -30,33 +29,37 @@ $$f = q\ –h*(b - a)$$
 
         **Hint:** *polygon{graphics}* - draws the polygons whose vertices are given in x and y.
 3.  ***Air Temperature and solar radiation throughout the day in two locations***
-    a.  Plot the following values of air temperature and solar radiation that are available throughout a day in two locations. For: - Times of the day
+    a.  Plot the following values of air temperature and solar radiation that are available throughout a day in two locations. For:
 
-        ```{r}
-        t = c("00:00","03:00","06:00","09:00","12:00",
+        -   Times of the day
+
+            ``` r
+            t = c("00:00","03:00","06:00","09:00","12:00",
               "15:00","18:00","21:00","00:00")
-        ```
+            ```
 
-        ``` r
-        t = c("00:00","03:00","06:00","09:00","12:00",
-              "15:00","18:00","21:00","00:00")
-        ```
-4.  Solar radiation in the rock habitat
+        -   Solar radiation in the rock habitat
 
-> *rock_q = c(150,150,800,1100,1300,1200,800,400,150)*
+            ``` r
+            rock_q = c(150,150,800,1100,1300,1200,800,400,150)
+            ```
 
--   Air temperature in the rock habitat
+        -   Air temperature in the rock habitat
 
-> *rock_a = c(18,13,10,14,21,24,22,20,18)*
+            ``` r
+            rock_a = c(18,13,10,14,21,24,22,20,18)
+            ```
 
--   Solar radiation in the bush habitat
+        -   Solar radiation in the bush habitat
 
-> *bush_q = c(150,150,450,600,650,650,350,200,150)*
+            ``` r
+            bush_q = c(150,150,450,600,650,650,350,200,150)
+            ```
 
--   Air temperature in the bush habitat
+        -   Air temperature in the bush habitat
 
-> bush_a = c(18,13,10,14,21,24,22,20,18)
+            ``` r
+            bush_a = c(18,13,10,14,21,24,22,20,18)
+            ```
 
-```         
-  b. At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
-```
+    b.  At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
