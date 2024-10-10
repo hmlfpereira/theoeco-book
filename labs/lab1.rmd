@@ -1,10 +1,10 @@
-# LAB.1 -- Climate space of an ectotherm
+LAB.1 -- Climate space of an ectotherm
 
 **THE HEAT FLUX EQUATION**
 
 Solar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (*f*) into the animal is given by:
 
-$$f = q\ –h*(b - a)$$
+$$\mathbf{f = q\ –h*(b - a)}$$
 
 -   $q$ = solar radiation (cal/h)
 
@@ -18,23 +18,16 @@ $$f = q\ –h*(b - a)$$
 
 1.  ***Equilibrium body temperature***
 
-<!-- -->
+2.  Assuming that air temperature is 18ºC, and **h** = 50 cal/h, plot the lizard's equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h
 
-a)  Assuming that air temperature is 18ºC, and **h** = 50 cal/h, plot the lizard's equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h
+3.  ***Climate space of a Lizard***
 
-<!-- -->
-
-2.  ***Climate space of a Lizard***
-
-<!-- -->
 
 a)  Draw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (***bmax***) is 36ºC and the lower lethal limit for the body temperature (***bmin***) is 24ºC.
 
 **Hint:** *polygon{graphics}* - draws the polygons whose vertices are given in x and y.
 
 3.  ***Air Temperature and solar radiation throughout the day in two locations***
-
-<!-- -->
 
 a)  Plot the following values of air temperature and solar radiation that are available throughout a day in two locations. For:
 
