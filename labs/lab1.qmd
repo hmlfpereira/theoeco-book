@@ -1,8 +1,11 @@
+
 # LAB.1 -- Climate space of an ectotherm
 
 **THE HEAT FLUX EQUATION**
 
-Solar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (*f*) into the animal is given by:
+Solar radiation and convection are the two main pathways for animals
+such as small lizards. In this case, the total heat flux (*f*) into the
+animal is given by:
 
 $$f = q\ –h*(b - a)$$
 
@@ -20,7 +23,10 @@ $$f = q\ –h*(b - a)$$
 
 <!-- -->
 
-a)  Assuming that air temperature is 18ºC, and **h** = 50 cal/h, plot the lizard's equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h
+a)  Assuming that air temperature is 18ºC, and **h** = 50 cal/h, plot
+    the lizard's equilibrium body temperature as a function of solar
+    radiation. Assume that solar radiation varies between 0 and 1500
+    cal/h
 
 <!-- -->
 
@@ -28,15 +34,22 @@ a)  Assuming that air temperature is 18ºC, and **h** = 50 cal/h, plot the lizar
 
 <!-- -->
 
-a)  Draw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (***bmax***) is 36ºC and the lower lethal limit for the body temperature (***bmin***) is 24ºC.
+a)  Draw the climate space of the lizard by drawing the polygon that is
+    limited by the minimum and maximum temperatures that the lizard can
+    support, as a function of solar radiation. Consider that the upper
+    lethal limit for the body temperature (***bmax***) is 36ºC and the
+    lower lethal limit for the body temperature (***bmin***) is 24ºC.
 
-**Hint:** *polygon{graphics}* - draws the polygons whose vertices are given in x and y.
+**Hint:** *polygon{graphics}* - draws the polygons whose vertices are
+given in x and y.
 
-3.  ***Air Temperature and solar radiation throughout the day in two locations***
+3.  ***Air Temperature and solar radiation throughout the day in two
+    locations***
 
 <!-- -->
 
-a)  Plot the following values of air temperature and solar radiation that are available throughout a day in two locations. For:
+a)  Plot the following values of air temperature and solar radiation
+    that are available throughout a day in two locations. For:
 
 -   Times of the day
 
@@ -60,4 +73,6 @@ a)  Plot the following values of air temperature and solar radiation that are av
 
 > bush_a = c(18,13,10,14,21,24,22,20,18)
 
-b)  At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
+b)  At which time of the day is the lizard on the rock, and at which
+    time is it at the bush? Is there any time when the lizard cannot be
+    at any of the locations?
