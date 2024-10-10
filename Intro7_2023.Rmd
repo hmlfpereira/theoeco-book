@@ -1,0 +1,105 @@
+---
+title: "Report from Intro R 6"
+author: "Henrique Pereira"
+date: '2023-10-23'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Introduction to confidence intervals
+
+First we generate 1000 samples from the uniform distribution with minimum 1.7 and maximum 2.7
+
+```{r}
+x<-runif(1000,1.7,2.7)
+```
+
+### Histogram
+Let's plot the histogram of these data.
+```{r}
+hist(x)
+```
+
+
+### Estimate of mean and standard deviation
+```{r}
+mean(x)
+sd(x)
+```
+
+Let's generate a smaller sample with 10 individuals from the uniform distribution with minimum 1.7 and maximum 2.7.
+
+```{r}
+x<-runif(10,1.7,2.7)
+mean(x)
+sd(x)
+```
+### Monte Carlo estimation of the confidence interval for the mean
+I will now simulate 1000 samples of 10 individuals from the unform distribution and calculate the mean value of each sample and store in vector xmean.
+```{r}
+n<-1000
+xmean<-0
+for (i in 1:n)
+{
+  x<-runif(10,1.7,2.7)
+  xmean[i]<-mean(x)
+}
+hist(xmean)
+```
+The confidence interval is given by quantiles of xmean 0f 2.5% and 97.5%.
+```{r}
+quantile(xmean,.025)
+quantile(xmean,.975)
+```
+What are the 2.5% and 97.5% quantiles of the standard normal distribution
+```{r}
+qnorm(.025)
+qnorm(.975)
+```
+Theoretical confidence interval
+```{r}
+2.2-1.96*sqrt(1/12*(2.7-1.7)^2)/sqrt(10)
+2.2+1.96*sqrt(1/12*(2.7-1.7)^2)/sqrt(10)
+```
+
+In practice confidence interval
+```{r}
+x<-runif(10,1.7,2.7)
+mean(x)-1.96*sd(x)/sqrt(10)
+mean(x)+1.96*sd(x)/sqrt(10)
+```
+## Estimating the confidence interval with bootstrapping
+
+Generate sample of 10 individuals, of a uniform distribution with mean 2.2 and sd=sqrt(1/12)=.289
+```{r}
+x<-runif(10,1.7,2.7)
+mean(x)
+sd(x)
+```
+
+Theoretical confidence interval based on sample mean and standard deviation
+```{r}
+mean(x)-1.96*sd(x)/sqrt(10)
+mean(x)+1.96*sd(x)/sqrt(10)
+```
+
+Estimating confidence interval by bootstrapping
+```{r}
+xmean<-0
+xsd<-0
+n<-10000
+for (i in 1:n)
+{
+  xsample<-sample(x,length(x),TRUE)
+  xmean[i]<-mean(xsample)
+  xsd[i]<-sd(xsample)
+}
+quantile(xmean,.025)
+quantile(xmean,.975)
+quantile(xsd,.025)
+quantile(xsd,.975)
+```
+
