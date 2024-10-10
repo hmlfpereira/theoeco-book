@@ -1,1 +1,1 @@
-*.qmd   linguist-language=markdown
+*.qmd text=auto linguist-language=Markdown
