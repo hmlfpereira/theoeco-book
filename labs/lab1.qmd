@@ -1,6 +1,4 @@
----
-format: gfm
----
+
 
 # LAB.1 -- Climate space of an ectotherm
 
