@@ -1,2 +1,1 @@
-*.qmd   linguist-detectable
-*.rmd   linguist-detectable
+*.qmd   linguist-language=markdown
