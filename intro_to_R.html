@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>A brief R tutorial – Ecological theory for the biodiversity crisis</title>
+<title>Appendix A — A brief R tutorial – Ecological theory for the biodiversity crisis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./labs/lab1.html" rel="next">
 <link href="./demography.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -114,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_R.html">Appendices</a></li><li class="breadcrumb-item"><a href="./intro_to_R.html">A brief R tutorial</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_R.html">Appendices</a></li><li class="breadcrumb-item"><a href="./intro_to_R.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A brief R tutorial</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -191,7 +192,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro_to_R.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">A brief R tutorial</span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A brief R tutorial</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./labs/lab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">LAB 1 - Climate space of an ectotherm</span></span></a>
   </div>
 </li>
       </ul>
@@ -206,27 +213,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#variables-vectors-and-matrices" id="toc-variables-vectors-and-matrices" class="nav-link active" data-scroll-target="#variables-vectors-and-matrices">Variables, vectors and matrices</a></li>
-  <li><a href="#iterations-and-conditional-expressions" id="toc-iterations-and-conditional-expressions" class="nav-link" data-scroll-target="#iterations-and-conditional-expressions">Iterations and conditional expressions</a></li>
-  <li><a href="#writing-functions" id="toc-writing-functions" class="nav-link" data-scroll-target="#writing-functions">Writing functions</a></li>
-  <li><a href="#random-numbers-and-statistical-distributions" id="toc-random-numbers-and-statistical-distributions" class="nav-link" data-scroll-target="#random-numbers-and-statistical-distributions">Random numbers and statistical distributions</a></li>
-  <li><a href="#spatial-analysis" id="toc-spatial-analysis" class="nav-link" data-scroll-target="#spatial-analysis">Spatial analysis</a>
+  <li><a href="#variables-vectors-and-matrices" id="toc-variables-vectors-and-matrices" class="nav-link active" data-scroll-target="#variables-vectors-and-matrices"><span class="header-section-number">A.1</span> Variables, vectors and matrices</a></li>
+  <li><a href="#iterations-and-conditional-expressions" id="toc-iterations-and-conditional-expressions" class="nav-link" data-scroll-target="#iterations-and-conditional-expressions"><span class="header-section-number">A.2</span> Iterations and conditional expressions</a></li>
+  <li><a href="#writing-functions" id="toc-writing-functions" class="nav-link" data-scroll-target="#writing-functions"><span class="header-section-number">A.3</span> Writing functions</a></li>
+  <li><a href="#random-numbers-and-statistical-distributions" id="toc-random-numbers-and-statistical-distributions" class="nav-link" data-scroll-target="#random-numbers-and-statistical-distributions"><span class="header-section-number">A.4</span> Random numbers and statistical distributions</a></li>
+  <li><a href="#spatial-analysis" id="toc-spatial-analysis" class="nav-link" data-scroll-target="#spatial-analysis"><span class="header-section-number">A.5</span> Spatial analysis</a>
   <ul class="collapse">
-  <li><a href="#shapefiles-and-raster-isabel-rosa" id="toc-shapefiles-and-raster-isabel-rosa" class="nav-link" data-scroll-target="#shapefiles-and-raster-isabel-rosa">Shapefiles and Raster (Isabel Rosa)</a></li>
-  <li><a href="#reference-systems" id="toc-reference-systems" class="nav-link" data-scroll-target="#reference-systems">Reference systems</a></li>
-  <li><a href="#operations-with-shapefiles" id="toc-operations-with-shapefiles" class="nav-link" data-scroll-target="#operations-with-shapefiles">Operations with Shapefiles</a></li>
-  <li><a href="#operations-with-rasters" id="toc-operations-with-rasters" class="nav-link" data-scroll-target="#operations-with-rasters">Operations with Rasters</a></li>
-  <li><a href="#operations-with-both-rasters-and-shapefiles" id="toc-operations-with-both-rasters-and-shapefiles" class="nav-link" data-scroll-target="#operations-with-both-rasters-and-shapefiles">Operations with both Rasters and Shapefiles</a></li>
-  <li><a href="#export-shapefiles-and-rasters" id="toc-export-shapefiles-and-rasters" class="nav-link" data-scroll-target="#export-shapefiles-and-rasters">Export Shapefiles and Rasters</a></li>
+  <li><a href="#shapefiles-and-raster-isabel-rosa" id="toc-shapefiles-and-raster-isabel-rosa" class="nav-link" data-scroll-target="#shapefiles-and-raster-isabel-rosa"><span class="header-section-number">A.5.1</span> Shapefiles and Raster (Isabel Rosa)</a></li>
+  <li><a href="#reference-systems" id="toc-reference-systems" class="nav-link" data-scroll-target="#reference-systems"><span class="header-section-number">A.5.2</span> Reference systems</a></li>
+  <li><a href="#operations-with-shapefiles" id="toc-operations-with-shapefiles" class="nav-link" data-scroll-target="#operations-with-shapefiles"><span class="header-section-number">A.5.3</span> Operations with Shapefiles</a></li>
+  <li><a href="#operations-with-rasters" id="toc-operations-with-rasters" class="nav-link" data-scroll-target="#operations-with-rasters"><span class="header-section-number">A.5.4</span> Operations with Rasters</a></li>
+  <li><a href="#operations-with-both-rasters-and-shapefiles" id="toc-operations-with-both-rasters-and-shapefiles" class="nav-link" data-scroll-target="#operations-with-both-rasters-and-shapefiles"><span class="header-section-number">A.5.5</span> Operations with both Rasters and Shapefiles</a></li>
+  <li><a href="#export-shapefiles-and-rasters" id="toc-export-shapefiles-and-rasters" class="nav-link" data-scroll-target="#export-shapefiles-and-rasters"><span class="header-section-number">A.5.6</span> Export Shapefiles and Rasters</a></li>
   </ul></li>
-  <li><a href="#working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif." id="toc-working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif." class="nav-link" data-scroll-target="#working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif.">Working with biodiversity data: GBIF, EBV Portal (Corey Callaghan, Luise Quoss)First we load the library rgbif.</a>
+  <li><a href="#working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif." id="toc-working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif." class="nav-link" data-scroll-target="#working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif."><span class="header-section-number">A.6</span> Working with biodiversity data: GBIF, EBV Portal (Corey Callaghan, Luise Quoss)First we load the library rgbif.</a>
   <ul class="collapse">
-  <li><a href="#version-2-isabel-rosa" id="toc-version-2-isabel-rosa" class="nav-link" data-scroll-target="#version-2-isabel-rosa">Version 2 (Isabel Rosa)</a></li>
+  <li><a href="#version-2-isabel-rosa" id="toc-version-2-isabel-rosa" class="nav-link" data-scroll-target="#version-2-isabel-rosa"><span class="header-section-number">A.6.1</span> Version 2 (Isabel Rosa)</a></li>
   </ul></li>
-  <li><a href="#climate-data" id="toc-climate-data" class="nav-link" data-scroll-target="#climate-data">Climate data</a></li>
-  <li><a href="#intro-to-apply-pipes-ggplot2-tidyverse." id="toc-intro-to-apply-pipes-ggplot2-tidyverse." class="nav-link" data-scroll-target="#intro-to-apply-pipes-ggplot2-tidyverse.">Intro to apply, pipes, ggplot2, tidyverse.</a>
+  <li><a href="#climate-data" id="toc-climate-data" class="nav-link" data-scroll-target="#climate-data"><span class="header-section-number">A.7</span> Climate data</a></li>
+  <li><a href="#intro-to-apply-pipes-ggplot2-tidyverse." id="toc-intro-to-apply-pipes-ggplot2-tidyverse." class="nav-link" data-scroll-target="#intro-to-apply-pipes-ggplot2-tidyverse."><span class="header-section-number">A.8</span> Intro to apply, pipes, ggplot2, tidyverse.</a>
   <ul class="collapse">
-  <li><a href="#introduction-to-gpplot" id="toc-introduction-to-gpplot" class="nav-link" data-scroll-target="#introduction-to-gpplot">Introduction to gpplot</a></li>
+  <li><a href="#introduction-to-gpplot" id="toc-introduction-to-gpplot" class="nav-link" data-scroll-target="#introduction-to-gpplot"><span class="header-section-number">A.8.1</span> Introduction to gpplot</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -234,9 +241,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_R.html">Appendices</a></li><li class="breadcrumb-item"><a href="./intro_to_R.html">A brief R tutorial</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro_to_R.html">Appendices</a></li><li class="breadcrumb-item"><a href="./intro_to_R.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">A brief R tutorial</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">A brief R tutorial</h1>
+<h1 class="title">Appendix A — A brief R tutorial</h1>
 </div>
 
 
@@ -254,8 +261,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>If you are new to <strong>R</strong> you can have a short dive into its main features by working through this tutorial. If you had learnt programming in another computer language, you will be able to skim over this tutorial to find the main differences from what you have learnt to how things are done in <strong>R.</strong></p>
-<section id="variables-vectors-and-matrices" class="level2">
-<h2 class="anchored" data-anchor-id="variables-vectors-and-matrices">Variables, vectors and matrices</h2>
+<section id="variables-vectors-and-matrices" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="variables-vectors-and-matrices"><span class="header-section-number">A.1</span> Variables, vectors and matrices</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Introduction to variables</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables can be any sequence of letter and numbers, but </span></span>
@@ -584,8 +591,8 @@ y    5    6    7    8</code></pre>
 </div>
 </div>
 </section>
-<section id="iterations-and-conditional-expressions" class="level2">
-<h2 class="anchored" data-anchor-id="iterations-and-conditional-expressions">Iterations and conditional expressions</h2>
+<section id="iterations-and-conditional-expressions" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="iterations-and-conditional-expressions"><span class="header-section-number">A.2</span> Iterations and conditional expressions</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FOR loops</span></span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -755,8 +762,8 @@ y    5    6    7    8</code></pre>
 </div>
 </div>
 </section>
-<section id="writing-functions" class="level2">
-<h2 class="anchored" data-anchor-id="writing-functions">Writing functions</h2>
+<section id="writing-functions" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="writing-functions"><span class="header-section-number">A.3</span> Writing functions</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating FUNCTIONS in r</span></span>
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -816,8 +823,8 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 </div>
 </section>
-<section id="random-numbers-and-statistical-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="random-numbers-and-statistical-distributions">Random numbers and statistical distributions</h2>
+<section id="random-numbers-and-statistical-distributions" class="level2" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="random-numbers-and-statistical-distributions"><span class="header-section-number">A.4</span> Random numbers and statistical distributions</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>random1d<span class="ot">&lt;-</span><span class="cf">function</span>(tmax)</span>
 <span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>{</span>
@@ -858,7 +865,7 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(lastx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -6.768</code></pre>
+<pre><code>[1] -0.724</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>d<span class="ot">&lt;-</span><span class="fu">sqrt</span>(lastx<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -871,7 +878,7 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 83.436</code></pre>
+<pre><code>[1] 83.024</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -879,7 +886,7 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 409</code></pre>
+<pre><code>[1] 415</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d[d<span class="sc">&lt;</span><span class="dv">20</span>],<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -891,10 +898,10 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 </div>
 </section>
-<section id="spatial-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="spatial-analysis">Spatial analysis</h2>
-<section id="shapefiles-and-raster-isabel-rosa" class="level3">
-<h3 class="anchored" data-anchor-id="shapefiles-and-raster-isabel-rosa">Shapefiles and Raster (Isabel Rosa)</h3>
+<section id="spatial-analysis" class="level2" data-number="A.5">
+<h2 data-number="A.5" class="anchored" data-anchor-id="spatial-analysis"><span class="header-section-number">A.5</span> Spatial analysis</h2>
+<section id="shapefiles-and-raster-isabel-rosa" class="level3" data-number="A.5.1">
+<h3 data-number="A.5.1" class="anchored" data-anchor-id="shapefiles-and-raster-isabel-rosa"><span class="header-section-number">A.5.1</span> Shapefiles and Raster (Isabel Rosa)</h3>
 <p>When you work with spatial data, essentially you use two types of data:</p>
 <ol type="1">
 <li>vector data (i.e., shapefiles): stores the geometric location and attribute information of geographic features. These can be represented by points, lines, or polygons (areas).</li>
@@ -938,16 +945,16 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 <span id="cb108-34"><a href="#cb108-34" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tg, <span class="at">main =</span> <span class="st">"Tree Cover Gain (binary)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="reference-systems" class="level3">
-<h3 class="anchored" data-anchor-id="reference-systems">Reference systems</h3>
+<section id="reference-systems" class="level3" data-number="A.5.2">
+<h3 data-number="A.5.2" class="anchored" data-anchor-id="reference-systems"><span class="header-section-number">A.5.2</span> Reference systems</h3>
 <p>Coordinate systems are essential to understand when working with spatial data. Some reading material on this can be found here: Essentially, if one wants to know which position of the Earth we refer to, coordinates of geospatial data require a reference system:</p>
 <ol type="1">
 <li>geodesic/geographic coordinates need an order (lat/long), a unit (e.g., degrees) and a datum (a reference ellipsoid: e.g.&nbsp;WGS84)</li>
 <li>cartesian/projected coordinates (e.g.&nbsp;UTM, web Mercator) need also measurement units (e.g., meters), and some way of encoding how they relate to geodesic coordinates, in which datum (this is handled by the GIS system)</li>
 </ol>
 </section>
-<section id="operations-with-shapefiles" class="level3">
-<h3 class="anchored" data-anchor-id="operations-with-shapefiles">Operations with Shapefiles</h3>
+<section id="operations-with-shapefiles" class="level3" data-number="A.5.3">
+<h3 data-number="A.5.3" class="anchored" data-anchor-id="operations-with-shapefiles"><span class="header-section-number">A.5.3</span> Operations with Shapefiles</h3>
 <p>Clip: in R you can clip using the command “intersect”, so that intersect(feature to be clipped, clip feature) Select: you can use a boolean selection to subset the features of your shapefile, for instance if you just want to look at settlements with a mininum number of habitants, so that Population &gt; median(Population) There are several options, have a look at this great tutorial: <a href="http://www.rspatial.org/spatial/rst/7-vectmanip.html" class="uri">http://www.rspatial.org/spatial/rst/7-vectmanip.html</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clip the settlement features using the Santa Catarina shapefile</span></span>
@@ -973,8 +980,8 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 <span id="cb109-21"><a href="#cb109-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sc_largesett, <span class="at">main =</span> <span class="st">"Largest Settlements"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="operations-with-rasters" class="level3">
-<h3 class="anchored" data-anchor-id="operations-with-rasters">Operations with Rasters</h3>
+<section id="operations-with-rasters" class="level3" data-number="A.5.4">
+<h3 data-number="A.5.4" class="anchored" data-anchor-id="operations-with-rasters"><span class="header-section-number">A.5.4</span> Operations with Rasters</h3>
 <p>There are many operations you can do with rasters, and these are more frequently used in spatial analyses than shapefiles. Here I will just illustrate a couple of simple operations: - Global/Raster statistics - obtain a value that summarizes the whole raster layer - Cell statistics (pixel-by-pixel operation): obtains a value per pixel - Focal statistics (operation that takes into account neighborhood of central cell) - results in raster of same of different size - Zonal statistics - calculates summary statistics of a give raster (e.g., elevation) based on pre-defined zones (e.g., admnistrative boundaries, biomes). Outputs a table with the values per zone. For more great examples, have a look here: <a href="http://www.rspatial.org/spatial/rst/8-rastermanip.html" class="uri">http://www.rspatial.org/spatial/rst/8-rastermanip.html</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sum the loss and gain rasters to know where there was simultaneous loss and gain in Santa Catarina</span></span>
@@ -1036,8 +1043,8 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 <span id="cb110-57"><a href="#cb110-57" aria-hidden="true" tabindex="-1"></a>sc_tc_mean_gain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="operations-with-both-rasters-and-shapefiles" class="level3">
-<h3 class="anchored" data-anchor-id="operations-with-both-rasters-and-shapefiles">Operations with both Rasters and Shapefiles</h3>
+<section id="operations-with-both-rasters-and-shapefiles" class="level3" data-number="A.5.5">
+<h3 data-number="A.5.5" class="anchored" data-anchor-id="operations-with-both-rasters-and-shapefiles"><span class="header-section-number">A.5.5</span> Operations with both Rasters and Shapefiles</h3>
 <p>Here I’ll show a couple of examples of operation that use feature data as inputs and output rasters: Distance to features - calculates the euclidean distance from each cell/pixel to the closest feature (e.g., roads, settlements). Outputs a raster file with these distances. Interpolation: a world in itself! Very vey short example provided here (based on a single method, IDW), please see more here: <a href="http://www.rspatial.org/analysis/rst/4-interpolation.html" class="uri">http://www.rspatial.org/analysis/rst/4-interpolation.html</a> To better understand interpolation I advise you to read first about spatial autocorrelation: <a href="http://www.rspatial.org/analysis/rst/3-spauto.html" class="uri">http://www.rspatial.org/analysis/rst/3-spauto.html</a></p>
 <p>To use interpolation metrics you need to load another packaged called gstat Inverse distance weighted (IDW) - See more also here: <a href="http://desktop.arcgis.com/en/arcmap/10.3/tools/3d-analyst-toolbox/how-idw-works.htm" class="uri">http://desktop.arcgis.com/en/arcmap/10.3/tools/3d-analyst-toolbox/how-idw-works.htm</a></p>
 <div class="cell">
@@ -1068,8 +1075,8 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 <span id="cb111-25"><a href="#cb111-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sc_pop, <span class="at">main =</span> <span class="st">"Santa Catarina Population"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="export-shapefiles-and-rasters" class="level3">
-<h3 class="anchored" data-anchor-id="export-shapefiles-and-rasters">Export Shapefiles and Rasters</h3>
+<section id="export-shapefiles-and-rasters" class="level3" data-number="A.5.6">
+<h3 data-number="A.5.6" class="anchored" data-anchor-id="export-shapefiles-and-rasters"><span class="header-section-number">A.5.6</span> Export Shapefiles and Rasters</h3>
 <p>It’s very easy to export both shapefiles and rasters from R to be visualized in QGIS or ArcMap.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save feature layers (point, polygon, polyline) to shapefile </span></span>
@@ -1083,8 +1090,8 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 </section>
 </section>
-<section id="working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif." class="level2">
-<h2 class="anchored" data-anchor-id="working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif.">Working with biodiversity data: GBIF, EBV Portal (Corey Callaghan, Luise Quoss)First we load the library rgbif.</h2>
+<section id="working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif." class="level2" data-number="A.6">
+<h2 data-number="A.6" class="anchored" data-anchor-id="working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif."><span class="header-section-number">A.6</span> Working with biodiversity data: GBIF, EBV Portal (Corey Callaghan, Luise Quoss)First we load the library rgbif.</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgbif)</span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1127,8 +1134,8 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 <span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(<span class="at">data=</span>octmat) <span class="sc">%&gt;%</span> <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(<span class="at">lat=</span> <span class="sc">~</span>decimalLatitude, <span class="at">lng =</span> <span class="sc">~</span>decimalLongitude,<span class="at">popup=</span><span class="sc">~</span>scientificName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="version-2-isabel-rosa" class="level3">
-<h3 class="anchored" data-anchor-id="version-2-isabel-rosa">Version 2 (Isabel Rosa)</h3>
+<section id="version-2-isabel-rosa" class="level3" data-number="A.6.1">
+<h3 data-number="A.6.1" class="anchored" data-anchor-id="version-2-isabel-rosa"><span class="header-section-number">A.6.1</span> Version 2 (Isabel Rosa)</h3>
 <p>Here are the packages we’ll need.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgbif)</span>
@@ -1193,8 +1200,8 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 </section>
 </section>
-<section id="climate-data" class="level2">
-<h2 class="anchored" data-anchor-id="climate-data">Climate data</h2>
+<section id="climate-data" class="level2" data-number="A.7">
+<h2 data-number="A.7" class="anchored" data-anchor-id="climate-data"><span class="header-section-number">A.7</span> Climate data</h2>
 <p>Let’s play with some global climate data and overlay that with our GBIF observations.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>mean_temp_map <span class="ot">&lt;-</span> <span class="fu">getData</span>(<span class="at">name=</span><span class="st">"worldclim"</span>, <span class="at">res=</span><span class="dv">10</span>, <span class="at">var=</span><span class="st">"tmean"</span>)</span>
@@ -1226,10 +1233,10 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 <span id="cb134-10"><a href="#cb134-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="intro-to-apply-pipes-ggplot2-tidyverse." class="level2">
-<h2 class="anchored" data-anchor-id="intro-to-apply-pipes-ggplot2-tidyverse.">Intro to apply, pipes, ggplot2, tidyverse.</h2>
-<section id="introduction-to-gpplot" class="level3">
-<h3 class="anchored" data-anchor-id="introduction-to-gpplot">Introduction to gpplot</h3>
+<section id="intro-to-apply-pipes-ggplot2-tidyverse." class="level2" data-number="A.8">
+<h2 data-number="A.8" class="anchored" data-anchor-id="intro-to-apply-pipes-ggplot2-tidyverse."><span class="header-section-number">A.8</span> Intro to apply, pipes, ggplot2, tidyverse.</h2>
+<section id="introduction-to-gpplot" class="level3" data-number="A.8.1">
+<h3 data-number="A.8.1" class="anchored" data-anchor-id="introduction-to-gpplot"><span class="header-section-number">A.8.1</span> Introduction to gpplot</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>cars</span>
 <span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -1775,6 +1782,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./labs/lab1.html" class="pagination-link" aria-label="LAB 1 - Climate space of an ectotherm">
+        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">LAB 1 - Climate space of an ectotherm</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
