@@ -1,9 +1,6 @@
+## Climate space of an ectotherm
 
-# LAB 1 - Climate space of an ectotherm
-
-## **The heat flux equation**
-
-Solar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (*f*) into the animal is given by:
+Solar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (*f*) into the animal is given by the **heat flux equation**:
 
 $$f = q\ –h*(b - a)$$
 

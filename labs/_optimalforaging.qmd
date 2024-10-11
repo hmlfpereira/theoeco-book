@@ -1,0 +1,19 @@
+## Optimal foraging theory
+
+1.  **Predator with a strategy for maximizing energy.**\
+    Let ***ai*** be the point abundance per unit of time of prey type ***i***, ***ei*** be the caloric content of prey type ***i***, ***hi*** be the time it takes to consume prey type ***i***, ***ew*** is the energy expended per unit of time by the predator while searching for prey, and ***eh*** is the energy expended per unit of time by the predator to ingest prey. Consider that there are only two types of prey and that:
+
+    Strategy 1: Chosing prey of type 1\
+    Strategy 2: Chosing prey of type 2\
+    Strategy 3: Chosing both preys
+
+    a.  Show that if ***e1\> e2*** and ***h1 \<h2*** then the second strategy is never a optimal strategy
+
+    b.  Plot and comment the graph of the energy gain per unit of time for the strategy of consuming both preys and for the strategy of consuming only the best prey. Make the abundances vary between 0.005 and 0.5 ind/s for the best prey. Consider the abundance of the worse prey to be 0.05 ind/s and 0.01 ind/s. Consider an active predator with the following physiological parameters:
+
+        ***e1*** = 10J; ***e2*** = 100J; ***h1*** = 1s; ***h2*** = 60s; ***ew*** = 1 J/s; ***eh*** = 1 J/S
+
+2.  **Predator with a strategy of sit-and-wait.**\
+    ***Ew*** is the energy expended per unit of time by the predator while waiting for its prey, ***ep*** is the energy expended per unit of time by the predator while chasing the prey, v is the velocity of the predator in chase and ***a*** is the point abundance of preys per unit of time.
+
+    a.  Produce a graph of energy gain per unit of time in function of the size of the feeding territory. Consider the following values for the parameters of the predator and prey: ***ew*** = 0,1 J/s; ***ep*** = 1 J/S; ***v*** = 0,5 m/s; ***a*** = 0,005 ind/s/m2; and ***e*** = 10;

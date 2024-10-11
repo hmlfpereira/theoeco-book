@@ -5,6 +5,7 @@ book:
   title: "Ecological theory for the biodiversity crisis"
   author: "Henrique Miguel Pereira"
   date: today
+  page-navigation: true
   chapters:
     - index.qmd
     - part: "Ecology of individuals"
@@ -15,7 +16,7 @@ book:
         - demography.qmd
   appendices:
     - intro_to_R.qmd
-    - labs/lab1.qmd
+    - labs.qmd
   #  - references.qmd
 
 bibliography: references.bib
