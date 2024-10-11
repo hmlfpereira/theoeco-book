@@ -1,5 +1,0 @@
-# Computational labs
-
-{{< include labs/_climatespace.qmd >}}
-
-{{< include labs/_optimalforaging.qmd >}}
