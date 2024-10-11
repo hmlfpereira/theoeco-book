@@ -3,3 +3,5 @@
 {{< include labs/_climatespace.qmd >}}
 
 {{< include labs/_optimalforaging.qmd >}}
+
+{{< include labs/_evogames.qmd >}}
