@@ -42,6 +42,3 @@ format:
     titlepage: false
 
 editor: visual
-
-execute:
-  freeze: auto
