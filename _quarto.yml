@@ -1,11 +1,14 @@
 project:
   type: book
 
+crossref:
+  appendix-title: "Lab"
+  appendix-delim: ":"
+
 book:
   title: "Ecological theory for the biodiversity crisis"
   author: "Henrique Miguel Pereira"
   date: today
-  page-navigation: true
   chapters:
     - index.qmd
     - part: "Ecology of individuals"
@@ -15,8 +18,13 @@ book:
       chapters:
         - demography.qmd
   appendices:
-    - intro_to_R.qmd
-    - Lab1_climate.qmd
+    - part: "Computational labs"
+      chapters:
+      - labs/Lab1_climatespace.qmd
+      - labs/Lab2_optimalforaging.qmd
+    - part: "R tutorials"
+      chapters:
+      - intro_to_R.qmd
   #  - references.qmd
 
 bibliography: references.bib
