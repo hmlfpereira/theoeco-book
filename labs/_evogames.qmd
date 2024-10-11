@@ -1,10 +1,7 @@
 ## Evolutionary games
 
-1.  **The Prisoners Dilemma Competition**. In this class we will have a competition of algorithms for playing the prisoner’s dilemma. Blabls
-
-<!-- -->
-
-a)  Write a function that takes as parameters two vectors that account with the history of the previous plays and returns one play (i.e., Cooperate – “C” or defect – “D”). This play should try to be the best response to the history of past moves. One example of such a function is:
+1.  **The Prisoners Dilemma Competition**. In this class we will have a competition of algorithms for playing the prisoner’s dilemma.
+    a)  Write a function that takes as parameters two vectors that account with the history of the previous plays and returns one play (i.e., Cooperate – “C” or defect – “D”). This play should try to be the best response to the history of past moves. One example of such a function is:
 
 ``` r
     strat<-function(own,opponent)
