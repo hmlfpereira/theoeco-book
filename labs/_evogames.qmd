@@ -1,10 +1,12 @@
 ## Evolutionary games
 
-1.  **The Prisoners Dilemma Competition**. In this class we will have a competition of algorithms for playing the prisoner’s dilemma.
+1.  **The Prisoners Dilemma Competition**. In this class we will have a competition of algorithms for playing the prisoner’s dilemma. Blabls
 
-    a)  Write a function that takes as parameters two vectors that account with the history of the previous plays and returns one play (i.e., Cooperate – “C” or defect – “D”). This play should try to be the best response to the history of past moves. One example of such a function is:
+<!-- -->
 
-    ``` r
+a)  Write a function that takes as parameters two vectors that account with the history of the previous plays and returns one play (i.e., Cooperate – “C” or defect – “D”). This play should try to be the best response to the history of past moves. One example of such a function is:
+
+``` r
     strat<-function(own,opponent)
     {
         n <- length(opponent)
@@ -13,17 +15,17 @@
                 if(own[n]=="D") opponent[n]
                else "C"
     }
-    ```
+```
 
-    b)  Use the function pd_sim (see below) to play your strategy with the strategy of the other groups (ask for each group their function(s)) and with itself, in an iterative game with x moves. Compare the results of the cumulative rewards as well as the sequence of moves. Report to the rest of groups the values of the rewards for each of the tournaments. What was the best strategy? What strategies are best responses to themselves?
+b)  Use the function pd_sim (see below) to play your strategy with the strategy of the other groups (ask for each group their function(s)) and with itself, in an iterative game with x moves. Compare the results of the cumulative rewards as well as the sequence of moves. Report to the rest of groups the values of the rewards for each of the tournaments. What was the best strategy? What strategies are best responses to themselves?
 
     ```{r eval=FALSE}
     pd_sim<-function(p1_strat,p2_strat,n)
     {
      w1<-0          #accumulated pay-off (fitness) of player 1
      w2<-0          #accumulated pay-offs of player 2
-     h1<-NULL     #history of plays of player 1
-     h2<-NULL     #history of plays of player 2
+     h1<-NULL       #history of plays of player 1
+     h2<-NULL       #history of plays of player 2
      
      for (t in 1:n)            
        {
