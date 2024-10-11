@@ -16,7 +16,7 @@ book:
         - demography.qmd
   appendices:
     - intro_to_R.qmd
-    - labs.qmd
+    - Lab1_climate.qmd
   #  - references.qmd
 
 bibliography: references.bib
