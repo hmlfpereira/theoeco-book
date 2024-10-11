@@ -175,25 +175,47 @@
     ]
   },
   {
-    "objectID": "labs/lab1.html",
-    "href": "labs/lab1.html",
-    "title": "Appendix B — LAB 1 - Climate space of an ectotherm",
+    "objectID": "labs.html",
+    "href": "labs.html",
+    "title": "Appendix B — Computational labs",
     "section": "",
-    "text": "B.1 The heat flux equation\nSolar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (f) into the animal is given by:\n\\[f = q\\ –h*(b - a)\\]",
+    "text": "B.1 Climate space of an ectotherm\nSolar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (f) into the animal is given by the heat flux equation:\n\\[f = q\\ –h*(b - a)\\]",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>LAB 1 - Climate space of an ectotherm</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Computational labs</span>"
     ]
   },
   {
-    "objectID": "labs/lab1.html#the-heat-flux-equation",
-    "href": "labs/lab1.html#the-heat-flux-equation",
-    "title": "Appendix B — LAB 1 - Climate space of an ectotherm",
+    "objectID": "labs.html#climate-space-of-an-ectotherm",
+    "href": "labs.html#climate-space-of-an-ectotherm",
+    "title": "Appendix B — Computational labs",
     "section": "",
     "text": "\\(q\\) = solar radiation (cal/h)\n\\(h*(b - a)\\) = heat loss through convection\n\\(b\\) = body temperature of the animal (ºC)\n\\(a\\) = air temperature (ºC)\n\\(h\\) = convection heat transfer coefficient (cal/h/ ºC)\n\n\nEquilibrium body temperature\n\nAssuming that air temperature is 18ºC, and h = 50 cal/h, plot the lizard’s equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h\n\nClimate space of a Lizard\n\nDraw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (bmax) is 36ºC and the lower lethal limit for the body temperature (bmin) is 24ºC.\nHint: polygon - draws the polygons whose vertices are given in x and y.\n\nAir Temperature and solar radiation throughout the day in two locations\n\nPlot the following values of air temperature and solar radiation that are available throughout a day in two locations. For:\n\nTimes of the day\nt = c(\"00:00\",\"03:00\",\"06:00\",\"09:00\",\"12:00\",\n  \"15:00\",\"18:00\",\"21:00\",\"00:00\")\nSolar radiation in the rock habitat\nrock_q = c(150,150,800,1100,1300,1200,800,400,150)\nAir temperature in the rock habitat\nrock_a = c(18,13,10,14,21,24,22,20,18)\nSolar radiation in the bush habitat\nbush_q = c(150,150,450,600,650,650,350,200,150)\nAir temperature in the bush habitat\nbush_a = c(18,13,10,14,21,24,22,20,18)\n\nAt which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>B</span>  <span class='chapter-title'>LAB 1 - Climate space of an ectotherm</span>"
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Computational labs</span>"
+    ]
+  },
+  {
+    "objectID": "labs.html#optimal-foraging-theory",
+    "href": "labs.html#optimal-foraging-theory",
+    "title": "Appendix B — Computational labs",
+    "section": "B.2 Optimal foraging theory",
+    "text": "B.2 Optimal foraging theory\n\nPredator with a strategy for maximizing energy.\nLet ai be the point abundance per unit of time of prey type i, ei be the caloric content of prey type i, hi be the time it takes to consume prey type i, ew is the energy expended per unit of time by the predator while searching for prey, and eh is the energy expended per unit of time by the predator to ingest prey. Consider that there are only two types of prey and that:\nStrategy 1: Chosing prey of type 1\nStrategy 2: Chosing prey of type 2\nStrategy 3: Chosing both preys\n\nShow that if e1&gt; e2 and h1 &lt;h2 then the second strategy is never a optimal strategy\nPlot and comment the graph of the energy gain per unit of time for the strategy of consuming both preys and for the strategy of consuming only the best prey. Make the abundances vary between 0.005 and 0.5 ind/s for the best prey. Consider the abundance of the worse prey to be 0.05 ind/s and 0.01 ind/s. Consider an active predator with the following physiological parameters:\ne1 = 10J; e2 = 100J; h1 = 1s; h2 = 60s; ew = 1 J/s; eh = 1 J/S\n\nPredator with a strategy of sit-and-wait.\nEw is the energy expended per unit of time by the predator while waiting for its prey, ep is the energy expended per unit of time by the predator while chasing the prey, v is the velocity of the predator in chase and a is the point abundance of preys per unit of time.\n\nProduce a graph of energy gain per unit of time in function of the size of the feeding territory. Consider the following values for the parameters of the predator and prey: ew = 0,1 J/s; ep = 1 J/S; v = 0,5 m/s; a = 0,005 ind/s/m2; and e = 10;",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Computational labs</span>"
+    ]
+  },
+  {
+    "objectID": "labs.html#evolutionary-games",
+    "href": "labs.html#evolutionary-games",
+    "title": "Appendix B — Computational labs",
+    "section": "B.3 Evolutionary games",
+    "text": "B.3 Evolutionary games\n\nThe Prisoners Dilemma Competition. In this class we will have a competition of algorithms for playing the prisoner’s dilemma.\n\nWrite a function that takes as parameters two vectors that account with the history of the previous plays and returns one play (i.e., Cooperate – “C” or defect – “D”). This play should try to be the best response to the history of past moves. One example of such a function is:\n\n\nUse the function pd_sim (see below) to play your strategy with the strategy of the other groups (ask for each group their function(s)) and with itself, in an iterative game with x moves. Compare the results of the cumulative rewards as well as the sequence of moves. Report to the rest of groups the values of the rewards for each of the tournaments. What was the best strategy? What strategies are best responses to themselves?",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Computational labs</span>"
     ]
   }
 ]
