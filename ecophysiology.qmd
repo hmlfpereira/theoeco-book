@@ -127,7 +127,7 @@ polygon(X,Y,col="green")
 Now that we have the climate space we can plot on top of it some empirical data of how the conditions are in the field during the day. We can for instance consider two micro-habitats, a rock (in the sun) and a bush (in the shade). Suppose we obtain some data from temperature loggers that were installed in each micro-habitat , recording every three hours the values of temperature and radiation as tabled below.
 
 | Time (hh:mm) | Radiation rock (cal/h) | Radiation bush (cal/h) | Temperature (ºC) |
-|-----------------|--------------------|--------------------|-----------------|
+|-----------------|-------------------|-------------------|-----------------|
 | 00:00        | 150                    | 150                    | 18               |
 | 03:00        | 150                    | 150                    | 13               |
 | 06:00        | 800                    | 450                    | 10               |
@@ -287,6 +287,7 @@ In the following steps we will be downloading from Dryad and using a data set cr
 To download the dataset, it is necessary to install the R package `rdryad`.
 
 ```{r}
+#| eval: false
 #| results: 'hide'
 #| warning: false
 install.packages("rdryad")
@@ -320,7 +321,7 @@ Once this is done, it is always good practice to check if the recently open data
 
 ```{r}
 #calling the dataset of interest as df
-df <- read.csv("/Users/andresmarmolguijarro/Library/Caches/R/rdryad/10_5061_dryad_h234n/winchell_evol_phenshifts.csv")
+df <- read.csv(downloaded_file[[1]][2])
 
 # checking the columns (variables) available in the data frame df using the str function
 names(df)
@@ -384,7 +385,7 @@ predict(model1, newdata=amb_temps)
 
 ```
 
-## How good our model is performing? 
+## How good our model is performing?
 
 Graphically the linear model fits the data as follows:
 

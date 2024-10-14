@@ -11,7 +11,7 @@ editor: visual
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 ```
 
-## Plotting real life ecophysiological from *Anolis* lizards. 
+## Plotting real life ecophysiological from *Anolis* lizards.
 
 Why anoles? Anoles are among the most studied reptile organisms. They are vastly diverse with more than 488 species described until today — circa 11% of all the squamates without considering snakes — due to their outstanding adaptive radiation, which has inspired many to dive-in-depth into understanding how evolution has operated within this group ([Lizards in an Evolutionary Tree](https://doi.org/10.1525/california/9780520255913.001.0001) by J. B. Losos is a highly recommended instructive reading for more info). As a result, very detailed data sets on many species of anoles, including information on micro habitat, field body temperature, activity patterns and morphological traits, performance, etc., can be found online in relatively few time.
 
@@ -63,7 +63,7 @@ names(df)
 
 There are 29 different variables within `df`, but this exercise will focus only in a few of them including `context`, `perch`, `bodytemp.C`, `perch.temp.C`, `ambient.temp.C`, and `local.time.decimal` where `context` indicates if the lizard was captured in natural or urban spaces; `perch` refers to the microhabitat where the lizard was found; `bodytemp.C` is body temperature $b$; `perch.temp.C` is substrate temperature $T_s$; `ambient.temp.C` is air temperature $a$; and `local.time.decimal` is the time of the day in hours when the lizards was captured and measured.
 
-### Exploring the thermophysiological data of *A. cristatellus.* 
+### Exploring the thermophysiological data of *A. cristatellus.*
 
 As covered in the first chapter, $b$ increases proportionally to $a$ as indicated in equation (1.2). Let's check if the data confirms this equation.
 
