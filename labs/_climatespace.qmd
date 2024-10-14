@@ -55,3 +55,20 @@ $$f = q\ –h*(b - a)$$
             ```
 
     b.  At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
+
+4.  ***Body temperature of A. cristatellus in two different habitats***
+
+As explained above, this data frame contains data on individuals *A. cristatellus* living in urban and forested areas in three cities in Puerto Rico, giving us the perfect  opportunity to assess the potential thermal effects of habitat upon this species. To do this:
+
+    a. Make a linear model for individuals of *A. cristatellus* living only in natural habitats (`context` = `natural`) and another for individuals living in urban habitats (`context` =     `urban`).
+
+    **Hint:** to filter the data you can use the `subset` function in R
+
+    ```{r}
+    # example filtering data from anoles only from San Jose sites
+    df_sanjose <- subset(df, Site == "San Jose")
+    ```
+
+    b. Is there an habitat where lizards are consistently warmer? If so, provide an ecological explanation for this observation (assume an ambient temperature of 30 °C).
+
+    c. Is your model appropriate for explaining your data?
