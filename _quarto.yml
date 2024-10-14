@@ -17,6 +17,7 @@ book:
   appendices:
     - intro_to_R.qmd
     - labs.qmd
+    - labs_solutions.qmd
   #  - references.qmd
 
 bibliography: references.bib
