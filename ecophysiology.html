@@ -160,6 +160,10 @@ window.Quarto = {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Ecological theory for the biodiversity crisis</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/hmlfpereira/theoeco-book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Ecological-theory-for-the-biodiversity-crisis.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -230,6 +234,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Computational labs</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./labs_tutorials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tutorials to support computational labs</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -245,15 +255,7 @@ window.Quarto = {
   <li><a href="#a-model-for-the-body-temperature-of-an-animal" id="toc-a-model-for-the-body-temperature-of-an-animal" class="nav-link active" data-scroll-target="#a-model-for-the-body-temperature-of-an-animal"><span class="header-section-number">1.1</span> A model for the body temperature of an animal</a></li>
   <li><a href="#understanding-the-climate-space" id="toc-understanding-the-climate-space" class="nav-link" data-scroll-target="#understanding-the-climate-space"><span class="header-section-number">1.2</span> Understanding the climate space</a></li>
   <li><a href="#from-ecophysiological-models-to-species-distribution-models" id="toc-from-ecophysiological-models-to-species-distribution-models" class="nav-link" data-scroll-target="#from-ecophysiological-models-to-species-distribution-models"><span class="header-section-number">1.3</span> From ecophysiological models to species distribution models</a></li>
-  <li><a href="#computational-lab-1-least-squaring-the-climate" id="toc-computational-lab-1-least-squaring-the-climate" class="nav-link" data-scroll-target="#computational-lab-1-least-squaring-the-climate"><span class="header-section-number">1.4</span> Computational Lab 1: Least squaring the climate</a></li>
-  <li><a href="#plotting-real-life-ecophysiological-from-anolis-lizards." id="toc-plotting-real-life-ecophysiological-from-anolis-lizards." class="nav-link" data-scroll-target="#plotting-real-life-ecophysiological-from-anolis-lizards."><span class="header-section-number">1.5</span> Plotting real life ecophysiological from <em>Anolis</em> lizards.</a>
-  <ul class="collapse">
-  <li><a href="#calling-the-dataset-from-dryad" id="toc-calling-the-dataset-from-dryad" class="nav-link" data-scroll-target="#calling-the-dataset-from-dryad"><span class="header-section-number">1.5.1</span> Calling the dataset from Dryad</a></li>
-  <li><a href="#exploring-the-thermophysiological-data-of-a.-cristatellus." id="toc-exploring-the-thermophysiological-data-of-a.-cristatellus." class="nav-link" data-scroll-target="#exploring-the-thermophysiological-data-of-a.-cristatellus."><span class="header-section-number">1.5.2</span> Exploring the thermophysiological data of <em>A. cristatellus.</em></a></li>
-  <li><a href="#interpreting-the-results-of-our-model." id="toc-interpreting-the-results-of-our-model." class="nav-link" data-scroll-target="#interpreting-the-results-of-our-model."><span class="header-section-number">1.5.3</span> Interpreting the results of our model.</a></li>
-  </ul></li>
-  <li><a href="#how-good-our-model-is-performing" id="toc-how-good-our-model-is-performing" class="nav-link" data-scroll-target="#how-good-our-model-is-performing"><span class="header-section-number">1.6</span> How good our model is performing?</a></li>
-  <li><a href="#statistical-confrontation-linear-regression" id="toc-statistical-confrontation-linear-regression" class="nav-link" data-scroll-target="#statistical-confrontation-linear-regression"><span class="header-section-number">1.7</span> Statistical confrontation: Linear regression</a></li>
+  <li><a href="#statistical-confrontation-regressing-the-climate-space" id="toc-statistical-confrontation-regressing-the-climate-space" class="nav-link" data-scroll-target="#statistical-confrontation-regressing-the-climate-space"><span class="header-section-number">1.4</span> Statistical confrontation: regressing the climate space</a></li>
   </ul>
 </nav>
     </div>
@@ -290,14 +292,14 @@ window.Quarto = {
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="Crocidura_russula.jpg" class="img-fluid quarto-figure quarto-figure-left figure-img"></p>
+<p><img src="images/Crocidura_russula.jpg" class="img-fluid quarto-figure quarto-figure-left figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-right">
 <figure class="figure">
-<p><img src="Vipera_seonae.jpg" class="img-fluid quarto-figure quarto-figure-right figure-img"></p>
+<p><img src="images/Vipera_seonae.jpg" class="img-fluid quarto-figure quarto-figure-right figure-img"></p>
 </figure>
 </div>
 </div>
@@ -312,7 +314,7 @@ Figure&nbsp;1.1: Shrews (left, <em>Crocidura russula</em>) are ectotherms and ha
 <div id="fig-lizard_heat_flow" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-lizard_heat_flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Lizard_Heat_Flow.png" class="img-fluid figure-img" style="width:100.0%">
+<img src="images/Lizard_Heat_Flow.png" class="img-fluid figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lizard_heat_flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1.2: The energy flows of a lizard basking in the sun.
@@ -427,10 +429,10 @@ Table&nbsp;1.1: Hypothetical radiation values in two micro-habitats and air temp
 <div aria-describedby="tbl-temprad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 23%">
-<col style="width: 26%">
-<col style="width: 26%">
-<col style="width: 23%">
+<col style="width: 24%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 24%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -600,172 +602,8 @@ Figure&nbsp;1.6: The geographic space and climate space of Lacerta schreiberi.
 </figure>
 </div>
 </section>
-<section id="computational-lab-1-least-squaring-the-climate" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="computational-lab-1-least-squaring-the-climate"><span class="header-section-number">1.4</span> Computational Lab 1: Least squaring the climate</h2>
-</section>
-<section id="plotting-real-life-ecophysiological-from-anolis-lizards." class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="plotting-real-life-ecophysiological-from-anolis-lizards."><span class="header-section-number">1.5</span> Plotting real life ecophysiological from <em>Anolis</em> lizards.</h2>
-<p>Why anoles? Anoles are among the most studied reptile organisms. They are vastly diverse with more than 488 species described until today — circa 11% of all the squamates without considering snakes — due to their outstanding adaptive radiation, which has inspired many to dive-in-depth into understanding how evolution has operated within this group (<a href="https://doi.org/10.1525/california/9780520255913.001.0001">Lizards in an Evolutionary Tree</a> by J. B. Losos is a highly recommended instructive reading for more info). As a result, very detailed data sets on many species of anoles, including information on micro habitat, field body temperature, activity patterns and morphological traits, performance, etc., can be found online in relatively few time.</p>
-<p>In the following steps we will be downloading from Dryad and using a data set created by Winchell et al.&nbsp;(2016) (https://doi.org/10.5061/dryad.h234n) on <em>Anolis cristatellus</em> making a pair-comparison of several morphological and thermal traits of individuals living in urban and forested areas at Puerto Rico. <em>A. cristatellus</em> is widely distributed across Puerto Rico and can be found in natural and human-intervened spaces easily. It can be seen over ground and laying on the trunks of trees in natural settings, and on walls and metal fences in more urban areas.</p>
-<section id="calling-the-dataset-from-dryad" class="level3" data-number="1.5.1">
-<h3 data-number="1.5.1" class="anchored" data-anchor-id="calling-the-dataset-from-dryad"><span class="header-section-number">1.5.1</span> Calling the dataset from Dryad</h3>
-<p>To download the dataset, it is necessary to install the R package <code>rdryad</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rdryad"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Then we open the newly installed package and download the dataset by specifying the DOI associated to this dataset.</p>
-<div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling rdryad</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdryad)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the DOI</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>doi <span class="ot">&lt;-</span> <span class="st">"10.5061/dryad.h234n"</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the dataset using the dryad_download function</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>downloaded_file <span class="ot">&lt;-</span> <span class="fu">dryad_download</span>(<span class="at">dois =</span> doi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The data sets are now downloaded on the paths indicated in the box below, although for this exercise only table [2] winchell_evol_phenshifts.csv” is needed.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The downloaded_file will contain the file path where the dataset is saved</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(downloaded_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$`10.5061/dryad.h234n`
-[1] "/Users/henrique/Library/Caches/R/rdryad/10_5061_dryad_h234n/winchell_evol_CG.csv"        
-[2] "/Users/henrique/Library/Caches/R/rdryad/10_5061_dryad_h234n/winchell_evol_phenshifts.csv"</code></pre>
-</div>
-</div>
-<p>Once this is done, it is always good practice to check if the recently open data frame works by checking the columns within the data frame.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling the dataset of interest as df</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(downloaded_file[[<span class="dv">1</span>]][<span class="dv">2</span>])</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># checking the columns (variables) available in the data frame df using the str function</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "ID"                 "date"               "Site"              
- [4] "context"            "perch"              "bodytemp.C"        
- [7] "perch.temp.C"       "ambient.temp.C"     "humidity.percent"  
-[10] "perch.height.cm"    "perch.diam.cm"      "weight.g"          
-[13] "head.height.mm"     "svl.mm"             "local.time.decimal"
-[16] "flags"              "JL"                 "JW"                
-[19] "METC"               "RAD"                "ULN"               
-[22] "HUM"                "FEM"                "TIB"               
-[25] "FIB"                "METT1"              "METT2"             
-[28] "FL"                 "HL"                </code></pre>
-</div>
-</div>
-<p>There are 29 different variables within <code>df</code>, but this exercise will focus only in a few of them including <code>context</code>, <code>perch</code>, <code>bodytemp.C</code>, <code>perch.temp.C</code>, <code>ambient.temp.C</code>, and <code>local.time.decimal</code> where <code>context</code> indicates if the lizard was captured in natural or urban spaces; <code>perch</code> refers to the microhabitat where the lizard was found; <code>bodytemp.C</code> is body temperature <span class="math inline">\(b\)</span>; <code>perch.temp.C</code> is substrate temperature <span class="math inline">\(T_s\)</span>; <code>ambient.temp.C</code> is air temperature <span class="math inline">\(a\)</span>; and <code>local.time.decimal</code> is the time of the day in hours when the lizards was captured and measured.</p>
-</section>
-<section id="exploring-the-thermophysiological-data-of-a.-cristatellus." class="level3" data-number="1.5.2">
-<h3 data-number="1.5.2" class="anchored" data-anchor-id="exploring-the-thermophysiological-data-of-a.-cristatellus."><span class="header-section-number">1.5.2</span> Exploring the thermophysiological data of <em>A. cristatellus.</em></h3>
-<p>As covered in the first chapter, <span class="math inline">\(b\)</span> increases proportionally to <span class="math inline">\(a\)</span> as indicated in equation (1.2). Let’s check if the data confirms this equation.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to call a variable directly from a data frame one must use $, indicating the name of the dataframe at the left and the name of the variable (columnt on the right).</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ecophysiology_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>In the plot we can observe that indeed body temperature increases with increasing temperature. However, we cannot quantitatively know how much is this increase. For that, we can model how air temperature affects body temperature modelling them a a line with the equation:</p>
-<p><span id="eq-linear-equation"><span class="math display">\[
-\hat{y} = α + β*x + e
-\tag{1.4}\]</span></span> where <span class="math inline">\(\hat{y}\)</span> is the predicted value of <span class="math inline">\(y\)</span> for any given <span class="math inline">\(x\)</span>; <span class="math inline">\(α\)</span> is point of intersection of the line when <span class="math inline">\(x=0\)</span>, <span class="math inline">\(β\)</span> is the slope of the regression line (i.e.&nbsp;how much increases <span class="math inline">\(\hat{y}\)</span> with a unit increase in <span class="math inline">\(x\)</span>) and <span class="math inline">\(e\)</span> is the random error.</p>
-<p>Placing our variables in formula, it would look like this:</p>
-<p><span id="eq-body-temp_vs_amb-temp_linear_eq"><span class="math display">\[
-b = b_{0} + β*a + e
-\tag{1.5}\]</span></span></p>
-<p>where <span class="math inline">\(b\)</span> is body temperature, <span class="math inline">\(a\)</span> is ambient temperature, and <span class="math inline">\(b_0\)</span> is the body temperature when <span class="math inline">\(a\)</span> is zero.</p>
-<p>Now lets model it using a least-squares linear regression using the <code>lm</code> function in R.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#define the linear model</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#the variable at the left of the tilde (~) is the dependent variable</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#data calls the specific dataframe to be used.</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bodytemp.C <span class="sc">~</span> ambient.temp.C, <span class="at">data=</span>df)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print model outputs</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = bodytemp.C ~ ambient.temp.C, data = df)
-
-Coefficients:
-   (Intercept)  ambient.temp.C  
-        8.7004          0.7237  </code></pre>
-</div>
-</div>
-</section>
-<section id="interpreting-the-results-of-our-model." class="level3" data-number="1.5.3">
-<h3 data-number="1.5.3" class="anchored" data-anchor-id="interpreting-the-results-of-our-model."><span class="header-section-number">1.5.3</span> Interpreting the results of our model.</h3>
-<p>The results of our model indicates that if the air temperature (<span class="math inline">\(a\)</span>) is zero, <em>A. cristatellus</em> would show a body temperature (<span class="math inline">\(b\)</span>) of 8.7 °C, which increases in approximately 0.7 °C for each 1 °C increase in air temperature.</p>
-<p>Now it is also possible to draw a few predictions</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a number of possible ambient temperatures that can be found in Puerto Rico during the day</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>amb_temps <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">ambient.temp.C =</span> <span class="fu">seq</span>(<span class="dv">27</span>,<span class="dv">38</span>, <span class="dv">1</span>))<span class="co"># defines a vector with values from 27 to 38, with one unit increase</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model1, <span class="at">newdata=</span>amb_temps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       1        2        3        4        5        6        7        8 
-28.23967 28.96335 29.68702 30.41070 31.13437 31.85805 32.58172 33.30540 
-       9       10       11       12 
-34.02907 34.75275 35.47642 36.20010 </code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="how-good-our-model-is-performing" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="how-good-our-model-is-performing"><span class="header-section-number">1.6</span> How good our model is performing?</h2>
-<p>Graphically the linear model fits the data as follows:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scatter plot</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add the line of fit from our recently created linear model "model1"</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(model1, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ecophysiology_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The red line in the plot follows very well the pattern of increase shown by our data. It is noticeable, however, that some points fall farther from the line of best fit than others. In other words, many <span class="math inline">\(\hat{y}\)</span> values (body temperature) are predicted with larger errors than others, for a given <span class="math inline">\(x\)</span> value (ambient temperature). These errors are also known as residuals, and are the vertical distance between the observed values and the line of best fit. They are graphically represented in green in our plot:</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ecophysiology_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>What a least square linear regression does is to find the lowest sum of squares of the residuals (every green line in the plot) so that the least amount of error is kept in the linear model.</p>
-<p>Finally, how well the model fits the data? In our example, the body temperatures do not perfectly fall on the line of best fit, and many of them are scattered around it. A common metric assess this question in a simple regression model is the <span class="math inline">\(r^2\)</span>. <span class="math inline">\(r^2\)</span> values indicates how much of the variance of body temperature (our dependent variable) is explained by ambient temperature (our independent variable). A perfect fit is indicated by an <span class="math inline">\(r^2\)</span> of 1, while no fit would be zero. To check the <span class="math inline">\(r^2\)</span> in our model we can simply use the <code>summary</code> function in R.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># obtaining the r-squared of our model</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5736088</code></pre>
-</div>
-</div>
-<p><span class="math inline">\(r^2\)</span> equals 0.574 indicating that almost 60% of the variance in body temperature is explained by ambient temperature.</p>
-<p>In summary, our expectation that lizards body temperature increases depending on how the temperature in their environment changes has been confirmed. Specifically for <em>A. cristatellus</em> in this study, body temperature increases ~ 0.7 °C every 1 degree increase in air temperature. A few questions remain. For example, does habitat has an effect in the body temperature in <em>A. cristatellus</em>, and if it does, how different could the body temperatures of the lizards in habitat A are from those in habitat B?</p>
-</section>
-<section id="statistical-confrontation-linear-regression" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="statistical-confrontation-linear-regression"><span class="header-section-number">1.7</span> Statistical confrontation: Linear regression</h2>
+<section id="statistical-confrontation-regressing-the-climate-space" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="statistical-confrontation-regressing-the-climate-space"><span class="header-section-number">1.4</span> Statistical confrontation: regressing the climate space</h2>
 
 
 </section>
