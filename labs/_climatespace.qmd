@@ -69,6 +69,6 @@ As explained above, this data frame contains data on individuals *A. cristatellu
     df_sanjose <- subset(df, Site == "San Jose")
     ```
 
-    b. Is there an habitat where lizards are consistently warmer? If so, provide an ecological explanation for this observation (assume an ambient temperature of 30 °C).
+    b. Is there a habitat where lizards are consistently warmer? If so, provide an ecological explanation (quantitatively) for this observation (assume an ambient temperature of 30 °C).  
 
     c. Is your model appropriate for explaining your data?
