@@ -1,17 +1,6 @@
----
-title: "Anolis Lizards Ecophisiology"
-author: "Andres Marmol"
-format: html
-editor: visual
----
-
-```{r}
-#| echo: false
-#| warning: false
-options(repos = c(CRAN = "https://cloud.r-project.org"))
-```
-
 ## Plotting real life ecophysiological from *Anolis* lizards.
+
+<!--# author: "Andres Marmol" !-->
 
 Why anoles? Anoles are among the most studied reptile organisms. They are vastly diverse with more than 488 species described until today — circa 11% of all the squamates without considering snakes — due to their outstanding adaptive radiation, which has inspired many to dive-in-depth into understanding how evolution has operated within this group ([Lizards in an Evolutionary Tree](https://doi.org/10.1525/california/9780520255913.001.0001) by J. B. Losos is a highly recommended instructive reading for more info). As a result, very detailed data sets on many species of anoles, including information on micro habitat, field body temperature, activity patterns and morphological traits, performance, etc., can be found online in relatively few time.
 
@@ -22,6 +11,7 @@ In the following steps we will be downloading from Dryad and using a data set cr
 To download the dataset, it is necessary to install the R package `rdryad`.
 
 ```{r}
+#| eval: false
 #| results: 'hide'
 #| warning: false
 install.packages("rdryad")
@@ -55,7 +45,7 @@ Once this is done, it is always good practice to check if the recently open data
 
 ```{r}
 #calling the dataset of interest as df
-df <- read.csv("/Users/andresmarmolguijarro/Library/Caches/R/rdryad/10_5061_dryad_h234n/winchell_evol_phenshifts.csv")
+df <- read.csv(downloaded_file[[1]][2])
 
 # checking the columns (variables) available in the data frame df using the str function
 names(df)
@@ -108,6 +98,19 @@ print(model1)
 
 The results of our model indicates that if the air temperature ($a$) is zero, *A. cristatellus* would show a body temperature ($b$) of 8.7 °C, which increases in approximately 0.7 °C for each 1 °C increase in air temperature.
 
+Now it is also possible to draw a few predictions
+
+```{r}
+# a number of possible ambient temperatures that can be found in Puerto Rico during the day
+
+amb_temps = data.frame(ambient.temp.C = seq(27,38, 1))# defines a vector with values from 27 to 38, with one unit increase
+
+predict(model1, newdata=amb_temps)
+
+```
+
+## How good our model is performing?
+
 Graphically the linear model fits the data as follows:
 
 ```{r}
@@ -153,23 +156,10 @@ summary(model1)$r.squared
 
 $r^2$ equals 0.574 indicating that almost 60% of the variance in body temperature is explained by ambient temperature.
 
-In summary, our expectation that lizards body temperature increases depending on how the temperature in their environment changes has been confirmed. Specifically for *A. cristatellus* in this study, body temperature increases \~ 0.7 °C every 1 degree increase in air temperature. A few questions remain. For example, does habitat has an effect in the body temperature in *A. cristatellus*, and if it does, how different could the body temperatures of the lizards in habitat A are from those in habitat B?.
-
-## Laboratory assignment
-
-4.  ***Differences in habitats***
-
-As explained above this data frame contains data on individuals *A. cristatellus* living in urban and forested areas from three cities in Puerto Rico, giving us the perfect opportunity to assess potential thermal effects of habitat upon this species. To do this:
-
-a\. Make a linear model for individuals of *A. cristatellus* living only in natural habitats (`context` = `natural`) and another for individuals living in urban habitats (`context` = `urban`).
-
-**Hint:** to filter the data you can use the `subset` function in R
+In summary, our expectation that lizards body temperature increases depending on how the temperature in their environment changes has been confirmed. Specifically for *A. cristatellus* in this study, body temperature increases \~ 0.7 °C every 1 degree increase in air temperature. A few questions remain. For example, does habitat has an effect in the body temperature in *A. cristatellus*, and if it does, how different could the body temperatures of the lizards in habitat A are from those in habitat B?
 
 ```{r}
-# example filtering data from anoles only from San Jose sites
-df_sanjose <- subset(df, Site == "San Jose")
+#| echo: false
+#| warning: false
+options(repos = c(CRAN = "https://cloud.r-project.org"))
 ```
-
-b\. Is there an habitat where lizards are consistently warmer? If so, provide an ecological explanation for this observation.
-
-c\. Is your model appropriate to explain your data?

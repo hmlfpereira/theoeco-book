@@ -4,10 +4,23 @@ We live in the midst of the biodiversity crisis. Biodiversity science, at first 
 
 Programming and mathematics are key tools of ecological theory. The programming language I use in this book is R (version 4). If you have familiarly with programming in another computer language, a fast skimming of Appendix A will be enough to get you going with the book. If you are new to programming, I recommend you spend a few hours working through the short course in Appendix A, but you may also wanna consult some web resources (e.g. <https://ourcodingclub.github.io/course>). With the advent of Large Language Models (LLM) such as ChatGPT there may be the temptation to think programming knowledge will no longer be needed. I think LLMs will accelerate our writing of computer code, but they will not replace the need for being able to read and understand the code.
 
-*Explain choice or R and open software/science.* blabla
+<!--# Explain choice or R and open software/science. -->
 
 But programming is not enough. In order to be able to effectively develop theory and models of biodiversity, a good grasp of mathematics, including of probability and statistics is essential. One challenge is that, and this at least the case in Europe where I have lectured the most, most biology students receive very little mathematical training. This book cannot address by itself such gap and assumes some basic familiarity with probability theory (e.g. what is a probability distribution function), some calculus training (e.g. what area a derivative and an integral), a little algebra (e.g. multiplication of a matrix by a vector). I try to take the reader forward from that level. There are excellent books out there for those that need this basic background (e.g. Otto's and Day's A Biologist's Guide to Mathematical Modelling). And Wikipedia (<https://www.wikipedia.org>) is often your best friend when you wanna a fast refresh of any mathematical concept or even for many of the models and ecological concepts presented in this book.
 
-*Structure of the book* blabla
+<!--# Explain structure of the book  -->
 
 This book can be used as the support for a semester course in Ecological Theory or Ecological Modelling. I have used many of these materials over the last decade in a similar course at iDiv/University of Halle-Wittenberg. But the book can also be used as self-learning tool or even as a reference tool. It takes a lot of experience from the Primer of Ecological Theory of Joan Roughgarden, that I was lucky to have as a mentor. As she used to say, one writes papers for the reviewers and books for the readers. This book is for you.
+
+
+<!--# Explain choice or R and open software/science. 
+# Welcome {.unnumbered}
+
+This is the website for **"Ecological theory for the biodiversity crisis"** book. This book teaches ecological theory with a hands-on approach using the R language. The ecological theory topics are often presented with an emphasis on their relevance for biodiversity conservation and management.
+
+This book was created with the [Quarto](https://quarto.org) publishing system.
+
+## License
+
+This website is (and will always be) **free to use**, and is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) License.
+-->

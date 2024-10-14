@@ -5,7 +5,9 @@ book:
   title: "Ecological theory for the biodiversity crisis"
   author: "Henrique Miguel Pereira"
   date: today
-  page-navigation: true
+  repo-url: https://github.com/hmlfpereira/theoeco-book
+  downloads: [pdf]
+#  repo-actions: [source]
   chapters:
     - index.qmd
     - part: "Ecology of individuals"
@@ -17,7 +19,8 @@ book:
   appendices:
     - intro_to_R.qmd
     - labs.qmd
-    - labs_solutions.qmd
+    - labs_tutorials.qmd
+  #  - labs_solutions.qmd     currently empty
   #  - references.qmd
 
 bibliography: references.bib
@@ -25,13 +28,13 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-    cover-image: "ValeCastroPanoramaBook.jpg"
+    cover-image: "images/ValeCastroPanoramaBook.jpg"
   titlepage-pdf:
     documentclass: book
     classoption: ["oneside", "open=any"]
     number-sections: true
     coverpage: true
-    coverpage-bg-image: "ValeCastroPanoramaBook.jpg"
+    coverpage-bg-image: "images/ValeCastroPanoramaBook.jpg"
     coverpage-theme:
       title-fontstyle: ["bfseries"]
       title-fontsize: 50
