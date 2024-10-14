@@ -308,6 +308,20 @@ window.Quarto = {
 </ul></li>
 <li><p>At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?</p></li>
 </ol></li>
+<li><strong><em>Body temperature of A. cristatellus in two different habitats</em></strong></li>
+</ol>
+<p>As explained above, this data frame contains data on individuals <em>A. cristatellus</em> living in urban and forested areas in three cities in Puerto Rico, giving us the perfect opportunity to assess the potential thermal effects of habitat upon this species. To do this:</p>
+<ol type="a">
+<li>Make a linear model for individuals of <em>A. cristatellus</em> living only in natural habitats (<code>context</code> = <code>natural</code>) and another for individuals living in urban habitats (<code>context</code> = <code>urban</code>).</li>
+</ol>
+<p><strong>Hint:</strong> to filter the data you can use the <code>subset</code> function in R</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example filtering data from anoles only from San Jose sites</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_sanjose <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, Site <span class="sc">==</span> <span class="st">"San Jose"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="a">
+<li><p>Is there a habitat where lizards are consistently warmer? If so, provide an ecological explanation (quantitatively) for this observation (assume an ambient temperature of 30 °C).</p></li>
+<li><p>Is your model appropriate for explaining your data?</p></li>
 </ol>
 </section>
 <section id="optimal-foraging-theory" class="level2" data-number="B.2">
@@ -338,36 +352,36 @@ Strategy 3: Chosing both preys</p>
 <li>Write a function that takes as parameters two vectors that account with the history of the previous plays and returns one play (i.e., Cooperate – “C” or defect – “D”). This play should try to be the best response to the history of past moves. One example of such a function is:</li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>    strat<span class="ot">&lt;-</span><span class="cf">function</span>(own,opponent)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        n <span class="ot">&lt;-</span> <span class="fu">length</span>(opponent)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>             <span class="cf">if</span>(n<span class="sc">==</span><span class="dv">0</span>) <span class="st">"D"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span>(own[n]<span class="sc">==</span><span class="st">"D"</span>) opponent[n]</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>               <span class="cf">else</span> <span class="st">"C"</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    strat<span class="ot">&lt;-</span><span class="cf">function</span>(own,opponent)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        n <span class="ot">&lt;-</span> <span class="fu">length</span>(opponent)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>             <span class="cf">if</span>(n<span class="sc">==</span><span class="dv">0</span>) <span class="st">"D"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span>(own[n]<span class="sc">==</span><span class="st">"D"</span>) opponent[n]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>               <span class="cf">else</span> <span class="st">"C"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="a">
 <li><p>Use the function pd_sim (see below) to play your strategy with the strategy of the other groups (ask for each group their function(s)) and with itself, in an iterative game with x moves. Compare the results of the cumulative rewards as well as the sequence of moves. Report to the rest of groups the values of the rewards for each of the tournaments. What was the best strategy? What strategies are best responses to themselves?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pd_sim<span class="ot">&lt;-</span><span class="cf">function</span>(p1_strat,p2_strat,n)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> w1<span class="ot">&lt;-</span><span class="dv">0</span>          <span class="co">#accumulated pay-off (fitness) of player 1</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> w2<span class="ot">&lt;-</span><span class="dv">0</span>          <span class="co">#accumulated pay-offs of player 2</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> h1<span class="ot">&lt;-</span><span class="cn">NULL</span>       <span class="co">#history of plays of player 1</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a> h2<span class="ot">&lt;-</span><span class="cn">NULL</span>       <span class="co">#history of plays of player 2</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n)            </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>   {</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    a1<span class="ot">&lt;-</span><span class="fu">p1_strat</span>(h1,h2) </span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    a2<span class="ot">&lt;-</span><span class="fu">p2_strat</span>(h2,h1) </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    p1<span class="ot">&lt;-</span>mat[a1,a2] </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    p2<span class="ot">&lt;-</span>mat[a2,a1]         </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    w1<span class="ot">&lt;-</span>w1<span class="sc">+</span>p1              </span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    w2<span class="ot">&lt;-</span>w2<span class="sc">+</span>p2             </span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    h1[t]<span class="ot">&lt;-</span>a1                   </span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>h2[t]<span class="ot">&lt;-</span>a2                   }   </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">list</span>(<span class="at">w1=</span>w1,<span class="at">w2=</span>w2,<span class="at">h1=</span>h1,<span class="at">h2=</span>h2)</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pd_sim<span class="ot">&lt;-</span><span class="cf">function</span>(p1_strat,p2_strat,n)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a> w1<span class="ot">&lt;-</span><span class="dv">0</span>          <span class="co">#accumulated pay-off (fitness) of player 1</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> w2<span class="ot">&lt;-</span><span class="dv">0</span>          <span class="co">#accumulated pay-offs of player 2</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a> h1<span class="ot">&lt;-</span><span class="cn">NULL</span>       <span class="co">#history of plays of player 1</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> h2<span class="ot">&lt;-</span><span class="cn">NULL</span>       <span class="co">#history of plays of player 2</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n)            </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>   {</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    a1<span class="ot">&lt;-</span><span class="fu">p1_strat</span>(h1,h2) </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    a2<span class="ot">&lt;-</span><span class="fu">p2_strat</span>(h2,h1) </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    p1<span class="ot">&lt;-</span>mat[a1,a2] </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    p2<span class="ot">&lt;-</span>mat[a2,a1]         </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    w1<span class="ot">&lt;-</span>w1<span class="sc">+</span>p1              </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    w2<span class="ot">&lt;-</span>w2<span class="sc">+</span>p2             </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    h1[t]<span class="ot">&lt;-</span>a1                   </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>h2[t]<span class="ot">&lt;-</span>a2                   }   </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">list</span>(<span class="at">w1=</span>w1,<span class="at">w2=</span>w2,<span class="at">h1=</span>h1,<span class="at">h2=</span>h2)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ol>
 
