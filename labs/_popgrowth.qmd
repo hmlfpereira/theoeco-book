@@ -1,0 +1,36 @@
+## Pandemic growth
+
+1.  **The exponential dynamics of the pandemic.** In early 2020, the first wave of the global pandemic of COVID-19 hit several European countries. Here we will plot the data for those countries and fit an exponential growth model.
+
+    a.  Load the cumulative infected individuals time series from the COVID-19 pandemic in five countries. Each time series starts after the first fifteen infections are detected.[^_popgrowth-1]
+
+    ``` r
+    it <- c(17, 79, 132, 229, 322, 400, 650, 888, 1128, 1689, 2036, 2502, 
+    3089, 3858, 4636, 5883, 7375, 9172, 10149, 12462, 15113, 17660, 21157,
+    23980, 27980, 31506, 35713, 41035, 47021, 53578) #Feb22-March22
+
+    es <- c(17, 35, 54, 82, 136, 192, 267, 348, 531, 764, 1094, 1527, 2299,
+    3274, 4427, 5958, 7641, 9785, 11491, 13994, 17688, 21735, 26304, 31750,
+    36616, 41262, 48953, 57506, 66460, 75641) #Feb27-March27
+
+    fr <- c(17, 38, 57, 100, 130, 178, 212, 285, 423, 613, 716, 1126, 1412,
+    1784, 2281, 2876, 3661, 4499, 5423, 6633, 7730, 9134, 10995, 12612, 14459, 
+    16018, 19856, 22302, 25233, 29155) #Feb27-March27
+
+    uk <- c(18, 22, 30, 42, 47, 69, 109, 164, 220, 271, 352, 412, 469, 617, 
+    876, 1282, 1766, 2244, 2605, 3047, 3658, 4427, 5426, 6481, 7736, 8934, 
+    10312, 12650, 15025, 17717) #Feb27-March27
+
+    de <- c(17, 21, 47, 57, 111, 129, 157, 196, 262, 400, 684, 847, 902, 1139, 
+    1296, 1567, 2369, 3062, 3795, 4838, 6012, 7156, 8198, 14138, 18187, 21463, 
+    24774, 29212, 31554, 36508) #Feb26-March26
+    ```
+
+    c.  Plot the data in a linear plot, coloring each country with a different colour. What do you observe?
+    d.  Plot the data in a semi-log plot (using the plot option `log=”y”`), coloring each country with a different color. What do you observe?
+    e.  Carry out a linear regression with the data of each country (using the log of the n values) and estimate the growth rate R. Are the values the same for all countries? Do they vary over time?
+    f.  Knowing that $$R_0 = R^\tau$$ and that the infectious period ($\tau$) duration is 10 days, what are the $R_0$’s in different countries?
+    g.  Write a for loop to simulate geometric (exponential) growth, going from time t in 1:100, and storing the population size values at each time step t+1 in variable n based on the population values at time t, i.e. `n[t+1]<-R*n[t]`. Don’t forget to initialize the population size before the for loop with `n<-1`. Plot a couple of runs of the for loop with different R values (for instance `R=1.01` and `R=1.1`) in linear scale.
+    h.  Given that you know the solution of the geometric growth equation to be $n(t)=n_0 R^t$, create a vector of values with this formula using the same R as you used above, but starting with `n0<-2` and overlay them on the plot.
+
+[^_popgrowth-1]: Data source: <https://github.com/owid/covid-19-data/tree/master/public/data>, accessed 8 Nov 2020

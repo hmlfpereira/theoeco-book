@@ -1,0 +1,11 @@
+## Dispersal and the random-walk
+
+1.  **Random walk for 1 individual**
+    a)  Create your own code to simulate an individual random walk. Assume that the starting point is always x,y =(0,0) and the probability of an individual to choose any direction (i.e. left, right, up or down) is the same. It should be a function taking as argument the number of steps and returning a list of two vectors, one with the x positions over time and another with the y positions overtime.
+    b)  Plot together the random walks (at least 5000 steps) of a few individuals. ![](/images/Lab_RandomWalk.png)
+2.  **Random walk for several (n) individuals**
+    a)  Create your own code to simulate random walks by several (***n***)individuals and returns the last position of each individual. It should be a function that takes as arguments the number of individuals and the numbers of time steps, and returns a list of two vectors, the last x position of each individual, and the last y position of each individual.
+    b)  Create a histogram showing the distribution of the x and y last positions of 10 000 individuals after 10 time steps, 100 time steps and 1 000 time steps.
+    c)  Create a function that receives as parameters a vector of values xlast, a mean value (meanx) and a standard deviation (stdx) and returns the log-likelihood of observing those values for those parameters.
+    d)  Find the value meanx and stdx that maximize the likelihood of the observations. Are they the same as mean(xlast) and std(xlast)? Why?
+    e)  **Extra credit:** Create a histogram showing the distribution of the distance to the origin (sqrt(x\^+y\^2)) of the last positions of 10 000 individuals for 10 time steps, 100 time steps, 1000 time steps and 10000 time steps. What is the relationship between the length of the randomwalk and the mean distance? Fit the Rayleigh distribution (2 r / sigma\^2) \* exp(-r\^2/2 sigma\^2) using non-linear fitting to each of the histograms and overlay it on the graph.

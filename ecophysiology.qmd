@@ -51,7 +51,7 @@ Let's see if this equation makes sense. It says that the equilibrium body temper
 It's time to start using **R** to explore this model. For instance, we can use **R** to plot the relationship between the body temperature and the solar radiation. First we create variables for the heat coefficient and the air temperature and assign some valuues:
 
 ```{r}
-k = 50  #convection coefficient (cal/h)
+k = 50  #convection coefficient (cal/h/ºC)
 a = 18  #air temperature (ºC)
 ```
 
@@ -88,8 +88,8 @@ Note that we added `type="l"` as a parameter of the plot to have a line drawn in
 Another way of looking at the heat exchange equation @eq-heat is to look at what combinations of air temperature and solar radiation values are livable for the lizard. This is also known as the climate space of an organism. In order to explore the climate space of the lizard we need to first assess what are the maximum and minimum body temperature that the lizard can experience. Let's assume those are respectively 36 and 24ºC and store them in **R,**
 
 ```{r}
-b_max = 36  #maximum body temperature
-b_min = 24  #minimum body temperature
+b_max = 36  #maximum body temperature (ºC)
+b_min = 24  #minimum body temperature (ºC)
 ```
 
 We now want to solve @eq-heat at equilibrium for the air temperature as a function of the solar radiation and body temperature. We can do this by rearranging @eq-bodytemp,
@@ -127,7 +127,7 @@ polygon(X,Y,col="green")
 Now that we have the climate space we can plot on top of it some empirical data of how the conditions are in the field during the day. We can for instance consider two micro-habitats, a rock (in the sun) and a bush (in the shade). Suppose we obtain some data from temperature loggers that were installed in each micro-habitat , recording every three hours the values of temperature and radiation as tabled below.
 
 | Time (hh:mm) | Radiation rock (cal/h) | Radiation bush (cal/h) | Temperature (ºC) |
-|------------------|-------------------|-------------------|------------------|
+|--------------|------------------------|------------------------|------------------|
 | 00:00        | 150                    | 150                    | 18               |
 | 03:00        | 150                    | 150                    | 13               |
 | 06:00        | 800                    | 450                    | 10               |

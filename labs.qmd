@@ -5,3 +5,9 @@
 {{< include labs/_optimalforaging.qmd >}}
 
 {{< include labs/_evogames.qmd >}}
+
+{{< include labs/_dispersal.qmd >}}
+
+{{< include labs/_popgrowth.qmd >}}
+
+{{< include labs/_pva.qmd >}} 

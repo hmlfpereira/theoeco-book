@@ -1,0 +1,18 @@
+## Population Viability Analysis
+
+![](/images/IUCN_redlist.png)
+
+1.  Consider a population with exponential growth but that exhibits environmental stochasticity, with the logarithm of the population growth rate following a normal distribution with mean $\bar{r}=\log(\bar{R})$ and variance $v$. Assume that the population has an on-off density dependence and cannot grow above the carrying capacity $K$. According to Foley (1994)[^_pva-1] the expect time to extinction is $$T=\frac{1}{s r}[e^{s \log(k)}(1-e^{-s \log(N_0)} )-s \log(N_0)]$$ where $s=2r/v$.
+
+    a.  Plot the mean extinction times, $T$, as a function of $r$, $v$, $n_0$, and $K$. Please comment each plot. $r$ can carry from 0.01 to 0.2, $v$ can vary from 0.05 to 1.0, $n0$ can vary from 0 to 10, and $K$ can vary from 10 to 500. Use as base parameters `n0=10`, `K=100`, `v=0.3` and `r=0.01`.
+
+    b.  Write a function that simulates a population with these dynamics numerically. Start by using the for loop that you developed in Lab 2 and modify it to include a carrying capacity and growth rate that is taken every year from a normal distribution. The function should take parameter `n0`, `r`, `v`, and `K`. It should return the vector of the population sizes over time.
+
+    c.  Simulate the dynamics with the following parameters:
+
+        1.  `n0=3`; `r=0.01`; `v=0.2`; `K=500`
+        2.  `n0=100`; `r=0.01`; `v=0.2`; `K=500`;
+
+    d.  **Extended credit**: Compare the model predictions with the results from the analytical approximation of Foley. You need to do many simulations to reach the predicted extinction times from Foley. For instance, you can create a function that call the function developed in (b) and executes it 100 times, returning the median time to extinction across the simulations.
+
+[^_pva-1]: Foley, P. (1994) Predicting Extinction Times from Environmental Stochasticity and Carrying-Capacity. *Conservation Biology* **8**: 124–137.
