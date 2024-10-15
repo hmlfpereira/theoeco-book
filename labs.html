@@ -255,6 +255,9 @@ window.Quarto = {
   <li><a href="#climate-space-of-an-ectotherm" id="toc-climate-space-of-an-ectotherm" class="nav-link active" data-scroll-target="#climate-space-of-an-ectotherm"><span class="header-section-number">B.1</span> Climate space of an ectotherm</a></li>
   <li><a href="#optimal-foraging-theory" id="toc-optimal-foraging-theory" class="nav-link" data-scroll-target="#optimal-foraging-theory"><span class="header-section-number">B.2</span> Optimal foraging theory</a></li>
   <li><a href="#evolutionary-games" id="toc-evolutionary-games" class="nav-link" data-scroll-target="#evolutionary-games"><span class="header-section-number">B.3</span> Evolutionary games</a></li>
+  <li><a href="#dispersal-and-the-random-walk" id="toc-dispersal-and-the-random-walk" class="nav-link" data-scroll-target="#dispersal-and-the-random-walk"><span class="header-section-number">B.4</span> Dispersal and the random-walk</a></li>
+  <li><a href="#pandemic-growth" id="toc-pandemic-growth" class="nav-link" data-scroll-target="#pandemic-growth"><span class="header-section-number">B.5</span> Pandemic growth</a></li>
+  <li><a href="#population-viability-analysis" id="toc-population-viability-analysis" class="nav-link" data-scroll-target="#population-viability-analysis"><span class="header-section-number">B.6</span> Population Viability Analysis</a></li>
   </ul>
 </nav>
     </div>
@@ -395,8 +398,86 @@ Strategy 3: Chosing both preys</p>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ol>
+</section>
+<section id="dispersal-and-the-random-walk" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="dispersal-and-the-random-walk"><span class="header-section-number">B.4</span> Dispersal and the random-walk</h2>
+<ol type="1">
+<li><strong>Random walk for 1 individual</strong>
+<ol type="a">
+<li>Create your own code to simulate an individual random walk. Assume that the starting point is always x,y =(0,0) and the probability of an individual to choose any direction (i.e.&nbsp;left, right, up or down) is the same. It should be a function taking as argument the number of steps and returning a list of two vectors, one with the x positions over time and another with the y positions overtime.</li>
+<li>Plot together the random walks (at least 5000 steps) of a few individuals. <img src="./images/Lab_RandomWalk.png" class="img-fluid"></li>
+</ol></li>
+<li><strong>Random walk for several (n) individuals</strong>
+<ol type="a">
+<li>Create your own code to simulate random walks by several (<strong><em>n</em></strong>)individuals and returns the last position of each individual. It should be a function that takes as arguments the number of individuals and the numbers of time steps, and returns a list of two vectors, the last x position of each individual, and the last y position of each individual.</li>
+<li>Create a histogram showing the distribution of the x and y last positions of 10 000 individuals after 10 time steps, 100 time steps and 1 000 time steps.</li>
+<li>Create a function that receives as parameters a vector of values xlast, a mean value (meanx) and a standard deviation (stdx) and returns the log-likelihood of observing those values for those parameters.</li>
+<li>Find the value meanx and stdx that maximize the likelihood of the observations. Are they the same as mean(xlast) and std(xlast)? Why?</li>
+<li><strong>Extra credit:</strong> Create a histogram showing the distribution of the distance to the origin (sqrt(x^+y^2)) of the last positions of 10 000 individuals for 10 time steps, 100 time steps, 1000 time steps and 10000 time steps. What is the relationship between the length of the randomwalk and the mean distance? Fit the Rayleigh distribution (2 r / sigma^2) * exp(-r^2/2 sigma^2) using non-linear fitting to each of the histograms and overlay it on the graph.</li>
+</ol></li>
+</ol>
+</section>
+<section id="pandemic-growth" class="level2" data-number="B.5">
+<h2 data-number="B.5" class="anchored" data-anchor-id="pandemic-growth"><span class="header-section-number">B.5</span> Pandemic growth</h2>
+<ol type="1">
+<li><p><strong>The exponential dynamics of the pandemic.</strong> In early 2020, the first wave of the global pandemic of COVID-19 hit several European countries. Here we will plot the data for those countries and fit an exponential growth model.</p>
+<ol type="a">
+<li>Load the cumulative infected individuals time series from the COVID-19 pandemic in five countries. Each time series starts after the first fifteen infections are detected.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>it <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">79</span>, <span class="dv">132</span>, <span class="dv">229</span>, <span class="dv">322</span>, <span class="dv">400</span>, <span class="dv">650</span>, <span class="dv">888</span>, <span class="dv">1128</span>, <span class="dv">1689</span>, <span class="dv">2036</span>, <span class="dv">2502</span>, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3089</span>, <span class="dv">3858</span>, <span class="dv">4636</span>, <span class="dv">5883</span>, <span class="dv">7375</span>, <span class="dv">9172</span>, <span class="dv">10149</span>, <span class="dv">12462</span>, <span class="dv">15113</span>, <span class="dv">17660</span>, <span class="dv">21157</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dv">23980</span>, <span class="dv">27980</span>, <span class="dv">31506</span>, <span class="dv">35713</span>, <span class="dv">41035</span>, <span class="dv">47021</span>, <span class="dv">53578</span>) <span class="co">#Feb22-March22</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>es <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">35</span>, <span class="dv">54</span>, <span class="dv">82</span>, <span class="dv">136</span>, <span class="dv">192</span>, <span class="dv">267</span>, <span class="dv">348</span>, <span class="dv">531</span>, <span class="dv">764</span>, <span class="dv">1094</span>, <span class="dv">1527</span>, <span class="dv">2299</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3274</span>, <span class="dv">4427</span>, <span class="dv">5958</span>, <span class="dv">7641</span>, <span class="dv">9785</span>, <span class="dv">11491</span>, <span class="dv">13994</span>, <span class="dv">17688</span>, <span class="dv">21735</span>, <span class="dv">26304</span>, <span class="dv">31750</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="dv">36616</span>, <span class="dv">41262</span>, <span class="dv">48953</span>, <span class="dv">57506</span>, <span class="dv">66460</span>, <span class="dv">75641</span>) <span class="co">#Feb27-March27</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>fr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">38</span>, <span class="dv">57</span>, <span class="dv">100</span>, <span class="dv">130</span>, <span class="dv">178</span>, <span class="dv">212</span>, <span class="dv">285</span>, <span class="dv">423</span>, <span class="dv">613</span>, <span class="dv">716</span>, <span class="dv">1126</span>, <span class="dv">1412</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="dv">1784</span>, <span class="dv">2281</span>, <span class="dv">2876</span>, <span class="dv">3661</span>, <span class="dv">4499</span>, <span class="dv">5423</span>, <span class="dv">6633</span>, <span class="dv">7730</span>, <span class="dv">9134</span>, <span class="dv">10995</span>, <span class="dv">12612</span>, <span class="dv">14459</span>, </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="dv">16018</span>, <span class="dv">19856</span>, <span class="dv">22302</span>, <span class="dv">25233</span>, <span class="dv">29155</span>) <span class="co">#Feb27-March27</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>uk <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">42</span>, <span class="dv">47</span>, <span class="dv">69</span>, <span class="dv">109</span>, <span class="dv">164</span>, <span class="dv">220</span>, <span class="dv">271</span>, <span class="dv">352</span>, <span class="dv">412</span>, <span class="dv">469</span>, <span class="dv">617</span>, </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="dv">876</span>, <span class="dv">1282</span>, <span class="dv">1766</span>, <span class="dv">2244</span>, <span class="dv">2605</span>, <span class="dv">3047</span>, <span class="dv">3658</span>, <span class="dv">4427</span>, <span class="dv">5426</span>, <span class="dv">6481</span>, <span class="dv">7736</span>, <span class="dv">8934</span>, </span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="dv">10312</span>, <span class="dv">12650</span>, <span class="dv">15025</span>, <span class="dv">17717</span>) <span class="co">#Feb27-March27</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>de <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">21</span>, <span class="dv">47</span>, <span class="dv">57</span>, <span class="dv">111</span>, <span class="dv">129</span>, <span class="dv">157</span>, <span class="dv">196</span>, <span class="dv">262</span>, <span class="dv">400</span>, <span class="dv">684</span>, <span class="dv">847</span>, <span class="dv">902</span>, <span class="dv">1139</span>, </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="dv">1296</span>, <span class="dv">1567</span>, <span class="dv">2369</span>, <span class="dv">3062</span>, <span class="dv">3795</span>, <span class="dv">4838</span>, <span class="dv">6012</span>, <span class="dv">7156</span>, <span class="dv">8198</span>, <span class="dv">14138</span>, <span class="dv">18187</span>, <span class="dv">21463</span>, </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="dv">24774</span>, <span class="dv">29212</span>, <span class="dv">31554</span>, <span class="dv">36508</span>) <span class="co">#Feb26-March26</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="a">
+<li>Plot the data in a linear plot, coloring each country with a different colour. What do you observe?</li>
+<li>Plot the data in a semi-log plot (using the plot option <code>log=”y”</code>), coloring each country with a different color. What do you observe?</li>
+<li>Carry out a linear regression with the data of each country (using the log of the n values) and estimate the growth rate R. Are the values the same for all countries? Do they vary over time?</li>
+<li>Knowing that <span class="math display">\[R_0 = R^\tau\]</span> and that the infectious period (<span class="math inline">\(\tau\)</span>) duration is 10 days, what are the <span class="math inline">\(R_0\)</span>’s in different countries?</li>
+<li>Write a for loop to simulate geometric (exponential) growth, going from time t in 1:100, and storing the population size values at each time step t+1 in variable n based on the population values at time t, i.e.&nbsp;<code>n[t+1]&lt;-R*n[t]</code>. Don’t forget to initialize the population size before the for loop with <code>n&lt;-1</code>. Plot a couple of runs of the for loop with different R values (for instance <code>R=1.01</code> and <code>R=1.1</code>) in linear scale.</li>
+<li>Given that you know the solution of the geometric growth equation to be <span class="math inline">\(n(t)=n_0 R^t\)</span>, create a vector of values with this formula using the same R as you used above, but starting with <code>n0&lt;-2</code> and overlay them on the plot.</li>
+</ol></li>
+</ol>
+</section>
+<section id="population-viability-analysis" class="level2" data-number="B.6">
+<h2 data-number="B.6" class="anchored" data-anchor-id="population-viability-analysis"><span class="header-section-number">B.6</span> Population Viability Analysis</h2>
+<p><img src="./images/IUCN_redlist.png" class="img-fluid"></p>
+<ol type="1">
+<li><p>Consider a population with exponential growth but that exhibits environmental stochasticity, with the logarithm of the population growth rate following a normal distribution with mean <span class="math inline">\(\bar{r}=\log(\bar{R})\)</span> and variance <span class="math inline">\(v\)</span>. Assume that the population has an on-off density dependence and cannot grow above the carrying capacity <span class="math inline">\(K\)</span>. According to Foley (1994)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> the expect time to extinction is <span class="math display">\[T=\frac{1}{s r}[e^{s \log(k)}(1-e^{-s \log(N_0)} )-s \log(N_0)]\]</span> where <span class="math inline">\(s=2r/v\)</span>.</p>
+<ol type="a">
+<li><p>Plot the mean extinction times, <span class="math inline">\(T\)</span>, as a function of <span class="math inline">\(r\)</span>, <span class="math inline">\(v\)</span>, <span class="math inline">\(n_0\)</span>, and <span class="math inline">\(K\)</span>. Please comment each plot. <span class="math inline">\(r\)</span> can carry from 0.01 to 0.2, <span class="math inline">\(v\)</span> can vary from 0.05 to 1.0, <span class="math inline">\(n0\)</span> can vary from 0 to 10, and <span class="math inline">\(K\)</span> can vary from 10 to 500. Use as base parameters <code>n0=10</code>, <code>K=100</code>, <code>v=0.3</code> and <code>r=0.01</code>.</p></li>
+<li><p>Write a function that simulates a population with these dynamics numerically. Start by using the for loop that you developed in Lab 2 and modify it to include a carrying capacity and growth rate that is taken every year from a normal distribution. The function should take parameter <code>n0</code>, <code>r</code>, <code>v</code>, and <code>K</code>. It should return the vector of the population sizes over time.</p></li>
+<li><p>Simulate the dynamics with the following parameters:</p>
+<ol type="1">
+<li><code>n0=3</code>; <code>r=0.01</code>; <code>v=0.2</code>; <code>K=500</code></li>
+<li><code>n0=100</code>; <code>r=0.01</code>; <code>v=0.2</code>; <code>K=500</code>;</li>
+</ol></li>
+<li><p><strong>Extended credit</strong>: Compare the model predictions with the results from the analytical approximation of Foley. You need to do many simulations to reach the predicted extinction times from Foley. For instance, you can create a function that call the function developed in (b) and executes it 100 times, returning the median time to extinction across the simulations.</p></li>
+</ol></li>
+</ol>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Data source: <a href="https://github.com/owid/covid-19-data/tree/master/public/data" class="uri">https://github.com/owid/covid-19-data/tree/master/public/data</a>, accessed 8 Nov 2020<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Foley, P. (1994) Predicting Extinction Times from Environmental Stochasticity and Carrying-Capacity. <em>Conservation Biology</em> <strong>8</strong>: 124–137.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

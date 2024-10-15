@@ -341,7 +341,7 @@ Figure&nbsp;1.2: The energy flows of a lizard basking in the sun.
 <p>Let’s see if this equation makes sense. It says that the equilibrium body temperature is the sum of the solar radiation divided by the convection coefficient with the air temperature. So, at minimum the equilibrium body temperature is equal to the air temperature when the solar radiation is zero (e.g.&nbsp;during the night). But when the solar radiation is greater than zero then the equilibrium body temperature is higher than the air temperature as one would expect. How much higher? Well that depends on the convection coefficient. If the convection coefficient is very high then the body temperature is mainly determined by the air temperature. In contrast, if the convection coefficient is very low then the solar radiation can contribute significantly to the body temperature.</p>
 <p>It’s time to start using <strong>R</strong> to explore this model. For instance, we can use <strong>R</strong> to plot the relationship between the body temperature and the solar radiation. First we create variables for the heat coefficient and the air temperature and assign some valuues:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">50</span>  <span class="co">#convection coefficient (cal/h)</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">=</span> <span class="dv">50</span>  <span class="co">#convection coefficient (cal/h/ºC)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="dv">18</span>  <span class="co">#air temperature (ºC)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We want to plot the equilibrium body temperature for a range of solar radiation values. So we create a vector with radiation values, for instance ranging from 0 cal/h to 1500 cal/h in steps of 500. I am going to use big letters to denote vectors in <strong>R</strong> code, in contrast with scalars which I will denote with small letters.</p>
@@ -383,8 +383,8 @@ Figure&nbsp;1.3: Equilibrium body temperature as a function of solar radiation.
 <h2 data-number="1.2" class="anchored" data-anchor-id="understanding-the-climate-space"><span class="header-section-number">1.2</span> Understanding the climate space</h2>
 <p>Another way of looking at the heat exchange equation <a href="#eq-heat" class="quarto-xref">Equation&nbsp;<span>1.1</span></a> is to look at what combinations of air temperature and solar radiation values are livable for the lizard. This is also known as the climate space of an organism. In order to explore the climate space of the lizard we need to first assess what are the maximum and minimum body temperature that the lizard can experience. Let’s assume those are respectively 36 and 24ºC and store them in <strong>R,</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>b_max <span class="ot">=</span> <span class="dv">36</span>  <span class="co">#maximum body temperature</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b_min <span class="ot">=</span> <span class="dv">24</span>  <span class="co">#minimum body temperature</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>b_max <span class="ot">=</span> <span class="dv">36</span>  <span class="co">#maximum body temperature (ºC)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b_min <span class="ot">=</span> <span class="dv">24</span>  <span class="co">#minimum body temperature (ºC)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We now want to solve <a href="#eq-heat" class="quarto-xref">Equation&nbsp;<span>1.1</span></a> at equilibrium for the air temperature as a function of the solar radiation and body temperature. We can do this by rearranging <a href="#eq-bodytemp" class="quarto-xref">Equation&nbsp;<span>1.2</span></a>,</p>
 <p><span id="eq-air"><span class="math display">\[
@@ -429,10 +429,10 @@ Table&nbsp;1.1: Hypothetical radiation values in two micro-habitats and air temp
 <div aria-describedby="tbl-temprad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 24%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 24%">
+<col style="width: 17%">
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 22%">
 </colgroup>
 <thead>
 <tr class="header">
