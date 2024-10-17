@@ -123,7 +123,7 @@
     "href": "intro_to_R.html#random-numbers-and-statistical-distributions",
     "title": "Appendix A — A brief R tutorial",
     "section": "A.4 Random numbers and statistical distributions",
-    "text": "A.4 Random numbers and statistical distributions\n\nrandom1d&lt;-function(tmax)\n{\nx&lt;-0\nfor (t in 1:tmax)\n{\n  r&lt;-runif(1)\n  if (r&lt;1/2)\n    x[t+1]&lt;-x[t]+1 else\n      x[t+1]&lt;-x[t]-1\n}\nreturn(x)\n}\n\nplot(random1d(100))\n\n\n\n\n\n\n\ntmax&lt;-10000\nlastx&lt;-0\nfor (i in 1:1000)\n{\n  x&lt;-random1d(tmax)\n  lastx[i]&lt;-x[tmax]\n}\n\nhist(lastx)\n\n\n\n\n\n\n\nmean(lastx)\n\n[1] -3.56\n\nd&lt;-sqrt(lastx^2)\nhist(d)\n\n\n\n\n\n\n\nmean(d)\n\n[1] 80.056\n\nmedian(d)\n\n[1] 71\n\nmax(d)\n\n[1] 361\n\nhist(d[d&lt;20],breaks=c(1:20))",
+    "text": "A.4 Random numbers and statistical distributions\n\nrandom1d&lt;-function(tmax)\n{\nx&lt;-0\nfor (t in 1:tmax)\n{\n  r&lt;-runif(1)\n  if (r&lt;1/2)\n    x[t+1]&lt;-x[t]+1 else\n      x[t+1]&lt;-x[t]-1\n}\nreturn(x)\n}\n\nplot(random1d(100))\n\n\n\n\n\n\n\ntmax&lt;-10000\nlastx&lt;-0\nfor (i in 1:1000)\n{\n  x&lt;-random1d(tmax)\n  lastx[i]&lt;-x[tmax]\n}\n\nhist(lastx)\n\n\n\n\n\n\n\nmean(lastx)\n\n[1] -0.942\n\nd&lt;-sqrt(lastx^2)\nhist(d)\n\n\n\n\n\n\n\nmean(d)\n\n[1] 77.064\n\nmedian(d)\n\n[1] 63\n\nmax(d)\n\n[1] 391\n\nhist(d[d&lt;20],breaks=c(1:20))",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>A</span>  <span class='chapter-title'>A brief R tutorial</span>"
@@ -245,6 +245,28 @@
     "title": "Appendix B — Computational labs",
     "section": "B.6 Population Viability Analysis",
     "text": "B.6 Population Viability Analysis\n\n\nConsider a population with exponential growth but that exhibits environmental stochasticity, with the logarithm of the population growth rate following a normal distribution with mean \\(\\bar{r}=\\log(\\bar{R})\\) and variance \\(v\\). Assume that the population has an on-off density dependence and cannot grow above the carrying capacity \\(K\\). According to Foley (1994)2 the expect time to extinction is \\[T=\\frac{1}{s r}[e^{s \\log(k)}(1-e^{-s \\log(N_0)} )-s \\log(N_0)]\\] where \\(s=2r/v\\).\n\nPlot the mean extinction times, \\(T\\), as a function of \\(r\\), \\(v\\), \\(n_0\\), and \\(K\\). Please comment each plot. \\(r\\) can carry from 0.01 to 0.2, \\(v\\) can vary from 0.05 to 1.0, \\(n0\\) can vary from 0 to 10, and \\(K\\) can vary from 10 to 500. Use as base parameters n0=10, K=100, v=0.3 and r=0.01.\nWrite a function that simulates a population with these dynamics numerically. Start by using the for loop that you developed in Lab 2 and modify it to include a carrying capacity and growth rate that is taken every year from a normal distribution. The function should take parameter n0, r, v, and K. It should return the vector of the population sizes over time.\nSimulate the dynamics with the following parameters:\n\nn0=3; r=0.01; v=0.2; K=500\nn0=100; r=0.01; v=0.2; K=500;\n\nExtended credit: Compare the model predictions with the results from the analytical approximation of Foley. You need to do many simulations to reach the predicted extinction times from Foley. For instance, you can create a function that call the function developed in (b) and executes it 100 times, returning the median time to extinction across the simulations.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Computational labs</span>"
+    ]
+  },
+  {
+    "objectID": "labs.html#the-camera-trapper",
+    "href": "labs.html#the-camera-trapper",
+    "title": "Appendix B — Computational labs",
+    "section": "B.7 The camera trapper",
+    "text": "B.7 The camera trapper\nA researcher place camera traps at a grid of sites during 19 days to observe roe-deer.\n\nLoad the data on the file roe_deer_2016_r.xls into R. Briefly describe the structure of the dataset.\nCase 1: Ignoring detection probability.\n\nBuild a vector that for each site takes value 1 when roe-deer is present and 0 when is absent.\nUsing maximum-likelihood estimate the occupancy probability (\\(\\Psi\\)). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of $\\Psi$ values and find the \\(\\Psi\\) value that maximizes the function.\nAssume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posteriori probability distribution for the occupancy \\(P(\\Psi)\\).\n\nSet function for Bayesian approach:\noccupancybayesian &lt;- function(v,psi,priorpsi)\n{\n  integrand &lt;- function(x)\n      occupancylikelihood(v,x)*priorpsi(x)\n  occupancylikelihood(v,psi)*priorpsi(psi)/\n      integrate(integrand, lower = 0.01, upper = 0.99)$value\n}\nSet function for uninformed prior:\nuninformedprior &lt;- function(psi) \n{ \n  dunif(psi,0.2,0.5) \n}\nCase 2: Using a hierarchical model with detection probability\n\nUsing maximum-likelihood estimate the occupancy probability (\\(\\Psi\\)) and detection probability (\\(p\\)).",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Computational labs</span>"
+    ]
+  },
+  {
+    "objectID": "labs.html#managing-a-fishery",
+    "href": "labs.html#managing-a-fishery",
+    "title": "Appendix B — Computational labs",
+    "section": "B.8 Managing a fishery",
+    "text": "B.8 Managing a fishery\n\nConsider that you are managing a fishery with the following dynamics: \\[dn/dt = 0.2 n (1-n/10000) \\]\n\nPlot the production function of the fishery, indicating the stock size for the maximum sustainable yield and the corresponding production level.\nSuppose you establish an annual quota that is equivalent to 50% of the maximum sustainable yield. What are the two stock size levels that sustainably allow that exploitation level?\nConsider that there is an annual variance of 10% in the productivity. Explore what happen when you manage this fishery for 100 years at each of the two stock sizes determined in the previous question.\nExplain why in a system with constant quotas, MSY is not stable and should not be the management goal.\nDiscuss how these results relate with the paper of Worm et al (2009) about the need to rebuild fisheries.\n\n\n\n\n\nAtlantic cod (Gadus morhua). Source: Hans-Petter Fjeld, CC-BY-SA, Wikipedia.",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>B</span>  <span class='chapter-title'>Computational labs</span>"

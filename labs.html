@@ -258,6 +258,8 @@ window.Quarto = {
   <li><a href="#dispersal-and-the-random-walk" id="toc-dispersal-and-the-random-walk" class="nav-link" data-scroll-target="#dispersal-and-the-random-walk"><span class="header-section-number">B.4</span> Dispersal and the random-walk</a></li>
   <li><a href="#pandemic-growth" id="toc-pandemic-growth" class="nav-link" data-scroll-target="#pandemic-growth"><span class="header-section-number">B.5</span> Pandemic growth</a></li>
   <li><a href="#population-viability-analysis" id="toc-population-viability-analysis" class="nav-link" data-scroll-target="#population-viability-analysis"><span class="header-section-number">B.6</span> Population Viability Analysis</a></li>
+  <li><a href="#the-camera-trapper" id="toc-the-camera-trapper" class="nav-link" data-scroll-target="#the-camera-trapper"><span class="header-section-number">B.7</span> The camera trapper</a></li>
+  <li><a href="#managing-a-fishery" id="toc-managing-a-fishery" class="nav-link" data-scroll-target="#managing-a-fishery"><span class="header-section-number">B.8</span> Managing a fishery</a></li>
   </ul>
 </nav>
     </div>
@@ -337,6 +339,7 @@ window.Quarto = {
 <li><p>Is there a habitat where lizards are consistently warmer? If so, provide an ecological explanation (quantitatively) for this observation (assume an ambient temperature of 30 °C).</p></li>
 <li><p>Is your model appropriate for explaining your data?</p></li>
 </ol>
+<div style="page-break-after: always;"></div>
 </section>
 <section id="optimal-foraging-theory" class="level2" data-number="B.2">
 <h2 data-number="B.2" class="anchored" data-anchor-id="optimal-foraging-theory"><span class="header-section-number">B.2</span> Optimal foraging theory</h2>
@@ -357,6 +360,7 @@ Strategy 3: Chosing both preys</p>
 <li>Produce a graph of energy gain per unit of time in function of the size of the feeding territory. Consider the following values for the parameters of the predator and prey: <strong><em>ew</em></strong> = 0,1 J/s; <strong><em>ep</em></strong> = 1 J/S; <strong><em>v</em></strong> = 0,5 m/s; <strong><em>a</em></strong> = 0,005 ind/s/m2; and <strong><em>e</em></strong> = 10;</li>
 </ol></li>
 </ol>
+<div style="page-break-after: always;"></div>
 </section>
 <section id="evolutionary-games" class="level2" data-number="B.3">
 <h2 data-number="B.3" class="anchored" data-anchor-id="evolutionary-games"><span class="header-section-number">B.3</span> Evolutionary games</h2>
@@ -398,6 +402,7 @@ Strategy 3: Chosing both preys</p>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ol>
+<div style="page-break-after: always;"></div>
 </section>
 <section id="dispersal-and-the-random-walk" class="level2" data-number="B.4">
 <h2 data-number="B.4" class="anchored" data-anchor-id="dispersal-and-the-random-walk"><span class="header-section-number">B.4</span> Dispersal and the random-walk</h2>
@@ -416,6 +421,7 @@ Strategy 3: Chosing both preys</p>
 <li><strong>Extra credit:</strong> Create a histogram showing the distribution of the distance to the origin (sqrt(x^+y^2)) of the last positions of 10 000 individuals for 10 time steps, 100 time steps, 1000 time steps and 10000 time steps. What is the relationship between the length of the randomwalk and the mean distance? Fit the Rayleigh distribution (2 r / sigma^2) * exp(-r^2/2 sigma^2) using non-linear fitting to each of the histograms and overlay it on the graph.</li>
 </ol></li>
 </ol>
+<div style="page-break-after: always;"></div>
 </section>
 <section id="pandemic-growth" class="level2" data-number="B.5">
 <h2 data-number="B.5" class="anchored" data-anchor-id="pandemic-growth"><span class="header-section-number">B.5</span> Pandemic growth</h2>
@@ -452,6 +458,7 @@ Strategy 3: Chosing both preys</p>
 <li>Given that you know the solution of the geometric growth equation to be <span class="math inline">\(n(t)=n_0 R^t\)</span>, create a vector of values with this formula using the same R as you used above, but starting with <code>n0&lt;-2</code> and overlay them on the plot.</li>
 </ol></li>
 </ol>
+<div style="page-break-after: always;"></div>
 </section>
 <section id="population-viability-analysis" class="level2" data-number="B.6">
 <h2 data-number="B.6" class="anchored" data-anchor-id="population-viability-analysis"><span class="header-section-number">B.6</span> Population Viability Analysis</h2>
@@ -469,6 +476,59 @@ Strategy 3: Chosing both preys</p>
 <li><p><strong>Extended credit</strong>: Compare the model predictions with the results from the analytical approximation of Foley. You need to do many simulations to reach the predicted extinction times from Foley. For instance, you can create a function that call the function developed in (b) and executes it 100 times, returning the median time to extinction across the simulations.</p></li>
 </ol></li>
 </ol>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="the-camera-trapper" class="level2" data-number="B.7">
+<h2 data-number="B.7" class="anchored" data-anchor-id="the-camera-trapper"><span class="header-section-number">B.7</span> The camera trapper</h2>
+<p>A researcher place camera traps at a grid of sites during 19 days to observe roe-deer.</p>
+<ol type="1">
+<li><p>Load the data on the file roe_deer_2016_r.xls into R. Briefly describe the structure of the dataset.</p></li>
+<li><p>Case 1: Ignoring detection probability.</p>
+<ol type="a">
+<li>Build a vector that for each site takes value 1 when roe-deer is present and 0 when is absent.</li>
+<li>Using maximum-likelihood estimate the occupancy probability (<span class="math inline">\(\Psi\)</span>). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of $\Psi$ values and find the <span class="math inline">\(\Psi\)</span> value that maximizes the function.</li>
+<li>Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posteriori probability distribution for the occupancy <span class="math inline">\(P(\Psi)\)</span>.</li>
+</ol>
+<p>Set function for Bayesian approach:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>occupancybayesian <span class="ot">&lt;-</span> <span class="cf">function</span>(v,psi,priorpsi)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  integrand <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">occupancylikelihood</span>(v,x)<span class="sc">*</span><span class="fu">priorpsi</span>(x)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">occupancylikelihood</span>(v,psi)<span class="sc">*</span><span class="fu">priorpsi</span>(psi)<span class="sc">/</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">integrate</span>(integrand, <span class="at">lower =</span> <span class="fl">0.01</span>, <span class="at">upper =</span> <span class="fl">0.99</span>)<span class="sc">$</span>value</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Set function for uninformed prior:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>uninformedprior <span class="ot">&lt;-</span> <span class="cf">function</span>(psi) </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>{ </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dunif</span>(psi,<span class="fl">0.2</span>,<span class="fl">0.5</span>) </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Case 2: Using a hierarchical model with detection probability</p>
+<ol type="a">
+<li>Using maximum-likelihood estimate the occupancy probability (<span class="math inline">\(\Psi\)</span>) and detection probability (<span class="math inline">\(p\)</span>).</li>
+</ol></li>
+</ol>
+<p><img src="./images/RoeDeer.jpg" class="img-fluid"></p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="managing-a-fishery" class="level2" data-number="B.8">
+<h2 data-number="B.8" class="anchored" data-anchor-id="managing-a-fishery"><span class="header-section-number">B.8</span> Managing a fishery</h2>
+<ol type="1">
+<li>Consider that you are managing a fishery with the following dynamics: <span class="math display">\[dn/dt = 0.2 n (1-n/10000) \]</span>
+<ol type="a">
+<li>Plot the production function of the fishery, indicating the stock size for the maximum sustainable yield and the corresponding production level.</li>
+<li>Suppose you establish an annual quota that is equivalent to 50% of the maximum sustainable yield. What are the two stock size levels that sustainably allow that exploitation level?</li>
+<li>Consider that there is an annual variance of 10% in the productivity. Explore what happen when you manage this fishery for 100 years at each of the two stock sizes determined in the previous question.</li>
+<li>Explain why in a system with constant quotas, MSY is not stable and should not be the management goal.</li>
+<li>Discuss how these results relate with the paper of Worm et al (2009) about the need to rebuild fisheries.</li>
+</ol></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/Gadus_morhua.JPG" class="img-fluid figure-img"></p>
+<figcaption>Atlantic cod (Gadus morhua). Source: Hans-Petter Fjeld, CC-BY-SA, Wikipedia.</figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
 
 
 </section>
