@@ -1,0 +1,42 @@
+---
+title: "IntroR6"
+---
+
+# Central Limit Theorem
+
+Consider a sample of random coin tosses. Each coin toss is sampled from a Bernouli distribution with p=.5, or equivalently from a Binomial distribution of size 1 and p=0.5. The mean of the Bernoulli $\mu$ is 0.5 and the standard deviation $\sigma$ is 0.5 (see Wikipedia). The central limit theorem says that the mean value of the sample of size n has a normal distribution with mean equal to μ and standard deviation equals to $\sigma /\sqrt(n)$.
+
+```{r}
+
+nmax=10000
+nsamples=100
+m=0
+n=0
+p = 0.05
+mean = p
+stdev = sqrt(p*(1-p))
+for (i in 1:nmax) # number of means calculated
+  {
+  x = rbinom(nsamples, 1, .05) # number of values draw from distribution
+  m[i] = mean(x)  # mean of the sample
+  n[i] = (mean(x)-mean)/(stdev/sqrt(nsamples))  # normalized sample mean
+}
+hist(m)
+mean(m)
+sd(m)
+.5/sqrt(nsamples)
+hist(n)
+sort(m)[0.025*nmax] #lower bound confidence interval 95%
+sort(m)[0.975*nmax] #upper bound confidence interval 95%
+qnorm(0.025,mean=.5,sd=0.5/sqrt(nsamples))
+qnorm(0.975,mean=.5,sd=0.5/sqrt(nsamples))
+mean(n)
+sd(n)
+sort(n)[0.025*nmax] #lower bound confidence interval 95%
+sort(n)[0.975*nmax] #upper bound confidence interval 95%
+```
+
+```{r}
+qnorm(0.025,mean=0,sd=1)
+qnorm(0.975,mean=0,sd=1)
+```

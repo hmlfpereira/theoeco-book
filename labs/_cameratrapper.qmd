@@ -1,0 +1,38 @@
+## The camera trapper
+
+A researcher place camera traps at a grid of sites during 19 days to observe roe-deer.
+
+1.  Load the data on the file roe_deer_2016_r.xls into R. Briefly describe the structure of the dataset.
+
+2.  Case 1: Ignoring detection probability.
+
+    a)  Build a vector that for each site takes value 1 when roe-deer is present and 0 when is absent.
+    b)  Using maximum-likelihood estimate the occupancy probability ($\Psi$). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of \$\\Psi\$ values and find the $\Psi$ value that maximizes the function.
+    c)  Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posteriori probability distribution for the occupancy $P(\Psi)$.
+
+    Set function for Bayesian approach:
+
+    ``` r
+    occupancybayesian <- function(v,psi,priorpsi)
+    {
+      integrand <- function(x)
+          occupancylikelihood(v,x)*priorpsi(x)
+      occupancylikelihood(v,psi)*priorpsi(psi)/
+          integrate(integrand, lower = 0.01, upper = 0.99)$value
+    }
+    ```
+
+    Set function for uninformed prior:
+
+    ``` r
+    uninformedprior <- function(psi) 
+    { 
+      dunif(psi,0.2,0.5) 
+    }
+    ```
+
+3.  Case 2: Using a hierarchical model with detection probability
+
+    a.  Using maximum-likelihood estimate the occupancy probability ($\Psi$) and detection probability ($p$).
+
+![](/images/RoeDeer.jpg)
