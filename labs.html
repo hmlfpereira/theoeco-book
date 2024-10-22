@@ -261,7 +261,7 @@ window.Quarto = {
   <li><a href="#the-camera-trapper" id="toc-the-camera-trapper" class="nav-link" data-scroll-target="#the-camera-trapper"><span class="header-section-number">B.7</span> The camera trapper</a></li>
   <li><a href="#managing-a-fishery" id="toc-managing-a-fishery" class="nav-link" data-scroll-target="#managing-a-fishery"><span class="header-section-number">B.8</span> Managing a fishery</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/labs.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -486,8 +486,8 @@ Strategy 3: Chosing both preys</p>
 <li><p>Case 1: Ignoring detection probability.</p>
 <ol type="a">
 <li>Build a vector that for each site takes value 1 when roe-deer is present and 0 when is absent.</li>
-<li>Using maximum-likelihood estimate the occupancy probability (<span class="math inline">\(\Psi\)</span>). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of $\Psi$ values and find the <span class="math inline">\(\Psi\)</span> value that maximizes the function.</li>
-<li>Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posteriori probability distribution for the occupancy <span class="math inline">\(P(\Psi)\)</span>.</li>
+<li>Using maximum-likelihood estimate the occupancy probability (<span class="math inline">\(\Psi\)</span>). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of <span class="math inline">\(\Psi\)</span> values and find the <span class="math inline">\(\Psi\)</span> value that maximizes the function.</li>
+<li>Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posterior probability distribution for the occupancy <span class="math inline">\(P(\Psi)\)</span>.</li>
 </ol>
 <p>Set function for Bayesian approach:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>occupancybayesian <span class="ot">&lt;-</span> <span class="cf">function</span>(v,psi,priorpsi)</span>
@@ -978,4 +978,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/labs.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
