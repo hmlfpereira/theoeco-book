@@ -7,7 +7,7 @@ book:
   date: today
   repo-url: https://github.com/hmlfpereira/theoeco-book
   downloads: [pdf]
-#  repo-actions: [source]
+  repo-actions: [source]
   chapters:
     - index.qmd
     - part: "Ecology of individuals"
