@@ -7,8 +7,8 @@ A researcher place camera traps at a grid of sites during 19 days to observe roe
 2.  Case 1: Ignoring detection probability.
 
     a)  Build a vector that for each site takes value 1 when roe-deer is present and 0 when is absent.
-    b)  Using maximum-likelihood estimate the occupancy probability ($\Psi$). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of \$\\Psi\$ values and find the $\Psi$ value that maximizes the function.
-    c)  Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posteriori probability distribution for the occupancy $P(\Psi)$.
+    b)  Using maximum-likelihood estimate the occupancy probability ($\Psi$). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of $\Psi$ values and find the $\Psi$ value that maximizes the function.
+    c)  Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posterior probability distribution for the occupancy $P(\Psi)$.
 
     Set function for Bayesian approach:
 
