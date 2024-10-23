@@ -1,3 +1,8 @@
+---
+execute:
+  freeze: auto  # re-render only when source changes
+---
+
 # Ecophysiology and the climate space: when to bask in the sun?
 
 We are now almost daily bombarded with news about climate change and its impacts on people and ecosystems. But how does climate mechanistically affects organisms? The basic foundations to address this question were laid out by ecophysiology research. Interestingly, at the time that some of seminal research on ecophysiology was carried out, back in the 1960's, climate change was not yet in the radar of most people. The research was driven by the interest in the basic understanding of how biophysical conditions affect organisms. Today the knowledge gained from this research has acquired new importance. This is an area whether the mechanistic knowledge learnt from theory and experiments is now sometimes overlooked because of the massive datasets and machine learning approaches available. But let's start with the basics.
@@ -127,7 +132,7 @@ polygon(X,Y,col="green")
 Now that we have the climate space we can plot on top of it some empirical data of how the conditions are in the field during the day. We can for instance consider two micro-habitats, a rock (in the sun) and a bush (in the shade). Suppose we obtain some data from temperature loggers that were installed in each micro-habitat , recording every three hours the values of temperature and radiation as tabled below.
 
 | Time (hh:mm) | Radiation rock (cal/h) | Radiation bush (cal/h) | Temperature (ºC) |
-|--------------|------------------------|------------------------|------------------|
+|-----------------|--------------------|--------------------|-----------------|
 | 00:00        | 150                    | 150                    | 18               |
 | 03:00        | 150                    | 150                    | 13               |
 | 06:00        | 800                    | 450                    | 10               |
