@@ -2,30 +2,30 @@
 
 A researcher place camera traps at a grid of sites during 19 days to observe roe-deer.
 
-1.  Load the data on the file roe_deer_2016_r.xls into R. Briefly describe the structure of the dataset.
+1.  Load the data on the file roe_deer_2016_r.csv into R. Briefly describe the structure of the dataset.
 
 2.  Case 1: Ignoring detection probability.
 
     a)  Build a vector that for each site takes value 1 when roe-deer is present and 0 when is absent.
-    b)  Using maximum-likelihood estimate the occupancy probability ($\Psi$). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of $\Psi$ values and find the $\Psi$ value that maximizes the function.
-    c)  Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posterior probability distribution for the occupancy $P(\Psi)$.
+    b)  Using maximum-likelihood estimate the occupancy probability ($\psi$). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of $\Psi$ values and find the $\psi$ value that maximizes the function.
+    c)  Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posterior probability distribution for the occupancy $P(\psi)$.
 
-    Set function for Bayesian approach:
+    Help: A function returning the $P(\psi|data)$ . It takes as parameters a vector `y` of presences/absences, a value for `psi`, and a function for the prior distribution of $\psi$ named `priorpsi`:
 
     ``` r
-    occupancybayesian <- function(v,psi,priorpsi)
+    occupancybayesian <- function(y,psi,priorpsi)
     {
       integrand <- function(x)
-          occupancylikelihood(v,x)*priorpsi(x)
-      occupancylikelihood(v,psi)*priorpsi(psi)/
+          occupancylikelihood(y,x)*priorpsi(x)
+      occupancylikelihood(y,psi)*priorpsi(psi)/
           integrate(integrand, lower = 0.01, upper = 0.99)$value
     }
     ```
 
-    Set function for uninformed prior:
+    A function returning $P(\psi)$, the prior distribution of $\psi$ values. It takes as parameters a value for `psi.`
 
     ``` r
-    uninformedprior <- function(psi) 
+    prior <- function(psi) 
     { 
       dunif(psi,0.2,0.5) 
     }
