@@ -260,6 +260,7 @@ window.Quarto = {
   <li><a href="#population-viability-analysis" id="toc-population-viability-analysis" class="nav-link" data-scroll-target="#population-viability-analysis"><span class="header-section-number">B.6</span> Population Viability Analysis</a></li>
   <li><a href="#the-camera-trapper" id="toc-the-camera-trapper" class="nav-link" data-scroll-target="#the-camera-trapper"><span class="header-section-number">B.7</span> The camera trapper</a></li>
   <li><a href="#managing-a-fishery" id="toc-managing-a-fishery" class="nav-link" data-scroll-target="#managing-a-fishery"><span class="header-section-number">B.8</span> Managing a fishery</a></li>
+  <li><a href="#road-kill" id="toc-road-kill" class="nav-link" data-scroll-target="#road-kill"><span class="header-section-number">B.9</span> Road Kill</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/labs.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -516,9 +517,17 @@ Strategy 3: Chosing both preys</p>
 <li>Consider that you are managing a fishery with the following dynamics: <span class="math display">\[dn/dt = 0.2 n (1-n/10000) \]</span>
 <ol type="a">
 <li>Plot the production function of the fishery, indicating the stock size for the maximum sustainable yield and the corresponding production level.</li>
-<li>Suppose you establish an annual quota that is equivalent to 50% of the maximum sustainable yield. What are the two stock size levels that sustainably allow that exploitation level?</li>
-<li>Consider that there is an annual variance of 10% in the productivity. Explore what happen when you manage this fishery for 100 years at each of the two stock sizes determined in the previous question.</li>
+<li>Suppose you establish an annual quota (harvest) that is equivalent to 50% of the maximum sustainable yield. What are the two stock size levels that sustainably allow that exploitation level?</li>
+<li>Explore what happen when you manage this fishery for 100 years. Start by writing a function that simulates the logistic growth above with a constant harvest. The function should take as parameters the initial population size n0 (the stock of the fishery), the annual harvest h, and the number of years for which you simulate the population dynamics and return a vector with the population sizes over time. Discuss the results of the following experiments.
+<ul>
+<li><strong>Experiment 1:</strong> Set the harvest equal to the production at MSY and initial population size at carrying capacity.</li>
+<li><strong>Experiment 2</strong>. Set the harvest equal to the production at MSY and initial population size at the stock size of MSY</li>
+<li><strong>Experiment 3.</strong> Set the harvest equal to 50% of the maximum sustainable yield and initial population size at carrying capacity.</li>
+<li><strong>Experiment 4.</strong> Set the harvest equal to the production at MSY and initial population size at the stock size of MSY - 1000 individuals.</li>
+<li><strong>Experiment 5.</strong> Set the harvest equal to the production at MSY and initial population size at the stock size of MSY - 1000 individuals.</li>
+</ul></li>
 <li>Explain why in a system with constant quotas, MSY is not stable and should not be the management goal.</li>
+<li><strong>Extra credit</strong>: Modify the logistic growth function to have stochastic dynamics so that there is a variance of 10% in the annual productivity. Simulate again experiment 2 a few times. What happens?</li>
 <li>Discuss how these results relate with the paper of Worm et al (2009) about the need to rebuild fisheries.</li>
 </ol></li>
 </ol>
@@ -528,6 +537,50 @@ Strategy 3: Chosing both preys</p>
 <figcaption>Atlantic cod (Gadus morhua). Source: Hans-Petter Fjeld, CC-BY-SA, Wikipedia.</figcaption>
 </figure>
 </div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="road-kill" class="level2" data-number="B.9">
+<h2 data-number="B.9" class="anchored" data-anchor-id="road-kill"><span class="header-section-number">B.9</span> Road Kill</h2>
+<p><strong>Populations in space and the impacts of roads</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 49%">
+<col style="width: 50%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><p><em>The <strong>Red fox</strong></em></p>
+<p><em>…So, while they may be most active at night.</em></p>
+<p><em>Red foxes are especially active during the</em></p>
+<p><em>daytime in <strong>spring and summer (April-Sept)</strong></em></p>
+<p><em>as they are foraging for food to feed their young.</em></p></td>
+<td><img src="./images/RedFox.jpg" class="img-fluid quarto-figure quarto-figure-right" width="345"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Goals of the exercise</strong>:</p>
+<ul>
+<li><p>Identify road segments with hotspots of red fox-car-collisions.</p></li>
+<li><p>What impact do activity patterns have on the rate of animal-car-collision hotspots?</p></li>
+<li><p>Use the False Discovery Rate (FDR) method to identify such hotspots.</p></li>
+</ul>
+<ol type="1">
+<li>Please install the following R packages</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fuzzySim)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol type="a">
+<li>Load the <em>roadkill</em> dataset.</li>
+<li>Explain the structure of the dataset.</li>
+<li>Show that differences in seasonal activity patterns impact the FDR hotspot results in red fox-car-collisions.</li>
+<li>How many hotspots were detected for the active season?</li>
+<li>Plot, based on the FDR method, true and “false” hotspots. Explain the general geographic locations of the hotspots and those vary between the two different seasons.</li>
+<li>Think about conservation management implications.</li>
+</ol>
 <div style="page-break-after: always;"></div>
 
 
