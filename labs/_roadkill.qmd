@@ -1,0 +1,41 @@
+## Road Kill
+
+**Populations in space and the impacts of roads**
+
++------------------------------------------------------+--------------------------------------------------------+
+| *The **Red fox***                                    | ![](/images/RedFox.jpg){fig-align="right" width="345"} |
+|                                                      |                                                        |
+| *…So, while they may be most active at night.*       |                                                        |
+|                                                      |                                                        |
+| *Red foxes are especially active during the*         |                                                        |
+|                                                      |                                                        |
+| *daytime in **spring and summer (April-Sept)***      |                                                        |
+|                                                      |                                                        |
+| *as they are foraging for food to feed their young.* |                                                        |
++------------------------------------------------------+--------------------------------------------------------+
+
+**Goals of the exercise**:
+
+-   Identify road segments with hotspots of red fox-car-collisions.
+
+-   What impact do activity patterns have on the rate of animal-car-collision hotspots?
+
+-   Use the False Discovery Rate (FDR) method to identify such hotspots.
+
+1.  Please install the following R packages
+
+``` r
+library(readxl)
+library(dplyr)
+library(sf)
+library(ggplot2)
+library(fuzzySim)
+library(grid)
+```
+
+a.  Load the *roadkill* dataset.
+b.  Explain the structure of the dataset.
+c.  Show that differences in seasonal activity patterns impact the FDR hotspot results in red fox-car-collisions.
+d.  How many hotspots were detected for the active season?
+e.  Plot, based on the FDR method, true and “false” hotspots. Explain the general geographic locations of the hotspots and those vary between the two different seasons.
+f.  Think about conservation management implications.

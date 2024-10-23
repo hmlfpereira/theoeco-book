@@ -2,9 +2,15 @@
 
 1.  Consider that you are managing a fishery with the following dynamics: $$dn/dt = 0.2 n (1-n/10000) $$
     a)  Plot the production function of the fishery, indicating the stock size for the maximum sustainable yield and the corresponding production level.
-    b)  Suppose you establish an annual quota that is equivalent to 50% of the maximum sustainable yield. What are the two stock size levels that sustainably allow that exploitation level?
-    c)  Consider that there is an annual variance of 10% in the productivity. Explore what happen when you manage this fishery for 100 years at each of the two stock sizes determined in the previous question.
+    b)  Suppose you establish an annual quota (harvest) that is equivalent to 50% of the maximum sustainable yield. What are the two stock size levels that sustainably allow that exploitation level?
+    c)  Explore what happen when you manage this fishery for 100 years. Start by writing a function that simulates the logistic growth above with a constant harvest. The function should take as parameters the initial population size n0 (the stock of the fishery), the annual harvest h, and the number of years for which you simulate the population dynamics and return a vector with the population sizes over time. Discuss the results of the following experiments.
+        -   **Experiment 1:** Set the harvest equal to the production at MSY and initial population size at carrying capacity.
+        -   **Experiment 2**. Set the harvest equal to the production at MSY and initial population size at the stock size of MSY
+        -   **Experiment 3.** Set the harvest equal to 50% of the maximum sustainable yield and initial population size at carrying capacity.
+        -   **Experiment 4.** Set the harvest equal to the production at MSY and initial population size at the stock size of MSY - 1000 individuals.
+        -   **Experiment 5.** Set the harvest equal to the production at MSY and initial population size at the stock size of MSY - 1000 individuals.
     d)  Explain why in a system with constant quotas, MSY is not stable and should not be the management goal.
-    e)  Discuss how these results relate with the paper of Worm et al (2009) about the need to rebuild fisheries.
+    e)  **Extra credit**: Modify the logistic growth function to have stochastic dynamics so that there is a variance of 10% in the annual productivity. Simulate again experiment 2 a few times. What happens?
+    f)  Discuss how these results relate with the paper of Worm et al (2009) about the need to rebuild fisheries.
 
 ![Atlantic cod (Gadus morhua). Source: Hans-Petter Fjeld, CC-BY-SA, Wikipedia.](/images/Gadus_morhua.JPG)
