@@ -482,23 +482,23 @@ Strategy 3: Chosing both preys</p>
 <h2 data-number="B.7" class="anchored" data-anchor-id="the-camera-trapper"><span class="header-section-number">B.7</span> The camera trapper</h2>
 <p>A researcher place camera traps at a grid of sites during 19 days to observe roe-deer.</p>
 <ol type="1">
-<li><p>Load the data on the file roe_deer_2016_r.xls into R. Briefly describe the structure of the dataset.</p></li>
+<li><p>Load the data on the file roe_deer_2016_r.csv into R. Briefly describe the structure of the dataset.</p></li>
 <li><p>Case 1: Ignoring detection probability.</p>
 <ol type="a">
 <li>Build a vector that for each site takes value 1 when roe-deer is present and 0 when is absent.</li>
-<li>Using maximum-likelihood estimate the occupancy probability (<span class="math inline">\(\Psi\)</span>). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of <span class="math inline">\(\Psi\)</span> values and find the <span class="math inline">\(\Psi\)</span> value that maximizes the function.</li>
-<li>Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posterior probability distribution for the occupancy <span class="math inline">\(P(\Psi)\)</span>.</li>
+<li>Using maximum-likelihood estimate the occupancy probability (<span class="math inline">\(\psi\)</span>). First create a function that takes as parameters psi and a vector of presence/absences and returns the likelihood. Then plot that function for a range of <span class="math inline">\(\Psi\)</span> values and find the <span class="math inline">\(\psi\)</span> value that maximizes the function.</li>
+<li>Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posterior probability distribution for the occupancy <span class="math inline">\(P(\psi)\)</span>.</li>
 </ol>
-<p>Set function for Bayesian approach:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>occupancybayesian <span class="ot">&lt;-</span> <span class="cf">function</span>(v,psi,priorpsi)</span>
+<p>Help: A function returning the <span class="math inline">\(P(\psi|data)\)</span> . It takes as parameters a vector <code>y</code> of presences/absences, a value for <code>psi</code>, and a function for the prior distribution of <span class="math inline">\(\psi\)</span> named <code>priorpsi</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>occupancybayesian <span class="ot">&lt;-</span> <span class="cf">function</span>(y,psi,priorpsi)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  integrand <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">occupancylikelihood</span>(v,x)<span class="sc">*</span><span class="fu">priorpsi</span>(x)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">occupancylikelihood</span>(v,psi)<span class="sc">*</span><span class="fu">priorpsi</span>(psi)<span class="sc">/</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">occupancylikelihood</span>(y,x)<span class="sc">*</span><span class="fu">priorpsi</span>(x)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">occupancylikelihood</span>(y,psi)<span class="sc">*</span><span class="fu">priorpsi</span>(psi)<span class="sc">/</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">integrate</span>(integrand, <span class="at">lower =</span> <span class="fl">0.01</span>, <span class="at">upper =</span> <span class="fl">0.99</span>)<span class="sc">$</span>value</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Set function for uninformed prior:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>uninformedprior <span class="ot">&lt;-</span> <span class="cf">function</span>(psi) </span>
+<p>A function returning <span class="math inline">\(P(\psi)\)</span>, the prior distribution of <span class="math inline">\(\psi\)</span> values. It takes as parameters a value for <code>psi.</code></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="cf">function</span>(psi) </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>{ </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dunif</span>(psi,<span class="fl">0.2</span>,<span class="fl">0.5</span>) </span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
