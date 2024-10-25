@@ -261,6 +261,7 @@ window.Quarto = {
   <li><a href="#the-camera-trapper" id="toc-the-camera-trapper" class="nav-link" data-scroll-target="#the-camera-trapper"><span class="header-section-number">B.7</span> The camera trapper</a></li>
   <li><a href="#managing-a-fishery" id="toc-managing-a-fishery" class="nav-link" data-scroll-target="#managing-a-fishery"><span class="header-section-number">B.8</span> Managing a fishery</a></li>
   <li><a href="#road-kill" id="toc-road-kill" class="nav-link" data-scroll-target="#road-kill"><span class="header-section-number">B.9</span> Road Kill</a></li>
+  <li><a href="#simulating-a-neutral-community" id="toc-simulating-a-neutral-community" class="nav-link" data-scroll-target="#simulating-a-neutral-community"><span class="header-section-number">B.10</span> Simulating a neutral community</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/labs.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -581,6 +582,35 @@ Strategy 3: Chosing both preys</p>
 <li>How many hotspots were detected for the active season?</li>
 <li>Plot, based on the FDR method, true and “false” hotspots. Explain the general geographic locations of the hotspots and those vary between the two different seasons.</li>
 <li>Think about conservation management implications.</li>
+</ol>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="simulating-a-neutral-community" class="level2" data-number="B.10">
+<h2 data-number="B.10" class="anchored" data-anchor-id="simulating-a-neutral-community"><span class="header-section-number">B.10</span> Simulating a neutral community</h2>
+<!--# Laura Quintero prepared first version? -->
+<p>The neutral theory in ecology provides a mechanistic explanation for species abundance distributions. It seeks to understand the impact of speciation, extinction, dispersal and ecological drift on the species abundance distribution (SAD), assuming that all species have equal opportunities (Hubbell, 2001).</p>
+<p>It is important to note that the neutral theory is a model created to explain a pattern of relative abundance within communities, but it does not necessarily reflect reality (communities’ mechanisms). The neutral theory utilizes a model based on the dynamics of a species’ population, which is governed by generalized birth and death events, including speciation, immigration, and emigration (Rosindell et al (2011).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/neutral.png" class="img-fluid figure-img"></p>
+<figcaption>Diagram of the dynamics of communities in the neutral theory of biodiversity (from Rosindell et al 2011).</figcaption>
+</figure>
+</div>
+<p>The neutral theory paradox is that in absence of migration or mutation diversity gradually declines to zero or monodominance. Let’s see what happens to species richness and the species abundance distribution over time for different parameters of the model. Start by installing the package <code>untb.</code></p>
+<ol type="1">
+<li><p><strong>Without mutation or dispersal (pure ecological drift):</strong> We start with a local community with 20 species, each with 25 individuals. The simulation then runs for 2500 generations (where 9/900 individuals die per generation). Mutation rate is zero and immigration rate is zero</p>
+<ol type="a">
+<li><p>Plot the number of species over time.</p></li>
+<li><p>Plot the species abundance distribution at time 1, 100 and 2500</p></li>
+<li><p>Plot the map of individuals at those time steps.</p></li>
+</ol></li>
+<li><p><strong>With point mutation:</strong> Same parameters as (1) but with speciation rate of 0.1.</p>
+<ol type="a">
+<li><p>Plot the number of species over time.</p></li>
+<li><p>Plot the species abundance distribution at time 1, 100 and 2500</p></li>
+<li><p>Plot the map of individuals at those time steps.</p></li>
+</ol></li>
+<li><p><strong>[Extra Credit] With immigration:</strong> Same parameters as (1) but immigration rate greater than zero. Play with different abundance distributions for the metacommunity.</p></li>
 </ol>
 <div style="page-break-after: always;"></div>
 
