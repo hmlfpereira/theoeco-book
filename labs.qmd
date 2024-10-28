@@ -35,3 +35,11 @@
 {{< include labs/_roadkill.qmd >}}
 
 {{< pagebreak >}}
+
+{{< include labs/_neutraltheory.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include labs/_monitoring.qmd >}}
+
+{{< pagebreak >}}

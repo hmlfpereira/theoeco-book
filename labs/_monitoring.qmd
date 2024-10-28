@@ -1,0 +1,10 @@
+## Monitoring biodiversity
+
+1.  Exploring the BBS dataset
+    a.  Load the file Florida.csv into R. Briefly describe the structure of the dataset.
+    b.  Map the monitored transects/routes in Florida’s map. Use the maps library to plot the counties of florida as a base map.
+    c.  For transect 4 and transect 109 in year 2018 plot calculate the species richness, Shannon diversity index H and evenness J of both transects, with H being $$H=-\sum_i (p_i \ln p_i)$$ where $p_i$ is defined as the proportion of individuals found in species $i$. Compare the two transects.
+    d.  Plot the species abundance distribution and abundance-rank for both transects. What do you observe?
+    e.  Choose one transect and plot the species richness, Shannon diversity, and geometric mean abundance over time
+    f.  *Extra credit 1:* Produce a map of the trends of one these metrics across Florida (for instance coloring different points according to the trend)
+    g.  *Extra credit 2:* Estimate the number of species in Florida by combining the different transects and using one of the estimators. Use bootstrap and/or jacknife to calculate confidence intervals.

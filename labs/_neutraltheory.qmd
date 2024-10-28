@@ -1,0 +1,29 @@
+## Simulating a neutral community
+
+<!--# Laura Quintero prepared first version? -->
+
+The neutral theory in ecology provides a mechanistic explanation for species abundance distributions. It seeks to understand the impact of speciation, extinction, dispersal and ecological drift on the species abundance distribution (SAD), assuming that all species have equal opportunities (Hubbell, 2001).
+
+It is important to note that the neutral theory is a model created to explain a pattern of relative abundance within communities, but it does not necessarily reflect reality (communities’ mechanisms). The neutral theory utilizes a model based on the dynamics of a species' population, which is governed by generalized birth and death events, including speciation, immigration, and emigration (Rosindell et al (2011).
+
+![Diagram of the dynamics of communities in the neutral theory of biodiversity (from Rosindell et al 2011).](/images/neutral.png)
+
+The neutral theory paradox is that in absence of migration or mutation diversity gradually declines to zero or monodominance. Let's see what happens to species richness and the species abundance distribution over time for different parameters of the model. Start by installing the package `untb.`
+
+1.  **Without mutation or dispersal (pure ecological drift):** We start with a local community with 20 species, each with 25 individuals. The simulation then runs for 2500 generations where 10 individuals die per generation. Mutation rate is zero and immigration rate is zero
+
+    a.  Plot the number of species over time.
+
+    b.  Plot the species abundance distribution at time 1, 100 and 2500
+
+    c.  Plot the map of individuals at those time steps.
+
+2.  **With point mutation:** Same parameters as (1) but with speciation rate of 0.1.
+
+    a.  Plot the number of species over time.
+
+    b.  Plot the species abundance distribution at time 1, 100 and 2500
+
+    c.  Plot the map of individuals at those time steps.
+
+3.  **\[Extra Credit\] With immigration:** Same parameters as (1) but immigration rate greater than zero. Play with different abundance distributions for the metacommunity.
