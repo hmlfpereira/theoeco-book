@@ -262,6 +262,7 @@ window.Quarto = {
   <li><a href="#managing-a-fishery" id="toc-managing-a-fishery" class="nav-link" data-scroll-target="#managing-a-fishery"><span class="header-section-number">B.8</span> Managing a fishery</a></li>
   <li><a href="#road-kill" id="toc-road-kill" class="nav-link" data-scroll-target="#road-kill"><span class="header-section-number">B.9</span> Road Kill</a></li>
   <li><a href="#simulating-a-neutral-community" id="toc-simulating-a-neutral-community" class="nav-link" data-scroll-target="#simulating-a-neutral-community"><span class="header-section-number">B.10</span> Simulating a neutral community</a></li>
+  <li><a href="#monitoring-biodiversity" id="toc-monitoring-biodiversity" class="nav-link" data-scroll-target="#monitoring-biodiversity"><span class="header-section-number">B.11</span> Monitoring biodiversity</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/labs.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -598,7 +599,7 @@ Strategy 3: Chosing both preys</p>
 </div>
 <p>The neutral theory paradox is that in absence of migration or mutation diversity gradually declines to zero or monodominance. Let’s see what happens to species richness and the species abundance distribution over time for different parameters of the model. Start by installing the package <code>untb.</code></p>
 <ol type="1">
-<li><p><strong>Without mutation or dispersal (pure ecological drift):</strong> We start with a local community with 20 species, each with 25 individuals. The simulation then runs for 2500 generations (where 9/900 individuals die per generation). Mutation rate is zero and immigration rate is zero</p>
+<li><p><strong>Without mutation or dispersal (pure ecological drift):</strong> We start with a local community with 20 species, each with 25 individuals. The simulation then runs for 2500 generations where 10 individuals die per generation. Mutation rate is zero and immigration rate is zero</p>
 <ol type="a">
 <li><p>Plot the number of species over time.</p></li>
 <li><p>Plot the species abundance distribution at time 1, 100 and 2500</p></li>
@@ -611,6 +612,22 @@ Strategy 3: Chosing both preys</p>
 <li><p>Plot the map of individuals at those time steps.</p></li>
 </ol></li>
 <li><p><strong>[Extra Credit] With immigration:</strong> Same parameters as (1) but immigration rate greater than zero. Play with different abundance distributions for the metacommunity.</p></li>
+</ol>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="monitoring-biodiversity" class="level2" data-number="B.11">
+<h2 data-number="B.11" class="anchored" data-anchor-id="monitoring-biodiversity"><span class="header-section-number">B.11</span> Monitoring biodiversity</h2>
+<ol type="1">
+<li>Exploring the BBS dataset
+<ol type="a">
+<li>Load the file Florida.csv into R. Briefly describe the structure of the dataset.</li>
+<li>Map the monitored transects/routes in Florida’s map. Use the maps library to plot the counties of florida as a base map.</li>
+<li>For transect 4 and transect 109 in year 2018 plot calculate the species richness, Shannon diversity index H and evenness J of both transects, with H being <span class="math display">\[H=-\sum_i (p_i \ln p_i)\]</span> where <span class="math inline">\(p_i\)</span> is defined as the proportion of individuals found in species <span class="math inline">\(i\)</span>. Compare the two transects.</li>
+<li>Plot the species abundance distribution and abundance-rank for both transects. What do you observe?</li>
+<li>Choose one transect and plot the species richness, Shannon diversity, and geometric mean abundance over time</li>
+<li><em>Extra credit 1:</em> Produce a map of the trends of one these metrics across Florida (for instance coloring different points according to the trend)</li>
+<li><em>Extra credit 2:</em> Estimate the number of species in Florida by combining the different transects and using one of the estimators. Use bootstrap and/or jacknife to calculate confidence intervals.</li>
+</ol></li>
 </ol>
 <div style="page-break-after: always;"></div>
 
