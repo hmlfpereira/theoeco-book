@@ -20,6 +20,16 @@
     ]
   },
   {
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "Ecological theory for the biodiversity crisis",
+    "section": "",
+    "text": "An R package is a set of functions developed by someone to extend the basic functionality of R. There are now packages f↩︎\nFor a guide on best practices for reproducible code see https://www.britishecologicalsociety.org/wp-content/uploads/2019/06/BES-Guide-Reproducible-Code-2019.pdf↩︎",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
     "objectID": "ecophysiology.html",
     "href": "ecophysiology.html",
     "title": "1  Ecophysiology and the climate space: when to bask in the sun?",
@@ -83,6 +93,17 @@
     "crumbs": [
       "Ecology of individuals",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Ecophysiology and the climate space: when to bask in the sun?</span>"
+    ]
+  },
+  {
+    "objectID": "modellingbiochange.html",
+    "href": "modellingbiochange.html",
+    "title": "3  Modelling biodiversity change: winners and losers",
+    "section": "",
+    "text": "Every minute about 2 football fields of native forest are cleared somewhere in the world. What are the consequences of land-use change for biodiversity?",
+    "crumbs": [
+      "Ecology of communities",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Modelling biodiversity change: winners and losers</span>"
     ]
   },
   {
