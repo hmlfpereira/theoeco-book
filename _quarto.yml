@@ -16,6 +16,9 @@ book:
     - part: "Ecology of populations"
       chapters:
         - demography.qmd
+    - part: "Ecology of communities"
+      chapters:
+        - modellingbiochange.qmd
   appendices:
     - intro_to_R.qmd
     - labs.qmd

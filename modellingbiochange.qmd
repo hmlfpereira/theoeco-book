@@ -1,0 +1,8 @@
+---
+execute:
+  freeze: auto  # re-render only when source changes
+---
+
+# Modelling biodiversity change: winners and losers
+
+Every minute about 2 football fields of native forest are cleared somewhere in the world. What are the consequences of land-use change for biodiversity?
