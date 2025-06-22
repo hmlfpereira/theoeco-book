@@ -132,7 +132,7 @@ polygon(X,Y,col="green")
 Now that we have the climate space we can plot on top of it some empirical data of how the conditions are in the field during the day. We can for instance consider two micro-habitats, a rock (in the sun) and a bush (in the shade). Suppose we obtain some data from temperature loggers that were installed in each micro-habitat , recording every three hours the values of temperature and radiation as tabled below.
 
 | Time (hh:mm) | Radiation rock (cal/h) | Radiation bush (cal/h) | Temperature (ºC) |
-|------------------|-------------------|-------------------|------------------|
+|------------------|------------------|------------------|------------------|
 | 00:00        | 150                    | 150                    | 18               |
 | 03:00        | 150                    | 150                    | 13               |
 | 06:00        | 800                    | 450                    | 10               |
@@ -194,7 +194,18 @@ text(Bush_q,Bush_a,T)
 
 ## From ecophysiological models to species distribution models
 
-In the previous section we developed a simple mechanistic model for the climate space of an organism. This is a micro-habitat level climate space. But one can also infer the climate space from the distribution of a species at the macro-habitat level. They are different but they are conceptually similar. The inference of such macro climate space is an area where species distribution models excel. The idea is relatively simple. One start with a bunch of locations of a species in space.
+In the previous section we developed a simple mechanistic model for the climate space of an organism. This is a micro-habitat level climate space. But one can also infer the climate space from the distribution of a species at the macro-habitat level. They are different but they are conceptually similar. The inference of such macro climate space is an area where species distribution models excel (for more on species distribution models check for example [@guisan2017]). The idea is relatively simple. One starts with a bunch of locations of a species in geographical space. Then, one obtains the climate characteristics for those locations, and then plots those locations in climate space. The convex hull in climate space delimited by those locations is the macro-habitat climate space. What species distribution models (SDMs) learn to do is to delineate that climate space, this is, SDMs try to predict the probability of a species occurring somewhere in the climate space by learning from presences and absences from species. Then the SDM can extrapolate again what happens in geographical space, by predicting the species occurence probability for any point based on the climate data for that point. Without getting all the way into a full blown SDM, let's try to follow some of the basics.
+
+
+![The Iberian emerald lizard, *Lacerta schreiberi*.](images/Lacerta_schreiberi.JPG){#fig-schreiberi}
+
+I will illustrate this with one my favorite species, the Iberian emerald lizard, *Lacerta schreiberi* . First we obtain the presences for a species from GBIF (Global Biodiversity Information Facility, <http://www.gbif.org>). GBIF is a repository for biodiversity observations, and has over three billions of occurrences of over a million species all over the world at the time I am writing these words. Natural history museums, citizen science platforms such as iNaturalist ( <http://www.inaturalist.org>) and eBird (<http://www.ebird.org>), and scientists, publish their species records in GBIF using a data format called Darwin Core. There is a R package that allows one to download observations from GBIF and also other relevant geodata, the **geodata** package. We will be doing some geospatial processing, so let's load also the **terra** package.
+
+```{r}
+#| eval: false
+library(geodata)
+library(terra)
+```
 
 ```{r echo=FALSE}
 #| warning: false
@@ -280,3 +291,8 @@ ggplot(allpts_bioclim_plot, aes(x=wc2.1_10m_bio_19,y=wc2.1_10m_bio_3,shape=pres,
 ```
 
 ## Statistical confrontation: regressing the climate space
+
+## References
+
+::: {#refs}
+:::
