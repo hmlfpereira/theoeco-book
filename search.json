@@ -24,7 +24,7 @@
     "href": "index.html#footnotes",
     "title": "Ecological theory for the biodiversity crisis",
     "section": "",
-    "text": "An R package is a set of functions developed by someone to extend the basic functionality of R. There are now packages f↩︎\nFor a guide on best practices for reproducible code see https://www.britishecologicalsociety.org/wp-content/uploads/2019/06/BES-Guide-Reproducible-Code-2019.pdf↩︎",
+    "text": "An R package is a set of functions developed by someone to extend the basic functionality of R.↩︎\nFor a guide on best practices for reproducible code see https://www.britishecologicalsociety.org/wp-content/uploads/2019/06/BES-Guide-Reproducible-Code-2019.pdf↩︎",
     "crumbs": [
       "Preface"
     ]
@@ -67,7 +67,7 @@
     "href": "ecophysiology.html#from-ecophysiological-models-to-species-distribution-models",
     "title": "1  Ecophysiology and the climate space: when to bask in the sun?",
     "section": "1.3 From ecophysiological models to species distribution models",
-    "text": "1.3 From ecophysiological models to species distribution models\nIn the previous section we developed a simple mechanistic model for the climate space of an organism. This is a micro-habitat level climate space. But one can also infer the climate space from the distribution of a species at the macro-habitat level. They are different but they are conceptually similar. The inference of such macro climate space is an area where species distribution models excel. The idea is relatively simple. One start with a bunch of locations of a species in space.\n\n\n\n\n\n\n\n\n\n\n\n(a) Geographic space\n\n\n\n\n\n\n\n\n\n\n\n(b) Climate space\n\n\n\n\n\n\n\n\n\n\n\n\n\n(c) Geographic space\n\n\n\n\n\n\n\n\n\n\n\n(d) Climate space\n\n\n\n\n\n\n\nFigure 1.6: The geographic space and climate space of Lacerta schreiberi.",
+    "text": "1.3 From ecophysiological models to species distribution models\nIn the previous section we developed a simple mechanistic model for the climate space of an organism. This is a micro-habitat level climate space. But one can also infer the climate space from the distribution of a species at the macro-habitat level. They are different but they are conceptually similar. The inference of such macro climate space is an area where species distribution models excel (for more on species distribution models check for example (Guisan, Thuiller, and Zimmermann 2017)). The idea is relatively simple. One starts with a bunch of locations of a species in geographical space. Then, one obtains the climate characteristics for those locations, and then plots those locations in climate space. The convex hull in climate space delimited by those locations is the macro-habitat climate space. What species distribution models (SDMs) learn to do is to delineate that climate space, this is, SDMs try to predict the probability of a species occurring somewhere in the climate space by learning from presences and absences from species. Then the SDM can extrapolate again what happens in geographical space, by predicting the species occurence probability for any point based on the climate data for that point. Without getting all the way into a full blown SDM, let’s try to follow some of the basics.\n\n\n\n\n\n\nFigure 1.6: The Iberian emerald lizard, Lacerta schreiberi.\n\n\n\nI will illustrate this with one my favorite species, the Iberian emerald lizard, Lacerta schreiberi . First we obtain the presences for a species from GBIF (Global Biodiversity Information Facility, http://www.gbif.org). GBIF is a repository for biodiversity observations, and has over three billions of occurrences of over a million species all over the world at the time I am writing these words. Natural history museums, citizen science platforms such as iNaturalist ( http://www.inaturalist.org) and eBird (http://www.ebird.org), and scientists, publish their species records in GBIF using a data format called Darwin Core. There is a R package that allows one to download observations from GBIF and also other relevant geodata, the geodata package. We will be doing some geospatial processing, so let’s load also the terra package.\n\nlibrary(geodata)\nlibrary(terra)\n\n\n\n\n\n\n\n\n\n\n\n\n(a) Geographic space\n\n\n\n\n\n\n\n\n\n\n\n(b) Climate space\n\n\n\n\n\n\n\n\n\n\n\n\n\n(c) Geographic space\n\n\n\n\n\n\n\n\n\n\n\n(d) Climate space\n\n\n\n\n\n\n\nFigure 1.7: The geographic space and climate space of Lacerta schreiberi.",
     "crumbs": [
       "Ecology of individuals",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Ecophysiology and the climate space: when to bask in the sun?</span>"
@@ -79,6 +79,17 @@
     "title": "1  Ecophysiology and the climate space: when to bask in the sun?",
     "section": "1.4 Statistical confrontation: regressing the climate space",
     "text": "1.4 Statistical confrontation: regressing the climate space",
+    "crumbs": [
+      "Ecology of individuals",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Ecophysiology and the climate space: when to bask in the sun?</span>"
+    ]
+  },
+  {
+    "objectID": "ecophysiology.html#references",
+    "href": "ecophysiology.html#references",
+    "title": "1  Ecophysiology and the climate space: when to bask in the sun?",
+    "section": "1.5 References",
+    "text": "1.5 References\n\n\nGuisan, Antoine, Wilfried Thuiller, and Niklaus E. Zimmermann. 2017.\nHabitat Suitability and Distribution Models: With Applications in\nr. Cambridge University Press.",
     "crumbs": [
       "Ecology of individuals",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Ecophysiology and the climate space: when to bask in the sun?</span>"
