@@ -57,7 +57,7 @@ $$f = q\ –h*(b - a)$$
     b.  At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
 4.  ***Body temperature of A. cristatellus in two different habitats***
 
-As explained above, this data frame contains data on individuals *A. cristatellus* living in urban and forested areas in three cities in Puerto Rico, giving us the perfect opportunity to assess the potential thermal effects of habitat upon this species. To do this:
+Start by reading the @sec-tutorial. The tutorial has a data frame containing data on individuals *A. cristatellus* living in urban and forested areas in three cities in Puerto Rico, giving us the perfect opportunity to assess the potential thermal effects of habitat upon this species. To do this:
 
 a.  Make a linear model for individuals of *A. cristatellus* living only in natural habitats (`context` = `natural`) and another for individuals living in urban habitats (`context` = `urban`).
 

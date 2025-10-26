@@ -213,6 +213,8 @@ library(terra)
 #| fig-cap: "The geographic space and climate space of Lacerta schreiberi."
 #| fig-subcap: 
 #|   - "Geographic space"
+#|   - "Bioclim 19"
+#|   - "Bioclim 13"
 #|   - "Climate space"
 #| layout-ncol: 2
 library(terra)

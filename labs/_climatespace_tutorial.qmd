@@ -3,7 +3,9 @@ execute:
   freeze: auto  # re-render only when source changes
 ---
 
-## Plotting real life ecophysiological from *Anolis* lizards.
+## Plotting real life ecophysiological from *Anolis* lizards {#sec-tutorial}
+
+*By Andres Marmol* 
 
 <!--# author: "Andres Marmol" !-->
 
