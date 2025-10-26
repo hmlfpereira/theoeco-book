@@ -588,7 +588,7 @@ Figure&nbsp;1.6: The Iberian emerald lizard, <em>Lacerta schreiberi</em>.
 </figcaption>
 </figure>
 </div>
-<p>I will illustrate this with one my favorite species, the Iberian emerald lizard, <em>Lacerta schreiberi</em> . First we obtain the presences for a species from GBIF (Global Biodiversity Information Facility, <a href="http://www.gbif.org" class="uri">http://www.gbif.org</a>). GBIF is a repository for biodiversity observations, and has over three billions of occurrences of over a million species all over the world at the time I am writing these words. Natural history museums, citizen science platforms such as iNaturalist ( <a href="http://www.inaturalist.org" class="uri">http://www.inaturalist.org</a>) and eBird (<a href="http://www.ebird.org" class="uri">http://www.ebird.org</a>), and scientists, publish their species records in GBIF using a data format called Darwin Core. There is a R package that allows one to download observations from GBIF and also other relevant geodata, the <strong>geodata</strong> package. We will be doing some geospatial processing, so let’s load also the <strong>terra</strong> package.</p>
+<p>I will illustrate this with one my favorite species, the Iberian emerald lizard, <em>Lacerta schreiberi</em>, a species endemic to the Iberian peninsula, often found near water streams in mountain landscapes, but also in other habitats. First we obtain the presences for a species from GBIF (Global Biodiversity Information Facility, <a href="http://www.gbif.org" class="uri">http://www.gbif.org</a>). GBIF is a repository for biodiversity observations, and has over three billions of occurrences of over a million species all over the world at the time I am writing these words. Natural history museums, citizen science platforms such as iNaturalist ( <a href="http://www.inaturalist.org" class="uri">http://www.inaturalist.org</a>) and eBird (<a href="http://www.ebird.org" class="uri">http://www.ebird.org</a>), and scientists, publish their species records in GBIF using a data format called Darwin Core. There is a R package that allows one to download observations from GBIF and also other relevant geodata, the <strong>geodata</strong> package. We will be doing some geospatial processing, so let’s load also the <strong>terra</strong> package.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geodata)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -616,7 +616,7 @@ Figure&nbsp;1.6: The Iberian emerald lizard, <em>Lacerta schreiberi</em>.
 <img src="ecophysiology_files/figure-html/fig-geog-vs-climate-2.png" class="img-fluid figure-img" data-ref-parent="fig-geog-vs-climate" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-geog-vs-climate-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) Climate space
+(b) Bioclim 19
 </figcaption>
 </figure>
 </div>
@@ -630,7 +630,7 @@ Figure&nbsp;1.6: The Iberian emerald lizard, <em>Lacerta schreiberi</em>.
 <img src="ecophysiology_files/figure-html/fig-geog-vs-climate-3.png" class="img-fluid figure-img" data-ref-parent="fig-geog-vs-climate" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-geog-vs-climate-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(c) Geographic space
+(c) Bioclim 13
 </figcaption>
 </figure>
 </div>

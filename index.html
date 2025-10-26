@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Henrique Miguel Pereira">
-<meta name="dcterms.date" content="2025-06-22">
+<meta name="dcterms.date" content="2025-10-27">
 
 <title>Ecological theory for the biodiversity crisis</title>
 <style>
@@ -237,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 22, 2025</p>
+      <p class="date">October 27, 2025</p>
     </div>
   </div>
   
@@ -262,7 +262,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="preface-1" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1>
 <p>We live in the midst of the biodiversity crisis. Biodiversity science, at first mostly a spin off from Ecology, has developed tremendously in the last two decades, becoming a truly interdisciplinary field, with contributions from Geography, Economy, Social Sciences and many other disciplines. Big data and the development of statistical ecology has also been remarkable. As I write these lines, the Global Biodiversity Information Facility or GBIF (<a href="https://gbif.org" class="uri">https://gbif.org</a>) is about to hit 3 billion records. The availability of large amounts of data and the availability of the open source R software (<a href="https://www.r-project.org" class="uri">https://www.r-project.org</a>) has made statistical approaches take the main stage in much of ecological research. However, at the same time, as a biodiversity researcher, practitioner, and a teacher, I find again and again the need for a good understanding of ecological theory to be able to carry out my work. This book if for all of you that have also felt a similar need.</p>
-<!-- more on ecological modelling versus ecological theory  -->
+<!--# more on ecological modelling versus ecological theory  -->
 <p>Programming and mathematics are key tools of ecological theory. The programming language I use in this book is R (version 4, available from <a href="https://www.r-project.org" class="uri">https://www.r-project.org</a>). If you have familiarly with programming in another computer language, a fast skimming of Appendix A will be enough to get you going with the book. If you are new to programming, I recommend you spend a few hours working through the short course in Appendix A, but you may also wanna consult some web resources (e.g.&nbsp;<a href="https://ourcodingclub.github.io/course" class="uri">https://ourcodingclub.github.io/course</a>). With the advent of Large Language Models (LLM) such as ChatGPT there may be the temptation to think programming knowledge will no longer be needed. I think LLMs will accelerate our writing of computer code, but they will not replace the need for being able to read and understand the code.</p>
 <p>You may wonder why I chose <strong>R</strong>. There are plenty other programming languages out there, several suitable for ecological theory and modelling (e.g.&nbsp;data scientists love Pyhton). However, <strong>R</strong> has become the <em>de facto</em> language of ecologists with dozens of packages<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for a wide range of analysis, from camera trapping to species richness estimation. <strong>R</strong> has also powerful packages for spatial data analysis and can work as a Geographic Information System. So R, grew from a statistics software (the origins of R are the comercial S-PLUS) to a general purpose programming language with dedicated packages for different uses.</p>
 <p>Why was R so successful, to the point of making some commercial software companies go out of business? R was open-source and free from its beginning, part of the free and open-source movement that gained popularity in the 1990’s, particularly with the development of the operating system Linux. Open-source means that the code behind R (R itself is a computer program written in C, Fortran, and other languages) is available for anyone to study. It also allows for anyone to contribute to improve the code in a collaborative way, including by contributing with packages. R is also free, meaning that anyone can download the software or any of its packages without any cost. Isn’t that a wonderful tool for science? Scientists dedicate their life to the pursue of knowledge, and the idea that someone has to pay for accessing that knowledge has always been a bit apocryphal. So R allowed scientists to share their research and code for free in an integrated platform. Another advantage of open-source software, is that we can in theory ran programs that we wrote decades ago by downloading archived versions of the software. At least in theory, the practice of code reproducibility in science is a bit more complex and requires careful data and code management by the researcher<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Platforms such as GitHub (<a href="https://github.com" class="uri">https://github.com</a>) for sharing code and Zenodo (<a href="https://zenodo.org" class="uri">https://zenodo.org</a>) or Dryad (<a href="https://datadryad.org" class="uri">https://datadryad.org</a>) for sharing data are a key component of reproducible science.</p>
