@@ -13,6 +13,7 @@ book:
     - part: "Ecology of individuals"
       chapters:
         - ecophysiology.qmd
+        - optimalforaging.qmd
     - part: "Ecology of populations"
       chapters:
         - demography.qmd
