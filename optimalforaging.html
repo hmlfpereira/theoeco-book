@@ -278,7 +278,7 @@ window.Quarto = {
   <li><a href="#searching-predator" id="toc-searching-predator" class="nav-link active" data-scroll-target="#searching-predator"><span class="header-section-number">2.1</span> Searching predator</a>
   <ul class="collapse">
   <li><a href="#time-minimizer" id="toc-time-minimizer" class="nav-link" data-scroll-target="#time-minimizer"><span class="header-section-number">2.1.1</span> Time minimizer</a></li>
-  <li><a href="#energy-maximizer" id="toc-energy-maximizer" class="nav-link" data-scroll-target="#energy-maximizer"><span class="header-section-number">2.1.2</span> Energy maximizer</a></li>
+  <li><a href="#energy-per-time-maximizer" id="toc-energy-per-time-maximizer" class="nav-link" data-scroll-target="#energy-per-time-maximizer"><span class="header-section-number">2.1.2</span> Energy per time maximizer</a></li>
   </ul></li>
   <li><a href="#sit-and-wait-predator" id="toc-sit-and-wait-predator" class="nav-link" data-scroll-target="#sit-and-wait-predator"><span class="header-section-number">2.2</span> Sit-and-wait predator</a></li>
   </ul>
@@ -382,8 +382,12 @@ min(T_s) \quad \text{for} \quad s=1, 2, 3
 </div>
 <p>So the critical threshold for these handling times occurs when <span class="math inline">\(a_1=0.017\)</span> individuals per second.</p>
 </section>
-<section id="energy-maximizer" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="energy-maximizer"><span class="header-section-number">2.1.2</span> Energy maximizer</h3>
+<section id="energy-per-time-maximizer" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="energy-per-time-maximizer"><span class="header-section-number">2.1.2</span> Energy per time maximizer</h3>
+<p>Perhaps more often, animals try to maximize their energy yield (benefits) while minimizing the time foraging (costs). Or in another way of looking at it, they try to maximize their energy yield per unit time. We already know the time per item associated to each of the three strategies of the searching predator. We now need to calciulate the average energy yield per item. Consider now that the energy content of the prey items are <span class="math inline">\(e_1\)</span> and <span class="math inline">\(e_2\)</span> for prey of type 1 and 2, respectively. We define prey 1 as the preferred type of prey, so we assume that the ratio of the energic content (measured for instance in calories) to the handling time is lower for type 1 prey, i.e.&nbsp;<span class="math inline">\(e_1/h_1&gt;e_2/h_2\)</span>. Now we calculate the energy yield per item for each strategy. We start with the energy content o fhe prey, but need to subtract the energy spent while waiting the prey and the energy spent chasing and processing the prey,</p>
+<p><span class="math display">\[
+E_1=e_1-e_w*t_w
+\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>e1<span class="ot">&lt;-</span><span class="dv">10</span>                       <span class="co">#Caloric content of prey 1</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>e2<span class="ot">&lt;-</span><span class="dv">100</span>                      <span class="co">#Caloric content of prey 2</span></span>
