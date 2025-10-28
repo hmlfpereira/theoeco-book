@@ -310,6 +310,16 @@ window.Quarto = {
 <section id="searching-predator" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="searching-predator"><span class="header-section-number">2.1</span> Searching predator</h2>
 <p>The searching predator is typified as an animal that actively searchs for food. For instance, wolfs roam the landscape constantly searching for their prey. The question is then, any time that a forager comes across a prey whether to spend the time catching and eating it, or continuing to search for another prey, for instance a larger or easier prey item. Joan Roughgarden also liked this type of foraging to the sushi-bar problem where dishes are coming one after the other on a moving tray, and a person needs to decide whether to pick a given dish. This decision is particularly akin to the searching predator situation when one assumes that a person can have only one dish at a time in her or his table, We consider two types of searching predators: time minimizers and energy maximizers.</p>
+<div id="fig-Canis_lupus" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Canis_lupus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Canis_lupus.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Canis_lupus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: A pack of wolf (<em>Canis lupus</em>) roaming around the landscape of Peneda-Gerês National Park, Portugal.
+</figcaption>
+</figure>
+</div>
 <section id="time-minimizer" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="time-minimizer"><span class="header-section-number">2.1.1</span> Time minimizer</h3>
 <p>Many searching predators are themselves preys to other animals. For instance shrews search for insects to eat, but can be themselves eaten by carnivores or owls. Therefore a reasonable assumption is that they are making foraging decisions that minimize the time foraging. Let’s assume there are two types of prey items, type 1 and 2. These two preys occur at different abundances in the environment, let’s name them <span class="math inline">\(a_1\)</span> and <span class="math inline">\(a_2\)</span>. These abundances can be measured as encounter rates from the predator perspective, this is the number of prey items found per unit time. The two types of prey also have different handling times, this is the amount of time required to chase and process the prey, <span class="math inline">\(h_1\)</span> and <span class="math inline">\(h_2\)</span> . We also convention to call the type 1 prey the prey with the lowest handling time, i.e.&nbsp;<span class="math inline">\(h_1&lt;h_2\)</span>,</p>
@@ -320,13 +330,13 @@ window.Quarto = {
 <li><p>Strategy 1&amp;2: to consumer both types of prey</p></li>
 </ul>
 <p>In order to find out which strategy should be adopted by the forager, one needs to calculate the average spent per food item in each of the strategies. For Strategy 1 the average time per item, <span class="math inline">\(T_1\)</span> is the sum of the amount of time the predator needs to encounter a prey with the amount of time that it takes to process that prey. As the abundance is measured in encounter rates, i.e.&nbsp;prey items per unit time, the inverse of that is the waiting time for a prey. Therefore we have for Strategy 1,</p>
-<p><span class="math display">\[T_1=1/a_1+h_1\]</span></p>
+<p><span id="eq-T1_timeminimizer"><span class="math display">\[T_1=1/a_1+h_1 \tag{2.1}\]</span></span></p>
 <p>Similarly, for Strategy 2, the average time per item <span class="math inline">\(T_2\)</span> is given by</p>
 <p><span class="math display">\[T_2=1/a_2+h_2.\]</span></p>
 <p>A more interesting case is Strategy 3. Here the waiting time is the inverse of the sum of the abundances of both times of prey, while the handling time is average of the handling times of both ypes of prey weighted by their relative abundance,</p>
-<p><span class="math display">\[
+<p><span id="eq-T3_timeminimizer"><span class="math display">\[
 T_{3}=\frac{1}{a_1+a_2}+\frac{a_1 h_1+a_2 h_2}{a_1+a_2}
-\]</span></p>
+\tag{2.2}\]</span></span></p>
 <p>We can now define the problem that the forager has to solve as to find the strategy <span class="math inline">\(s\)</span> that minimizes <span class="math inline">\(T_s\)</span>:</p>
 <p><span class="math display">\[
 min(T_s) \quad \text{for} \quad s=1, 2, 3
@@ -384,9 +394,17 @@ min(T_s) \quad \text{for} \quad s=1, 2, 3
 </section>
 <section id="energy-per-time-maximizer" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="energy-per-time-maximizer"><span class="header-section-number">2.1.2</span> Energy per time maximizer</h3>
-<p>Perhaps more often, animals try to maximize their energy yield (benefits) while minimizing the time foraging (costs). Or in another way of looking at it, they try to maximize their energy yield per unit time. We already know the time per item associated to each of the three strategies of the searching predator. We now need to calciulate the average energy yield per item. Consider now that the energy content of the prey items are <span class="math inline">\(e_1\)</span> and <span class="math inline">\(e_2\)</span> for prey of type 1 and 2, respectively. We define prey 1 as the preferred type of prey, so we assume that the ratio of the energic content (measured for instance in calories) to the handling time is higher for type 1 prey, i.e.&nbsp;<span class="math inline">\(e_1/h_1&gt;e_2/h_2\)</span>. Now we calculate the energy yield per item for each strategy. We start with the energy content o fhe prey, but need to subtract the energy spent while waiting the prey and the energy spent chasing and processing the prey,</p>
+<p>Perhaps more often, animals try to maximize their energy yield (benefits) while minimizing the time foraging (costs). Or in another way of looking at it, they try to maximize their energy yield per unit time. We already know the time per item associated to each of the three strategies of the searching predator. We now need to calciulate the average energy yield per item. Consider now that the energy content of the prey items are <span class="math inline">\(e_1\)</span> and <span class="math inline">\(e_2\)</span> for prey of type 1 and 2, respectively. We define prey 1 as the preferred type of prey, so we assume that the ratio of the energic content (measured for instance in calories) to the handling time is higher for type 1 prey, i.e.&nbsp;<span class="math inline">\(e_1/h_1&gt;e_2/h_2\)</span>. Now we calculate the energy yield per item for each strategy. We start with the energy content of the prey, but need to subtract the energy spent while waiting the prey and the energy spent chasing and processing the prey,</p>
+<p><span id="eq-E1_energymaximizer"><span class="math display">\[
+E_1=e_1-ew*tw_1-eh*h_1
+\tag{2.3}\]</span></span></p>
+<p>where <span class="math inline">\(ew\)</span> and <span class="math inline">\(eh\)</span> are the energy spent per unit time while waiting for the prey and the energy spent per unit time while handling, respectively. They can both be measured for instance in cal/s. We already know from the time minimizer that the waiting time for the prey is the inverse of the abundance, <span class="math inline">\(tw_1=1/a_1\)</span>. Therefore substituting in <a href="#eq-E1_energymaximizer" class="quarto-xref">Equation&nbsp;<span>2.3</span></a> we have</p>
 <p><span class="math display">\[
-E_1=e_1-e_w*t_w
+E_1=e_1-\frac{ew}{a_1}-eh*h_1.
+\]</span></p>
+<p>A similar expression can be written for Strategy 2, replacing 1 with 2 in <a href="#eq-E1_energymaximizer" class="quarto-xref">Equation&nbsp;<span>2.3</span></a>. More interesting is to derive the expression for Strategy 3, where the foragers takes both types of prey. The energy content of the prey is the average of the energetic contents of each prey type, weighted by their abundances, <span class="math inline">\((e_1*a_1+e_2*a_2)/(a_1+a_2)\)</span>. The waiting time is the inverse of the sums of the abundances of preys of both types, as in <a href="#eq-T3_timeminimizer" class="quarto-xref">Equation&nbsp;<span>2.2</span></a>. The handling time is the average of the handling times of each prey type, weighted by their abundances. So we have,</p>
+<p><span class="math display">\[
+E_3=\frac{e_1*a_1+e_2*a_2}{a_1+a_2}-\frac{ew}{a_1+a_2}-eh\frac{h_1*a_1+h_2*a_2}{a_1+a_2}.
 \]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>e1<span class="ot">&lt;-</span><span class="dv">10</span>                       <span class="co">#Caloric content of prey 1</span></span>
