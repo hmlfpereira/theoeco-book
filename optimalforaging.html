@@ -309,7 +309,7 @@ window.Quarto = {
 <p>Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. This approach is rooted in the idea that natural selection, under certain conditions, maximize the average fitness of individuals in a population. It underpins many of the studies in behavioral ecology, and lead to the development during the 1980’s.of a sub-field dedicated to the study of foraging decisions, known as optimal foraging. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two “idealized” types of foragers: searching predator and sit-and-wait predators.</p>
 <section id="searching-predator" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="searching-predator"><span class="header-section-number">2.1</span> Searching predator</h2>
-<p>The searching predator is typified as an animal that actively searchs for food. For instance, wolfs roam the landscape constantly searching for their prey. The question is then, any time that a forager comes across a prey whether to spend the time catching and eating it, or continuing to search for another prey, for instance a larger or easier prey item. Joan Roughgarden also liked this type of foraging to the sushi-bar problem where dishes are coming one after the other on a moving tray, and a person needs to decide whether to pick a given dish. This decision is particularly akin to the searching predator situation when one assumes that a person can have only one dish at a time in her or his table, We consider two types of searching predators: time minimizers and energy maximizers.</p>
+<p>The searching predator is typified as an animal that actively searchs for food. For instance, wolfs roam the landscape constantly searching for their prey (<a href="#fig-Canis_lupus" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>). The question is then, any time that a forager comes across a prey whether to spend the time catching and eating it, or continuing to search for another prey, for instance a larger or easier prey item. Joan Roughgarden also liked this type of foraging to the sushi-bar problem where dishes are coming one after the other on a moving tray, and a person needs to decide whether to pick a given dish. This decision is particularly akin to the searching predator situation when one assumes that a person can have only one dish at a time in her or his table, We consider two types of searching predators: time minimizers and energy maximizers.</p>
 <div id="fig-Canis_lupus" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-Canis_lupus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -332,14 +332,14 @@ Figure&nbsp;2.1: A pack of wolf (<em>Canis lupus</em>) roaming around the landsc
 <p>In order to find out which strategy should be adopted by the forager, one needs to calculate the average spent per food item in each of the strategies. For Strategy 1 the average time per item, <span class="math inline">\(T_1\)</span> is the sum of the amount of time the predator needs to encounter a prey with the amount of time that it takes to process that prey. As the abundance is measured in encounter rates, i.e.&nbsp;prey items per unit time, the inverse of that is the waiting time for a prey. Therefore we have for Strategy 1,</p>
 <p><span id="eq-T1_timeminimizer"><span class="math display">\[T_1=1/a_1+h_1 \tag{2.1}\]</span></span></p>
 <p>Similarly, for Strategy 2, the average time per item <span class="math inline">\(T_2\)</span> is given by</p>
-<p><span class="math display">\[T_2=1/a_2+h_2.\]</span></p>
+<p><span id="eq-T2_timeminimizer"><span class="math display">\[T_2=1/a_2+h_2. \tag{2.2}\]</span></span></p>
 <p>A more interesting case is Strategy 3. Here the waiting time is the inverse of the sum of the abundances of both times of prey, while the handling time is average of the handling times of both ypes of prey weighted by their relative abundance,</p>
 <p><span id="eq-T3_timeminimizer"><span class="math display">\[
 T_{3}=\frac{1}{a_1+a_2}+\frac{a_1 h_1+a_2 h_2}{a_1+a_2}
-\tag{2.2}\]</span></span></p>
-<p>We can now define the problem that the forager has to solve as to find the strategy <span class="math inline">\(s\)</span> that minimizes <span class="math inline">\(T_s\)</span>:</p>
+\tag{2.3}\]</span></span></p>
+<p>We can now define the problem that the forager has to solve as to find the strategy <span class="math inline">\(i\)</span> that minimizes <span class="math inline">\(T_i\)</span>:</p>
 <p><span class="math display">\[
-min(T_s) \quad \text{for} \quad s=1, 2, 3
+min(T_i) \quad \text{for} \quad i=1, 2, 3
 \]</span></p>
 <p>It is easy to demonstrate that Strategy 2 is always worse than Strategy 3, independently of the abundances of the two types of prey. This happens because Strategy 3 always implies a longer waiting time than the two other specialized strategies (i.e.&nbsp;one has to wait less time to find any item of an prey than items of a given prey time, <span class="math inline">\(1/(a_1+a_2)&lt;1/a_2\)</span>) and the handling time of strategy 3 can never be higher than the handling time of strategy 2 (it’s always a value betwen <span class="math inline">\(h_1\)</span> and <span class="math inline">\(h_2\)</span>). So we can exclude Strategy 2 from our analysis. The choice is then between Strategy 1, just taking items of the preferred prey item, and 3, taking items of both types of prey. Let’s assess this two strategies with a little bit of help from R. We start by assuming that the handling time of prey type 1 is 1 second while prey type 2 takes 60 seconds. Let’s also assume that the abundance of prey type 2 is 0.05 individuals per second, i.e.&nbsp;one individuals needs to wait in average 20 seconds to find prey type 2.</p>
 <div class="cell">
@@ -394,58 +394,85 @@ min(T_s) \quad \text{for} \quad s=1, 2, 3
 </section>
 <section id="energy-per-time-maximizer" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="energy-per-time-maximizer"><span class="header-section-number">2.1.2</span> Energy per time maximizer</h3>
-<p>Perhaps more often, animals try to maximize their energy yield (benefits) while minimizing the time foraging (costs). Or in another way of looking at it, they try to maximize their energy yield per unit time. We already know the time per item associated to each of the three strategies of the searching predator. We now need to calciulate the average energy yield per item. Consider now that the energy content of the prey items are <span class="math inline">\(e_1\)</span> and <span class="math inline">\(e_2\)</span> for prey of type 1 and 2, respectively. We define prey 1 as the preferred type of prey, so we assume that the ratio of the energic content (measured for instance in calories) to the handling time is higher for type 1 prey, i.e.&nbsp;<span class="math inline">\(e_1/h_1&gt;e_2/h_2\)</span>. Now we calculate the energy yield per item for each strategy. We start with the energy content of the prey, but need to subtract the energy spent while waiting the prey and the energy spent chasing and processing the prey,</p>
+<p>Perhaps more often, animals try to maximize their energy yield (benefits) while minimizing the time foraging (costs). Or in another way of looking at it, they try to maximize their energy yield per unit time. We already know the time per item associated to each of the three strategies of the searching predator. We now need to caiculate the average energy yield per item. Consider now that the energy content of the prey items are <span class="math inline">\(e_1\)</span> and <span class="math inline">\(e_2\)</span> for prey of type 1 and 2, respectively. We define prey 1 as the preferred type of prey, so we assume that the ratio of the energic content (measured for instance in calories) to the handling time is higher for type 1 prey, i.e.&nbsp;<span class="math inline">\(e_1/h_1&gt;e_2/h_2\)</span>. Now we calculate the energy yield per item for each strategy. We start with the energy content of the prey, but need to subtract the energy spent while waiting the prey and the energy spent chasing and processing the prey,</p>
 <p><span id="eq-E1_energymaximizer"><span class="math display">\[
 E_1=e_1-ew*tw_1-eh*h_1
-\tag{2.3}\]</span></span></p>
-<p>where <span class="math inline">\(ew\)</span> and <span class="math inline">\(eh\)</span> are the energy spent per unit time while waiting for the prey and the energy spent per unit time while handling, respectively. They can both be measured for instance in cal/s. We already know from the time minimizer that the waiting time for the prey is the inverse of the abundance, <span class="math inline">\(tw_1=1/a_1\)</span>. Therefore substituting in <a href="#eq-E1_energymaximizer" class="quarto-xref">Equation&nbsp;<span>2.3</span></a> we have</p>
-<p><span class="math display">\[
+\tag{2.4}\]</span></span></p>
+<p>where <span class="math inline">\(ew\)</span> and <span class="math inline">\(eh\)</span> are the energy spent per unit time while waiting for the prey and the energy spent per unit time while handling, respectively. They can both be measured for instance in cal/s. We already know from the time minimizer that the waiting time for the prey is the inverse of the abundance, <span class="math inline">\(tw_1=1/a_1\)</span>. Therefore substituting in <a href="#eq-E1_energymaximizer" class="quarto-xref">Equation&nbsp;<span>2.4</span></a> we have</p>
+<p><span id="eq-E1_energymaximizer2"><span class="math display">\[
 E_1=e_1-\frac{ew}{a_1}-eh*h_1.
-\]</span></p>
-<p>A similar expression can be written for Strategy 2, replacing 1 with 2 in <a href="#eq-E1_energymaximizer" class="quarto-xref">Equation&nbsp;<span>2.3</span></a>. More interesting is to derive the expression for Strategy 3, where the foragers takes both types of prey. The energy content of the prey is the average of the energetic contents of each prey type, weighted by their abundances, <span class="math inline">\((e_1*a_1+e_2*a_2)/(a_1+a_2)\)</span>. The waiting time is the inverse of the sums of the abundances of preys of both types, as in <a href="#eq-T3_timeminimizer" class="quarto-xref">Equation&nbsp;<span>2.2</span></a>. The handling time is the average of the handling times of each prey type, weighted by their abundances. So we have,</p>
-<p><span class="math display">\[
+\tag{2.5}\]</span></span></p>
+<p>A similar expression can be written for Strategy 2, replacing 1 with 2 in <a href="#eq-E1_energymaximizer" class="quarto-xref">Equation&nbsp;<span>2.4</span></a>.</p>
+<p><span id="eq-E2_energymaximizer"><span class="math display">\[
+E_2=e_2-\frac{ew}{a_2}-eh*h_2.
+\tag{2.6}\]</span></span></p>
+<p>More interesting is to derive the expression for Strategy 3, where the foragers takes both types of prey. The energy content of the prey is the average of the energetic contents of each prey type, weighted by their abundances, <span class="math inline">\((e_1*a_1+e_2*a_2)/(a_1+a_2)\)</span>. The waiting time is the inverse of the sums of the abundances of preys of both types, as in <a href="#eq-T3_timeminimizer" class="quarto-xref">Equation&nbsp;<span>2.3</span></a>. The handling time is the average of the handling times of each prey type, weighted by their abundances. So we have,</p>
+<p><span id="eq-E3_energymaximizer"><span class="math display">\[
 E_3=\frac{e_1*a_1+e_2*a_2}{a_1+a_2}-\frac{ew}{a_1+a_2}-eh\frac{h_1*a_1+h_2*a_2}{a_1+a_2}.
+\tag{2.7}\]</span></span></p>
+<p>Finally we can calculate the energy per unit time for each strategy by dividing <a href="#eq-E1_energymaximizer2" class="quarto-xref">Equation&nbsp;<span>2.5</span></a> by <a href="#eq-T1_timeminimizer" class="quarto-xref">Equation&nbsp;<span>2.1</span></a> for Strategy 1, dividing <a href="#eq-E2_energymaximizer" class="quarto-xref">Equation&nbsp;<span>2.6</span></a> by <a href="#eq-T2_timeminimizer" class="quarto-xref">Equation&nbsp;<span>2.2</span></a> for Strategy 2, and dividing <a href="#eq-E3_energymaximizer" class="quarto-xref">Equation&nbsp;<span>2.7</span></a> by <a href="#eq-T3_timeminimizer" class="quarto-xref">Equation&nbsp;<span>2.3</span></a> for strategy 3,</p>
+<p><span class="math display">\[
+ET_i=\frac{E_i}{T_i}
 \]</span></p>
+<p>Similarly to the time minimizer, it’s possible to show mathematically that strategy 2 is never an optimal strategy. So the interesting comparison is again between strategy 1 and strategy 3. Let’s use R to plot the energy per time yield for both strategies. We start by setting the parameter values of our model with some realistic numbers.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>e1<span class="ot">&lt;-</span><span class="dv">10</span>                       <span class="co">#Caloric content of prey 1</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>e2<span class="ot">&lt;-</span><span class="dv">100</span>                      <span class="co">#Caloric content of prey 2</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>h1<span class="ot">&lt;-</span><span class="dv">1</span>                        <span class="co">#Handling time of prey 1</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>h2<span class="ot">&lt;-</span><span class="dv">60</span>                       <span class="co">#Handling time of prey 2</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">&lt;-</span><span class="dv">1</span>                        <span class="co">#Energy spend per unit time while waiting (cal/s)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>eh<span class="ot">&lt;-</span><span class="dv">1</span>                        <span class="co">#energy spend per unit time handling the prey (cal/s)</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>a1<span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.005</span>,<span class="fl">0.5</span>,<span class="fl">0.001</span>)    <span class="co">#Abundance of prey 1</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>a2<span class="ot">&lt;-</span><span class="fl">0.05</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>E1 <span class="ot">=</span> e1 <span class="sc">-</span>(eh<span class="sc">*</span>h1) <span class="sc">-</span> ew<span class="sc">/</span>a1    <span class="co">#energy per item of Strategy 1 (s)</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>E3 <span class="ot">=</span> (e1<span class="sc">*</span>a1<span class="sc">+</span>e2<span class="sc">*</span>a2)<span class="sc">/</span>(a1<span class="sc">+</span>a2)<span class="sc">-</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>     eh<span class="sc">*</span>(h1<span class="sc">*</span>a1<span class="sc">+</span>h2<span class="sc">*</span>a2)<span class="sc">/</span>(a1<span class="sc">+</span>a2)<span class="sc">-</span>ew<span class="sc">/</span>(a1<span class="sc">+</span>a2) <span class="co">#energy per item of Strategy 3 (s)</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>T1<span class="ot">=</span><span class="dv">1</span><span class="sc">/</span>a1<span class="sc">+</span>h1                 <span class="co">#time per item of Strategy 1 (s)</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>T3<span class="ot">=</span><span class="dv">1</span><span class="sc">/</span>(a1<span class="sc">+</span>a2)<span class="sc">+</span>h1<span class="sc">*</span>a1<span class="sc">/</span>(a1<span class="sc">+</span>a2)<span class="sc">+</span>h2<span class="sc">*</span>a2<span class="sc">/</span>(a1<span class="sc">+</span>a2) <span class="co">#time per item of Strategy 3 (s)</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>ET1 <span class="ot">=</span> E1<span class="sc">/</span>T1 <span class="co">#energy per time of strategy 1</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ET3 <span class="ot">=</span> E3<span class="sc">/</span>T3 <span class="co">#energy per time of strategy 3</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(a1,ET1,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">xlab=</span><span class="st">"Abundance of prey 1"</span>, <span class="at">ylab=</span><span class="st">"Energy per time"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(a1,ET3,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,                    </span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Strategy 1"</span>, <span class="st">"Strategy 3"</span>),  <span class="co"># Labels</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>),             <span class="co"># Line colors</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>,                            <span class="co"># Line width</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>)     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>eh<span class="ot">&lt;-</span><span class="dv">1</span>                        <span class="co">#energy spend per unit time handling the prey (cal/s)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will examine the energy yields for strategy 1 and strategy 3 for a fixed abundance of prey type 2 and a sequence of abundances of prey type 1 from 0.005 individuals per second to 0.5 individuals per second</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a1<span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.005</span>,<span class="fl">0.5</span>,<span class="fl">0.001</span>)    <span class="co">#Sequence of abundances of prey 1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>a2<span class="ot">&lt;-</span><span class="fl">0.05</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>With the parameter and abundance values defined, we can calculate <span class="math inline">\(E_1\)</span>, <span class="math inline">\(E_3\)</span>, <span class="math inline">\(T_1\)</span>, <span class="math inline">\(T_3\)</span>, and then <span class="math inline">\(ET_1\)</span> and <span class="math inline">\(ET_3\)</span> based on the equations above, resulting in vectors for these variables with each entry in the vector corresponding to an abundance value in the vector of abundances <code>a1.</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>E1 <span class="ot">=</span> e1 <span class="sc">-</span>(eh<span class="sc">*</span>h1) <span class="sc">-</span> ew<span class="sc">/</span>a1    <span class="co">#energy per item of Strategy 1 (s)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>E3 <span class="ot">=</span> (e1<span class="sc">*</span>a1<span class="sc">+</span>e2<span class="sc">*</span>a2)<span class="sc">/</span>(a1<span class="sc">+</span>a2)<span class="sc">-</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     eh<span class="sc">*</span>(h1<span class="sc">*</span>a1<span class="sc">+</span>h2<span class="sc">*</span>a2)<span class="sc">/</span>(a1<span class="sc">+</span>a2)<span class="sc">-</span>ew<span class="sc">/</span>(a1<span class="sc">+</span>a2) <span class="co">#energy per item of Strategy 3 (s)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>T1<span class="ot">=</span><span class="dv">1</span><span class="sc">/</span>a1<span class="sc">+</span>h1                 <span class="co">#time per item of Strategy 1 (s)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>T3<span class="ot">=</span><span class="dv">1</span><span class="sc">/</span>(a1<span class="sc">+</span>a2)<span class="sc">+</span>h1<span class="sc">*</span>a1<span class="sc">/</span>(a1<span class="sc">+</span>a2)<span class="sc">+</span>h2<span class="sc">*</span>a2<span class="sc">/</span>(a1<span class="sc">+</span>a2) <span class="co">#time per item of Strategy 3 (s)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ET1 <span class="ot">=</span> E1<span class="sc">/</span>T1 <span class="co">#energy per time of strategy 1</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>ET3 <span class="ot">=</span> E3<span class="sc">/</span>T3 <span class="co">#energy per time of strategy 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next we plot the energy yields against the values of abundance of prey of type 1, and add a nice legend:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(a1,ET1,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">xlab=</span><span class="st">"Abundance of prey 1"</span>, <span class="at">ylab=</span><span class="st">"Energy per time"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(a1,ET3,<span class="at">type=</span><span class="st">"l"</span>,<span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,                    </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Strategy 1"</span>, <span class="st">"Strategy 3"</span>),  <span class="co"># Labels</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>),             <span class="co"># Line colors</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>,                            <span class="co"># Line width</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="optimalforaging_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="optimalforaging_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Similarly to the the time minimizer, for the energy maximizer there is also a critical threshold of the abundance of prey type 1 above which strategy 1 is preferrable, while below that threshold strategy 3 is the best strategy.</p>
 </section>
 </section>
 <section id="sit-and-wait-predator" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="sit-and-wait-predator"><span class="header-section-number">2.2</span> Sit-and-wait predator</h2>
+<p>In contrast to the searching predator, the sit-and-wait predator forages by patiently ambushing its prey. For instance, the lizard <em>Anolis gingivinus</em> (<a href="#fig-Anolis_gingivinus" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>) waits in a perch, often a tree trunk, for a prey to come into its reach, sprinting then down the trunk or into the ground to capture its prey, returning then to its perch again.</p>
+<div id="fig-Anolis_gingivinus" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Anolis_gingivinus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Anolis_gingivinus.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Anolis_gingivinus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.2: An Anolis gingivinus, a sit-and-wait predator, captures a prey after running down from its perch. Photo taken in the island of Saint Martin, Leward Islands, Caribbean.
+</figcaption>
+</figure>
+</div>
 
 
 </section>
