@@ -9,11 +9,9 @@ Animals have to make decisions all the time: where and when to move, when and wh
 
 ## Searching predator
 
-The searching predator is typified as an animal that actively searchs for food. For instance, wolfs roam the landscape constantly searching for their prey. The question is then, any time that a forager comes across a prey whether to spend the time catching and eating it, or continuing to search for another prey, for instance a larger or easier prey item. Joan Roughgarden also liked this type of foraging to the sushi-bar problem where dishes are coming one after the other on a moving tray, and a person needs to decide whether to pick a given dish. This decision is particularly akin to the searching predator situation when one assumes that a person can have only one dish at a time in her or his table, We consider two types of searching predators: time minimizers and energy maximizers.
+The searching predator is typified as an animal that actively searchs for food. For instance, wolfs roam the landscape constantly searching for their prey (@fig-Canis_lupus). The question is then, any time that a forager comes across a prey whether to spend the time catching and eating it, or continuing to search for another prey, for instance a larger or easier prey item. Joan Roughgarden also liked this type of foraging to the sushi-bar problem where dishes are coming one after the other on a moving tray, and a person needs to decide whether to pick a given dish. This decision is particularly akin to the searching predator situation when one assumes that a person can have only one dish at a time in her or his table, We consider two types of searching predators: time minimizers and energy maximizers.
 
-::: {#fig-Canis_lupus}
-![A pack of wolf (*Canis lupus*) roaming around the landscape of Peneda-Gerês National Park, Portugal.](images/Canis_lupus.jpg){fig-align="left"}
-:::
+![A pack of wolf (*Canis lupus*) roaming around the landscape of Peneda-Gerês National Park, Portugal.](images/Canis_lupus.jpg){#fig-Canis_lupus}
 
 ### Time minimizer
 
@@ -29,22 +27,22 @@ A searching predator can adopt one of the following three strategies:
 
 In order to find out which strategy should be adopted by the forager, one needs to calculate the average spent per food item in each of the strategies. For Strategy 1 the average time per item, $T_1$ is the sum of the amount of time the predator needs to encounter a prey with the amount of time that it takes to process that prey. As the abundance is measured in encounter rates, i.e. prey items per unit time, the inverse of that is the waiting time for a prey. Therefore we have for Strategy 1,
 
-$$T_1=1/a_1+h_1$$ {#eq-T1-timeminimizer}
+$$T_1=1/a_1+h_1$$ {#eq-T1_timeminimizer}
 
 Similarly, for Strategy 2, the average time per item $T_2$ is given by
 
-$$T_2=1/a_2+h_2.$$
+$$T_2=1/a_2+h_2.$$ {#eq-T2_timeminimizer}
 
 A more interesting case is Strategy 3. Here the waiting time is the inverse of the sum of the abundances of both times of prey, while the handling time is average of the handling times of both ypes of prey weighted by their relative abundance,
 
 $$
 T_{3}=\frac{1}{a_1+a_2}+\frac{a_1 h_1+a_2 h_2}{a_1+a_2}
-$$ {#eq-T3-timeminimizer}
+$$ {#eq-T3_timeminimizer}
 
-We can now define the problem that the forager has to solve as to find the strategy $s$ that minimizes $T_s$:
+We can now define the problem that the forager has to solve as to find the strategy $i$ that minimizes $T_i$:
 
 $$
-min(T_s) \quad \text{for} \quad s=1, 2, 3
+min(T_i) \quad \text{for} \quad i=1, 2, 3
 $$
 
 It is easy to demonstrate that Strategy 2 is always worse than Strategy 3, independently of the abundances of the two types of prey. This happens because Strategy 3 always implies a longer waiting time than the two other specialized strategies (i.e. one has to wait less time to find any item of an prey than items of a given prey time, $1/(a_1+a_2)<1/a_2$) and the handling time of strategy 3 can never be higher than the handling time of strategy 2 (it's always a value betwen $h_1$ and $h_2$). So we can exclude Strategy 2 from our analysis. The choice is then between Strategy 1, just taking items of the preferred prey item, and 3, taking items of both types of prey. Let's assess this two strategies with a little bit of help from R. We start by assuming that the handling time of prey type 1 is 1 second while prey type 2 takes 60 seconds. Let's also assume that the abundance of prey type 2 is 0.05 individuals per second, i.e. one individuals needs to wait in average 20 seconds to find prey type 2.
@@ -91,7 +89,7 @@ So the critical threshold for these handling times occurs when $a_1=0.017$ indiv
 
 ### Energy per time maximizer
 
-Perhaps more often, animals try to maximize their energy yield (benefits) while minimizing the time foraging (costs). Or in another way of looking at it, they try to maximize their energy yield per unit time. We already know the time per item associated to each of the three strategies of the searching predator. We now need to calciulate the average energy yield per item. Consider now that the energy content of the prey items are $e_1$ and $e_2$ for prey of type 1 and 2, respectively. We define prey 1 as the preferred type of prey, so we assume that the ratio of the energic content (measured for instance in calories) to the handling time is higher for type 1 prey, i.e. $e_1/h_1>e_2/h_2$. Now we calculate the energy yield per item for each strategy. We start with the energy content of the prey, but need to subtract the energy spent while waiting the prey and the energy spent chasing and processing the prey,
+Perhaps more often, animals try to maximize their energy yield (benefits) while minimizing the time foraging (costs). Or in another way of looking at it, they try to maximize their energy yield per unit time. We already know the time per item associated to each of the three strategies of the searching predator. We now need to caiculate the average energy yield per item. Consider now that the energy content of the prey items are $e_1$ and $e_2$ for prey of type 1 and 2, respectively. We define prey 1 as the preferred type of prey, so we assume that the ratio of the energic content (measured for instance in calories) to the handling time is higher for type 1 prey, i.e. $e_1/h_1>e_2/h_2$. Now we calculate the energy yield per item for each strategy. We start with the energy content of the prey, but need to subtract the energy spent while waiting the prey and the energy spent chasing and processing the prey,
 
 $$
 E_1=e_1-ew*tw_1-eh*h_1
@@ -101,13 +99,27 @@ where $ew$ and $eh$ are the energy spent per unit time while waiting for the pre
 
 $$
 E_1=e_1-\frac{ew}{a_1}-eh*h_1.
-$$
+$$ {#eq-E1_energymaximizer2}
 
-A similar expression can be written for Strategy 2, replacing 1 with 2 in @eq-E1_energymaximizer. More interesting is to derive the expression for Strategy 3, where the foragers takes both types of prey. The energy content of the prey is the average of the energetic contents of each prey type, weighted by their abundances, $(e_1*a_1+e_2*a_2)/(a_1+a_2)$. The waiting time is the inverse of the sums of the abundances of preys of both types, as in @eq_T3_timeminimizer. The handling time is the average of the handling times of each prey type, weighted by their abundances. So we have,
+A similar expression can be written for Strategy 2, replacing 1 with 2 in @eq-E1_energymaximizer.
+
+$$
+E_2=e_2-\frac{ew}{a_2}-eh*h_2.
+$$ {#eq-E2_energymaximizer}
+
+More interesting is to derive the expression for Strategy 3, where the foragers takes both types of prey. The energy content of the prey is the average of the energetic contents of each prey type, weighted by their abundances, $(e_1*a_1+e_2*a_2)/(a_1+a_2)$. The waiting time is the inverse of the sums of the abundances of preys of both types, as in @eq-T3_timeminimizer. The handling time is the average of the handling times of each prey type, weighted by their abundances. So we have,
 
 $$
 E_3=\frac{e_1*a_1+e_2*a_2}{a_1+a_2}-\frac{ew}{a_1+a_2}-eh\frac{h_1*a_1+h_2*a_2}{a_1+a_2}.
+$$ {#eq-E3_energymaximizer}
+
+Finally we can calculate the energy per unit time for each strategy by dividing @eq-E1_energymaximizer2 by @eq-T1_timeminimizer for Strategy 1, dividing @eq-E2_energymaximizer by @eq-T2_timeminimizer for Strategy 2, and dividing @eq-E3_energymaximizer by @eq-T3_timeminimizer for strategy 3,
+
 $$
+ET_i=\frac{E_i}{T_i}
+$$
+
+Similarly to the time minimizer, it's possible to show mathematically that strategy 2 is never an optimal strategy. So the interesting comparison is again between strategy 1 and strategy 3. Let's use R to plot the energy per time yield for both strategies. We start by setting the parameter values of our model with some realistic numbers.
 
 ```{r}
 e1<-10                       #Caloric content of prey 1
@@ -116,10 +128,18 @@ h1<-1                        #Handling time of prey 1
 h2<-60                       #Handling time of prey 2
 ew<-1                        #Energy spend per unit time while waiting (cal/s)
 eh<-1                        #energy spend per unit time handling the prey (cal/s)
+```
 
-a1<- seq(0.005,0.5,0.001)    #Abundance of prey 1
+We will examine the energy yields for strategy 1 and strategy 3 for a fixed abundance of prey type 2 and a sequence of abundances of prey type 1 from 0.005 individuals per second to 0.5 individuals per second
+
+```{r}
+a1<- seq(0.005,0.5,0.001)    #Sequence of abundances of prey 1
 a2<-0.05
+```
 
+With the parameter and abundance values defined, we can calculate $E_1$, $E_3$, $T_1$, $T_3$, and then $ET_1$ and $ET_3$ based on the equations above, resulting in vectors for these variables with each entry in the vector corresponding to an abundance value in the vector of abundances `a1.`
+
+```{r}
 E1 = e1 -(eh*h1) - ew/a1    #energy per item of Strategy 1 (s)
 E3 = (e1*a1+e2*a2)/(a1+a2)-
      eh*(h1*a1+h2*a2)/(a1+a2)-ew/(a1+a2) #energy per item of Strategy 3 (s)
@@ -129,14 +149,24 @@ T3=1/(a1+a2)+h1*a1/(a1+a2)+h2*a2/(a1+a2) #time per item of Strategy 3 (s)
 
 ET1 = E1/T1 #energy per time of strategy 1
 ET3 = E3/T3 #energy per time of strategy 3
+```
 
+Next we plot the energy yields against the values of abundance of prey of type 1, and add a nice legend:
+
+```{r}
 plot(a1,ET1,type="l",xlab="Abundance of prey 1", ylab="Energy per time", col="blue")
 lines(a1,ET3,type="l",col="red")
 legend("topright",                    
        legend = c("Strategy 1", "Strategy 3"),  # Labels
        col = c("red", "blue"),             # Line colors
        lwd = 2,                            # Line width
-       lty = 1)     
+       lty = 1) 
 ```
 
+Similarly to the the time minimizer, for the energy maximizer there is also a critical threshold of the abundance of prey type 1 above which strategy 1 is preferrable, while below that threshold strategy 3 is the best strategy.
+
 ## Sit-and-wait predator
+
+In contrast to the searching predator, the sit-and-wait predator forages by patiently ambushing its prey. For instance, the lizard *Anolis gingivinus* (@fig-Anolis_gingivinus) waits in a perch, often a tree trunk, for a prey to come into its reach, sprinting then down the trunk or into the ground to capture its prey, returning then to its perch again.
+
+![An Anolis gingivinus, a sit-and-wait predator, captures a prey after running down from its perch. Photo taken in the island of Saint Martin, Leward Islands, Caribbean.](images/Anolis_gingivinus.jpg){#fig-Anolis_gingivinus}
