@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./demography.html" rel="next">
+<link href="./gametheory.html" rel="next">
 <link href="./ecophysiology.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -200,6 +200,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Economic models of behavior: do animals optimize?</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gametheory.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conflict resolution in ecology and evolution: war and peace</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./movement.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Movement and dispersal<strong>:</strong> should I stay or should I go?</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -214,7 +226,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./demography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Demography: boom or bust</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Demography: boom or bust</span></span></a>
   </div>
 </li>
       </ul>
@@ -231,7 +243,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modellingbiochange.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Modelling biodiversity change: winners and losers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling biodiversity change: winners and losers</span></span></a>
   </div>
 </li>
       </ul>
@@ -257,12 +269,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Computational labs</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./labs_tutorials.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tutorials to support computational labs</span></span></a>
-  </div>
-</li>
       </ul>
   </li>
     </ul>
@@ -281,6 +287,7 @@ window.Quarto = {
   <li><a href="#energy-per-time-maximizer" id="toc-energy-per-time-maximizer" class="nav-link" data-scroll-target="#energy-per-time-maximizer"><span class="header-section-number">2.1.2</span> Energy per time maximizer</a></li>
   </ul></li>
   <li><a href="#sit-and-wait-predator" id="toc-sit-and-wait-predator" class="nav-link" data-scroll-target="#sit-and-wait-predator"><span class="header-section-number">2.2</span> Sit-and-wait predator</a></li>
+  <li><a href="#statistical-confrontation-finding-the-maximum" id="toc-statistical-confrontation-finding-the-maximum" class="nav-link" data-scroll-target="#statistical-confrontation-finding-the-maximum"><span class="header-section-number">2.3</span> Statistical confrontation: finding the maximum</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/optimalforaging.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -307,6 +314,7 @@ window.Quarto = {
 
 
 <p>Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. This approach is rooted in the idea that natural selection, under certain conditions, maximize the average fitness of individuals in a population. It underpins many of the studies in behavioral ecology, and lead to the development during the 1980’s.of a sub-field dedicated to the study of foraging decisions, known as optimal foraging. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two “idealized” types of foragers: searching predator and sit-and-wait predators.</p>
+<!--# Say something about the main theorem of natural selection and climbing the fitness landscape  or Fisher's fundamental theorem-->
 <section id="searching-predator" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="searching-predator"><span class="header-section-number">2.1</span> Searching predator</h2>
 <p>The searching predator is typified as an animal that actively searchs for food. For instance, wolfs roam the landscape constantly searching for their prey (<a href="#fig-Canis_lupus" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>). The question is then, any time that a forager comes across a prey whether to spend the time catching and eating it, or continuing to search for another prey, for instance a larger or easier prey item. Joan Roughgarden also liked this type of foraging to the sushi-bar problem where dishes are coming one after the other on a moving tray, and a person needs to decide whether to pick a given dish. This decision is particularly akin to the searching predator situation when one assumes that a person can have only one dish at a time in her or his table, We consider two types of searching predators: time minimizers and energy maximizers.</p>
@@ -342,6 +350,7 @@ T_{3}=\frac{1}{a_1+a_2}+\frac{a_1 h_1+a_2 h_2}{a_1+a_2}
 min(T_i) \quad \text{for} \quad i=1, 2, 3
 \]</span></p>
 <p>It is easy to demonstrate that Strategy 2 is always worse than Strategy 3, independently of the abundances of the two types of prey. This happens because Strategy 3 always implies a longer waiting time than the two other specialized strategies (i.e.&nbsp;one has to wait less time to find any item of an prey than items of a given prey time, <span class="math inline">\(1/(a_1+a_2)&lt;1/a_2\)</span>) and the handling time of strategy 3 can never be higher than the handling time of strategy 2 (it’s always a value betwen <span class="math inline">\(h_1\)</span> and <span class="math inline">\(h_2\)</span>). So we can exclude Strategy 2 from our analysis. The choice is then between Strategy 1, just taking items of the preferred prey item, and 3, taking items of both types of prey. Let’s assess this two strategies with a little bit of help from R. We start by assuming that the handling time of prey type 1 is 1 second while prey type 2 takes 60 seconds. Let’s also assume that the abundance of prey type 2 is 0.05 individuals per second, i.e.&nbsp;one individuals needs to wait in average 20 seconds to find prey type 2.</p>
+<!--# Maybe rename strategies with letters, Strategy A, B, C-->
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>h1<span class="ot">=</span><span class="dv">1</span>           <span class="co">#Handling time of prey type 1 (s)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>h2<span class="ot">=</span><span class="dv">60</span>          <span class="co">#Handling time of prey type 2 (s)</span></span>
@@ -462,7 +471,7 @@ ET_i=\frac{E_i}{T_i}
 </section>
 <section id="sit-and-wait-predator" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="sit-and-wait-predator"><span class="header-section-number">2.2</span> Sit-and-wait predator</h2>
-<p>In contrast to the searching predator, the sit-and-wait predator forages by patiently ambushing its prey. For instance, the lizard <em>Anolis gingivinus</em> (<a href="#fig-Anolis_gingivinus" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>) waits in a perch, often a tree trunk, for a prey to come into its reach, sprinting then down the trunk or into the ground to capture its prey, returning then to its perch again.</p>
+<p>In contrast to the searching predator, the sit-and-wait predator forages by patiently ambushing its prey. For instance, the lizard <em>Anolis gingivinus</em> (<a href="#fig-Anolis_gingivinus" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>) waits in a perch, often a tree trunk, for a prey to come into its reach, sprinting then down the trunk or into the ground to capture its prey, returning then to its perch again. So here the decision that the predator has to take after seeing the prey is whether it should run an capture the prey or if it should ignore it.</p>
 <div id="fig-Anolis_gingivinus" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-Anolis_gingivinus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -473,6 +482,80 @@ Figure&nbsp;2.2: An Anolis gingivinus, a sit-and-wait predator, captures a prey 
 </figcaption>
 </figure>
 </div>
+<p>We will build on the model we developed for the energy per time maximizer searching predator to develop a model for the decisions of the sit-and-wait predator. The energy per prey item consumed is,</p>
+<p><span id="eq-energy_sit_and_wait"><span class="math display">\[
+E=e-ep t_p-e_w t_w
+\tag{2.8}\]</span></span></p>
+<p>where <span class="math inline">\(e_p\)</span> is the energy per unit time while pursuing the prey, <span class="math inline">\(t_p\)</span> is the average time it takes to sprint to the prey and come back to the perch, <span class="math inline">\(e_w\)</span> is the energy per unit time while waiting for the prey, and <span class="math inline">\(t_w\)</span> is the average time it takes to wait for a prey item to show up within the home-range or territory of the predator. We will use these two terms interchangeably, although they are sometimes used in the literature differently.</p>
+<p>Let’s consider that the home-range of the lizard is shaped as a semi-circle centered in the perch. This is the lizard has a viewing angle of <span class="math inline">\(180\deg\)</span> from its perch (<a href="#fig-feedingterritory" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>). Then the total abundance of the the prey in the territory is the integral of the prey point density over the territory. So, using polar coordinates for the integral this can be written as,</p>
+<p><span class="math display">\[
+A=\int_{0}^{r_c}a \pi r dr
+\]</span></p>
+<p>The waiting time is just the inverse of the total abundance.</p>
+<p><span class="math display">\[t_w=1/A=\frac{1}{\int_{0}^{r_c}a \pi r dr}\]</span></p>
+<div id="fig-feedingterritory" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-feedingterritory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/FeedingTerritory.jpg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-feedingterritory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.3: Feeding territory of a sit-and-wait predator with radius <span class="math inline">\(r_c\)</span>.
+</figcaption>
+</figure>
+</div>
+<p>The average pursuit time is a bit more complicated. For a prey landing at distance <span class="math inline">\(r\)</span> from the predator, the pursuit time is the time the lizards needs to run to that location and back. This is can be calculated by dividing the double of the distance by the speed of the lizard, <span class="math inline">\(2r/v\)</span>. We have now to average these sprint times over the range of possibile distance that the lizard can run, from 0 to the radius of its territory <span class="math inline">\(r_c\)</span>, weighted by the probability of a prey appearing at each distance. The probability of a prey appearing at distance <span class="math inline">\(r\)</span> is the length of the semi-circle with radius <span class="math inline">\(r\)</span> multiplied by the point density of prey divided by the total density of prey in the territory of the lizard, <span class="math inline">\(a \pi r / A\)</span>. So we now need to calculate the integral of the sprint times at each distance times the probability of running to a prey at that distance over the range of possible radius values,</p>
+<p><span class="math display">\[
+t_p=\int_{0}^{r_c} \frac{2r}{v} \frac{a \pi r}{A} \ dr
+\]</span></p>
+<p>The average time per prey item consumed is simply the sum of the average pursuit time, <span class="math inline">\(t_p\)</span>, and the average waiting time <span class="math inline">\(t_w\)</span>,</p>
+<p><span id="eq-time_sit_and_wait"><span class="math display">\[
+T=t_p+t_w
+\tag{2.9}\]</span></span></p>
+<p>Therefore the energy per time that the optimal sit-and-wait predator wants to maximize is obtained by dividing <a href="#eq-energy_sit_and_wait" class="quarto-xref">Equation&nbsp;<span>2.8</span></a> by <a href="#eq-time_sit_and_wait" class="quarto-xref">Equation&nbsp;<span>2.9</span></a>,</p>
+<p><span class="math display">\[
+ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
+\]</span></p>
+<p>where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius <span class="math inline">\(r_c\)</span>.</p>
+<p>The optimal decision is to find the cut-off radius <span class="math inline">\(r_c\)</span> that maximizes the energy per time,</p>
+<p><span class="math display">\[
+\max_{r_c}(ET)
+\]</span></p>
+<p>Let’s plot the energy per time as a function of the territory size,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">&lt;-</span><span class="fl">0.1</span>                  <span class="co">#Energy per unit of time of waiting</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ep<span class="ot">&lt;-</span><span class="dv">1</span>                    <span class="co">#Energy per unit of time of pursuing the prey</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span><span class="fl">0.5</span>                   <span class="co">#Velocity of the predator in chase</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fl">0.005</span>                 <span class="co">#Abundance of prey</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>e<span class="ot">&lt;-</span><span class="dv">10</span>                    <span class="co">#Energy value of the prey</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>rc<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="fl">0.001</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)   <span class="co">#Radius of the hunting ground </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>tw <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))   <span class="co">#Waiting time </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">&lt;-</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v                <span class="co">#Pursuing time</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ti<span class="ot">&lt;-</span>tw<span class="sc">+</span>tp                   <span class="co">#Time per item </span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ei<span class="ot">&lt;-</span>e<span class="sc">-</span>ew<span class="sc">*</span>tw<span class="sc">-</span>ep<span class="sc">*</span>tp           <span class="co">#Energy per item</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>et<span class="ot">&lt;-</span>ei<span class="sc">/</span>ti                   <span class="co">#Energy per unit of time</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span><span class="cf">function</span>()</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  (e<span class="sc">-</span>ew<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)))<span class="sc">-</span>ep<span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))<span class="sc">+</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rc,<span class="fu">et</span>(),<span class="at">type=</span><span class="st">"l"</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Radius of the territory"</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Energy per unit of time (cal/sec) "</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="optimalforaging_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="statistical-confrontation-finding-the-maximum" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="statistical-confrontation-finding-the-maximum"><span class="header-section-number">2.3</span> Statistical confrontation: finding the maximum</h2>
 
 
 </section>
@@ -905,8 +988,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./demography.html" class="pagination-link" aria-label="Demography: boom or bust">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Demography: boom or bust</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./gametheory.html" class="pagination-link" aria-label="Conflict resolution in ecology and evolution: war and peace">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conflict resolution in ecology and evolution: war and peace</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
