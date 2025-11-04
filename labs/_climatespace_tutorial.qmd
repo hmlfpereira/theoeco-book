@@ -1,6 +1,6 @@
 ## Plotting real life ecophysiological from *Anolis* lizards {#sec-tutorial}
 
-*By Andres Marmol* 
+*By Andres Marmol*
 
 <!--# author: "Andres Marmol" !-->
 

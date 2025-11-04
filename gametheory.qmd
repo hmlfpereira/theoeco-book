@@ -1,0 +1,8 @@
+---
+execute:
+  freeze: auto  # re-render only when source changes
+---
+
+# Conflict resolution in ecology and evolution: war and peace
+
+Frequency dependent selection. Game theory and evolutionary stable strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic population model. 2 player games, discrete strategies: Hawk-Dove; Prisioner's dillema\`ndefinedndefinedndefinedSearching predator

@@ -7,6 +7,8 @@ execute:
 
 Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. This approach is rooted in the idea that natural selection, under certain conditions, maximize the average fitness of individuals in a population. It underpins many of the studies in behavioral ecology, and lead to the development during the 1980's.of a sub-field dedicated to the study of foraging decisions, known as optimal foraging. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two "idealized" types of foragers: searching predator and sit-and-wait predators.
 
+<!--# Say something about the main theorem of natural selection and climbing the fitness landscape  or Fisher's fundamental theorem-->
+
 ## Searching predator
 
 The searching predator is typified as an animal that actively searchs for food. For instance, wolfs roam the landscape constantly searching for their prey (@fig-Canis_lupus). The question is then, any time that a forager comes across a prey whether to spend the time catching and eating it, or continuing to search for another prey, for instance a larger or easier prey item. Joan Roughgarden also liked this type of foraging to the sushi-bar problem where dishes are coming one after the other on a moving tray, and a person needs to decide whether to pick a given dish. This decision is particularly akin to the searching predator situation when one assumes that a person can have only one dish at a time in her or his table, We consider two types of searching predators: time minimizers and energy maximizers.
@@ -46,6 +48,8 @@ min(T_i) \quad \text{for} \quad i=1, 2, 3
 $$
 
 It is easy to demonstrate that Strategy 2 is always worse than Strategy 3, independently of the abundances of the two types of prey. This happens because Strategy 3 always implies a longer waiting time than the two other specialized strategies (i.e. one has to wait less time to find any item of an prey than items of a given prey time, $1/(a_1+a_2)<1/a_2$) and the handling time of strategy 3 can never be higher than the handling time of strategy 2 (it's always a value betwen $h_1$ and $h_2$). So we can exclude Strategy 2 from our analysis. The choice is then between Strategy 1, just taking items of the preferred prey item, and 3, taking items of both types of prey. Let's assess this two strategies with a little bit of help from R. We start by assuming that the handling time of prey type 1 is 1 second while prey type 2 takes 60 seconds. Let's also assume that the abundance of prey type 2 is 0.05 individuals per second, i.e. one individuals needs to wait in average 20 seconds to find prey type 2.
+
+<!--# Maybe rename strategies with letters, Strategy A, B, C-->
 
 ```{r}
 h1=1           #Handling time of prey type 1 (s)
@@ -167,6 +171,82 @@ Similarly to the the time minimizer, for the energy maximizer there is also a cr
 
 ## Sit-and-wait predator
 
-In contrast to the searching predator, the sit-and-wait predator forages by patiently ambushing its prey. For instance, the lizard *Anolis gingivinus* (@fig-Anolis_gingivinus) waits in a perch, often a tree trunk, for a prey to come into its reach, sprinting then down the trunk or into the ground to capture its prey, returning then to its perch again.
+In contrast to the searching predator, the sit-and-wait predator forages by patiently ambushing its prey. For instance, the lizard *Anolis gingivinus* (@fig-Anolis_gingivinus) waits in a perch, often a tree trunk, for a prey to come into its reach, sprinting then down the trunk or into the ground to capture its prey, returning then to its perch again. So here the decision that the predator has to take after seeing the prey is whether it should run an capture the prey or if it should ignore it.
 
 ![An Anolis gingivinus, a sit-and-wait predator, captures a prey after running down from its perch. Photo taken in the island of Saint Martin, Leward Islands, Caribbean.](images/Anolis_gingivinus.jpg){#fig-Anolis_gingivinus}
+
+We will build on the model we developed for the energy per time maximizer searching predator to develop a model for the decisions of the sit-and-wait predator. The energy per prey item consumed is,
+
+$$
+E=e-ep t_p-e_w t_w
+$$ {#eq-energy_sit_and_wait}
+
+where $e_p$ is the energy per unit time while pursuing the prey, $t_p$ is the average time it takes to sprint to the prey and come back to the perch, $e_w$ is the energy per unit time while waiting for the prey, and $t_w$ is the average time it takes to wait for a prey item to show up within the home-range or territory of the predator. We will use these two terms interchangeably, although they are sometimes used in the literature differently.
+
+Let's consider that the home-range of the lizard is shaped as a semi-circle centered in the perch. This is the lizard has a viewing angle of $180\deg$ from its perch (@fig-feedingterritory). Then the total abundance of the the prey in the territory is the integral of the prey point density over the territory. So, using polar coordinates for the integral this can be written as,
+
+$$
+A=\int_{0}^{r_c}a \pi r dr
+$$
+
+The waiting time is just the inverse of the total abundance.
+
+$$t_w=1/A=\frac{1}{\int_{0}^{r_c}a \pi r dr}$$
+
+![Feeding territory of a sit-and-wait predator with radius $r_c$.](images/FeedingTerritory.jpg){#fig-feedingterritory}
+
+The average pursuit time is a bit more complicated. For a prey landing at distance $r$ from the predator, the pursuit time is the time the lizards needs to run to that location and back. This is can be calculated by dividing the double of the distance by the speed of the lizard, $2r/v$. We have now to average these sprint times over the range of possibile distance that the lizard can run, from 0 to the radius of its territory $r_c$, weighted by the probability of a prey appearing at each distance. The probability of a prey appearing at distance $r$ is the length of the semi-circle with radius $r$ multiplied by the point density of prey divided by the total density of prey in the territory of the lizard, $a \pi r / A$. So we now need to calculate the integral of the sprint times at each distance times the probability of running to a prey at that distance over the range of possible radius values,
+
+$$
+t_p=\int_{0}^{r_c} \frac{2r}{v} \frac{a \pi r}{A} \ dr
+$$
+
+The average time per prey item consumed is simply the sum of the average pursuit time, $t_p$, and the average waiting time $t_w$,
+
+$$
+T=t_p+t_w
+$$ {#eq-time_sit_and_wait}
+
+Therefore the energy per time that the optimal sit-and-wait predator wants to maximize is obtained by dividing @eq-energy_sit_and_wait by @eq-time_sit_and_wait,
+
+$$
+ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
+$$
+
+where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius $r_c$.
+
+The optimal decision is to find the cut-off radius $r_c$ that maximizes the energy per time,
+
+$$
+\max_{r_c}(ET)
+$$
+
+Let's plot the energy per time as a function of the territory size,
+
+```{r}
+ew<-0.1                  #Energy per unit of time of waiting
+ep<-1                    #Energy per unit of time of pursuing the prey
+v<-0.5                   #Velocity of the predator in chase
+a<-0.005                 #Abundance of prey
+e<-10                    #Energy value of the prey
+
+rc<-seq(0.001,4,0.001)   #Radius of the hunting ground 
+
+tw <- 1/(a*pi*((rc^2)/2))   #Waiting time 
+tp<-4/3*rc/v                #Pursuing time
+ti<-tw+tp                   #Time per item 
+ei<-e-ew*tw-ep*tp           #Energy per item
+et<-ei/ti                   #Energy per unit of time
+
+et <-function()
+{
+  (e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)
+}
+
+plot(rc,et(),type="l",
+     xlab="Radius of the territory",
+     ylab="Energy per unit of time (cal/sec) ")
+ abline(0,0)
+```
+
+## Statistical confrontation: finding the maximum

@@ -1,0 +1,8 @@
+---
+execute:
+  freeze: auto  # re-render only when source changes
+---
+
+# Movement and dispersal**:** should I stay or should I go?
+
+Diffusion dispersal models as random-walk. Interactions between neighbor individuals (e.g. competition for space or resources). The ideal free distribution; The ideal despotic distribution
