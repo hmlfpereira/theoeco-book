@@ -1,6 +1,7 @@
 ::: {.content-visible when-format="pdf"}
 # Preface {.unnumbered}
 :::
+
 ::: {.content-visible unless-format="pdf"}
 # Welcome {.unnumbered}
 

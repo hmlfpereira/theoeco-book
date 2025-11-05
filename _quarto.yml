@@ -34,9 +34,20 @@ format:
   html:
     theme: cosmo
     cover-image: "images/BookCover.png"
-  pdf:
-    documentclass: scrbook
+  titlepage-pdf:
+    documentclass: book
     classoption: ["oneside", "open=any"]
     number-sections: true
+    coverpage: true
+    coverpage-bg-image: "images/ValeCastroPanoramaBook.jpg"
+    coverpage-theme:
+      title-fontstyle: ["bfseries"]
+      title-fontsize: 50
+      title-bottom: "0.9\\paperheight"
+      author-style: "plain"
+      author-bottom: "0.65\\paperheight"
+      author-sep: "newline"
+      author-fontsize: 30
+    titlepage: true
     toc-depth: 2
 editor: visual
