@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -69,6 +89,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -213,8 +262,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-prisoners-dillema-and-the-evolution-of-cooperation" id="toc-the-prisoners-dillema-and-the-evolution-of-cooperation" class="nav-link active" data-scroll-target="#the-prisoners-dillema-and-the-evolution-of-cooperation"><span class="header-section-number">3.1</span> The prisoner’s dillema and the evolution of cooperation</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.2</span> References</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/gametheory.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -238,9 +294,24 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Frequency dependent selection. Game theory and evolutionary stable strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic population model. 2 player games, discrete strategies: Hawk-Dove; Prisioner’s dillema`ndefinedndefinedndefinedSearching predator</p>
+<p>In the previous chapter we looked at the decisions of individual animals assuming that the the decisions where taken by each forager alone. For instance, for the sit-and-wait predator we assumed that the territory could be as large as the predator wanted, and that the optimal territory size was the one where the energy per unit time was maximized. But what happens if the territory is so large that it starts intruding in the territory of the neighbors? Or in other words, what happens if the optimal territory size is for instance 1 <span class="math inline">\(m^2\)</span> , but the density of the predators is so high that there is more than 1 predator per square meter? Then there is a potential conflict between individuals and it may not be possible to have territory sizes that are optimal. More generally, one can say that the decision of an individual now affects the decisions of its conspecifics.</p>
+<p>In evolutionary contexts, where decisions or phenotypes are determined by genes, we enter the so called realm of frequency-dependent selection. In contrasts with frequency independent selection, where the fitness of a genotype depends only on the environment, in frequence-dependent selection the fitness of a genotype depends also on the frequency of the different genotypes in the population.</p>
+<p>The analysis of this kind of behavior conflict or evolutionary dynamics is the topic of game theory, particularly non-cooperative game theory. Some of the key concepts of game theory for animal behavior were developed by the biologist John Maynard Smith in the 1970’s and beautiful explained in his book “Evolution and the Theory of Games” <span class="citation" data-cites="maynardsmith1982">Maynard Smith (<a href="ecophysiology.html#ref-maynardsmith1982" role="doc-biblioref">1982</a>)</span>. We now know that similar ideas were developed independently by the mathematician John Nash, twenty years earlier in the 1950’s, ideas that would lead to Nash being awarded the Nobel Prize of Economics in 1994.</p>
+<p>In this chapter we examine three non-cooperative games that model situations of behavior or evolutionary conflict: the Prisionner’s dillema, the Hawk-Dove game, and the war of attrition. They are called non-cooperative because each “player” does not know what the other “player” is going to do in the game, and the players cannot discuss the strategy that they are going to take in any cooperative game.</p>
+<section id="the-prisoners-dillema-and-the-evolution-of-cooperation" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="the-prisoners-dillema-and-the-evolution-of-cooperation"><span class="header-section-number">3.1</span> The prisoner’s dillema and the evolution of cooperation</h2>
+<p>Game theory and evolutionary stable strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic population model. 2 player games, discrete strategies: Hawk-Dove; Prisioner’s dillema</p>
+</section>
+<section id="references" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="references"><span class="header-section-number">3.2</span> References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-maynardsmith1982" class="csl-entry" role="listitem">
+Maynard Smith, J. 1982. <em>Evolution and the Theory of Games</em>. Cambridge: Cambridge University Press.
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -680,4 +751,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/gametheory.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/gametheory.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

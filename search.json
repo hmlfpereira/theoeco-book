@@ -89,7 +89,7 @@
     "href": "ecophysiology.html#references",
     "title": "1  Ecophysiology and the climate space: when to bask in the sun?",
     "section": "1.5 References",
-    "text": "1.5 References\n\n\nGuisan, Antoine, Wilfried Thuiller, and Niklaus E. Zimmermann. 2017.\nHabitat Suitability and Distribution Models: With Applications in\nr. Cambridge University Press.",
+    "text": "1.5 References\n\n\nGuisan, Antoine, Wilfried Thuiller, and Niklaus E. Zimmermann. 2017.\nHabitat Suitability and Distribution Models: With Applications in\nr. Cambridge University Press.\n\n\nMaynard Smith, J. 1982. Evolution and the Theory of Games.\nCambridge: Cambridge University Press.",
     "crumbs": [
       "Ecology of individuals",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Ecophysiology and the climate space: when to bask in the sun?</span>"
@@ -140,11 +140,33 @@
     ]
   },
   {
+    "objectID": "optimalforaging.html#does-natural-selection-maximizes-fitness",
+    "href": "optimalforaging.html#does-natural-selection-maximizes-fitness",
+    "title": "2  Economic models of behavior: do animals optimize?",
+    "section": "2.3 Does natural selection maximizes fitness?",
+    "text": "2.3 Does natural selection maximizes fitness?\n\nSimple models of population genetics for frequency independent selection.\nSomething on Tinberger, Konrad Lorenz on the genetic basis of behavior",
+    "crumbs": [
+      "Ecology of individuals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Economic models of behavior: do animals optimize?</span>"
+    ]
+  },
+  {
     "objectID": "optimalforaging.html#statistical-confrontation-finding-the-maximum",
     "href": "optimalforaging.html#statistical-confrontation-finding-the-maximum",
     "title": "2  Economic models of behavior: do animals optimize?",
-    "section": "2.3 Statistical confrontation: finding the maximum",
-    "text": "2.3 Statistical confrontation: finding the maximum",
+    "section": "2.4 Statistical confrontation: finding the maximum",
+    "text": "2.4 Statistical confrontation: finding the maximum\n\nExplain how to find the maximum of a function with R. Parallel between genetic algorithms and optimization.",
+    "crumbs": [
+      "Ecology of individuals",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Economic models of behavior: do animals optimize?</span>"
+    ]
+  },
+  {
+    "objectID": "optimalforaging.html#section",
+    "href": "optimalforaging.html#section",
+    "title": "2  Economic models of behavior: do animals optimize?",
+    "section": "2.5 ",
+    "text": "2.5",
     "crumbs": [
       "Ecology of individuals",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Economic models of behavior: do animals optimize?</span>"
@@ -155,7 +177,18 @@
     "href": "gametheory.html",
     "title": "3  Conflict resolution in ecology and evolution: war and peace",
     "section": "",
-    "text": "Frequency dependent selection. Game theory and evolutionary stable strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic population model. 2 player games, discrete strategies: Hawk-Dove; Prisioner’s dillema`ndefinedndefinedndefinedSearching predator",
+    "text": "3.1 The prisoner’s dillema and the evolution of cooperation\nGame theory and evolutionary stable strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic population model. 2 player games, discrete strategies: Hawk-Dove; Prisioner’s dillema",
+    "crumbs": [
+      "Ecology of individuals",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conflict resolution in ecology and evolution: war and peace</span>"
+    ]
+  },
+  {
+    "objectID": "gametheory.html#references",
+    "href": "gametheory.html#references",
+    "title": "3  Conflict resolution in ecology and evolution: war and peace",
+    "section": "3.2 References",
+    "text": "3.2 References\n\n\nMaynard Smith, J. 1982. Evolution and the Theory of Games. Cambridge: Cambridge University Press.",
     "crumbs": [
       "Ecology of individuals",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conflict resolution in ecology and evolution: war and peace</span>"
