@@ -249,4 +249,14 @@ plot(rc,et(),type="l",
  abline(0,0)
 ```
 
+## Does natural selection maximizes fitness?
+
+-   Simple models of population genetics for frequency independent selection.
+
+-   Something on Tinberger, Konrad Lorenz on the genetic basis of behavior
+
 ## Statistical confrontation: finding the maximum
+
+-   Explain how to find the maximum of a function with R. Parallel between genetic algorithms and optimization.
+
+## 

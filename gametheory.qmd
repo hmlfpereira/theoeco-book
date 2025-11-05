@@ -5,4 +5,19 @@ execute:
 
 # Conflict resolution in ecology and evolution: war and peace
 
-Frequency dependent selection. Game theory and evolutionary stable strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic population model. 2 player games, discrete strategies: Hawk-Dove; Prisioner's dillema\`ndefinedndefinedndefinedSearching predator
+In the previous chapter we looked at the decisions of individual animals assuming that the the decisions where taken by each forager alone. For instance, for the sit-and-wait predator we assumed that the territory could be as large as the predator wanted, and that the optimal territory size was the one where the energy per unit time was maximized. But what happens if the territory is so large that it starts intruding in the territory of the neighbors? Or in other words, what happens if the optimal territory size is for instance 1 $m^2$ , but the density of the predators is so high that there is more than 1 predator per square meter? Then there is a potential conflict between individuals and it may not be possible to have territory sizes that are optimal. More generally, one can say that the decision of an individual now affects the decisions of its conspecifics.
+
+In evolutionary contexts, where decisions or phenotypes are determined by genes, we enter the so called realm of frequency-dependent selection. In contrasts with frequency independent selection, where the fitness of a genotype depends only on the environment, in frequence-dependent selection the fitness of a genotype depends also on the frequency of the different genotypes in the population.
+
+The analysis of this kind of behavior conflict or evolutionary dynamics is the topic of game theory, particularly non-cooperative game theory. Some of the key concepts of game theory for animal behavior were developed by the biologist John Maynard Smith in the 1970's and beautiful explained in his book "Evolution and the Theory of Games" @maynardsmith1982. We now know that similar ideas were developed independently by the mathematician John Nash, twenty years earlier in the 1950's, ideas that would lead to Nash being awarded the Nobel Prize of Economics in 1994.
+
+In this chapter we examine three non-cooperative games that model situations of behavior or evolutionary conflict: the Prisionner's dillema, the Hawk-Dove game, and the war of attrition. They are called non-cooperative because each "player" does not know what the other "player" is going to do in the game, and the players cannot discuss the strategy that they are going to take in any cooperative game.
+
+## The prisoner's dillema and the evolution of cooperation
+
+Game theory and evolutionary stable strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic population model. 2 player games, discrete strategies: Hawk-Dove; Prisioner's dillema
+
+## References
+
+::: {#refs}
+:::
