@@ -1,0 +1,4223 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  letterpaper,
+  oneside,
+  open=any]{book}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\usepackage{tocloft}
+\setlength{\cftbeforetoctitleskip}{-2em}
+\renewcommand{\cftaftertoctitle}{%
+  \hfill\mbox{}\newline\mbox{}\hfill}
+\makeatletter
+\patchcmd{\@starttoc}
+  {\begingroup}
+  {\begingroup\addtocontents{toc}{\protect\thispagestyle{empty}}}
+  {}{}
+\makeatother
+\makeatletter
+\@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\usepackage{hyphenat}
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{calculator}
+
+
+
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{afterpage}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{fadings}
+\usepackage[pagecolor=none]{pagecolor}
+
+
+% Set the titlepage font families
+
+
+
+
+
+
+
+% Set the coverpage font families
+
+
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Ecological theory for the biodiversity crisis},
+  pdfauthor={Henrique Miguel Pereira},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Ecological theory for the biodiversity crisis}
+\author{Henrique Miguel Pereira}
+\date{2025-11-04}
+
+\begin{document}
+%%%%% begin titlepage extension code
+
+  \begin{frontmatter}
+
+\begin{titlepage}
+% This is a combination of Pandoc templating and LaTeX
+% Pandoc templating https://pandoc.org/MANUAL.html#templates
+% See the README for help
+
+\thispagestyle{empty}
+
+\newgeometry{top=-100in}
+
+% Page color
+
+\newcommand{\coverauthorstyle}[1]{{\fontsize{30}{36.0}\selectfont
+#1}}
+
+\begin{tikzpicture}[remember picture, overlay, inner sep=0pt, outer sep=0pt]
+
+\tikzfading[name=fadeout, inner color=transparent!0,outer color=transparent!100]
+\tikzfading[name=fadein, inner color=transparent!100,outer color=transparent!0]
+\node[anchor=south west, rotate=0.0, opacity=1.0] at ($(current page.south west)+(0.0, 0.0)$) {
+\includegraphics[width=\paperwidth, keepaspectratio]{images/ValeCastroPanoramaBook.jpg}};
+
+% Title
+\newcommand{\titlelocationleft}{0.2\paperwidth}
+\newcommand{\titlelocationbottom}{0.9\paperheight}
+\newcommand{\titlealign}{left}
+
+\begin{scope}{%
+\fontsize{50}{60.0}\selectfont
+\node[anchor=north
+west, align=left, rotate=0] (Title1) at ($(current page.south west)+(\titlelocationleft,\titlelocationbottom)$)  [text width = 0.7\paperwidth]  {{\bfseries{\nohyphens{Ecological
+theory for the biodiversity crisis}}}};
+}
+\end{scope}
+
+% Author
+\newcommand{\authorlocationleft}{0.2\paperwidth}
+\newcommand{\authorlocationbottom}{0.65\paperheight}
+\newcommand{\authoralign}{left}
+
+\begin{scope}
+{%
+\fontsize{30}{36.0}\selectfont
+\node[anchor=north
+west, align=left, rotate=0] (Author1) at ($(current page.south west)+(\authorlocationleft,\authorlocationbottom)$)  [text width = 0.7\paperwidth]  {
+\coverauthorstyle{Henrique Miguel Pereira\\}};
+}
+\end{scope}
+
+% Date
+\newcommand{\datelocationleft}{0.2\paperwidth}
+\newcommand{\datelocationbottom}{0.05\paperheight}
+\newcommand{\datelocationalign}{left}
+
+\begin{scope}
+{%
+ \node[anchor=north west, align=left, rotate=0] (Date1) at %
+($(current page.south west)+(\datelocationleft,\datelocationbottom)$)  [text width = 0.7\paperwidth]  {{\nohyphens{2025-11-04}}};
+}
+\end{scope}
+
+\end{tikzpicture}
+\clearpage
+\restoregeometry
+\end{titlepage}
+\setcounter{page}{1}
+\end{frontmatter}
+
+%%%%% end titlepage extension code
+
+\renewcommand*\contentsname{Table of contents}
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+
+\mainmatter
+\bookmarksetup{startatroot}
+
+\chapter*{Preface}\label{preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+\markboth{Preface}{Preface}
+
+We live in the midst of the biodiversity crisis. Biodiversity science,
+at first mostly a spin off from Ecology, has developed tremendously in
+the last two decades, becoming a truly interdisciplinary field, with
+contributions from Geography, Economy, Social Sciences and many other
+disciplines. Big data and the development of statistical ecology has
+also been remarkable. As I write these lines, the Global Biodiversity
+Information Facility or GBIF (\url{https://gbif.org}) is about to hit 3
+billion records. The availability of large amounts of data and the
+availability of the open source R software
+(\url{https://www.r-project.org}) has made statistical approaches take
+the main stage in much of ecological research. However, at the same
+time, as a biodiversity researcher, practitioner, and a teacher, I find
+again and again the need for a good understanding of ecological theory
+to be able to carry out my work. This book if for all of you that have
+also felt a similar need.
+
+Programming and mathematics are key tools of ecological theory. The
+programming language I use in this book is R (version 4, available from
+\url{https://www.r-project.org}). If you have familiarly with
+programming in another computer language, a fast skimming of Appendix A
+will be enough to get you going with the book. If you are new to
+programming, I recommend you spend a few hours working through the short
+course in Appendix A, but you may also wanna consult some web resources
+(e.g.~\url{https://ourcodingclub.github.io/course}). With the advent of
+Large Language Models (LLM) such as ChatGPT there may be the temptation
+to think programming knowledge will no longer be needed. I think LLMs
+will accelerate our writing of computer code, but they will not replace
+the need for being able to read and understand the code.
+
+You may wonder why I chose \textbf{R}. There are plenty other
+programming languages out there, several suitable for ecological theory
+and modelling (e.g.~data scientists love Pyhton). However, \textbf{R}
+has become the \emph{de facto} language of ecologists with dozens of
+packages\footnote{An R package is a set of functions developed by
+  someone to extend the basic functionality of R.} for a wide range of
+analysis, from camera trapping to species richness estimation.
+\textbf{R} has also powerful packages for spatial data analysis and can
+work as a Geographic Information System. So R, grew from a statistics
+software (the origins of R are the comercial S-PLUS) to a general
+purpose programming language with dedicated packages for different uses.
+
+Why was R so successful, to the point of making some commercial software
+companies go out of business? R was open-source and free from its
+beginning, part of the free and open-source movement that gained
+popularity in the 1990's, particularly with the development of the
+operating system Linux. Open-source means that the code behind R (R
+itself is a computer program written in C, Fortran, and other languages)
+is available for anyone to study. It also allows for anyone to
+contribute to improve the code in a collaborative way, including by
+contributing with packages. R is also free, meaning that anyone can
+download the software or any of its packages without any cost. Isn't
+that a wonderful tool for science? Scientists dedicate their life to the
+pursue of knowledge, and the idea that someone has to pay for accessing
+that knowledge has always been a bit apocryphal. So R allowed scientists
+to share their research and code for free in an integrated platform.
+Another advantage of open-source software, is that we can in theory ran
+programs that we wrote decades ago by downloading archived versions of
+the software. At least in theory, the practice of code reproducibility
+in science is a bit more complex and requires careful data and code
+management by the researcher\footnote{For a guide on best practices for
+  reproducible code see
+  \url{https://www.britishecologicalsociety.org/wp-content/uploads/2019/06/BES-Guide-Reproducible-Code-2019.pdf}}.
+Platforms such as GitHub (\url{https://github.com}) for sharing code and
+Zenodo (\url{https://zenodo.org}) or Dryad (\url{https://datadryad.org})
+for sharing data are a key component of reproducible science.
+
+In contrast a lot of the code I wrote for my PhD was based on a
+commercial package (Mathematica) and anyone that wants to reuse it a
+couple decades later has to pay a few hundred Euros for the package
+(well there are student discounts) and has to find a version of the
+Mathematica that still runs this code. This latter problem can be
+insurmountable, as sometimes older versions of the software are no
+longer commercially available. One can argue that many programming
+languages are also free and public, however for ecological theory and
+modelling a high-level language like R provides a nice integrated
+platform for development and is literally priceless.
+
+But programming is not enough. In order to be able to effectively
+develop theory and models of biodiversity, a good grasp of mathematics,
+including of probability and statistics is essential. One challenge is
+that, and this at least the case in Europe where I have lectured the
+most, most biology students receive very little mathematical training.
+This book cannot address by itself such gap and assumes some basic
+familiarity with probability theory (e.g.~what is a probability
+distribution function), some calculus training (e.g.~what area a
+derivative and an integral), a little algebra (e.g.~multiplication of a
+matrix by a vector). I try to take the reader forward from that level.
+There are excellent books out there for those that need this basic
+background (e.g.~Otto's and Day's A Biologist's Guide to Mathematical
+Modelling). And Wikipedia (\url{https://www.wikipedia.org}) is often
+your best friend when you wanna a fast refresh of any mathematical
+concept or even for many of the models and ecological concepts presented
+in this book.
+
+This book can be used as the support for a semester course in Ecological
+Theory or Ecological Modelling. I have used many of these materials over
+the last decade in a similar course at iDiv/University of
+Halle-Wittenberg. But the book can also be used as self-learning tool or
+even as a reference tool. This book takes a lot of inspiration from the
+Primer of Ecological Theory of Joan Roughgarden (the first two chapters
+draw heavily on her first chapters), that I was lucky to have as a
+mentor. As she used to say, one writes papers for the reviewers and
+books for the readers. This book is for you.
+
+\part{Ecology of individuals}
+
+\chapter{Ecophysiology and the climate space: when to bask in the
+sun?}\label{ecophysiology-and-the-climate-space-when-to-bask-in-the-sun}
+
+We are now almost daily bombarded with news about climate change and its
+impacts on people and ecosystems. But how does climate mechanistically
+affects organisms? The basic foundations to address this question were
+laid out by ecophysiology research. Interestingly, at the time that some
+of seminal research on ecophysiology was carried out, back in the
+1960's, climate change was not yet in the radar of most people. The
+research was driven by the interest in the basic understanding of how
+biophysical conditions affect organisms. Today the knowledge gained from
+this research has acquired new importance. This is an area whether the
+mechanistic knowledge learnt from theory and experiments is now
+sometimes overlooked because of the massive datasets and machine
+learning approaches available. But let's start with the basics.
+
+\section{A model for the body temperature of an
+animal}\label{a-model-for-the-body-temperature-of-an-animal}
+
+Animals can be divided in two big groups in regard to the way they
+regulate their temperature: ecoctherms and endotherms
+(Figure~\ref{fig-CrociduraVipera}). Endotherms such as mammals and birds
+are able to regulate their temperature by producing heat through
+metabolism. Ectotherms in contrast must regulate their temperature by
+obtaining heat from the environment. By obtaining energy from the
+environment, ectotherms have lower energy demands than endotherms, which
+have to be burning energy all the time to keep their bodies warm. Both
+do have to avoid getting too hot because indeed there can bee too much
+from a good thing.
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+\includegraphics{images/Crocidura_russula.jpg}\hfill
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+\hfill
+\includegraphics{images/Vipera_seonae.jpg}\end{minipage}%
+
+\caption{\label{fig-CrociduraVipera}Shrews (left, \emph{Crocidura
+russula}) are ectotherms and have high energy demands, eating almost
+their body weight every day. In contrast, vipers (right, \emph{Vipera
+seonae}) can go days without eating, or even hibernate or aestivate as
+needed.}
+
+\end{figure}%
+
+To build a model of the body temperature of an animal, let's consider a
+lizard that is perched in a rock basking in the sun
+(Figure~\ref{fig-lizard_heat_flow}). The lizard receives heat from the
+direct solar radiation than can be measured in for instance calories per
+hour. It can also receive indirect solar radiation, reflected for
+instance by the ground. The lizard also exchanges heat with the
+surrounding air through convection. If the lizard body temperature is
+higher than the surrounding air temperature it will lose heat, while if
+the lizard body temperature is lower than it will gain heat. The rate at
+which this exchange of heat through convection happens depends on the
+body of the animal and the properties of its skin. These properties are
+captured in the heat transfer coefficient, which can be measured as
+calories per hour per degree Celsius. Similarly, the lizard can receive
+heat by conduction from being in contact with a warm rock, or lose heat
+to the rock if the rock is colder than the lizard's body temperature.
+Finally the animal can lose heat through evapotranspiration, this is by
+transpiring water that has a cooling effect when it evaporates. I also
+like to think about this model as representing our own experience on the
+beach. We can be laying on a towel receiving heat by conduction from the
+sand and solar radiation from the sun. If the air temperature is warm,
+we can become uncomfortable in the sun and we may seek a shade to reduce
+the input from solar radiation, but if there is a cool brise we may be
+able to stay in the sun a bit longer. If the air temperature is really
+cold and it's really windy our skin hair may rise to reduce the
+convection coefficient.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=1\textwidth,height=\textheight]{images/Lizard_Heat_Flow.png}
+
+}
+
+\caption{\label{fig-lizard_heat_flow}The energy flows of a lizard
+basking in the sun.}
+
+\end{figure}%
+
+The total flow of energy into the lizard, also known as the heat
+exchange equation, can be written as
+\begin{equation}\phantomsection\label{eq-heat}{f=q-k(b-a)}\end{equation}
+
+where
+
+\begin{itemize}
+\item
+  \(f\) is the energy flow (cal/h),
+\item
+  \(q\) is the quantity of heat in the solar radiation (cal/h),
+\item
+  \(k\) is the convection coefficient (cal/h/ºC),
+\item
+  \(b\) is the body temperature (ºC) and
+\item
+  \(a\) is the air temperature (ºC).
+\end{itemize}
+
+If the energy flow is positive, then the lizard is warming, while if it
+is negative then the lizard is cooling. The equilibrium\footnote{The
+  concept of equilibrium is very important in ecological theory. It is
+  often introduced in the context of differential equations and
+  corresponds to the point at which the derivative of the variable of
+  interest is zero. The heat equation can also be seen as a differential
+  equation where \(f\) corresponds to the derivative of the amount of
+  heat \(Q\) in the lizard through time \(t\), i.e.~\(dQ/dt\).} happens
+when the energy flow is zero and so the the lizard is neither cooling
+nor warming. If we solve Equation~\ref{eq-heat} for equilibrium by
+replacing \(f\) with zero and expanding the right-hand side of the
+equation,
+
+\[
+0=q-k\ b+k\ a
+\]
+
+and rearranging for \(b\) we find the equilibrium body temperature that
+we denote with a hat,
+
+\begin{equation}\phantomsection\label{eq-bodytemp}{
+\hat{b}=q/k+a.
+}\end{equation}
+
+Let's see if this equation makes sense. It says that the equilibrium
+body temperature is the sum of the solar radiation divided by the
+convection coefficient with the air temperature. So, at minimum the
+equilibrium body temperature is equal to the air temperature when the
+solar radiation is zero (e.g.~during the night). But when the solar
+radiation is greater than zero then the equilibrium body temperature is
+higher than the air temperature as one would expect. How much higher?
+Well that depends on the convection coefficient. If the convection
+coefficient is very high then the body temperature is mainly determined
+by the air temperature. In contrast, if the convection coefficient is
+very low then the solar radiation can contribute significantly to the
+body temperature.
+
+It's time to start using \textbf{R} to explore this model. For instance,
+we can use \textbf{R} to plot the relationship between the body
+temperature and the solar radiation. First we create variables for the
+heat coefficient and the air temperature and assign some valuues:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{k }\OtherTok{=} \DecValTok{50}  \CommentTok{\#convection coefficient (cal/h/ºC)}
+\NormalTok{a }\OtherTok{=} \DecValTok{18}  \CommentTok{\#air temperature (ºC)}
+\end{Highlighting}
+\end{Shaded}
+
+We want to plot the equilibrium body temperature for a range of solar
+radiation values. So we create a vector with radiation values, for
+instance ranging from 0 cal/h to 1500 cal/h in steps of 500. I am going
+to use big letters to denote vectors in \textbf{R} code, in contrast
+with scalars which I will denote with small letters.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Q }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1500}\NormalTok{,}\AttributeTok{by=}\DecValTok{500}\NormalTok{)  }\CommentTok{\#vector with radiation values}
+\end{Highlighting}
+\end{Shaded}
+
+Now we can write Equation~\ref{eq-bodytemp} in \textbf{R} to produce a
+vector of the equilibrium body temperatures for each value of radiation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{B\_eq }\OtherTok{=}\NormalTok{ Q}\SpecialCharTok{/}\NormalTok{k}\SpecialCharTok{+}\NormalTok{a   }\CommentTok{\#vector with equilibrium body temperatures}
+\end{Highlighting}
+\end{Shaded}
+
+Let's examine the values of the vector, by binding the two vectors as a
+matrix,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rbind}\NormalTok{(Q,B\_eq)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3] [,4]
+Q       0  500 1000 1500
+B_eq   18   28   38   48
+\end{verbatim}
+
+This is nice as we can see the values of the equilibrium body
+temperature for each value of solar radiation. But let's visualize this
+as a graph, by plotting these vectors in \textbf{R},
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Q,B\_eq,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{ecophysiology_files/figure-pdf/fig-bodytemp_radiation-1.pdf}
+
+}
+
+\caption{\label{fig-bodytemp_radiation}Equilibrium body temperature as a
+function of solar radiation.}
+
+\end{figure}%
+
+Note that we added \texttt{type="l"} as a parameter of the plot to have
+a line drawn instead of a sequence of dots in the plot.
+
+\section{Understanding the climate
+space}\label{understanding-the-climate-space}
+
+Another way of looking at the heat exchange equation
+Equation~\ref{eq-heat} is to look at what combinations of air
+temperature and solar radiation values are livable for the lizard. This
+is also known as the climate space of an organism. In order to explore
+the climate space of the lizard we need to first assess what are the
+maximum and minimum body temperature that the lizard can experience.
+Let's assume those are respectively 36 and 24ºC and store them in
+\textbf{R,}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{b\_max }\OtherTok{=} \DecValTok{36}  \CommentTok{\#maximum body temperature (ºC)}
+\NormalTok{b\_min }\OtherTok{=} \DecValTok{24}  \CommentTok{\#minimum body temperature (ºC)}
+\end{Highlighting}
+\end{Shaded}
+
+We now want to solve Equation~\ref{eq-heat} at equilibrium for the air
+temperature as a function of the solar radiation and body temperature.
+We can do this by rearranging Equation~\ref{eq-bodytemp},
+
+\begin{equation}\phantomsection\label{eq-air}{
+a=b-q/k.
+}\end{equation}
+
+This equation can be then used in \textbf{R} to calculate vectors of the
+maximum and minimum survivable air temperatures for each value of the
+solar radiation in vector \texttt{Q},
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A\_max }\OtherTok{=}\NormalTok{ b\_max }\SpecialCharTok{{-}}\NormalTok{ Q}\SpecialCharTok{/}\NormalTok{k  }\CommentTok{\#vector with maximum air temperatures}
+\NormalTok{A\_min }\OtherTok{=}\NormalTok{ b\_min }\SpecialCharTok{{-}}\NormalTok{ Q}\SpecialCharTok{/}\NormalTok{k  }\CommentTok{\#vector with minimum air temperatures}
+\end{Highlighting}
+\end{Shaded}
+
+We can now visualize the climate space, this is, the combination of
+solar radiation and air temperatures in which the lizard can survive, by
+plotting these two equations (i.e.~by plotting lines with x coordinates
+given by the vector Q and the y coordinates given by the vectors A\_max
+and A\_min),
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Q, A\_max,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\CommentTok{\#plots the maximum survivable air temperature}
+     \AttributeTok{xlab=}\StringTok{"Solar radiation (cal/h)"}\NormalTok{, }\CommentTok{\#adds x and y axis labels to the plot}
+     \AttributeTok{ylab=}\StringTok{"Air temperature (ºC)"}\NormalTok{)    }
+\FunctionTok{lines}\NormalTok{(Q,A\_min) }\CommentTok{\#adds line for the minimum survivable air temperature}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+\centering{
+
+\includegraphics{ecophysiology_files/figure-pdf/fig-climatespace-1.pdf}
+
+}
+
+\caption{\label{fig-climatespace}The climate space of a lizard.}
+
+\end{figure}%
+
+Let's paint the area between the two lines which corresponds to the
+climate space of the lizard. We can use the \textbf{R} function
+\texttt{polygon}, to which we need to give the set of \texttt{x} and
+\texttt{y} coordinates delimiting the climate space as vectors. For
+instance, the upper lower corner can be the first coordinate, being 0
+for the \texttt{x} vector and \texttt{b\_min} for the \texttt{y} vector.
+The right upper corner is 1500 for \texttt{x} and \texttt{b\_max-1500/k}
+for \texttt{y}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1500}\NormalTok{,}\DecValTok{1500}\NormalTok{)}
+\NormalTok{Y }\OtherTok{=} \FunctionTok{c}\NormalTok{(b\_min,b\_max,b\_max}\DecValTok{{-}1500}\SpecialCharTok{/}\NormalTok{k,b\_min}\DecValTok{{-}1500}\SpecialCharTok{/}\NormalTok{k)}
+\FunctionTok{polygon}\NormalTok{(X,Y,}\AttributeTok{col=}\StringTok{"green"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Now that we have the climate space we can plot on top of it some
+empirical data of how the conditions are in the field during the day. We
+can for instance consider two micro-habitats, a rock (in the sun) and a
+bush (in the shade). Suppose we obtain some data from temperature
+loggers that were installed in each micro-habitat , recording every
+three hours the values of temperature and radiation as tabled below.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1750}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2250}}@{}}
+\caption{Hypothetical radiation values in two micro-habitats and air
+temperatures at different times of the
+day.}\label{tbl-temprad}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Time (hh:mm)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Radiation rock (cal/h)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Radiation bush (cal/h)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Temperature (ºC)
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Time (hh:mm)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Radiation rock (cal/h)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Radiation bush (cal/h)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Temperature (ºC)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+00:00 & 150 & 150 & 18 \\
+03:00 & 150 & 150 & 13 \\
+06:00 & 800 & 450 & 10 \\
+09:00 & 1100 & 600 & 14 \\
+12:00 & 1300 & 650 & 21 \\
+15:00 & 1200 & 650 & 24 \\
+18:00 & 800 & 350 & 22 \\
+21:00 & 400 & 200 & 20 \\
+\end{longtable}
+
+We can overlay these values of temperatures and radiations on the plot
+to understand which microhabitat should the lizard choose at each time
+of the day. First we create a vector for each column of
+Table~\ref{tbl-temprad}. Note that we must enclose the times of the day
+in commas as they are strings. We also append at the end of the vector
+the values for 0:00 in order to close the lines (otherwise there would
+be a gap between 21:00 and 0:00).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Times of the day}
+\NormalTok{T }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"00:00"}\NormalTok{,}\StringTok{"03:00"}\NormalTok{,}\StringTok{"06:00"}\NormalTok{,}\StringTok{"09:00"}\NormalTok{,}
+      \StringTok{"12:00"}\NormalTok{,}\StringTok{"15:00"}\NormalTok{,}\StringTok{"18:00"}\NormalTok{,}\StringTok{"21:00"}\NormalTok{,}\StringTok{"00:00"}\NormalTok{)}
+
+\CommentTok{\#Solar radiation in the rock habitat}
+\NormalTok{Rock\_q }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{150}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{800}\NormalTok{,}\DecValTok{1100}\NormalTok{,}\DecValTok{1300}\NormalTok{,}\DecValTok{1200}\NormalTok{,}\DecValTok{800}\NormalTok{,}\DecValTok{400}\NormalTok{,}\DecValTok{150}\NormalTok{)}
+
+\CommentTok{\#Air temperature in the rock habitat}
+\NormalTok{Rock\_a }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{18}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{21}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{18}\NormalTok{)}
+
+\CommentTok{\#Solar radiation in the bush habitat}
+\NormalTok{Bush\_q }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{150}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{450}\NormalTok{,}\DecValTok{600}\NormalTok{,}\DecValTok{650}\NormalTok{,}\DecValTok{650}\NormalTok{,}\DecValTok{350}\NormalTok{,}\DecValTok{200}\NormalTok{,}\DecValTok{150}\NormalTok{)}
+
+\CommentTok{\#   Air temperature in the bush habitat}
+\NormalTok{Bush\_a }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{18}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{21}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{18}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We overlay these vectors in the figure by invoking the function
+\texttt{lines(Xcoor,Ycoord)} for each micro-habitat. We add labels to
+each point to show the correspondence between each point and the time of
+the day.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{lines}\NormalTok{(Rock\_q,Rock\_a,}\AttributeTok{col=}\StringTok{"orange"}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(Rock\_q,Rock\_a,T)}
+
+\FunctionTok{lines}\NormalTok{(Bush\_q,Bush\_a,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\FunctionTok{text}\NormalTok{(Bush\_q,Bush\_a,T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{ecophysiology_files/figure-pdf/fig-climatespace2-1.pdf}
+
+}
+
+\caption{\label{fig-climatespace2}The climate space of a lizard with the
+conditions of two microhabitats ploted at different times of the day:
+rock (orange), bush (blue).}
+
+\end{figure}%
+
+\section{From ecophysiological models to species distribution
+models}\label{from-ecophysiological-models-to-species-distribution-models}
+
+In the previous section we developed a simple mechanistic model for the
+climate space of an organism. This is a micro-habitat level climate
+space. But one can also infer the climate space from the distribution of
+a species at the macro-habitat level. They are different but they are
+conceptually similar. The inference of such macro climate space is an
+area where species distribution models excel (for more on species
+distribution models check for example (Guisan, Thuiller, and Zimmermann
+2017)). The idea is relatively simple. One starts with a bunch of
+locations of a species in geographical space. Then, one obtains the
+climate characteristics for those locations, and then plots those
+locations in climate space. The convex hull in climate space delimited
+by those locations is the macro-habitat climate space. What species
+distribution models (SDMs) learn to do is to delineate that climate
+space, this is, SDMs try to predict the probability of a species
+occurring somewhere in the climate space by learning from presences and
+absences from species. Then the SDM can extrapolate again what happens
+in geographical space, by predicting the species occurence probability
+for any point based on the climate data for that point. Without getting
+all the way into a full blown SDM, let's try to follow some of the
+basics.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{images/Lacerta_schreiberi.JPG}
+
+}
+
+\caption{\label{fig-schreiberi}The Iberian emerald lizard, \emph{Lacerta
+schreiberi}.}
+
+\end{figure}%
+
+I will illustrate this with one my favorite species, the Iberian emerald
+lizard, \emph{Lacerta schreiberi}, a species endemic to the Iberian
+peninsula, often found near water streams in mountain landscapes, but
+also in other habitats. First we obtain the presences for a species from
+GBIF (Global Biodiversity Information Facility,
+\url{http://www.gbif.org}). GBIF is a repository for biodiversity
+observations, and has over three billions of occurrences of over a
+million species all over the world at the time I am writing these words.
+Natural history museums, citizen science platforms such as iNaturalist (
+\url{http://www.inaturalist.org}) and eBird
+(\url{http://www.ebird.org}), and scientists, publish their species
+records in GBIF using a data format called Darwin Core. There is a R
+package that allows one to download observations from GBIF and also
+other relevant geodata, the \textbf{geodata} package. We will be doing
+some geospatial processing, so let's load also the \textbf{terra}
+package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(geodata)}
+\FunctionTok{library}\NormalTok{(terra)}
+\FunctionTok{library}\NormalTok{(predicts)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+We download the observations of \emph{Lacerta schreiberi} from GBIF with
+the function \texttt{sp\_occurence(genus,species)}. We also download a
+world map with the function \texttt{world(path)}, where path should
+point towards a local directory where we want to store the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{occ }\OtherTok{\textless{}{-}} \FunctionTok{sp\_occurrence}\NormalTok{(}\StringTok{"Lacerta"}\NormalTok{,}\StringTok{"schreiberi"}\NormalTok{) }
+\NormalTok{world\_data }\OtherTok{\textless{}{-}} \FunctionTok{world}\NormalTok{(}\AttributeTok{path =} \StringTok{"."}\NormalTok{) }\CommentTok{\#download world countries limits}
+\NormalTok{ext\_eur }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{15}\NormalTok{,}\DecValTok{45}\NormalTok{,}\DecValTok{35}\NormalTok{,}\DecValTok{72}\NormalTok{) }\CommentTok{\# coordinates of European extent}
+
+\CommentTok{\#download bioclim data}
+\NormalTok{bioclim }\OtherTok{\textless{}{-}} \FunctionTok{worldclim\_global}\NormalTok{(}\AttributeTok{var =} \StringTok{\textquotesingle{}bioc\textquotesingle{}}\NormalTok{, }\AttributeTok{res =} \DecValTok{10}\NormalTok{, }\AttributeTok{path =} \StringTok{"."}\NormalTok{)}
+
+\CommentTok{\# plot the map of Europe}
+\FunctionTok{plot}\NormalTok{(world\_data,  }
+     \AttributeTok{xlab =} \StringTok{"Longitude"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Latitude"}\NormalTok{, }\AttributeTok{axes =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{ext=}\NormalTok{ext\_eur)}
+
+\CommentTok{\# add the species occurrences}
+\FunctionTok{points}\NormalTok{(occ}\SpecialCharTok{$}\NormalTok{lon,occ}\SpecialCharTok{$}\NormalTok{lat,}\AttributeTok{cex=}\NormalTok{.}\DecValTok{1}\NormalTok{,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+
+\CommentTok{\# create pseudo{-}absences}
+\NormalTok{eumask}\OtherTok{\textless{}{-}}\FunctionTok{crop}\NormalTok{(bioclim[[}\DecValTok{1}\NormalTok{]], }\FunctionTok{ext}\NormalTok{(ext\_eur))}
+\NormalTok{absences}\OtherTok{\textless{}{-}}\FunctionTok{backgroundSample}\NormalTok{(eumask,}\FunctionTok{nrow}\NormalTok{(occ),}\FunctionTok{vect}\NormalTok{(occ),}\AttributeTok{tryf=}\DecValTok{10}\NormalTok{)}
+\FunctionTok{points}\NormalTok{(absences,}\AttributeTok{cex=}\NormalTok{.}\DecValTok{1}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+
+
+\CommentTok{\# plot the climate variables in geographic space}
+\FunctionTok{plot}\NormalTok{(bioclim[[}\DecValTok{19}\NormalTok{]],}\AttributeTok{ext=}\NormalTok{ext\_eur)}
+\FunctionTok{plot}\NormalTok{(bioclim[[}\DecValTok{3}\NormalTok{]],}\AttributeTok{ext=}\NormalTok{ext\_eur)}
+
+\CommentTok{\# plot the climate space figure}
+\CommentTok{\# first merge occurences and absences into a single matrix}
+\NormalTok{allpts }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(occ}\SpecialCharTok{$}\NormalTok{lon,occ}\SpecialCharTok{$}\NormalTok{lat,}\FunctionTok{rep}\NormalTok{(}\DecValTok{1}\NormalTok{,}\FunctionTok{nrow}\NormalTok{(occ))),}
+                \FunctionTok{cbind}\NormalTok{(absences,}\FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\FunctionTok{nrow}\NormalTok{(absences))))}
+\FunctionTok{colnames}\NormalTok{(allpts)[}\DecValTok{3}\NormalTok{]}\OtherTok{\textless{}{-}}\StringTok{"pres"}
+
+\CommentTok{\# extract the climate variable values for all points}
+\NormalTok{bioclim\_sample}\OtherTok{\textless{}{-}}\FunctionTok{extract}\NormalTok{(bioclim,allpts[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{])}
+\NormalTok{allpts\_bioclim }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(allpts,bioclim\_sample)}
+
+\NormalTok{allpts\_bioclim\_plot}\OtherTok{\textless{}{-}}\NormalTok{allpts\_bioclim}
+\NormalTok{allpts\_bioclim\_plot}\SpecialCharTok{$}\NormalTok{pres}\OtherTok{\textless{}{-}}\FunctionTok{as.factor}\NormalTok{(allpts\_bioclim\_plot}\SpecialCharTok{$}\NormalTok{pres)}
+\FunctionTok{ggplot}\NormalTok{(allpts\_bioclim\_plot, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{wc2}\FloatTok{.1}\NormalTok{\_10m\_bio\_19,}\AttributeTok{y=}\NormalTok{wc2}\FloatTok{.1}\NormalTok{\_10m\_bio\_3,}\AttributeTok{shape=}\NormalTok{pres, }\AttributeTok{col=}\NormalTok{pres)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"0"} \OtherTok{=} \StringTok{"red"}\NormalTok{, }\StringTok{"1"} \OtherTok{=} \StringTok{"blue"}\NormalTok{)) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\begin{minipage}{0.50\linewidth}
+
+\centering{
+
+\includegraphics{ecophysiology_files/figure-pdf/fig-geog-vs-climate-1.pdf}
+
+}
+
+\subcaption{\label{fig-geog-vs-climate-1}Geographic space}
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\centering{
+
+\includegraphics{ecophysiology_files/figure-pdf/fig-geog-vs-climate-2.pdf}
+
+}
+
+\subcaption{\label{fig-geog-vs-climate-2}Bioclim 19}
+
+\end{minipage}%
+\newline
+\begin{minipage}{0.50\linewidth}
+
+\centering{
+
+\includegraphics{ecophysiology_files/figure-pdf/fig-geog-vs-climate-3.pdf}
+
+}
+
+\subcaption{\label{fig-geog-vs-climate-3}Bioclim 13}
+
+\end{minipage}%
+%
+\begin{minipage}{0.50\linewidth}
+
+\centering{
+
+\includegraphics{ecophysiology_files/figure-pdf/fig-geog-vs-climate-4.pdf}
+
+}
+
+\subcaption{\label{fig-geog-vs-climate-4}Climate space}
+
+\end{minipage}%
+
+\caption{\label{fig-geog-vs-climate}The geographic space and climate
+space of Lacerta schreiberi.}
+
+\end{figure}%
+
+\section{Statistical confrontation: regressing the climate
+space}\label{statistical-confrontation-regressing-the-climate-space}
+
+\emph{By Andres Marmol}
+
+Why anoles? Anoles are among the most studied reptile organisms. They
+are vastly diverse with more than 488 species described until today ---
+circa 11\% of all the squamates without considering snakes --- due to
+their outstanding adaptive radiation, which has inspired many to
+dive-in-depth into understanding how evolution has operated within this
+group
+(\href{https://doi.org/10.1525/california/9780520255913.001.0001}{Lizards
+in an Evolutionary Tree} by J. B. Losos is a highly recommended
+instructive reading for more info). As a result, very detailed data sets
+on many species of anoles, including information on micro habitat, field
+body temperature, activity patterns and morphological traits,
+performance, etc., can be found online in relatively few time.
+
+In the following steps we will be downloading from Dryad and using a
+data set created by Winchell et al.~(2016)
+(https://doi.org/10.5061/dryad.h234n) on \emph{Anolis cristatellus}
+making a pair-comparison of several morphological and thermal traits of
+individuals living in urban and forested areas at Puerto Rico. \emph{A.
+cristatellus} is widely distributed across Puerto Rico and can be found
+in natural and human-intervened spaces easily. It can be seen over
+ground and laying on the trunks of trees in natural settings, and on
+walls and metal fences in more urban areas.
+
+\subsection{Calling the dataset from
+Dryad}\label{calling-the-dataset-from-dryad}
+
+To download the dataset, it is necessary to install the R package
+\texttt{rdryad}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"rdryad"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then we open the newly installed package and download the dataset by
+specifying the DOI associated to this dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#calling rdryad}
+\FunctionTok{library}\NormalTok{(rdryad)}
+
+\CommentTok{\# Specify the DOI}
+\NormalTok{doi }\OtherTok{\textless{}{-}} \StringTok{"10.5061/dryad.h234n"}
+
+\CommentTok{\# Download the dataset using the dryad\_download function}
+\NormalTok{downloaded\_file }\OtherTok{\textless{}{-}} \FunctionTok{dryad\_download}\NormalTok{(}\AttributeTok{dois =}\NormalTok{ doi)}
+\end{Highlighting}
+\end{Shaded}
+
+The data sets are now downloaded on the paths indicated in the box
+below, although for this exercise only table {[}2{]}
+winchell\_evol\_phenshifts.csv'' is needed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# The downloaded\_file will contain the file path where the dataset is saved}
+\FunctionTok{print}\NormalTok{(downloaded\_file)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$`10.5061/dryad.h234n`
+[1] "/Users/henrique/Library/Caches/R/rdryad/10_5061_dryad_h234n/winchell_evol_CG.csv"        
+[2] "/Users/henrique/Library/Caches/R/rdryad/10_5061_dryad_h234n/winchell_evol_phenshifts.csv"
+\end{verbatim}
+
+Once this is done, it is always good practice to check if the recently
+open data frame works by checking the columns within the data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#calling the dataset of interest as df}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(downloaded\_file[[}\DecValTok{1}\NormalTok{]][}\DecValTok{2}\NormalTok{])}
+
+\CommentTok{\# checking the columns (variables) available in the data frame df using the str function}
+\FunctionTok{names}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] "ID"                 "date"               "Site"              
+ [4] "context"            "perch"              "bodytemp.C"        
+ [7] "perch.temp.C"       "ambient.temp.C"     "humidity.percent"  
+[10] "perch.height.cm"    "perch.diam.cm"      "weight.g"          
+[13] "head.height.mm"     "svl.mm"             "local.time.decimal"
+[16] "flags"              "JL"                 "JW"                
+[19] "METC"               "RAD"                "ULN"               
+[22] "HUM"                "FEM"                "TIB"               
+[25] "FIB"                "METT1"              "METT2"             
+[28] "FL"                 "HL"                
+\end{verbatim}
+
+There are 29 different variables within \texttt{df}, but this exercise
+will focus only in a few of them including \texttt{context},
+\texttt{perch}, \texttt{bodytemp.C}, \texttt{perch.temp.C},
+\texttt{ambient.temp.C}, and \texttt{local.time.decimal} where
+\texttt{context} indicates if the lizard was captured in natural or
+urban spaces; \texttt{perch} refers to the microhabitat where the lizard
+was found; \texttt{bodytemp.C} is body temperature \(b\);
+\texttt{perch.temp.C} is substrate temperature \(T_s\);
+\texttt{ambient.temp.C} is air temperature \(a\); and
+\texttt{local.time.decimal} is the time of the day in hours when the
+lizards was captured and measured.
+
+\subsection{\texorpdfstring{Exploring the thermophysiological data of
+\emph{A.
+cristatellus.}}{Exploring the thermophysiological data of A. cristatellus.}}\label{sec-anolis_cristatellus}
+
+As covered in the first chapter, \(b\) increases proportionally to \(a\)
+as indicated in equation (1.2). Let's check if the data confirms this
+equation.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# to call a variable directly from a data frame one must use $, indicating the name of the dataframe at the left and the name of the variable (columnt on the right).}
+
+\FunctionTok{plot}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{ambient.temp.C, df}\SpecialCharTok{$}\NormalTok{bodytemp.C,}
+     \AttributeTok{xlab=}\StringTok{"air temperature (°C)"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"body temperature (°C)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ecophysiology_files/figure-pdf/unnamed-chunk-16-1.pdf}
+
+In the plot we can observe that indeed body temperature increases with
+increasing temperature. However, we cannot quantitatively know how much
+is this increase. For that, we can model how air temperature affects
+body temperature modelling them a a line with the equation:
+
+\[
+\hat{y} = α + β*x + e 
+\] where \(\hat{y}\) is the predicted value of \(y\) for any given
+\(x\); \(α\) is point of intersection of the line when \(x=0\), \(β\) is
+the slope of the regression line (i.e.~how much increases \(\hat{y}\)
+with a unit increase in \(x\)) and \(e\) is the random error.
+
+Placing our variables in formula, it would look like this:
+
+\[
+b = b_{0} + β*a + e
+\]
+
+where \(b\) is body temperature, \(a\) is ambient temperature, and
+\(b_0\) is the body temperature when \(a\) is zero.
+
+Now lets model it using a least-squares linear regression using the
+\texttt{lm} function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#define the linear model}
+\CommentTok{\#the variable at the left of the tilde (\textasciitilde{}) is the dependent variable}
+\CommentTok{\#data calls the specific dataframe to be used.}
+
+\NormalTok{model1 }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(bodytemp.C }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ambient.temp.C, }\AttributeTok{data=}\NormalTok{df)}
+
+\CommentTok{\# print model outputs}
+\FunctionTok{print}\NormalTok{(model1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = bodytemp.C ~ ambient.temp.C, data = df)
+
+Coefficients:
+   (Intercept)  ambient.temp.C  
+        8.7004          0.7237  
+\end{verbatim}
+
+\subsection{Interpreting the results of our
+model.}\label{interpreting-the-results-of-our-model.}
+
+The results of our model indicates that if the air temperature (\(a\))
+is zero, \emph{A. cristatellus} would show a body temperature (\(b\)) of
+8.7 °C, which increases in approximately 0.7 °C for each 1 °C increase
+in air temperature.
+
+Now it is also possible to draw a few predictions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# a number of possible ambient temperatures that can be found in Puerto Rico during the day}
+
+\NormalTok{amb\_temps }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{ambient.temp.C =} \FunctionTok{seq}\NormalTok{(}\DecValTok{27}\NormalTok{,}\DecValTok{38}\NormalTok{, }\DecValTok{1}\NormalTok{))}\CommentTok{\# defines a vector with values from 27 to 38, with one unit increase}
+
+\FunctionTok{predict}\NormalTok{(model1, }\AttributeTok{newdata=}\NormalTok{amb\_temps)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       1        2        3        4        5        6        7        8 
+28.23967 28.96335 29.68702 30.41070 31.13437 31.85805 32.58172 33.30540 
+       9       10       11       12 
+34.02907 34.75275 35.47642 36.20010 
+\end{verbatim}
+
+\subsection{How good our model is
+performing?}\label{how-good-our-model-is-performing}
+
+Graphically the linear model fits the data as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create the scatter plot}
+\FunctionTok{plot}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{ambient.temp.C, df}\SpecialCharTok{$}\NormalTok{bodytemp.C,}
+     \AttributeTok{xlab=}\StringTok{"air temperature (°C)"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"body temperature (°C)"}\NormalTok{)}
+
+\CommentTok{\# add the line of fit from our recently created linear model "model1"}
+\FunctionTok{abline}\NormalTok{(model1, }\AttributeTok{col =} \StringTok{"red"}\NormalTok{, }\AttributeTok{lwd=} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ecophysiology_files/figure-pdf/unnamed-chunk-19-1.pdf}
+
+The red line in the plot follows very well the pattern of increase shown
+by our data. It is noticeable, however, that some points fall farther
+from the line of best fit than others. In other words, many \(\hat{y}\)
+values (body temperature) are predicted with larger errors than others,
+for a given \(x\) value (ambient temperature). These errors are also
+known as residuals, and are the vertical distance between the observed
+values and the line of best fit. They are graphically represented in
+green in our plot:
+
+\includegraphics{ecophysiology_files/figure-pdf/unnamed-chunk-20-1.pdf}
+
+What a least square linear regression does is to find the lowest sum of
+squares of the residuals (every green line in the plot) so that the
+least amount of error is kept in the linear model.
+
+Finally, how well the model fits the data? In our example, the body
+temperatures do not perfectly fall on the line of best fit, and many of
+them are scattered around it. A common metric assess this question in a
+simple regression model is the \(r^2\). \(r^2\) values indicates how
+much of the variance of body temperature (our dependent variable) is
+explained by ambient temperature (our independent variable). A perfect
+fit is indicated by an \(r^2\) of 1, while no fit would be zero. To
+check the \(r^2\) in our model we can simply use the \texttt{summary}
+function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# obtaining the r{-}squared of our model}
+
+\FunctionTok{summary}\NormalTok{(model1)}\SpecialCharTok{$}\NormalTok{r.squared}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.5736088
+\end{verbatim}
+
+\(r^2\) equals 0.574 indicating that almost 60\% of the variance in body
+temperature is explained by ambient temperature.
+
+In summary, our expectation that lizards body temperature increases
+depending on how the temperature in their environment changes has been
+confirmed. Specifically for \emph{A. cristatellus} in this study, body
+temperature increases \textasciitilde{} 0.7 °C every 1 degree increase
+in air temperature. A few questions remain. For example, does habitat
+has an effect in the body temperature in \emph{A. cristatellus}, and if
+it does, how different could the body temperatures of the lizards in
+habitat A are from those in habitat B?
+
+\section{References}\label{references}
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-guisan2017}
+Guisan, Antoine, Wilfried Thuiller, and Niklaus E. Zimmermann. 2017.
+\emph{Habitat Suitability and Distribution Models: With Applications in
+r}. Cambridge University Press.
+
+\end{CSLReferences}
+
+\chapter{Economic models of behavior: do animals
+optimize?}\label{economic-models-of-behavior-do-animals-optimize}
+
+Animals have to make decisions all the time: where and when to move,
+when and what to eat, whom to mate, etc. How do animals make those
+decisions? One approach to study this question is to assume that animals
+take decisions that maximize their fitness. This approach is rooted in
+the idea that natural selection, under certain conditions, maximize the
+average fitness of individuals in a population. It underpins many of the
+studies in behavioral ecology, and lead to the development during the
+1980's.of a sub-field dedicated to the study of foraging decisions,
+known as optimal foraging. The idea of optimal foraging is to develop
+economic models of foraging behavior, assessing the costs and benefits
+of different actions, and identifying in any particular circumstance the
+action that maximizes benefits and minimizes costs. This is, animals are
+seen as optimizer of decision-making. Here we consider models for two
+``idealized'' types of foragers: searching predator and sit-and-wait
+predators.
+
+\section{Searching predator}\label{searching-predator}
+
+The searching predator is typified as an animal that actively searchs
+for food. For instance, wolfs roam the landscape constantly searching
+for their prey (Figure~\ref{fig-Canis_lupus}). The question is then, any
+time that a forager comes across a prey whether to spend the time
+catching and eating it, or continuing to search for another prey, for
+instance a larger or easier prey item. Joan Roughgarden also liked this
+type of foraging to the sushi-bar problem where dishes are coming one
+after the other on a moving tray, and a person needs to decide whether
+to pick a given dish. This decision is particularly akin to the
+searching predator situation when one assumes that a person can have
+only one dish at a time in her or his table, We consider two types of
+searching predators: time minimizers and energy maximizers.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{images/Canis_lupus.jpg}
+
+}
+
+\caption{\label{fig-Canis_lupus}A pack of wolf (\emph{Canis lupus})
+roaming around the landscape of Peneda-Gerês National Park, Portugal.}
+
+\end{figure}%
+
+\subsection{Time minimizer}\label{time-minimizer}
+
+Many searching predators are themselves preys to other animals. For
+instance shrews search for insects to eat, but can be themselves eaten
+by carnivores or owls. Therefore a reasonable assumption is that they
+are making foraging decisions that minimize the time foraging. Let's
+assume there are two types of prey items, type 1 and 2. These two preys
+occur at different abundances in the environment, let's name them
+\(a_1\) and \(a_2\). These abundances can be measured as encounter rates
+from the predator perspective, this is the number of prey items found
+per unit time. The two types of prey also have different handling times,
+this is the amount of time required to chase and process the prey,
+\(h_1\) and \(h_2\) . We also convention to call the type 1 prey the
+prey with the lowest handling time, i.e.~\(h_1<h_2\),
+
+A searching predator can adopt one of the following three strategies:
+
+\begin{itemize}
+\item
+  Strategy 1: to consume only prey items of type 1
+\item
+  Strategy 2: to consumer only prey items of type 2
+\item
+  Strategy 1\&2: to consumer both types of prey
+\end{itemize}
+
+In order to find out which strategy should be adopted by the forager,
+one needs to calculate the average spent per food item in each of the
+strategies. For Strategy 1 the average time per item, \(T_1\) is the sum
+of the amount of time the predator needs to encounter a prey with the
+amount of time that it takes to process that prey. As the abundance is
+measured in encounter rates, i.e.~prey items per unit time, the inverse
+of that is the waiting time for a prey. Therefore we have for Strategy
+1,
+
+\begin{equation}\phantomsection\label{eq-T1_timeminimizer}{T_1=1/a_1+h_1}\end{equation}
+
+Similarly, for Strategy 2, the average time per item \(T_2\) is given by
+
+\begin{equation}\phantomsection\label{eq-T2_timeminimizer}{T_2=1/a_2+h_2.}\end{equation}
+
+A more interesting case is Strategy 3. Here the waiting time is the
+inverse of the sum of the abundances of both times of prey, while the
+handling time is average of the handling times of both ypes of prey
+weighted by their relative abundance,
+
+\begin{equation}\phantomsection\label{eq-T3_timeminimizer}{
+T_{3}=\frac{1}{a_1+a_2}+\frac{a_1 h_1+a_2 h_2}{a_1+a_2}
+}\end{equation}
+
+We can now define the problem that the forager has to solve as to find
+the strategy \(i\) that minimizes \(T_i\):
+
+\[
+min(T_i) \quad \text{for} \quad i=1, 2, 3
+\]
+
+It is easy to demonstrate that Strategy 2 is always worse than Strategy
+3, independently of the abundances of the two types of prey. This
+happens because Strategy 3 always implies a longer waiting time than the
+two other specialized strategies (i.e.~one has to wait less time to find
+any item of an prey than items of a given prey time,
+\(1/(a_1+a_2)<1/a_2\)) and the handling time of strategy 3 can never be
+higher than the handling time of strategy 2 (it's always a value betwen
+\(h_1\) and \(h_2\)). So we can exclude Strategy 2 from our analysis.
+The choice is then between Strategy 1, just taking items of the
+preferred prey item, and 3, taking items of both types of prey. Let's
+assess this two strategies with a little bit of help from R. We start by
+assuming that the handling time of prey type 1 is 1 second while prey
+type 2 takes 60 seconds. Let's also assume that the abundance of prey
+type 2 is 0.05 individuals per second, i.e.~one individuals needs to
+wait in average 20 seconds to find prey type 2.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{h1}\OtherTok{=}\DecValTok{1}           \CommentTok{\#Handling time of prey type 1 (s)}
+\NormalTok{h2}\OtherTok{=}\DecValTok{60}          \CommentTok{\#Handling time of prey type 2 (s)}
+\NormalTok{a2}\OtherTok{=}\FloatTok{0.05}        \CommentTok{\#abundance of prey type 2 (ind/s)}
+\end{Highlighting}
+\end{Shaded}
+
+Let's now plot the time per item of each of the strategies as a function
+of the abundance of the preferred prey.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a1}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\FloatTok{0.005}\NormalTok{,}\FloatTok{0.1}\NormalTok{,}\FloatTok{0.001}\NormalTok{)   }\CommentTok{\#abundance of prey time 1 (ind/s)}
+\NormalTok{t1}\OtherTok{=}\DecValTok{1}\SpecialCharTok{/}\NormalTok{a1}\SpecialCharTok{+}\NormalTok{h1                 }\CommentTok{\#time per item of Strategy 1 (s)}
+\NormalTok{t3}\OtherTok{=}\DecValTok{1}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2)}\SpecialCharTok{+}\NormalTok{h1}\SpecialCharTok{*}\NormalTok{a1}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2)}\SpecialCharTok{+}\NormalTok{h2}\SpecialCharTok{*}\NormalTok{a2}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2) }\CommentTok{\#time per item of Strategy 2 (s)}
+\FunctionTok{plot}\NormalTok{(a1,t1, }\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(a1,t3, }\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{,                    }
+       \AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Strategy 1"}\NormalTok{, }\StringTok{"Strategy 3"}\NormalTok{),  }\CommentTok{\# Labels}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{),             }\CommentTok{\# Line colors}
+       \AttributeTok{lwd =} \DecValTok{2}\NormalTok{,                            }\CommentTok{\# Line width}
+       \AttributeTok{lty =} \DecValTok{1}\NormalTok{)      }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{optimalforaging_files/figure-pdf/unnamed-chunk-2-1.pdf}
+
+There is a critical threshold of the abundance of prey type 1 above
+which strategy 1 is preferrable, while below that threshold strategy 3
+is the best strategy. Interestingly this threshold does not depend on
+the abundance of the less preferable prey. For instance, if we assume a
+low abundance of prey time 2 at 0.01, the resulting plot is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a2 }\OtherTok{=} \FloatTok{0.01}
+\NormalTok{t1}\OtherTok{=}\DecValTok{1}\SpecialCharTok{/}\NormalTok{a1}\SpecialCharTok{+}\NormalTok{h1                 }\CommentTok{\#time per item of Strategy 1 (s)}
+\NormalTok{t3}\OtherTok{=}\DecValTok{1}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2)}\SpecialCharTok{+}\NormalTok{h1}\SpecialCharTok{*}\NormalTok{a1}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2)}\SpecialCharTok{+}\NormalTok{h2}\SpecialCharTok{*}\NormalTok{a2}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2) }\CommentTok{\#time per item of Strategy 2 (s)}
+\FunctionTok{plot}\NormalTok{(a1,t1, }\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(a1,t3, }\AttributeTok{type=}\StringTok{"l"}\NormalTok{, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{optimalforaging_files/figure-pdf/unnamed-chunk-3-1.pdf}
+
+To determine this critical threshold one can compare the two vectors, T1
+and T3, and find the first position at which T1 becomes smaller than T3,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pos}\OtherTok{=}\FunctionTok{which}\NormalTok{(t1}\SpecialCharTok{\textless{}}\NormalTok{t3)[}\DecValTok{1}\NormalTok{]}
+\NormalTok{a1[pos]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.017
+\end{verbatim}
+
+So the critical threshold for these handling times occurs when
+\(a_1=0.017\) individuals per second.
+
+\subsection{Energy per time maximizer}\label{energy-per-time-maximizer}
+
+Perhaps more often, animals try to maximize their energy yield
+(benefits) while minimizing the time foraging (costs). Or in another way
+of looking at it, they try to maximize their energy yield per unit time.
+We already know the time per item associated to each of the three
+strategies of the searching predator. We now need to caiculate the
+average energy yield per item. Consider now that the energy content of
+the prey items are \(e_1\) and \(e_2\) for prey of type 1 and 2,
+respectively. We define prey 1 as the preferred type of prey, so we
+assume that the ratio of the energic content (measured for instance in
+calories) to the handling time is higher for type 1 prey,
+i.e.~\(e_1/h_1>e_2/h_2\). Now we calculate the energy yield per item for
+each strategy. We start with the energy content of the prey, but need to
+subtract the energy spent while waiting the prey and the energy spent
+chasing and processing the prey,
+
+\begin{equation}\phantomsection\label{eq-E1_energymaximizer}{
+E_1=e_1-ew*tw_1-eh*h_1
+}\end{equation}
+
+where \(ew\) and \(eh\) are the energy spent per unit time while waiting
+for the prey and the energy spent per unit time while handling,
+respectively. They can both be measured for instance in cal/s. We
+already know from the time minimizer that the waiting time for the prey
+is the inverse of the abundance, \(tw_1=1/a_1\). Therefore substituting
+in Equation~\ref{eq-E1_energymaximizer} we have
+
+\begin{equation}\phantomsection\label{eq-E1_energymaximizer2}{
+E_1=e_1-\frac{ew}{a_1}-eh*h_1.
+}\end{equation}
+
+A similar expression can be written for Strategy 2, replacing 1 with 2
+in Equation~\ref{eq-E1_energymaximizer}.
+
+\begin{equation}\phantomsection\label{eq-E2_energymaximizer}{
+E_2=e_2-\frac{ew}{a_2}-eh*h_2.
+}\end{equation}
+
+More interesting is to derive the expression for Strategy 3, where the
+foragers takes both types of prey. The energy content of the prey is the
+average of the energetic contents of each prey type, weighted by their
+abundances, \((e_1*a_1+e_2*a_2)/(a_1+a_2)\). The waiting time is the
+inverse of the sums of the abundances of preys of both types, as in
+Equation~\ref{eq-T3_timeminimizer}. The handling time is the average of
+the handling times of each prey type, weighted by their abundances. So
+we have,
+
+\begin{equation}\phantomsection\label{eq-E3_energymaximizer}{
+E_3=\frac{e_1*a_1+e_2*a_2}{a_1+a_2}-\frac{ew}{a_1+a_2}-eh\frac{h_1*a_1+h_2*a_2}{a_1+a_2}.
+}\end{equation}
+
+Finally we can calculate the energy per unit time for each strategy by
+dividing Equation~\ref{eq-E1_energymaximizer2} by
+Equation~\ref{eq-T1_timeminimizer} for Strategy 1, dividing
+Equation~\ref{eq-E2_energymaximizer} by
+Equation~\ref{eq-T2_timeminimizer} for Strategy 2, and dividing
+Equation~\ref{eq-E3_energymaximizer} by
+Equation~\ref{eq-T3_timeminimizer} for strategy 3,
+
+\[
+ET_i=\frac{E_i}{T_i}
+\]
+
+Similarly to the time minimizer, it's possible to show mathematically
+that strategy 2 is never an optimal strategy. So the interesting
+comparison is again between strategy 1 and strategy 3. Let's use R to
+plot the energy per time yield for both strategies. We start by setting
+the parameter values of our model with some realistic numbers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{e1}\OtherTok{\textless{}{-}}\DecValTok{10}                       \CommentTok{\#Caloric content of prey 1}
+\NormalTok{e2}\OtherTok{\textless{}{-}}\DecValTok{100}                      \CommentTok{\#Caloric content of prey 2}
+\NormalTok{h1}\OtherTok{\textless{}{-}}\DecValTok{1}                        \CommentTok{\#Handling time of prey 1}
+\NormalTok{h2}\OtherTok{\textless{}{-}}\DecValTok{60}                       \CommentTok{\#Handling time of prey 2}
+\NormalTok{ew}\OtherTok{\textless{}{-}}\DecValTok{1}                        \CommentTok{\#Energy spend per unit time while waiting (cal/s)}
+\NormalTok{eh}\OtherTok{\textless{}{-}}\DecValTok{1}                        \CommentTok{\#energy spend per unit time handling the prey (cal/s)}
+\end{Highlighting}
+\end{Shaded}
+
+We will examine the energy yields for strategy 1 and strategy 3 for a
+fixed abundance of prey type 2 and a sequence of abundances of prey type
+1 from 0.005 individuals per second to 0.5 individuals per second
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a1}\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FloatTok{0.005}\NormalTok{,}\FloatTok{0.5}\NormalTok{,}\FloatTok{0.001}\NormalTok{)    }\CommentTok{\#Sequence of abundances of prey 1}
+\NormalTok{a2}\OtherTok{\textless{}{-}}\FloatTok{0.05}
+\end{Highlighting}
+\end{Shaded}
+
+With the parameter and abundance values defined, we can calculate
+\(E_1\), \(E_3\), \(T_1\), \(T_3\), and then \(ET_1\) and \(ET_3\) based
+on the equations above, resulting in vectors for these variables with
+each entry in the vector corresponding to an abundance value in the
+vector of abundances \texttt{a1.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{E1 }\OtherTok{=}\NormalTok{ e1 }\SpecialCharTok{{-}}\NormalTok{(eh}\SpecialCharTok{*}\NormalTok{h1) }\SpecialCharTok{{-}}\NormalTok{ ew}\SpecialCharTok{/}\NormalTok{a1    }\CommentTok{\#energy per item of Strategy 1 (s)}
+\NormalTok{E3 }\OtherTok{=}\NormalTok{ (e1}\SpecialCharTok{*}\NormalTok{a1}\SpecialCharTok{+}\NormalTok{e2}\SpecialCharTok{*}\NormalTok{a2)}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2)}\SpecialCharTok{{-}}
+\NormalTok{     eh}\SpecialCharTok{*}\NormalTok{(h1}\SpecialCharTok{*}\NormalTok{a1}\SpecialCharTok{+}\NormalTok{h2}\SpecialCharTok{*}\NormalTok{a2)}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2)}\SpecialCharTok{{-}}\NormalTok{ew}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2) }\CommentTok{\#energy per item of Strategy 3 (s)}
+
+\NormalTok{T1}\OtherTok{=}\DecValTok{1}\SpecialCharTok{/}\NormalTok{a1}\SpecialCharTok{+}\NormalTok{h1                 }\CommentTok{\#time per item of Strategy 1 (s)}
+\NormalTok{T3}\OtherTok{=}\DecValTok{1}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2)}\SpecialCharTok{+}\NormalTok{h1}\SpecialCharTok{*}\NormalTok{a1}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2)}\SpecialCharTok{+}\NormalTok{h2}\SpecialCharTok{*}\NormalTok{a2}\SpecialCharTok{/}\NormalTok{(a1}\SpecialCharTok{+}\NormalTok{a2) }\CommentTok{\#time per item of Strategy 3 (s)}
+
+\NormalTok{ET1 }\OtherTok{=}\NormalTok{ E1}\SpecialCharTok{/}\NormalTok{T1 }\CommentTok{\#energy per time of strategy 1}
+\NormalTok{ET3 }\OtherTok{=}\NormalTok{ E3}\SpecialCharTok{/}\NormalTok{T3 }\CommentTok{\#energy per time of strategy 3}
+\end{Highlighting}
+\end{Shaded}
+
+Next we plot the energy yields against the values of abundance of prey
+of type 1, and add a nice legend:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(a1,ET1,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"Abundance of prey 1"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Energy per time"}\NormalTok{, }\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(a1,ET3,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\StringTok{"topright"}\NormalTok{,                    }
+       \AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Strategy 1"}\NormalTok{, }\StringTok{"Strategy 3"}\NormalTok{),  }\CommentTok{\# Labels}
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{),             }\CommentTok{\# Line colors}
+       \AttributeTok{lwd =} \DecValTok{2}\NormalTok{,                            }\CommentTok{\# Line width}
+       \AttributeTok{lty =} \DecValTok{1}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{optimalforaging_files/figure-pdf/unnamed-chunk-8-1.pdf}
+
+Similarly to the the time minimizer, for the energy maximizer there is
+also a critical threshold of the abundance of prey type 1 above which
+strategy 1 is preferrable, while below that threshold strategy 3 is the
+best strategy.
+
+\section{Sit-and-wait predator}\label{sit-and-wait-predator}
+
+In contrast to the searching predator, the sit-and-wait predator forages
+by patiently ambushing its prey. For instance, the lizard \emph{Anolis
+gingivinus} (Figure~\ref{fig-Anolis_gingivinus}) waits in a perch, often
+a tree trunk, for a prey to come into its reach, sprinting then down the
+trunk or into the ground to capture its prey, returning then to its
+perch again. So here the decision that the predator has to take after
+seeing the prey is whether it should run an capture the prey or if it
+should ignore it.
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{images/Anolis_gingivinus.jpg}
+
+}
+
+\caption{\label{fig-Anolis_gingivinus}An Anolis gingivinus, a
+sit-and-wait predator, captures a prey after running down from its
+perch. Photo taken in the island of Saint Martin, Leward Islands,
+Caribbean.}
+
+\end{figure}%
+
+We will build on the model we developed for the energy per time
+maximizer searching predator to develop a model for the decisions of the
+sit-and-wait predator. The energy per prey item consumed is,
+
+\begin{equation}\phantomsection\label{eq-energy_sit_and_wait}{
+E=e-ep t_p-e_w t_w
+}\end{equation}
+
+where \(e_p\) is the energy per unit time while pursuing the prey,
+\(t_p\) is the average time it takes to sprint to the prey and come back
+to the perch, \(e_w\) is the energy per unit time while waiting for the
+prey, and \(t_w\) is the average time it takes to wait for a prey item
+to show up within the home-range or territory of the predator. We will
+use these two terms interchangeably, although they are sometimes used in
+the literature differently.
+
+Let's consider that the home-range of the lizard is shaped as a
+semi-circle centered in the perch. This is the lizard has a viewing
+angle of \(180\deg\) from its perch (Figure~\ref{fig-feedingterritory}).
+Then the total abundance of the the prey in the territory is the
+integral of the prey point density over the territory. So, using polar
+coordinates for the integral this can be written as,
+
+\[
+A=\int_{0}^{r_c}a \pi r dr
+\]
+
+The waiting time is just the inverse of the total abundance.
+
+\[t_w=1/A=\frac{1}{\int_{0}^{r_c}a \pi r dr}\]
+
+\begin{figure}
+
+\centering{
+
+\includegraphics{images/FeedingTerritory.jpg}
+
+}
+
+\caption{\label{fig-feedingterritory}Feeding territory of a sit-and-wait
+predator with radius \(r_c\).}
+
+\end{figure}%
+
+The average pursuit time is a bit more complicated. For a prey landing
+at distance \(r\) from the predator, the pursuit time is the time the
+lizards needs to run to that location and back. This is can be
+calculated by dividing the double of the distance by the speed of the
+lizard, \(2r/v\). We have now to average these sprint times over the
+range of possibile distance that the lizard can run, from 0 to the
+radius of its territory \(r_c\), weighted by the probability of a prey
+appearing at each distance. The probability of a prey appearing at
+distance \(r\) is the length of the semi-circle with radius \(r\)
+multiplied by the point density of prey divided by the total density of
+prey in the territory of the lizard, \(a \pi r / A\). So we now need to
+calculate the integral of the sprint times at each distance times the
+probability of running to a prey at that distance over the range of
+possible radius values,
+
+\[
+t_p=\int_{0}^{r_c} \frac{2r}{v} \frac{a \pi r}{A} \ dr
+\]
+
+The average time per prey item consumed is simply the sum of the average
+pursuit time, \(t_p\), and the average waiting time \(t_w\),
+
+\begin{equation}\phantomsection\label{eq-time_sit_and_wait}{
+T=t_p+t_w
+}\end{equation}
+
+Therefore the energy per time that the optimal sit-and-wait predator
+wants to maximize is obtained by dividing
+Equation~\ref{eq-energy_sit_and_wait} by
+Equation~\ref{eq-time_sit_and_wait},
+
+\[
+ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
+\]
+
+where we highlighted that the wating time and the pursuit time are
+functions of the territory size or cut-off radius \(r_c\).
+
+The optimal decision is to find the cut-off radius \(r_c\) that
+maximizes the energy per time,
+
+\[
+\max_{r_c}(ET)
+\]
+
+Let's plot the energy per time as a function of the territory size,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ew}\OtherTok{\textless{}{-}}\FloatTok{0.1}                  \CommentTok{\#Energy per unit of time of waiting}
+\NormalTok{ep}\OtherTok{\textless{}{-}}\DecValTok{1}                    \CommentTok{\#Energy per unit of time of pursuing the prey}
+\NormalTok{v}\OtherTok{\textless{}{-}}\FloatTok{0.5}                   \CommentTok{\#Velocity of the predator in chase}
+\NormalTok{a}\OtherTok{\textless{}{-}}\FloatTok{0.005}                 \CommentTok{\#Abundance of prey}
+\NormalTok{e}\OtherTok{\textless{}{-}}\DecValTok{10}                    \CommentTok{\#Energy value of the prey}
+
+\NormalTok{rc}\OtherTok{\textless{}{-}}\FunctionTok{seq}\NormalTok{(}\FloatTok{0.001}\NormalTok{,}\DecValTok{4}\NormalTok{,}\FloatTok{0.001}\NormalTok{)   }\CommentTok{\#Radius of the hunting ground }
+
+\NormalTok{tw }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{/}\NormalTok{(a}\SpecialCharTok{*}\NormalTok{pi}\SpecialCharTok{*}\NormalTok{((rc}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{))   }\CommentTok{\#Waiting time }
+\NormalTok{tp}\OtherTok{\textless{}{-}}\DecValTok{4}\SpecialCharTok{/}\DecValTok{3}\SpecialCharTok{*}\NormalTok{rc}\SpecialCharTok{/}\NormalTok{v                }\CommentTok{\#Pursuing time}
+\NormalTok{ti}\OtherTok{\textless{}{-}}\NormalTok{tw}\SpecialCharTok{+}\NormalTok{tp                   }\CommentTok{\#Time per item }
+\NormalTok{ei}\OtherTok{\textless{}{-}}\NormalTok{e}\SpecialCharTok{{-}}\NormalTok{ew}\SpecialCharTok{*}\NormalTok{tw}\SpecialCharTok{{-}}\NormalTok{ep}\SpecialCharTok{*}\NormalTok{tp           }\CommentTok{\#Energy per item}
+\NormalTok{et}\OtherTok{\textless{}{-}}\NormalTok{ei}\SpecialCharTok{/}\NormalTok{ti                   }\CommentTok{\#Energy per unit of time}
+
+\NormalTok{et }\OtherTok{\textless{}{-}}\ControlFlowTok{function}\NormalTok{()}
+\NormalTok{\{}
+\NormalTok{  (e}\SpecialCharTok{{-}}\NormalTok{ew}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\NormalTok{(a}\SpecialCharTok{*}\NormalTok{pi}\SpecialCharTok{*}\NormalTok{((rc}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)))}\SpecialCharTok{{-}}\NormalTok{ep}\SpecialCharTok{*}\NormalTok{(}\DecValTok{4}\SpecialCharTok{/}\DecValTok{3}\SpecialCharTok{*}\NormalTok{rc}\SpecialCharTok{/}\NormalTok{v))}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\NormalTok{(a}\SpecialCharTok{*}\NormalTok{pi}\SpecialCharTok{*}\NormalTok{((rc}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{))}\SpecialCharTok{+}\DecValTok{4}\SpecialCharTok{/}\DecValTok{3}\SpecialCharTok{*}\NormalTok{rc}\SpecialCharTok{/}\NormalTok{v)}
+\NormalTok{\}}
+
+\FunctionTok{plot}\NormalTok{(rc,}\FunctionTok{et}\NormalTok{(),}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}
+     \AttributeTok{xlab=}\StringTok{"Radius of the territory"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"Energy per unit of time (cal/sec) "}\NormalTok{)}
+ \FunctionTok{abline}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{optimalforaging_files/figure-pdf/unnamed-chunk-9-1.pdf}
+
+\section{Statistical confrontation: finding the
+maximum}\label{statistical-confrontation-finding-the-maximum}
+
+\chapter{Conflict resolution in ecology and evolution: war and
+peace}\label{conflict-resolution-in-ecology-and-evolution-war-and-peace}
+
+Frequency dependent selection. Game theory and evolutionary stable
+strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic
+population model. 2 player games, discrete strategies: Hawk-Dove;
+Prisioner's dillema`ndefinedndefinedndefinedSearching predator
+
+\chapter{\texorpdfstring{Movement and dispersal\textbf{:} should I stay
+or should I
+go?}{Movement and dispersal: should I stay or should I go?}}\label{movement-and-dispersal-should-i-stay-or-should-i-go}
+
+Diffusion dispersal models as random-walk. Interactions between neighbor
+individuals (e.g.~competition for space or resources). The ideal free
+distribution; The ideal despotic distribution
+
+\part{Ecology of populations}
+
+\chapter{Demography: boom or bust}\label{sec-demography}
+
+\part{Ecology of communities}
+
+\chapter{Modelling biodiversity change: winners and
+losers}\label{modelling-biodiversity-change-winners-and-losers}
+
+Every minute about 2 football fields of native forest are cleared
+somewhere in the world. What are the consequences of land-use change for
+biodiversity?
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{part}{Appendices}
+\appendix
+
+\chapter{A brief R tutorial}\label{a-brief-r-tutorial}
+
+If you are new to \textbf{R} you can have a short dive into its main
+features by working through this tutorial. If you had learnt programming
+in another computer language, you will be able to skim over this
+tutorial to find the main differences from what you have learnt to how
+things are done in \textbf{R.}
+
+\section{Variables, vectors and
+matrices}\label{variables-vectors-and-matrices}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Introduction to variables}
+\CommentTok{\# Variables can be any sequence of letter and numbers, but }
+\CommentTok{\# it cannot start with a number}
+\NormalTok{x }\OtherTok{=} \DecValTok{2}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{4}
+\DecValTok{2}\SpecialCharTok{+}\DecValTok{2} 
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{\^{}}\DecValTok{5}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1024
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Introduction to vectors}
+\NormalTok{v1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{12}\NormalTok{)}
+\NormalTok{v2 }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{100}
+\FunctionTok{length}\NormalTok{(v2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 100
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18
+ [19]  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36
+ [37]  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54
+ [55]  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72
+ [73]  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90
+ [91]  91  92  93  94  95  96  97  98  99 100
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v3 }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{,}\DecValTok{5}\NormalTok{)  }\CommentTok{\# call without naming arguments}
+\NormalTok{v3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1]  1  6 11 16 21 26 31 36 41 46 51 56 61 66 71 76 81 86 91 96
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v3 }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from=}\DecValTok{1}\NormalTok{,}\AttributeTok{to=}\DecValTok{100}\NormalTok{,}\AttributeTok{by=}\DecValTok{5}\NormalTok{) }\CommentTok{\# call with names of arguments}
+\NormalTok{v3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1]  1  6 11 16 21 26 31 36 41 46 51 56 61 66 71 76 81 86 91 96
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v3 }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{to=}\DecValTok{100}\NormalTok{,}\AttributeTok{by=}\DecValTok{5}\NormalTok{) }\CommentTok{\# call skipping the first argument}
+\CommentTok{\#and using the default value 1 {-} see help(seq)}
+\NormalTok{v3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1]  1  6 11 16 21 26 31 36 41 46 51 56 61 66 71 76 81 86 91 96
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v3 }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\AttributeTok{by=}\DecValTok{5}\NormalTok{,}\AttributeTok{to=}\DecValTok{100}\NormalTok{) }\CommentTok{\# call by arguments and change order or arguments}
+
+\CommentTok{\# Indexing vectors}
+\NormalTok{v3[}\DecValTok{3}\NormalTok{] }\CommentTok{\#uses square brackets to obtain the third element of the vector}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 11
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v3}\SpecialCharTok{\textgreater{}}\DecValTok{20} \CommentTok{\# produce a vector of boolean values that are TRUE when}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+[13]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+      \CommentTok{\#v3 is greater than 20}
+\NormalTok{v3[v3}\SpecialCharTok{\textgreater{}}\DecValTok{20}\NormalTok{] }\CommentTok{\# select from v3 all the values that are greater than 20}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] 21 26 31 36 41 46 51 56 61 66 71 76 81 86 91 96
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v4}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\NormalTok{v4[}\FunctionTok{c}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{,}\ConstantTok{TRUE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{,}\ConstantTok{TRUE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{)] }\CommentTok{\#select from v4 the second and fourth element}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v3[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{] }\CommentTok{\# first ten elements}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1]  1  6 11 16 21 26 31 36 41 46
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v3[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{] }\CommentTok{\# dropping first element}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1]  6 11 16 21 26 31 36 41 46 51 56 61 66 71 76 81 86 91 96
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(v2) }\CommentTok{\# prints the first few elements of v2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 2 3 4 5 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(v2) }\CommentTok{\# prints the last few elements of v2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  95  96  97  98  99 100
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(v3 }\SpecialCharTok{==} \DecValTok{26}\NormalTok{) }\CommentTok{\# returns the position of v3 that equals 26}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Numerical operations with vectors}
+\DecValTok{2}\SpecialCharTok{\^{}}\NormalTok{v2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [1] 2.000000e+00 4.000000e+00 8.000000e+00 1.600000e+01 3.200000e+01
+  [6] 6.400000e+01 1.280000e+02 2.560000e+02 5.120000e+02 1.024000e+03
+ [11] 2.048000e+03 4.096000e+03 8.192000e+03 1.638400e+04 3.276800e+04
+ [16] 6.553600e+04 1.310720e+05 2.621440e+05 5.242880e+05 1.048576e+06
+ [21] 2.097152e+06 4.194304e+06 8.388608e+06 1.677722e+07 3.355443e+07
+ [26] 6.710886e+07 1.342177e+08 2.684355e+08 5.368709e+08 1.073742e+09
+ [31] 2.147484e+09 4.294967e+09 8.589935e+09 1.717987e+10 3.435974e+10
+ [36] 6.871948e+10 1.374390e+11 2.748779e+11 5.497558e+11 1.099512e+12
+ [41] 2.199023e+12 4.398047e+12 8.796093e+12 1.759219e+13 3.518437e+13
+ [46] 7.036874e+13 1.407375e+14 2.814750e+14 5.629500e+14 1.125900e+15
+ [51] 2.251800e+15 4.503600e+15 9.007199e+15 1.801440e+16 3.602880e+16
+ [56] 7.205759e+16 1.441152e+17 2.882304e+17 5.764608e+17 1.152922e+18
+ [61] 2.305843e+18 4.611686e+18 9.223372e+18 1.844674e+19 3.689349e+19
+ [66] 7.378698e+19 1.475740e+20 2.951479e+20 5.902958e+20 1.180592e+21
+ [71] 2.361183e+21 4.722366e+21 9.444733e+21 1.888947e+22 3.777893e+22
+ [76] 7.555786e+22 1.511157e+23 3.022315e+23 6.044629e+23 1.208926e+24
+ [81] 2.417852e+24 4.835703e+24 9.671407e+24 1.934281e+25 3.868563e+25
+ [86] 7.737125e+25 1.547425e+26 3.094850e+26 6.189700e+26 1.237940e+27
+ [91] 2.475880e+27 4.951760e+27 9.903520e+27 1.980704e+28 3.961408e+28
+ [96] 7.922816e+28 1.584563e+29 3.169127e+29 6.338253e+29 1.267651e+30
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{log}\NormalTok{(v2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
+  [8] 2.0794415 2.1972246 2.3025851 2.3978953 2.4849066 2.5649494 2.6390573
+ [15] 2.7080502 2.7725887 2.8332133 2.8903718 2.9444390 2.9957323 3.0445224
+ [22] 3.0910425 3.1354942 3.1780538 3.2188758 3.2580965 3.2958369 3.3322045
+ [29] 3.3672958 3.4011974 3.4339872 3.4657359 3.4965076 3.5263605 3.5553481
+ [36] 3.5835189 3.6109179 3.6375862 3.6635616 3.6888795 3.7135721 3.7376696
+ [43] 3.7612001 3.7841896 3.8066625 3.8286414 3.8501476 3.8712010 3.8918203
+ [50] 3.9120230 3.9318256 3.9512437 3.9702919 3.9889840 4.0073332 4.0253517
+ [57] 4.0430513 4.0604430 4.0775374 4.0943446 4.1108739 4.1271344 4.1431347
+ [64] 4.1588831 4.1743873 4.1896547 4.2046926 4.2195077 4.2341065 4.2484952
+ [71] 4.2626799 4.2766661 4.2904594 4.3040651 4.3174881 4.3307333 4.3438054
+ [78] 4.3567088 4.3694479 4.3820266 4.3944492 4.4067192 4.4188406 4.4308168
+ [85] 4.4426513 4.4543473 4.4659081 4.4773368 4.4886364 4.4998097 4.5108595
+ [92] 4.5217886 4.5325995 4.5432948 4.5538769 4.5643482 4.5747110 4.5849675
+ [99] 4.5951199 4.6051702
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v5 }\OtherTok{\textless{}{-}} \DecValTok{101}\SpecialCharTok{:}\DecValTok{200}
+\NormalTok{v5}\SpecialCharTok{{-}}\NormalTok{v2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [1] 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100
+ [19] 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100
+ [37] 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100
+ [55] 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100
+ [73] 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100
+ [91] 100 100 100 100 100 100 100 100 100 100
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v5}\SpecialCharTok{/}\NormalTok{v2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [1] 101.000000  51.000000  34.333333  26.000000  21.000000  17.666667
+  [7]  15.285714  13.500000  12.111111  11.000000  10.090909   9.333333
+ [13]   8.692308   8.142857   7.666667   7.250000   6.882353   6.555556
+ [19]   6.263158   6.000000   5.761905   5.545455   5.347826   5.166667
+ [25]   5.000000   4.846154   4.703704   4.571429   4.448276   4.333333
+ [31]   4.225806   4.125000   4.030303   3.941176   3.857143   3.777778
+ [37]   3.702703   3.631579   3.564103   3.500000   3.439024   3.380952
+ [43]   3.325581   3.272727   3.222222   3.173913   3.127660   3.083333
+ [49]   3.040816   3.000000   2.960784   2.923077   2.886792   2.851852
+ [55]   2.818182   2.785714   2.754386   2.724138   2.694915   2.666667
+ [61]   2.639344   2.612903   2.587302   2.562500   2.538462   2.515152
+ [67]   2.492537   2.470588   2.449275   2.428571   2.408451   2.388889
+ [73]   2.369863   2.351351   2.333333   2.315789   2.298701   2.282051
+ [79]   2.265823   2.250000   2.234568   2.219512   2.204819   2.190476
+ [85]   2.176471   2.162791   2.149425   2.136364   2.123596   2.111111
+ [91]   2.098901   2.086957   2.075269   2.063830   2.052632   2.041667
+ [97]   2.030928   2.020408   2.010101   2.000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v1}\SpecialCharTok{/}\NormalTok{v2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [1] 2.00000000 1.50000000 2.00000000 3.00000000 0.40000000 0.50000000
+  [7] 0.85714286 1.50000000 0.22222222 0.30000000 0.54545455 1.00000000
+ [13] 0.15384615 0.21428571 0.40000000 0.75000000 0.11764706 0.16666667
+ [19] 0.31578947 0.60000000 0.09523810 0.13636364 0.26086957 0.50000000
+ [25] 0.08000000 0.11538462 0.22222222 0.42857143 0.06896552 0.10000000
+ [31] 0.19354839 0.37500000 0.06060606 0.08823529 0.17142857 0.33333333
+ [37] 0.05405405 0.07894737 0.15384615 0.30000000 0.04878049 0.07142857
+ [43] 0.13953488 0.27272727 0.04444444 0.06521739 0.12765957 0.25000000
+ [49] 0.04081633 0.06000000 0.11764706 0.23076923 0.03773585 0.05555556
+ [55] 0.10909091 0.21428571 0.03508772 0.05172414 0.10169492 0.20000000
+ [61] 0.03278689 0.04838710 0.09523810 0.18750000 0.03076923 0.04545455
+ [67] 0.08955224 0.17647059 0.02898551 0.04285714 0.08450704 0.16666667
+ [73] 0.02739726 0.04054054 0.08000000 0.15789474 0.02597403 0.03846154
+ [79] 0.07594937 0.15000000 0.02469136 0.03658537 0.07228916 0.14285714
+ [85] 0.02352941 0.03488372 0.06896552 0.13636364 0.02247191 0.03333333
+ [91] 0.06593407 0.13043478 0.02150538 0.03191489 0.06315789 0.12500000
+ [97] 0.02061856 0.03061224 0.06060606 0.12000000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Using strings in R}
+\NormalTok{mystring }\OtherTok{\textless{}{-}} \StringTok{"Ecology"}
+\NormalTok{vstrg }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Anna"}\NormalTok{, }\StringTok{"Peter"}\NormalTok{, }\StringTok{"Xavier"}\NormalTok{)}
+\NormalTok{vstrg[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "Peter"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#making plots in R}
+\FunctionTok{plot}\NormalTok{(v2,v2)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(v2,v2}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-1-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(v2,v2}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-1-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(v2,v2}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-1-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(v2,v2}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{main=}\StringTok{"My beautiful plot"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-1-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(v2,v2}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{,}\AttributeTok{col=}\StringTok{"red"}\NormalTok{,}\AttributeTok{main=}\StringTok{"My beautiful plot"}\NormalTok{,}\AttributeTok{xlab=}\StringTok{"x"}\NormalTok{,}
+     \AttributeTok{ylab=}\StringTok{"x\^{}2"}\NormalTok{)}
+\FunctionTok{lines}\NormalTok{(v2,v2}\SpecialCharTok{\^{}}\DecValTok{3}\NormalTok{,}\AttributeTok{col=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-1-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Matrices in R}
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2]
+[1,]    5    5
+[2,]    5    5
+[3,]    5    5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m2 }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\NormalTok{m2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2]
+[1,]    1    4
+[2,]    2    5
+[3,]    3    6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{t}\NormalTok{(m2) }\CommentTok{\# transposes matrix}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{4}
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{5}\SpecialCharTok{:}\DecValTok{8}
+
+\NormalTok{m3}\OtherTok{\textless{}{-}}\FunctionTok{cbind}\NormalTok{(x,y)}
+\NormalTok{m3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     x y
+[1,] 1 5
+[2,] 2 6
+[3,] 3 7
+[4,] 4 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m4}\OtherTok{\textless{}{-}}\FunctionTok{rbind}\NormalTok{(x,y)}
+\NormalTok{m4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [,1] [,2] [,3] [,4]
+x    1    2    3    4
+y    5    6    7    8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Indexing matrices}
+\NormalTok{m3[}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{] }\CommentTok{\#element in row 3 and column 2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+y 
+7 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m3[}\DecValTok{1}\NormalTok{,] }\CommentTok{\#entire first row}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+x y 
+1 5 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m3[,}\DecValTok{1}\NormalTok{] }\CommentTok{\#entire first column}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 2 3 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(m3)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"col1"}\NormalTok{,}\StringTok{"col2"}\NormalTok{)}
+\NormalTok{m3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     col1 col2
+[1,]    1    5
+[2,]    2    6
+[3,]    3    7
+[4,]    4    8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m3[,}\StringTok{"col2"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 5 6 7 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Lists in R}
+\NormalTok{mylist }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{elem1=}\NormalTok{m,}\AttributeTok{elem2=}\NormalTok{v2,}\AttributeTok{elem3=}\StringTok{"my list"}\NormalTok{)}
+\NormalTok{mylist}\SpecialCharTok{$}\NormalTok{elem2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18
+ [19]  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36
+ [37]  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54
+ [55]  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71  72
+ [73]  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89  90
+ [91]  91  92  93  94  95  96  97  98  99 100
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dataframes}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(m3)}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{col1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 2 3 4
+\end{verbatim}
+
+\section{Iterations and conditional
+expressions}\label{iterations-and-conditional-expressions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# FOR loops}
+
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)  }\CommentTok{\# for k =1, 2, 3, 4, 5,...10}
+  \FunctionTok{print}\NormalTok{ (k}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)   }\CommentTok{\#do this}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1
+[1] 4
+[1] 9
+[1] 16
+[1] 25
+[1] 36
+[1] 49
+[1] 64
+[1] 81
+[1] 100
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{R }\OtherTok{\textless{}{-}} \FloatTok{1.2}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{1}
+\FunctionTok{print}\NormalTok{(n[}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{)}
+\NormalTok{\{}
+\NormalTok{  n[t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ R}\SpecialCharTok{*}\NormalTok{n[t]}
+  \FunctionTok{print}\NormalTok{(n[t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.2
+[1] 1.44
+[1] 1.728
+[1] 2.0736
+[1] 2.48832
+[1] 2.985984
+[1] 3.583181
+[1] 4.299817
+[1] 5.15978
+[1] 6.191736
+[1] 7.430084
+[1] 8.9161
+[1] 10.69932
+[1] 12.83918
+[1] 15.40702
+[1] 18.48843
+[1] 22.18611
+[1] 26.62333
+[1] 31.948
+[1] 38.3376
+[1] 46.00512
+[1] 55.20614
+[1] 66.24737
+[1] 79.49685
+[1] 95.39622
+[1] 114.4755
+[1] 137.3706
+[1] 164.8447
+[1] 197.8136
+[1] 237.3763
+[1] 284.8516
+[1] 341.8219
+[1] 410.1863
+[1] 492.2235
+[1] 590.6682
+[1] 708.8019
+[1] 850.5622
+[1] 1020.675
+[1] 1224.81
+[1] 1469.772
+[1] 1763.726
+[1] 2116.471
+[1] 2539.765
+[1] 3047.718
+[1] 3657.262
+[1] 4388.714
+[1] 5266.457
+[1] 6319.749
+[1] 7583.698
+[1] 9100.438
+[1] 10920.53
+[1] 13104.63
+[1] 15725.56
+[1] 18870.67
+[1] 22644.8
+[1] 27173.76
+[1] 32608.52
+[1] 39130.22
+[1] 46956.26
+[1] 56347.51
+[1] 67617.02
+[1] 81140.42
+[1] 97368.5
+[1] 116842.2
+[1] 140210.6
+[1] 168252.8
+[1] 201903.3
+[1] 242284
+[1] 290740.8
+[1] 348889
+[1] 418666.7
+[1] 502400.1
+[1] 602880.1
+[1] 723456.1
+[1] 868147.4
+[1] 1041777
+[1] 1250132
+[1] 1500159
+[1] 1800190
+[1] 2160228
+[1] 2592274
+[1] 3110729
+[1] 3732875
+[1] 4479450
+[1] 5375340
+[1] 6450408
+[1] 7740489
+[1] 9288587
+[1] 11146304
+[1] 13375565
+[1] 16050678
+[1] 19260814
+[1] 23112977
+[1] 27735572
+[1] 33282687
+[1] 39939224
+[1] 47927069
+[1] 57512482
+[1] 69014979
+[1] 82817975
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{R }\OtherTok{\textless{}{-}} \FloatTok{1.2}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{1}
+\ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{)}
+\NormalTok{  n[t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ R}\SpecialCharTok{*}\NormalTok{n[t]}
+
+\CommentTok{\# IF conditional statement}
+
+\CommentTok{\# logical operators}
+\CommentTok{\# == equal to}
+\CommentTok{\# \textgreater{} greater than}
+\CommentTok{\# \textless{} smaller than}
+\CommentTok{\# \textgreater{}= greater or equal}
+\CommentTok{\# \textless{}= smaller or equal}
+\CommentTok{\# != different from}
+\CommentTok{\# \&\& and}
+\CommentTok{\# || or}
+
+\ControlFlowTok{if}\NormalTok{ (}\DecValTok{3}\SpecialCharTok{\textgreater{}}\DecValTok{2}\NormalTok{) }\FunctionTok{print}\NormalTok{ (}\StringTok{"yes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "yes"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\DecValTok{3}\SpecialCharTok{==}\DecValTok{2}\NormalTok{) }\FunctionTok{print}\NormalTok{ (}\StringTok{"yes"}\NormalTok{) }\ControlFlowTok{else} \FunctionTok{print}\NormalTok{(}\StringTok{"no"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "no"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ ((}\DecValTok{3}\SpecialCharTok{\textgreater{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{\&\&}\NormalTok{(}\DecValTok{4}\SpecialCharTok{\textgreater{}}\DecValTok{5}\NormalTok{)) }\FunctionTok{print}\NormalTok{ (}\StringTok{"yes"}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)  }\CommentTok{\# for k =1, 2, 3, 4, 5,...10}
+  \ControlFlowTok{if}\NormalTok{ (k}\SpecialCharTok{\^{}}\DecValTok{2}\SpecialCharTok{\textgreater{}}\DecValTok{20}\NormalTok{) }\FunctionTok{print}\NormalTok{ (k}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 25
+[1] 36
+[1] 49
+[1] 64
+[1] 81
+[1] 100
+\end{verbatim}
+
+\section{Writing functions}\label{writing-functions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# creating FUNCTIONS in r}
+
+\NormalTok{pythagoras }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{ (c1,c2)}
+\NormalTok{\{}
+\NormalTok{  h }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{ (c1}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ c2}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{ (h)}
+\NormalTok{\}}
+
+\FunctionTok{pythagoras}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.414214
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pythagoras}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 7.071068
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pythagoras}\NormalTok{(}\DecValTok{10}\NormalTok{,}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 10.04988
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# regression in R}
+
+\FunctionTok{help}\NormalTok{(lm)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{1.1}\NormalTok{,}\FloatTok{2.3}\NormalTok{,}\FloatTok{2.9}\NormalTok{,}\FloatTok{4.1}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(x,y)}
+\NormalTok{myreg}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(y }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x)}
+\FunctionTok{summary}\NormalTok{(myreg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+lm(formula = y ~ x)
+
+Residuals:
+    1     2     3     4 
+-0.06  0.18 -0.18  0.06 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)   
+(Intercept)  0.20000    0.23238   0.861  0.48012   
+x            0.96000    0.08485  11.314  0.00772 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1897 on 2 degrees of freedom
+Multiple R-squared:  0.9846,    Adjusted R-squared:  0.9769 
+F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{abline}\NormalTok{(myreg)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-3-1.pdf}
+
+\section{Random numbers and statistical
+distributions}\label{random-numbers-and-statistical-distributions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{random1d}\OtherTok{\textless{}{-}}\ControlFlowTok{function}\NormalTok{(tmax)}
+\NormalTok{\{}
+\NormalTok{x}\OtherTok{\textless{}{-}}\DecValTok{0}
+\ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{tmax)}
+\NormalTok{\{}
+\NormalTok{  r}\OtherTok{\textless{}{-}}\FunctionTok{runif}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+  \ControlFlowTok{if}\NormalTok{ (r}\SpecialCharTok{\textless{}}\DecValTok{1}\SpecialCharTok{/}\DecValTok{2}\NormalTok{)}
+\NormalTok{    x[t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{x[t]}\SpecialCharTok{+}\DecValTok{1} \ControlFlowTok{else}
+\NormalTok{      x[t}\SpecialCharTok{+}\DecValTok{1}\NormalTok{]}\OtherTok{\textless{}{-}}\NormalTok{x[t]}\SpecialCharTok{{-}}\DecValTok{1}
+\NormalTok{\}}
+\FunctionTok{return}\NormalTok{(x)}
+\NormalTok{\}}
+
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{random1d}\NormalTok{(}\DecValTok{100}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tmax}\OtherTok{\textless{}{-}}\DecValTok{10000}
+\NormalTok{lastx}\OtherTok{\textless{}{-}}\DecValTok{0}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{)}
+\NormalTok{\{}
+\NormalTok{  x}\OtherTok{\textless{}{-}}\FunctionTok{random1d}\NormalTok{(tmax)}
+\NormalTok{  lastx[i]}\OtherTok{\textless{}{-}}\NormalTok{x[tmax]}
+\NormalTok{\}}
+
+\FunctionTok{hist}\NormalTok{(lastx)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-4-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(lastx)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2.556
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d}\OtherTok{\textless{}{-}}\FunctionTok{sqrt}\NormalTok{(lastx}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(d)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-4-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(d)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 84.246
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(d)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 73
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{max}\NormalTok{(d)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 313
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(d[d}\SpecialCharTok{\textless{}}\DecValTok{20}\NormalTok{],}\AttributeTok{breaks=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{intro_to_R_files/figure-pdf/unnamed-chunk-4-4.pdf}
+
+\section{Spatial analysis}\label{spatial-analysis}
+
+\subsection{Shapefiles and Raster (Isabel
+Rosa)}\label{shapefiles-and-raster-isabel-rosa}
+
+When you work with spatial data, essentially you use two types of data:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  vector data (i.e., shapefiles): stores the geometric location and
+  attribute information of geographic features. These can be represented
+  by points, lines, or polygons (areas).
+\item
+  matricial data (i.e., raster): consists of a matrix of cells (or
+  pixels) organized into rows and columns (or a grid) where each cell
+  contains a value representing information. They can be categorical or
+  continuous and have multiple bands.
+\end{enumerate}
+
+For more information on the tree cover datasets, please see:
+\url{https://earthenginepartners.appspot.com/science-2013-global-forest/download_v1.2.html}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# read in shapefile using rgdal}
+\NormalTok{sc }\OtherTok{\textless{}{-}} \FunctionTok{readOGR}\NormalTok{(}\StringTok{"."}\NormalTok{, }\StringTok{"SantaCatarina"}\NormalTok{)}
+
+\CommentTok{\# import municipalities and settlements shapefiles}
+\NormalTok{sc\_mun }\OtherTok{\textless{}{-}} \FunctionTok{readOGR}\NormalTok{(}\StringTok{"."}\NormalTok{, }\StringTok{"SantaCatarina\_mun"}\NormalTok{)}
+\NormalTok{br\_sett }\OtherTok{\textless{}{-}} \FunctionTok{readOGR}\NormalTok{(}\StringTok{"."}\NormalTok{, }\StringTok{"Brazil\_settlements"}\NormalTok{)}
+
+\CommentTok{\# always good to check the contents of your dat}
+\CommentTok{\#str(br\_sett)}
+
+\CommentTok{\# visualize one of the variables}
+\FunctionTok{spplot}\NormalTok{(sc\_mun, }\AttributeTok{z=}\StringTok{"Shape\_Area"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Municipality Area (km2)"}\NormalTok{)}
+
+\CommentTok{\# read in raster}
+\NormalTok{tc}\OtherTok{\textless{}{-}}\FunctionTok{raster}\NormalTok{(}\StringTok{"tree\_cover.tif"}\NormalTok{)}
+
+\CommentTok{\# import loss and gain rasters here}
+\NormalTok{tl}\OtherTok{\textless{}{-}}\FunctionTok{raster}\NormalTok{(}\StringTok{"loss.tif"}\NormalTok{)}
+\NormalTok{tg}\OtherTok{\textless{}{-}}\FunctionTok{raster}\NormalTok{(}\StringTok{"gain.tif"}\NormalTok{)}
+
+\CommentTok{\# for multiple band rasters, you can choose to import just one or all bands}
+\CommentTok{\#r2 \textless{}{-} raster("tree\_cover\_multi.tif", band=2)}
+
+\CommentTok{\# note that the value 255, which is Hansen\textquotesingle{}s nodata value was not recognized as such}
+\FunctionTok{NAvalue}\NormalTok{(tg) }\CommentTok{\# check first}
+\FunctionTok{NAvalue}\NormalTok{(tc)}\OtherTok{\textless{}{-}}\DecValTok{255} \CommentTok{\#fix it by forcing 255 to be the nodata}
+\FunctionTok{NAvalue}\NormalTok{(tl)}\OtherTok{\textless{}{-}}\DecValTok{255} \CommentTok{\#fix it by forcing 255 to be the nodata}
+\FunctionTok{NAvalue}\NormalTok{(tg)}\OtherTok{\textless{}{-}}\DecValTok{255} \CommentTok{\#fix it by forcing 255 to be the nodata}
+
+\CommentTok{\# visualize one of the rasters}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(tc, }\AttributeTok{main =} \StringTok{"Tree Cover (\%)"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(tl, }\AttributeTok{main =} \StringTok{"Tree Cover Loss (binary)"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(tg, }\AttributeTok{main =} \StringTok{"Tree Cover Gain (binary)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Reference systems}\label{reference-systems}
+
+Coordinate systems are essential to understand when working with spatial
+data. Some reading material on this can be found here: Essentially, if
+one wants to know which position of the Earth we refer to, coordinates
+of geospatial data require a reference system:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\tightlist
+\item
+  geodesic/geographic coordinates need an order (lat/long), a unit
+  (e.g., degrees) and a datum (a reference ellipsoid: e.g.~WGS84)
+\item
+  cartesian/projected coordinates (e.g.~UTM, web Mercator) need also
+  measurement units (e.g., meters), and some way of encoding how they
+  relate to geodesic coordinates, in which datum (this is handled by the
+  GIS system)
+\end{enumerate}
+
+\subsection{Operations with
+Shapefiles}\label{operations-with-shapefiles}
+
+Clip: in R you can clip using the command ``intersect'', so that
+intersect(feature to be clipped, clip feature) Select: you can use a
+boolean selection to subset the features of your shapefile, for instance
+if you just want to look at settlements with a mininum number of
+habitants, so that Population \textgreater{} median(Population) There
+are several options, have a look at this great tutorial:
+\url{http://www.rspatial.org/spatial/rst/7-vectmanip.html}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Clip the settlement features using the Santa Catarina shapefile}
+\NormalTok{sc\_sett}\OtherTok{\textless{}{-}}\FunctionTok{intersect}\NormalTok{(br\_sett, sc)}
+
+\CommentTok{\#sc\_sett$med \textless{}{-} sc\_sett$population \textgreater{} median(sc\_sett$population) \# oops! annoyingly our population values have been stored as factors}
+
+\CommentTok{\# convert to original numerical values}
+\NormalTok{sc\_sett}\SpecialCharTok{$}\NormalTok{population}\OtherTok{\textless{}{-}}\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{as.vector}\NormalTok{(sc\_sett}\SpecialCharTok{$}\NormalTok{population))}
+\CommentTok{\# careful! applying as.numeric alone it will not work!!}
+
+\CommentTok{\# visualize results}
+\FunctionTok{plot}\NormalTok{(sc\_sett, }\AttributeTok{main =} \StringTok{"Settlements in Santa Catarina"}\NormalTok{)}
+\FunctionTok{spplot}\NormalTok{(sc\_sett, }\AttributeTok{z=}\StringTok{"population"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Population per Settlement (people)"}\NormalTok{)}
+
+\CommentTok{\# select settlements larger then the median value}
+\NormalTok{sc\_sett}\SpecialCharTok{$}\NormalTok{med }\OtherTok{\textless{}{-}}\NormalTok{ sc\_sett}\SpecialCharTok{$}\NormalTok{population }\SpecialCharTok{\textgreater{}} \FunctionTok{median}\NormalTok{(sc\_sett}\SpecialCharTok{$}\NormalTok{population)}
+\NormalTok{sc\_largesett }\OtherTok{\textless{}{-}}\NormalTok{ sc\_sett[sc\_sett}\SpecialCharTok{$}\NormalTok{med }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, ]}
+
+\CommentTok{\# visualize results}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(sc\_sett, }\AttributeTok{main =} \StringTok{"All Settlements"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(sc\_largesett, }\AttributeTok{main =} \StringTok{"Largest Settlements"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Operations with Rasters}\label{operations-with-rasters}
+
+There are many operations you can do with rasters, and these are more
+frequently used in spatial analyses than shapefiles. Here I will just
+illustrate a couple of simple operations: - Global/Raster statistics -
+obtain a value that summarizes the whole raster layer - Cell statistics
+(pixel-by-pixel operation): obtains a value per pixel - Focal statistics
+(operation that takes into account neighborhood of central cell) -
+results in raster of same of different size - Zonal statistics -
+calculates summary statistics of a give raster (e.g., elevation) based
+on pre-defined zones (e.g., admnistrative boundaries, biomes). Outputs a
+table with the values per zone. For more great examples, have a look
+here: \url{http://www.rspatial.org/spatial/rst/8-rastermanip.html}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sum the loss and gain rasters to know where there was simultaneous loss and gain in Santa Catarina}
+\NormalTok{tclg}\OtherTok{\textless{}{-}}\NormalTok{tl}\SpecialCharTok{+}\NormalTok{tg }
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(tl, }\AttributeTok{main =} \StringTok{"Forest Loss"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(tg, }\AttributeTok{main =} \StringTok{"Forest Gain"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(tclg, }\AttributeTok{main =} \StringTok{"Forest Loss and Gain"}\NormalTok{)}
+
+\CommentTok{\# you can also try to create three new rasters and work with them}
+\CommentTok{\# create a new raster}
+\NormalTok{r }\OtherTok{\textless{}{-}} \FunctionTok{raster}\NormalTok{(}\AttributeTok{ncol=}\DecValTok{10}\NormalTok{, }\AttributeTok{nrow=}\DecValTok{10}\NormalTok{, }\AttributeTok{xmx=}\SpecialCharTok{{-}}\DecValTok{80}\NormalTok{, }\AttributeTok{xmn=}\SpecialCharTok{{-}}\DecValTok{150}\NormalTok{, }\AttributeTok{ymn=}\DecValTok{20}\NormalTok{, }\AttributeTok{ymx=}\DecValTok{60}\NormalTok{)}
+\FunctionTok{values}\NormalTok{(r) }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(}\FunctionTok{ncell}\NormalTok{(r)) }\CommentTok{\# assign random values}
+\CommentTok{\#plot(r)}
+
+\CommentTok{\# create two more rasters based on the first one}
+\NormalTok{r2 }\OtherTok{\textless{}{-}}\NormalTok{ r }\SpecialCharTok{*}\NormalTok{ r}
+\NormalTok{r3  }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(r)}
+
+\CommentTok{\# either stack or brick them}
+\NormalTok{s }\OtherTok{\textless{}{-}} \FunctionTok{stack}\NormalTok{(r, r2, r3)}
+\CommentTok{\#b \textless{}{-} brick(s)}
+
+\CommentTok{\# Raster statistics {-} calculate several statistics per raster layer (i.e., sum, mean, median)}
+\FunctionTok{cellStats}\NormalTok{(s, }\StringTok{"sum"}\NormalTok{) }\CommentTok{\# outputs a value per raster}
+
+\CommentTok{\# Cell statistics {-} calculate several statistics per pixel  (i.e., sum, mean, median)}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(r, }\AttributeTok{main =}\StringTok{"Random 1"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(r2, }\AttributeTok{main =}\StringTok{"Random 2"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(r3, }\AttributeTok{main =}\StringTok{"Random 3"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(}\FunctionTok{overlay}\NormalTok{(s, }\AttributeTok{fun=}\StringTok{"mean"}\NormalTok{), }\AttributeTok{main=}\StringTok{"Average Values"}\NormalTok{) }\CommentTok{\# outputs a new raster}
+
+\CommentTok{\# Focal statistics {-} calculate mean accounting for the neighborhood values, compare with previous outcome }
+\NormalTok{f1 }\OtherTok{\textless{}{-}} \FunctionTok{focal}\NormalTok{(tc, }\AttributeTok{w=}\FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{nrow=}\DecValTok{5}\NormalTok{,}\AttributeTok{ncol=}\DecValTok{5}\NormalTok{) , }\AttributeTok{fun=}\NormalTok{mean)}
+\FunctionTok{plot}\NormalTok{(f1, }\AttributeTok{main =} \StringTok{"Average forest cover 5x5"}\NormalTok{)}
+\CommentTok{\# sum the loss, vary window size}
+\NormalTok{f2 }\OtherTok{\textless{}{-}} \FunctionTok{focal}\NormalTok{(tl, }\AttributeTok{w=}\FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{nrow=}\DecValTok{5}\NormalTok{,}\AttributeTok{ncol=}\DecValTok{5}\NormalTok{) , }\AttributeTok{fun=}\NormalTok{sum)}
+\FunctionTok{plot}\NormalTok{(f2, }\AttributeTok{main =} \StringTok{"Total forest loss 5x5"}\NormalTok{)}
+\CommentTok{\# sum the gain, vary window size}
+\NormalTok{f3 }\OtherTok{\textless{}{-}} \FunctionTok{focal}\NormalTok{(tg, }\AttributeTok{w=}\FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{nrow=}\DecValTok{5}\NormalTok{,}\AttributeTok{ncol=}\DecValTok{5}\NormalTok{) , }\AttributeTok{fun=}\NormalTok{sum)}
+\FunctionTok{plot}\NormalTok{(f3, }\AttributeTok{main =} \StringTok{"Total forest gain 5x5"}\NormalTok{)}
+
+\CommentTok{\# plot 4 maps with different window sizes}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow=}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{25}\NormalTok{,}\DecValTok{55}\NormalTok{))\{}
+\NormalTok{  f\_w }\OtherTok{\textless{}{-}} \FunctionTok{focal}\NormalTok{(tc, }\AttributeTok{w=}\FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{nrow=}\NormalTok{i,}\AttributeTok{ncol=}\NormalTok{i) , }\AttributeTok{fun=}\NormalTok{sum)}
+  \FunctionTok{plot}\NormalTok{(f\_w, }\AttributeTok{main =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"Window size: "}\NormalTok{, i))}
+\NormalTok{\}}
+
+\CommentTok{\# Zonal Statistics {-} using two rasters}
+\NormalTok{sc\_tc\_mean\_loss }\OtherTok{\textless{}{-}} \FunctionTok{zonal}\NormalTok{(tc, tl, }\AttributeTok{fun=}\NormalTok{mean) }\CommentTok{\#average tree cover in loss areas}
+\NormalTok{sc\_tc\_mean\_gain }\OtherTok{\textless{}{-}} \FunctionTok{zonal}\NormalTok{(tc, tg, }\AttributeTok{fun=}\NormalTok{mean) }\CommentTok{\#average tree cover in gain areas}
+
+\CommentTok{\# average tree cover loss}
+\NormalTok{sc\_tc\_mean\_loss}
+
+\CommentTok{\# average tree cover gain}
+\NormalTok{sc\_tc\_mean\_gain}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Operations with both Rasters and
+Shapefiles}\label{operations-with-both-rasters-and-shapefiles}
+
+Here I'll show a couple of examples of operation that use feature data
+as inputs and output rasters: Distance to features - calculates the
+euclidean distance from each cell/pixel to the closest feature (e.g.,
+roads, settlements). Outputs a raster file with these distances.
+Interpolation: a world in itself! Very vey short example provided here
+(based on a single method, IDW), please see more here:
+\url{http://www.rspatial.org/analysis/rst/4-interpolation.html} To
+better understand interpolation I advise you to read first about spatial
+autocorrelation:
+\url{http://www.rspatial.org/analysis/rst/3-spauto.html}
+
+To use interpolation metrics you need to load another packaged called
+gstat Inverse distance weighted (IDW) - See more also here:
+\url{http://desktop.arcgis.com/en/arcmap/10.3/tools/3d-analyst-toolbox/how-idw-works.htm}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create an empty raster (little trick using existing raster)}
+\NormalTok{dist\_sett}\OtherTok{\textless{}{-}}\NormalTok{tc}\SpecialCharTok{*}\DecValTok{0}
+\CommentTok{\# or you can create an empty one like before}
+\CommentTok{\# dist\_sett \textless{}{-} raster(ncol=ncol(tc), nrow=nrow(tc), xmx=extent(tc)@xmax, xmn=extent(tc)@xmin, ymn=extent(tc)@ymin, ymx=extent(tc)@ymax)}
+
+\CommentTok{\# Distance to points}
+\NormalTok{dist\_sett }\OtherTok{\textless{}{-}} \FunctionTok{distanceFromPoints}\NormalTok{(dist\_sett, sc\_sett)}
+
+\CommentTok{\# you can then mask the outside area of Santa Catarina}
+\NormalTok{dist\_sett }\OtherTok{\textless{}{-}} \FunctionTok{mask}\NormalTok{(dist\_sett, tc)}
+
+\CommentTok{\# plot results}
+\FunctionTok{plot}\NormalTok{(dist\_sett, }\AttributeTok{main =} \StringTok{"Distance to settlements (m)"}\NormalTok{)}
+
+\CommentTok{\# load gstat}
+\FunctionTok{library}\NormalTok{(gstat)}
+\NormalTok{idw\_sett}\OtherTok{\textless{}{-}}\NormalTok{tc}\SpecialCharTok{*}\DecValTok{0}
+
+\CommentTok{\# compute the model, see reference for more detail}
+\NormalTok{gs }\OtherTok{\textless{}{-}} \FunctionTok{gstat}\NormalTok{(}\AttributeTok{formula=}\NormalTok{population}\SpecialCharTok{\textasciitilde{}}\DecValTok{1}\NormalTok{, }\AttributeTok{locations=}\NormalTok{sc\_sett, }\AttributeTok{nmax=}\DecValTok{5}\NormalTok{, }\AttributeTok{set=}\FunctionTok{list}\NormalTok{(}\AttributeTok{idp =} \DecValTok{2}\NormalTok{))}
+\NormalTok{idw\_out }\OtherTok{\textless{}{-}} \FunctionTok{interpolate}\NormalTok{(idw\_sett, gs)}
+
+\DocumentationTok{\#\# [inverse distance weighted interpolation]}
+\NormalTok{sc\_pop }\OtherTok{\textless{}{-}} \FunctionTok{mask}\NormalTok{(idw\_out, tc)}
+\FunctionTok{plot}\NormalTok{(sc\_pop, }\AttributeTok{main =} \StringTok{"Santa Catarina Population"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Export Shapefiles and
+Rasters}\label{export-shapefiles-and-rasters}
+
+It's very easy to export both shapefiles and rasters from R to be
+visualized in QGIS or ArcMap.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save feature layers (point, polygon, polyline) to shapefile }
+\FunctionTok{writeOGR}\NormalTok{(sc\_largesett, }\AttributeTok{dsn=}\StringTok{"."}\NormalTok{, }\AttributeTok{layer=}\StringTok{"SC\_largeSett"}\NormalTok{, }\AttributeTok{driver=}\StringTok{"ESRI Shapefile"}\NormalTok{ )}
+
+\CommentTok{\# or }
+\CommentTok{\#shapefile(sc\_largesett, "SC\_largeSett.shp", overwrite=TRUE) }
+
+\CommentTok{\#Exporting raster}
+\FunctionTok{writeRaster}\NormalTok{(sc\_pop, }\AttributeTok{filename=}\StringTok{"SC\_popmap"}\NormalTok{, }\AttributeTok{format=}\StringTok{"GTiff"}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Working with biodiversity data: GBIF, EBV Portal (Corey
+Callaghan, Luise Quoss)First we load the library
+rgbif.}\label{working-with-biodiversity-data-gbif-ebv-portal-corey-callaghan-luise-quossfirst-we-load-the-library-rgbif.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rgbif)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we will download observations of a species. Let's download
+observations of the common toad ``Bufo bufo''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{matbufobufo}\OtherTok{\textless{}{-}}\FunctionTok{occ\_search}\NormalTok{(}\AttributeTok{scientificName=}\StringTok{"Bufo bufo"}\NormalTok{, }\AttributeTok{limit=}\DecValTok{500}\NormalTok{, }\AttributeTok{hasCoordinate =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{hasGeospatialIssue =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Let's examine the object \emph{matbufobufo}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(matbufobufo)}
+\NormalTok{matbufobufo}
+\end{Highlighting}
+\end{Shaded}
+
+Let's download data about octupusses. They are in the order
+``Octopoda''. First we need to find the GBIF search key for Octopoda.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a}\OtherTok{\textless{}{-}}\FunctionTok{name\_suggest}\NormalTok{(}\AttributeTok{q=}\StringTok{"Octopoda"}\NormalTok{,}\AttributeTok{rank=}\StringTok{"Order"}\NormalTok{)}
+\NormalTok{key}\OtherTok{\textless{}{-}}\NormalTok{a}\SpecialCharTok{$}\NormalTok{data}\SpecialCharTok{$}\NormalTok{key}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{octopusses}\OtherTok{\textless{}{-}}\FunctionTok{occ\_search}\NormalTok{(}\AttributeTok{orderKey=}\NormalTok{key,}\AttributeTok{limit=}\DecValTok{2000}\NormalTok{, }\AttributeTok{hasCoordinate =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{hasGeospatialIssue =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Show the result
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{octmat}\OtherTok{\textless{}{-}}\NormalTok{octopusses}\SpecialCharTok{$}\NormalTok{data}
+\FunctionTok{head}\NormalTok{(octmat)}
+\end{Highlighting}
+\end{Shaded}
+
+Count the number of observations per species using tidyverse and pipes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#class(octmat)}
+\NormalTok{octmat }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(scientificName) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{sample\_size=}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(sample\_size)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample\_size\_log=}\FunctionTok{log}\NormalTok{(sample\_size,}\DecValTok{2}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ sample\_size\_log)) }\SpecialCharTok{+} \FunctionTok{geom\_histogram}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+Plot the records on an interactive map. First load the leaflet package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(leaflet)}
+\FunctionTok{leaflet}\NormalTok{(}\AttributeTok{data=}\NormalTok{octmat) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{addTiles}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{addCircleMarkers}\NormalTok{(}\AttributeTok{lat=} \SpecialCharTok{\textasciitilde{}}\NormalTok{decimalLatitude, }\AttributeTok{lng =} \SpecialCharTok{\textasciitilde{}}\NormalTok{decimalLongitude,}\AttributeTok{popup=}\SpecialCharTok{\textasciitilde{}}\NormalTok{scientificName)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Version 2 (Isabel Rosa)}\label{version-2-isabel-rosa}
+
+Here are the packages we'll need.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rgbif)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(raster)}
+\FunctionTok{library}\NormalTok{(maps)}
+\FunctionTok{library}\NormalTok{(leaflet)}
+\FunctionTok{library}\NormalTok{(sdmpredictors)}
+\end{Highlighting}
+\end{Shaded}
+
+First let's pick an example species to download data for. We will only
+download 500 observations to keep it simple for now. If you were doing
+this for real, you would download all data for that species (see notes
+at the end). I will choose the European Robin:
+\url{https://en.wikipedia.org/wiki/European_robin.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{species }\OtherTok{\textless{}{-}} \FunctionTok{occ\_search}\NormalTok{(}\AttributeTok{scientificName=}\StringTok{"Erithacus rubecula"}\NormalTok{, }\AttributeTok{limit=}\DecValTok{500}\NormalTok{, }\AttributeTok{hasCoordinate =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{hasGeospatialIssue=}\ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+What does this object look like?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(species)}
+
+\NormalTok{species}
+\end{Highlighting}
+\end{Shaded}
+
+It is a special object of class \texttt{gbif} which allows for the
+metadata and the actual data to all be included, as well as taxonomic
+hierarchy data, and media metadata. We won't worry too much about the
+details of this object now. But we do want to get a dataframe we can
+work with! To do this, we have one extra step.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sp\_dat }\OtherTok{\textless{}{-}}\NormalTok{ species}\SpecialCharTok{$}\NormalTok{data}
+
+\FunctionTok{class}\NormalTok{(sp\_dat)}
+
+\FunctionTok{head}\NormalTok{(sp\_dat)}
+\end{Highlighting}
+\end{Shaded}
+
+So this was just for one species. Lets broaden this out a little bit.
+What if we were interested in many species of a given order/class? Here,
+we will choose an entire order to download. I will choose owls!
+\url{https://en.wikipedia.org/wiki/Owl.} First, we need to find the
+`key' that gbif uses for that order and then pass it to our GBIF
+download function. Again, we are only getting a small number of records
+for illustration purposes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{name\_suggest}\NormalTok{(}\AttributeTok{q=}\StringTok{\textquotesingle{}Strigiformes\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{key }\OtherTok{\textless{}{-}}\NormalTok{ a}\SpecialCharTok{$}\NormalTok{data}\SpecialCharTok{$}\NormalTok{key}
+
+\NormalTok{order }\OtherTok{\textless{}{-}} \FunctionTok{occ\_search}\NormalTok{(}\AttributeTok{orderKey=}\NormalTok{key, }\AttributeTok{limit=}\DecValTok{1000}\NormalTok{, }\AttributeTok{hasCoordinate =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{hasGeospatialIssue=}\ConstantTok{FALSE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+What kind of object is `order'? As with species, we need to turn it into
+a dataframe to work with.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{order\_dat }\OtherTok{\textless{}{-}}\NormalTok{ order}\SpecialCharTok{$}\NormalTok{data}
+
+\FunctionTok{class}\NormalTok{(order\_dat)}
+
+\FunctionTok{head}\NormalTok{(order\_dat)}
+\end{Highlighting}
+\end{Shaded}
+
+Count the number of observations by species
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{order\_dat }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(scientificName) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{sample\_size=}\FunctionTok{n}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(sample\_size))}
+\end{Highlighting}
+\end{Shaded}
+
+Plot the records on an interactive map. First for our chosen species.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{leaflet}\NormalTok{(}\AttributeTok{data =}\NormalTok{ sp\_dat) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{addTiles}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{addCircleMarkers}\NormalTok{(}\AttributeTok{lat =} \SpecialCharTok{\textasciitilde{}}\NormalTok{decimalLatitude, }\AttributeTok{lng =} \SpecialCharTok{\textasciitilde{}}\NormalTok{decimalLongitude,}\AttributeTok{popup =} \SpecialCharTok{\textasciitilde{}}\NormalTok{scientificName)}
+\end{Highlighting}
+\end{Shaded}
+
+Then for the order we chose.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{leaflet}\NormalTok{(}\AttributeTok{data =}\NormalTok{ order\_dat) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{addTiles}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{addCircleMarkers}\NormalTok{(}\AttributeTok{lat =} \SpecialCharTok{\textasciitilde{}}\NormalTok{decimalLatitude, }\AttributeTok{lng =} \SpecialCharTok{\textasciitilde{}}\NormalTok{decimalLongitude, }\AttributeTok{popup =} \SpecialCharTok{\textasciitilde{}}\NormalTok{scientificName)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Climate data}\label{climate-data}
+
+Let's play with some global climate data and overlay that with our GBIF
+observations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean\_temp\_map }\OtherTok{\textless{}{-}} \FunctionTok{getData}\NormalTok{(}\AttributeTok{name=}\StringTok{"worldclim"}\NormalTok{, }\AttributeTok{res=}\DecValTok{10}\NormalTok{, }\AttributeTok{var=}\StringTok{"tmean"}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(mean\_temp\_map)}
+\end{Highlighting}
+\end{Shaded}
+
+Each month has separate values for each cell. To combine to a yearly
+value, we just take the mean.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{annual\_mean\_temp }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(mean\_temp\_map)}\SpecialCharTok{/}\DecValTok{10} \CommentTok{\#data comes as degrees * 10}
+\end{Highlighting}
+\end{Shaded}
+
+Now plot this.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(annual\_mean\_temp)}
+\end{Highlighting}
+\end{Shaded}
+
+To get out the values for the organism of interest, we use
+\texttt{extract}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{org\_temp }\OtherTok{\textless{}{-}} \FunctionTok{extract}\NormalTok{(annual\_mean\_temp, }\FunctionTok{cbind}\NormalTok{(}\AttributeTok{x=}\NormalTok{sp\_dat}\SpecialCharTok{$}\NormalTok{decimalLongitude, }\AttributeTok{y=}\NormalTok{sp\_dat}\SpecialCharTok{$}\NormalTok{decimalLatitude))}
+\end{Highlighting}
+\end{Shaded}
+
+Now we will visualize how the global distribution of temperature values
+compares with the species' distribution of temperature values. This
+shows the distribution of temps where robins are found versus the global
+distribution of temps.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{temp }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{mean\_temp=}\FunctionTok{getValues}\NormalTok{(annual\_mean\_temp)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(mean\_temp))}
+
+\NormalTok{temp\_org }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{organism\_temp=}\NormalTok{org\_temp) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(organism\_temp))}
+
+\FunctionTok{ggplot}\NormalTok{(temp, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{mean\_temp))}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{fill=}\StringTok{"blue"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{geom\_density}\NormalTok{(}\AttributeTok{data=}\NormalTok{temp\_org, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{organism\_temp), }\AttributeTok{fill=}\StringTok{"red"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Intro to apply, pipes, ggplot2,
+tidyverse.}\label{intro-to-apply-pipes-ggplot2-tidyverse.}
+
+\subsection{Introduction to gpplot}\label{introduction-to-gpplot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cars}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{cars, }\AttributeTok{mapping=}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{speed,}\AttributeTok{y=}\NormalTok{dist)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{colour=}\StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(cars}\SpecialCharTok{$}\NormalTok{speed,cars}\SpecialCharTok{$}\NormalTok{dist)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Introduction to R {-} 9}
+
+
+\CommentTok{\# a recursive function that calculates a factorial}
+\NormalTok{myfun }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)}
+\NormalTok{\{}
+  \ControlFlowTok{if}\NormalTok{ (x}\SpecialCharTok{==}\DecValTok{1}\NormalTok{)}
+    \FunctionTok{return}\NormalTok{ (}\DecValTok{1}\NormalTok{)}
+  \ControlFlowTok{else} \FunctionTok{return}\NormalTok{(x}\SpecialCharTok{*}\FunctionTok{myfun}\NormalTok{(x}\DecValTok{{-}1}\NormalTok{))}
+\NormalTok{\}}
+
+\FunctionTok{myfun}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{) }\CommentTok{\# does not work}
+
+\CommentTok{\#option1 {-} with a for loop}
+\NormalTok{start\_time }\OtherTok{\textless{}{-}} \FunctionTok{Sys.time}\NormalTok{()}
+\NormalTok{y}\OtherTok{\textless{}{-}}\DecValTok{0}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{)}
+\NormalTok{  y[i]}\OtherTok{\textless{}{-}}\FunctionTok{myfun}\NormalTok{(i)}
+\NormalTok{end\_time }\OtherTok{\textless{}{-}} \FunctionTok{Sys.time}\NormalTok{()}
+\NormalTok{end\_time}\SpecialCharTok{{-}}\NormalTok{start\_time}
+\NormalTok{y}
+\FunctionTok{plot}\NormalTok{(y,}\AttributeTok{type=}\StringTok{"l"}\NormalTok{)}
+
+\CommentTok{\#option 2 {-} with apply}
+\NormalTok{start\_time }\OtherTok{\textless{}{-}} \FunctionTok{Sys.time}\NormalTok{()}
+\NormalTok{y}\OtherTok{\textless{}{-}}\FunctionTok{sapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{,myfun)}
+\NormalTok{end\_time }\OtherTok{\textless{}{-}} \FunctionTok{Sys.time}\NormalTok{()}
+\NormalTok{end\_time}\SpecialCharTok{{-}}\NormalTok{start\_time}
+\NormalTok{y}
+
+\CommentTok{\# selecting a subset from a matrix and applying a function to a column of that subset}
+
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/iDiv Dropbox/Henrique Pereira/Teaching/Spatial Ecology/Spatial Ecology 2022/2\_Lab\_assignments"}\NormalTok{)}
+\NormalTok{Florida }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Florida.csv"}\NormalTok{)}
+
+\CommentTok{\# number of species for year 1970 and route 20}
+\FunctionTok{tapply}\NormalTok{(Florida}\SpecialCharTok{$}\NormalTok{Abundance,Florida}\SpecialCharTok{$}\NormalTok{Route}\SpecialCharTok{==}\DecValTok{20} \SpecialCharTok{\&}\NormalTok{ Florida}\SpecialCharTok{$}\NormalTok{Year}\SpecialCharTok{==}\DecValTok{1970}\NormalTok{, length)}
+
+\CommentTok{\# matrix with number of species per route and per year}
+\NormalTok{out}\OtherTok{\textless{}{-}}\FunctionTok{tapply}\NormalTok{(Florida}\SpecialCharTok{$}\NormalTok{Abundance,}\FunctionTok{list}\NormalTok{(Florida}\SpecialCharTok{$}\NormalTok{Route,Florida}\SpecialCharTok{$}\NormalTok{Year), length)}
+
+\FunctionTok{names}\NormalTok{(out[,}\DecValTok{1}\NormalTok{])}
+\FunctionTok{plot}\NormalTok{(out[}\DecValTok{10}\NormalTok{,])}
+\FunctionTok{plot}\NormalTok{(out[}\DecValTok{20}\NormalTok{,])}
+
+
+\NormalTok{shannon}\OtherTok{\textless{}{-}}\ControlFlowTok{function}\NormalTok{(x)}
+\NormalTok{\{}
+\NormalTok{  p}\OtherTok{\textless{}{-}}\NormalTok{x}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(x)}
+  \SpecialCharTok{{-}} \FunctionTok{sum}\NormalTok{(p}\SpecialCharTok{*}\FunctionTok{log}\NormalTok{(p))}
+\NormalTok{\}}
+
+\NormalTok{out}\OtherTok{\textless{}{-}}\FunctionTok{tapply}\NormalTok{(Florida}\SpecialCharTok{$}\NormalTok{Abundance,}\FunctionTok{list}\NormalTok{(Florida}\SpecialCharTok{$}\NormalTok{Route,Florida}\SpecialCharTok{$}\NormalTok{Year), shannon)}
+\FunctionTok{plot}\NormalTok{(out[}\DecValTok{10}\NormalTok{,])}
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\CommentTok{\#our first pipe}
+\NormalTok{x}\OtherTok{\textless{}{-}}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{)}
+\FunctionTok{hist}\NormalTok{(x)}
+
+\FunctionTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{  hist}
+
+\NormalTok{t}\OtherTok{\textless{}{-}}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(out)}
+\NormalTok{myreg}\OtherTok{\textless{}{-}}\FunctionTok{lm}\NormalTok{(out[}\DecValTok{10}\NormalTok{,]}\SpecialCharTok{\textasciitilde{}}\NormalTok{t)}
+\FunctionTok{summary}\NormalTok{(myreg)}
+\FunctionTok{plot}\NormalTok{(out[}\DecValTok{10}\NormalTok{,])}
+\FunctionTok{abline}\NormalTok{(myreg)}
+
+\FunctionTok{lm}\NormalTok{(out[}\DecValTok{10}\NormalTok{,]}\SpecialCharTok{\textasciitilde{}}\NormalTok{t) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ summary }
+\FunctionTok{plot}\NormalTok{(out[}\DecValTok{10}\NormalTok{,])}
+\FunctionTok{lm}\NormalTok{(out[}\DecValTok{10}\NormalTok{,]}\SpecialCharTok{\textasciitilde{}}\NormalTok{t) }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ abline }
+
+\CommentTok{\#ggplot}
+\NormalTok{mat}\OtherTok{=}\FunctionTok{cbind}\NormalTok{(t,out[}\DecValTok{10}\NormalTok{,])}
+\FunctionTok{data}\NormalTok{(cars)}
+\FunctionTok{colnames}\NormalTok{(mat)}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{,}\StringTok{"shannon"}\NormalTok{)}
+\NormalTok{mat}\OtherTok{\textless{}{-}}\FunctionTok{as.data.frame}\NormalTok{(mat)}
+
+\NormalTok{myplot }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{(mat, }\FunctionTok{aes}\NormalTok{(time,shannon))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\NormalTok{myplot}
+
+\NormalTok{myplot }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{(mat, }\FunctionTok{aes}\NormalTok{(time,shannon))}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{()}
+\NormalTok{myplot}
+
+\FunctionTok{data}\NormalTok{(cars)}
+\NormalTok{myplot }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{(cars, }\FunctionTok{aes}\NormalTok{(speed,dist))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{geom\_line}\NormalTok{()}
+\NormalTok{myplot}
+
+\FunctionTok{data}\NormalTok{(cars)}
+\NormalTok{myplot }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{(cars, }\FunctionTok{aes}\NormalTok{(speed,dist))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{)}
+\NormalTok{myplot}
+
+\FunctionTok{data}\NormalTok{(cars)}
+\NormalTok{myplot }\OtherTok{\textless{}{-}}  \FunctionTok{ggplot}\NormalTok{(cars, }\FunctionTok{aes}\NormalTok{(speed,dist))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\StringTok{"lm"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_x\_log10}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{scale\_y\_log10}\NormalTok{()}
+\NormalTok{myplot}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{Computational labs}\label{computational-labs}
+
+\section{Climate space of an
+ectotherm}\label{climate-space-of-an-ectotherm}
+
+Solar radiation and convection are the two main pathways for animals
+such as small lizards. In this case, the total heat flux (\emph{f}) into
+the animal is given by the \textbf{heat flux equation}:
+
+\[f = q\ –h*(b - a)\]
+
+\begin{itemize}
+\item
+  \(q\) = solar radiation (cal/h)
+\item
+  \(h*(b - a)\) = heat loss through convection
+\item
+  \(b\) = body temperature of the animal (ºC)
+\item
+  \(a\) = air temperature (ºC)
+\item
+  \(h\) = convection heat transfer coefficient (cal/h/ ºC)
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{\emph{Equilibrium body temperature}}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Assuming that air temperature is 18ºC, and \textbf{h} = 50 cal/h,
+    plot the lizard's equilibrium body temperature as a function of
+    solar radiation. Assume that solar radiation varies between 0 and
+    1500 cal/h
+  \end{enumerate}
+\item
+  \textbf{\emph{Climate space of a Lizard}}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    Draw the climate space of the lizard by drawing the polygon that is
+    limited by the minimum and maximum temperatures that the lizard can
+    support, as a function of solar radiation. Consider that the upper
+    lethal limit for the body temperature (\textbf{\emph{bmax}}) is 36ºC
+    and the lower lethal limit for the body temperature
+    (\textbf{\emph{bmin}}) is 24ºC.
+
+    \textbf{Hint:} \texttt{polygon} - draws the polygons whose vertices
+    are given in x and y.
+  \end{enumerate}
+\item
+  \textbf{\emph{Air Temperature and solar radiation throughout the day
+  in two locations}}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    Plot the following values of air temperature and solar radiation
+    that are available throughout a day in two locations. For:
+
+    \begin{itemize}
+    \item
+      Times of the day
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{t }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"00:00"}\NormalTok{,}\StringTok{"03:00"}\NormalTok{,}\StringTok{"06:00"}\NormalTok{,}\StringTok{"09:00"}\NormalTok{,}\StringTok{"12:00"}\NormalTok{,}
+  \StringTok{"15:00"}\NormalTok{,}\StringTok{"18:00"}\NormalTok{,}\StringTok{"21:00"}\NormalTok{,}\StringTok{"00:00"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+    \item
+      Solar radiation in the rock habitat
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rock\_q }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{150}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{800}\NormalTok{,}\DecValTok{1100}\NormalTok{,}\DecValTok{1300}\NormalTok{,}\DecValTok{1200}\NormalTok{,}\DecValTok{800}\NormalTok{,}\DecValTok{400}\NormalTok{,}\DecValTok{150}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+    \item
+      Air temperature in the rock habitat
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rock\_a }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{18}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{21}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{18}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+    \item
+      Solar radiation in the bush habitat
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bush\_q }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{150}\NormalTok{,}\DecValTok{150}\NormalTok{,}\DecValTok{450}\NormalTok{,}\DecValTok{600}\NormalTok{,}\DecValTok{650}\NormalTok{,}\DecValTok{650}\NormalTok{,}\DecValTok{350}\NormalTok{,}\DecValTok{200}\NormalTok{,}\DecValTok{150}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+    \item
+      Air temperature in the bush habitat
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bush\_a }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{18}\NormalTok{,}\DecValTok{13}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{14}\NormalTok{,}\DecValTok{21}\NormalTok{,}\DecValTok{24}\NormalTok{,}\DecValTok{22}\NormalTok{,}\DecValTok{20}\NormalTok{,}\DecValTok{18}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+    \end{itemize}
+  \item
+    At which time of the day is the lizard on the rock, and at which
+    time is it at the bush? Is there any time when the lizard cannot be
+    at any of the locations?
+  \end{enumerate}
+\item
+  \textbf{\emph{Body temperature of A. cristatellus in two different
+  habitats}}
+\end{enumerate}
+
+Section~\ref{sec-anolis_cristatellus} presents a data frame containing
+data on individuals \emph{A. cristatellus} living in urban and forested
+areas in three cities in Puerto Rico, giving us the perfect opportunity
+to assess the potential thermal effects of habitat upon this species. To
+do this:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Make a linear model for individuals of \emph{A. cristatellus} living
+  only in natural habitats (\texttt{context} = \texttt{natural}) and
+  another for individuals living in urban habitats (\texttt{context} =
+  \texttt{urban}).
+\end{enumerate}
+
+\textbf{Hint:} to filter the data you can use the \texttt{subset}
+function in R
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# example filtering data from anoles only from San Jose sites}
+\NormalTok{df\_sanjose }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(df, Site }\SpecialCharTok{==} \StringTok{"San Jose"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Is there a habitat where lizards are consistently warmer? If so,
+  provide an ecological explanation (quantitatively) for this
+  observation (assume an ambient temperature of 30 °C).
+\item
+  Is your model appropriate for explaining your data?
+\end{enumerate}
+
+\newpage{}
+
+\section{Optimal foraging theory}\label{optimal-foraging-theory}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Predator with a strategy for maximizing energy.}\\
+  Let \textbf{\emph{ai}} be the point abundance per unit of time of prey
+  type \textbf{\emph{i}}, \textbf{\emph{ei}} be the caloric content of
+  prey type \textbf{\emph{i}}, \textbf{\emph{hi}} be the time it takes
+  to consume prey type \textbf{\emph{i}}, \textbf{\emph{ew}} is the
+  energy expended per unit of time by the predator while searching for
+  prey, and \textbf{\emph{eh}} is the energy expended per unit of time
+  by the predator to ingest prey. Consider that there are only two types
+  of prey and that:
+
+  Strategy 1: Chosing prey of type 1\\
+  Strategy 2: Chosing prey of type 2\\
+  Strategy 3: Chosing both preys
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    Show that if \textbf{\emph{e1\textgreater{} e2}} and
+    \textbf{\emph{h1 \textless h2}} then the second strategy is never a
+    optimal strategy
+  \item
+    Plot and comment the graph of the energy gain per unit of time for
+    the strategy of consuming both preys and for the strategy of
+    consuming only the best prey. Make the abundances vary between 0.005
+    and 0.5 ind/s for the best prey. Consider the abundance of the worse
+    prey to be 0.05 ind/s and 0.01 ind/s. Consider an active predator
+    with the following physiological parameters:
+
+    \textbf{\emph{e1}} = 10J; \textbf{\emph{e2}} = 100J;
+    \textbf{\emph{h1}} = 1s; \textbf{\emph{h2}} = 60s;
+    \textbf{\emph{ew}} = 1 J/s; \textbf{\emph{eh}} = 1 J/S
+  \end{enumerate}
+\item
+  \textbf{Predator with a strategy of sit-and-wait.}\\
+  \textbf{\emph{Ew}} is the energy expended per unit of time by the
+  predator while waiting for its prey, \textbf{\emph{ep}} is the energy
+  expended per unit of time by the predator while chasing the prey, v is
+  the velocity of the predator in chase and \textbf{\emph{a}} is the
+  point abundance of preys per unit of time.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Produce a graph of energy gain per unit of time in function of the
+    size of the feeding territory. Consider the following values for the
+    parameters of the predator and prey: \textbf{\emph{ew}} = 0,1 J/s;
+    \textbf{\emph{ep}} = 1 J/S; \textbf{\emph{v}} = 0,5 m/s;
+    \textbf{\emph{a}} = 0,005 ind/s/m2; and \textbf{\emph{e}} = 10;
+  \end{enumerate}
+\end{enumerate}
+
+\newpage{}
+
+\section{Evolutionary games}\label{evolutionary-games}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{The Prisoners Dilemma Competition}. In this class we will have
+  a competition of algorithms for playing the prisoner's dilemma.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \tightlist
+  \item
+    Write a function that takes as parameters two vectors that account
+    with the history of the previous plays and returns one play (i.e.,
+    Cooperate -- ``C'' or defect -- ``D''). This play should try to be
+    the best response to the history of past moves. One example of such
+    a function is:
+  \end{enumerate}
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{    strat}\OtherTok{\textless{}{-}}\ControlFlowTok{function}\NormalTok{(own,opponent)}
+\NormalTok{    \{}
+\NormalTok{        n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(opponent)}
+             \ControlFlowTok{if}\NormalTok{(n}\SpecialCharTok{==}\DecValTok{0}\NormalTok{) }\StringTok{"D"}
+            \ControlFlowTok{else}
+                \ControlFlowTok{if}\NormalTok{(own[n]}\SpecialCharTok{==}\StringTok{"D"}\NormalTok{) opponent[n]}
+               \ControlFlowTok{else} \StringTok{"C"}
+\NormalTok{    \}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{1}
+\item
+  Use the function pd\_sim (see below) to play your strategy with the
+  strategy of the other groups (ask for each group their function(s))
+  and with itself, in an iterative game with x moves. Compare the
+  results of the cumulative rewards as well as the sequence of moves.
+  Report to the rest of groups the values of the rewards for each of the
+  tournaments. What was the best strategy? What strategies are best
+  responses to themselves?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pd\_sim}\OtherTok{\textless{}{-}}\ControlFlowTok{function}\NormalTok{(p1\_strat,p2\_strat,n)}
+\NormalTok{\{}
+\NormalTok{ w1}\OtherTok{\textless{}{-}}\DecValTok{0}          \CommentTok{\#accumulated pay{-}off (fitness) of player 1}
+\NormalTok{ w2}\OtherTok{\textless{}{-}}\DecValTok{0}          \CommentTok{\#accumulated pay{-}offs of player 2}
+\NormalTok{ h1}\OtherTok{\textless{}{-}}\ConstantTok{NULL}       \CommentTok{\#history of plays of player 1}
+\NormalTok{ h2}\OtherTok{\textless{}{-}}\ConstantTok{NULL}       \CommentTok{\#history of plays of player 2}
+
+ \ControlFlowTok{for}\NormalTok{ (t }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n)            }
+\NormalTok{   \{}
+\NormalTok{    a1}\OtherTok{\textless{}{-}}\FunctionTok{p1\_strat}\NormalTok{(h1,h2) }
+\NormalTok{    a2}\OtherTok{\textless{}{-}}\FunctionTok{p2\_strat}\NormalTok{(h2,h1) }
+\NormalTok{    p1}\OtherTok{\textless{}{-}}\NormalTok{mat[a1,a2] }
+\NormalTok{    p2}\OtherTok{\textless{}{-}}\NormalTok{mat[a2,a1]         }
+\NormalTok{    w1}\OtherTok{\textless{}{-}}\NormalTok{w1}\SpecialCharTok{+}\NormalTok{p1              }
+\NormalTok{    w2}\OtherTok{\textless{}{-}}\NormalTok{w2}\SpecialCharTok{+}\NormalTok{p2             }
+\NormalTok{    h1[t]}\OtherTok{\textless{}{-}}\NormalTok{a1                   }
+\NormalTok{h2[t]}\OtherTok{\textless{}{-}}\NormalTok{a2                   \}   }
+ \FunctionTok{list}\NormalTok{(}\AttributeTok{w1=}\NormalTok{w1,}\AttributeTok{w2=}\NormalTok{w2,}\AttributeTok{h1=}\NormalTok{h1,}\AttributeTok{h2=}\NormalTok{h2)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\end{enumerate}
+
+\newpage{}
+
+\section{Dispersal and the
+random-walk}\label{dispersal-and-the-random-walk}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Random walk for 1 individual}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \tightlist
+  \item
+    Create your own code to simulate an individual random walk. Assume
+    that the starting point is always x,y =(0,0) and the probability of
+    an individual to choose any direction (i.e.~left, right, up or down)
+    is the same. It should be a function taking as argument the number
+    of steps and returning a list of two vectors, one with the x
+    positions over time and another with the y positions overtime.
+  \item
+    Plot together the random walks (at least 5000 steps) of a few
+    individuals. \includegraphics{images/Lab_RandomWalk.png}
+  \end{enumerate}
+\item
+  \textbf{Random walk for several (n) individuals}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \tightlist
+  \item
+    Create your own code to simulate random walks by several
+    (\textbf{\emph{n}})individuals and returns the last position of each
+    individual. It should be a function that takes as arguments the
+    number of individuals and the numbers of time steps, and returns a
+    list of two vectors, the last x position of each individual, and the
+    last y position of each individual.
+  \item
+    Create a histogram showing the distribution of the x and y last
+    positions of 10 000 individuals after 10 time steps, 100 time steps
+    and 1 000 time steps.
+  \item
+    Create a function that receives as parameters a vector of values
+    xlast, a mean value (meanx) and a standard deviation (stdx) and
+    returns the log-likelihood of observing those values for those
+    parameters.
+  \item
+    Find the value meanx and stdx that maximize the likelihood of the
+    observations. Are they the same as mean(xlast) and std(xlast)? Why?
+  \item
+    \textbf{Extra credit:} Create a histogram showing the distribution
+    of the distance to the origin (sqrt(x\^{}+y\^{}2)) of the last
+    positions of 10 000 individuals for 10 time steps, 100 time steps,
+    1000 time steps and 10000 time steps. What is the relationship
+    between the length of the randomwalk and the mean distance? Fit the
+    Rayleigh distribution (2 r / sigma\^{}2) * exp(-r\^{}2/2 sigma\^{}2)
+    using non-linear fitting to each of the histograms and overlay it on
+    the graph.
+  \end{enumerate}
+\end{enumerate}
+
+\newpage{}
+
+\section{Pandemic growth}\label{pandemic-growth}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{The exponential dynamics of the pandemic.} In early 2020, the
+  first wave of the global pandemic of COVID-19 hit several European
+  countries. Here we will plot the data for those countries and fit an
+  exponential growth model.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Load the cumulative infected individuals time series from the
+    COVID-19 pandemic in five countries. Each time series starts after
+    the first fifteen infections are detected.\footnote{Data source:
+      \url{https://github.com/owid/covid-19-data/tree/master/public/data},
+      accessed 8 Nov 2020}
+  \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{it }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{17}\NormalTok{, }\DecValTok{79}\NormalTok{, }\DecValTok{132}\NormalTok{, }\DecValTok{229}\NormalTok{, }\DecValTok{322}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{650}\NormalTok{, }\DecValTok{888}\NormalTok{, }\DecValTok{1128}\NormalTok{, }\DecValTok{1689}\NormalTok{, }\DecValTok{2036}\NormalTok{, }\DecValTok{2502}\NormalTok{, }
+\DecValTok{3089}\NormalTok{, }\DecValTok{3858}\NormalTok{, }\DecValTok{4636}\NormalTok{, }\DecValTok{5883}\NormalTok{, }\DecValTok{7375}\NormalTok{, }\DecValTok{9172}\NormalTok{, }\DecValTok{10149}\NormalTok{, }\DecValTok{12462}\NormalTok{, }\DecValTok{15113}\NormalTok{, }\DecValTok{17660}\NormalTok{, }\DecValTok{21157}\NormalTok{,}
+\DecValTok{23980}\NormalTok{, }\DecValTok{27980}\NormalTok{, }\DecValTok{31506}\NormalTok{, }\DecValTok{35713}\NormalTok{, }\DecValTok{41035}\NormalTok{, }\DecValTok{47021}\NormalTok{, }\DecValTok{53578}\NormalTok{) }\CommentTok{\#Feb22{-}March22}
+
+\NormalTok{es }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{17}\NormalTok{, }\DecValTok{35}\NormalTok{, }\DecValTok{54}\NormalTok{, }\DecValTok{82}\NormalTok{, }\DecValTok{136}\NormalTok{, }\DecValTok{192}\NormalTok{, }\DecValTok{267}\NormalTok{, }\DecValTok{348}\NormalTok{, }\DecValTok{531}\NormalTok{, }\DecValTok{764}\NormalTok{, }\DecValTok{1094}\NormalTok{, }\DecValTok{1527}\NormalTok{, }\DecValTok{2299}\NormalTok{,}
+\DecValTok{3274}\NormalTok{, }\DecValTok{4427}\NormalTok{, }\DecValTok{5958}\NormalTok{, }\DecValTok{7641}\NormalTok{, }\DecValTok{9785}\NormalTok{, }\DecValTok{11491}\NormalTok{, }\DecValTok{13994}\NormalTok{, }\DecValTok{17688}\NormalTok{, }\DecValTok{21735}\NormalTok{, }\DecValTok{26304}\NormalTok{, }\DecValTok{31750}\NormalTok{,}
+\DecValTok{36616}\NormalTok{, }\DecValTok{41262}\NormalTok{, }\DecValTok{48953}\NormalTok{, }\DecValTok{57506}\NormalTok{, }\DecValTok{66460}\NormalTok{, }\DecValTok{75641}\NormalTok{) }\CommentTok{\#Feb27{-}March27}
+
+\NormalTok{fr }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{17}\NormalTok{, }\DecValTok{38}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{130}\NormalTok{, }\DecValTok{178}\NormalTok{, }\DecValTok{212}\NormalTok{, }\DecValTok{285}\NormalTok{, }\DecValTok{423}\NormalTok{, }\DecValTok{613}\NormalTok{, }\DecValTok{716}\NormalTok{, }\DecValTok{1126}\NormalTok{, }\DecValTok{1412}\NormalTok{,}
+\DecValTok{1784}\NormalTok{, }\DecValTok{2281}\NormalTok{, }\DecValTok{2876}\NormalTok{, }\DecValTok{3661}\NormalTok{, }\DecValTok{4499}\NormalTok{, }\DecValTok{5423}\NormalTok{, }\DecValTok{6633}\NormalTok{, }\DecValTok{7730}\NormalTok{, }\DecValTok{9134}\NormalTok{, }\DecValTok{10995}\NormalTok{, }\DecValTok{12612}\NormalTok{, }\DecValTok{14459}\NormalTok{, }
+\DecValTok{16018}\NormalTok{, }\DecValTok{19856}\NormalTok{, }\DecValTok{22302}\NormalTok{, }\DecValTok{25233}\NormalTok{, }\DecValTok{29155}\NormalTok{) }\CommentTok{\#Feb27{-}March27}
+
+\NormalTok{uk }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{18}\NormalTok{, }\DecValTok{22}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{42}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{69}\NormalTok{, }\DecValTok{109}\NormalTok{, }\DecValTok{164}\NormalTok{, }\DecValTok{220}\NormalTok{, }\DecValTok{271}\NormalTok{, }\DecValTok{352}\NormalTok{, }\DecValTok{412}\NormalTok{, }\DecValTok{469}\NormalTok{, }\DecValTok{617}\NormalTok{, }
+\DecValTok{876}\NormalTok{, }\DecValTok{1282}\NormalTok{, }\DecValTok{1766}\NormalTok{, }\DecValTok{2244}\NormalTok{, }\DecValTok{2605}\NormalTok{, }\DecValTok{3047}\NormalTok{, }\DecValTok{3658}\NormalTok{, }\DecValTok{4427}\NormalTok{, }\DecValTok{5426}\NormalTok{, }\DecValTok{6481}\NormalTok{, }\DecValTok{7736}\NormalTok{, }\DecValTok{8934}\NormalTok{, }
+\DecValTok{10312}\NormalTok{, }\DecValTok{12650}\NormalTok{, }\DecValTok{15025}\NormalTok{, }\DecValTok{17717}\NormalTok{) }\CommentTok{\#Feb27{-}March27}
+
+\NormalTok{de }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{17}\NormalTok{, }\DecValTok{21}\NormalTok{, }\DecValTok{47}\NormalTok{, }\DecValTok{57}\NormalTok{, }\DecValTok{111}\NormalTok{, }\DecValTok{129}\NormalTok{, }\DecValTok{157}\NormalTok{, }\DecValTok{196}\NormalTok{, }\DecValTok{262}\NormalTok{, }\DecValTok{400}\NormalTok{, }\DecValTok{684}\NormalTok{, }\DecValTok{847}\NormalTok{, }\DecValTok{902}\NormalTok{, }\DecValTok{1139}\NormalTok{, }
+\DecValTok{1296}\NormalTok{, }\DecValTok{1567}\NormalTok{, }\DecValTok{2369}\NormalTok{, }\DecValTok{3062}\NormalTok{, }\DecValTok{3795}\NormalTok{, }\DecValTok{4838}\NormalTok{, }\DecValTok{6012}\NormalTok{, }\DecValTok{7156}\NormalTok{, }\DecValTok{8198}\NormalTok{, }\DecValTok{14138}\NormalTok{, }\DecValTok{18187}\NormalTok{, }\DecValTok{21463}\NormalTok{, }
+\DecValTok{24774}\NormalTok{, }\DecValTok{29212}\NormalTok{, }\DecValTok{31554}\NormalTok{, }\DecValTok{36508}\NormalTok{) }\CommentTok{\#Feb26{-}March26}
+\end{Highlighting}
+\end{Shaded}
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \setcounter{enumii}{2}
+  \tightlist
+  \item
+    Plot the data in a linear plot, coloring each country with a
+    different colour. What do you observe?
+  \item
+    Plot the data in a semi-log plot (using the plot option
+    \texttt{log=”y”}), coloring each country with a different color.
+    What do you observe?
+  \item
+    Carry out a linear regression with the data of each country (using
+    the log of the n values) and estimate the growth rate R. Are the
+    values the same for all countries? Do they vary over time?
+  \item
+    Knowing that \[R_0 = R^\tau\] and that the infectious period
+    (\(\tau\)) duration is 10 days, what are the \(R_0\)'s in different
+    countries?
+  \item
+    Write a for loop to simulate geometric (exponential) growth, going
+    from time t in 1:100, and storing the population size values at each
+    time step t+1 in variable n based on the population values at time
+    t, i.e.~\texttt{n{[}t+1{]}\textless{}-R*n{[}t{]}}. Don't forget to
+    initialize the population size before the for loop with
+    \texttt{n\textless{}-1}. Plot a couple of runs of the for loop with
+    different R values (for instance \texttt{R=1.01} and \texttt{R=1.1})
+    in linear scale.
+  \item
+    Given that you know the solution of the geometric growth equation to
+    be \(n(t)=n_0 R^t\), create a vector of values with this formula
+    using the same R as you used above, but starting with
+    \texttt{n0\textless{}-2} and overlay them on the plot.
+  \end{enumerate}
+\end{enumerate}
+
+\newpage{}
+
+\section{Population Viability
+Analysis}\label{population-viability-analysis}
+
+\includegraphics{images/IUCN_redlist.png}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Consider a population with exponential growth but that exhibits
+  environmental stochasticity, with the logarithm of the population
+  growth rate following a normal distribution with mean
+  \(\bar{r}=\log(\bar{R})\) and variance \(v\). Assume that the
+  population has an on-off density dependence and cannot grow above the
+  carrying capacity \(K\). According to Foley (1994)\footnote{Foley, P.
+    (1994) Predicting Extinction Times from Environmental Stochasticity
+    and Carrying-Capacity. \emph{Conservation Biology} \textbf{8}:
+    124--137.} the expect time to extinction is
+  \[T=\frac{1}{s r}[e^{s \log(k)}(1-e^{-s \log(N_0)} )-s \log(N_0)]\]
+  where \(s=2r/v\).
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    Plot the mean extinction times, \(T\), as a function of \(r\),
+    \(v\), \(n_0\), and \(K\). Please comment each plot. \(r\) can carry
+    from 0.01 to 0.2, \(v\) can vary from 0.05 to 1.0, \(n0\) can vary
+    from 0 to 10, and \(K\) can vary from 10 to 500. Use as base
+    parameters \texttt{n0=10}, \texttt{K=100}, \texttt{v=0.3} and
+    \texttt{r=0.01}.
+  \item
+    Write a function that simulates a population with these dynamics
+    numerically. Start by using the for loop that you developed in Lab 2
+    and modify it to include a carrying capacity and growth rate that is
+    taken every year from a normal distribution. The function should
+    take parameter \texttt{n0}, \texttt{r}, \texttt{v}, and \texttt{K}.
+    It should return the vector of the population sizes over time.
+  \item
+    Simulate the dynamics with the following parameters:
+
+    \begin{enumerate}
+    \def\labelenumiii{\arabic{enumiii}.}
+    \tightlist
+    \item
+      \texttt{n0=3}; \texttt{r=0.01}; \texttt{v=0.2}; \texttt{K=500}
+    \item
+      \texttt{n0=100}; \texttt{r=0.01}; \texttt{v=0.2}; \texttt{K=500};
+    \end{enumerate}
+  \item
+    \textbf{Extended credit}: Compare the model predictions with the
+    results from the analytical approximation of Foley. You need to do
+    many simulations to reach the predicted extinction times from Foley.
+    For instance, you can create a function that call the function
+    developed in (b) and executes it 100 times, returning the median
+    time to extinction across the simulations.
+  \end{enumerate}
+\end{enumerate}
+
+\newpage{}
+
+\section{The camera trapper}\label{the-camera-trapper}
+
+A researcher place camera traps at a grid of sites during 19 days to
+observe roe-deer.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Load the data on the file roe\_deer\_2016\_r.csv into R. Briefly
+  describe the structure of the dataset.
+\item
+  Case 1: Ignoring detection probability.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \tightlist
+  \item
+    Build a vector that for each site takes value 1 when roe-deer is
+    present and 0 when is absent.
+  \item
+    Using maximum-likelihood estimate the occupancy probability
+    (\(\psi\)). First create a function that takes as parameters psi and
+    a vector of presence/absences and returns the likelihood. Then plot
+    that function for a range of \(\Psi\) values and find the \(\psi\)
+    value that maximizes the function.
+  \item
+    Assume that based on previous work we know that occupancy is
+    somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate
+    the posterior probability distribution for the occupancy
+    \(P(\psi)\).
+  \end{enumerate}
+
+  Help: A function returning the \(P(\psi|data)\) . It takes as
+  parameters a vector \texttt{y} of presences/absences, a value for
+  \texttt{psi}, and a function for the prior distribution of \(\psi\)
+  named \texttt{priorpsi}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{occupancybayesian }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(y,psi,priorpsi)}
+\NormalTok{\{}
+\NormalTok{  integrand }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)}
+      \FunctionTok{occupancylikelihood}\NormalTok{(y,x)}\SpecialCharTok{*}\FunctionTok{priorpsi}\NormalTok{(x)}
+  \FunctionTok{occupancylikelihood}\NormalTok{(y,psi)}\SpecialCharTok{*}\FunctionTok{priorpsi}\NormalTok{(psi)}\SpecialCharTok{/}
+      \FunctionTok{integrate}\NormalTok{(integrand, }\AttributeTok{lower =} \FloatTok{0.01}\NormalTok{, }\AttributeTok{upper =} \FloatTok{0.99}\NormalTok{)}\SpecialCharTok{$}\NormalTok{value}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+  A function returning \(P(\psi)\), the prior distribution of \(\psi\)
+  values. It takes as parameters a value for \texttt{psi.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prior }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(psi) }
+\NormalTok{\{ }
+  \FunctionTok{dunif}\NormalTok{(psi,}\FloatTok{0.2}\NormalTok{,}\FloatTok{0.5}\NormalTok{) }
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+\item
+  Case 2: Using a hierarchical model with detection probability
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Using maximum-likelihood estimate the occupancy probability
+    (\(\Psi\)) and detection probability (\(p\)).
+  \end{enumerate}
+\end{enumerate}
+
+\includegraphics{images/RoeDeer.jpg}
+
+\newpage{}
+
+\section{Managing a fishery}\label{managing-a-fishery}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Consider that you are managing a fishery with the following dynamics:
+  \[dn/dt = 0.2 n (1-n/10000) \]
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii})}
+  \tightlist
+  \item
+    Plot the production function of the fishery, indicating the stock
+    size for the maximum sustainable yield and the corresponding
+    production level.
+  \item
+    Suppose you establish an annual quota (harvest) that is equivalent
+    to 50\% of the maximum sustainable yield. What are the two stock
+    size levels that sustainably allow that exploitation level?
+  \item
+    Explore what happen when you manage this fishery for 100 years.
+    Start by writing a function that simulates the logistic growth above
+    with a constant harvest. The function should take as parameters the
+    initial population size n0 (the stock of the fishery), the annual
+    harvest h, and the number of years for which you simulate the
+    population dynamics and return a vector with the population sizes
+    over time. Discuss the results of the following experiments.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{Experiment 1:} Set the harvest equal to the production at
+      MSY and initial population size at carrying capacity.
+    \item
+      \textbf{Experiment 2}. Set the harvest equal to the production at
+      MSY and initial population size at the stock size of MSY
+    \item
+      \textbf{Experiment 3.} Set the harvest equal to 50\% of the
+      maximum sustainable yield and initial population size at carrying
+      capacity.
+    \item
+      \textbf{Experiment 4.} Set the harvest equal to the production at
+      MSY and initial population size at the stock size of MSY - 1000
+      individuals.
+    \item
+      \textbf{Experiment 5.} Set the harvest equal to the production at
+      MSY and initial population size at the stock size of MSY - 1000
+      individuals.
+    \end{itemize}
+  \item
+    Explain why in a system with constant quotas, MSY is not stable and
+    should not be the management goal.
+  \item
+    \textbf{Extra credit}: Modify the logistic growth function to have
+    stochastic dynamics so that there is a variance of 10\% in the
+    annual productivity. Simulate again experiment 2 a few times. What
+    happens?
+  \item
+    Discuss how these results relate with the paper of Worm et al (2009)
+    about the need to rebuild fisheries.
+  \end{enumerate}
+\end{enumerate}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/Gadus_morhua.JPG}
+
+}
+
+\caption{Atlantic cod (Gadus morhua). Source: Hans-Petter Fjeld,
+CC-BY-SA, Wikipedia.}
+
+\end{figure}%
+
+\newpage{}
+
+\section{Road Kill}\label{road-kill}
+
+\textbf{Populations in space and the impacts of roads}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4911}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5089}}@{}}
+\toprule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\emph{The \textbf{Red fox}}
+
+\emph{\ldots So, while they may be most active at night.}
+
+\emph{Red foxes are especially active during the}
+
+\emph{daytime in \textbf{spring and summer (April-Sept)}}
+
+\emph{as they are foraging for food to feed their young.}
+
+Source photo: Wikipedia, CC0. & \hfill
+\includegraphics[width=3.59375in,height=\textheight]{images/RedFox.jpg} \\
+\end{longtable}
+
+\textbf{Goals of the exercise}:
+
+\begin{itemize}
+\item
+  Identify road segments with hotspots of red fox-car-collisions.
+\item
+  What impact do activity patterns have on the rate of
+  animal-car-collision hotspots?
+\item
+  Use the False Discovery Rate (FDR) method to identify such hotspots.
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Please install the following R packages
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(sf)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(fuzzySim)}
+\FunctionTok{library}\NormalTok{(grid)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Load the \emph{roadkill} dataset.
+\item
+  Explain the structure of the dataset.
+\item
+  Show that differences in seasonal activity patterns impact the FDR
+  hotspot results in red fox-car-collisions.
+\item
+  How many hotspots were detected for the active season?
+\item
+  Plot, based on the FDR method, true and ``false'' hotspots. Explain
+  the general geographic locations of the hotspots and those vary
+  between the two different seasons.
+\item
+  Think about conservation management implications.
+\end{enumerate}
+
+\newpage{}
+
+\section{Simulating a neutral
+community}\label{simulating-a-neutral-community}
+
+The neutral theory in ecology provides a mechanistic explanation for
+species abundance distributions. It seeks to understand the impact of
+speciation, extinction, dispersal and ecological drift on the species
+abundance distribution (SAD), assuming that all species have equal
+opportunities (Hubbell, 2001).
+
+It is important to note that the neutral theory is a model created to
+explain a pattern of relative abundance within communities, but it does
+not necessarily reflect reality (communities' mechanisms). The neutral
+theory utilizes a model based on the dynamics of a species' population,
+which is governed by generalized birth and death events, including
+speciation, immigration, and emigration (Rosindell et al (2011).
+
+\begin{figure}[H]
+
+{\centering \includegraphics{images/neutral.png}
+
+}
+
+\caption{Diagram of the dynamics of communities in the neutral theory of
+biodiversity (from Rosindell et al 2011).}
+
+\end{figure}%
+
+The neutral theory paradox is that in absence of migration or mutation
+diversity gradually declines to zero or monodominance. Let's see what
+happens to species richness and the species abundance distribution over
+time for different parameters of the model. Start by installing the
+package \texttt{untb.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Without mutation or dispersal (pure ecological drift):} We
+  start with a local community with 20 species, each with 25
+  individuals. The simulation then runs for 2500 generations where 10
+  individuals die per generation. Mutation rate is zero and immigration
+  rate is zero
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    Plot the number of species over time.
+  \item
+    Plot the species abundance distribution at time 1, 100 and 2500
+  \item
+    Plot the map of individuals at those time steps.
+  \end{enumerate}
+\item
+  \textbf{With point mutation:} Same parameters as (1) but with
+  speciation rate of 0.1.
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \item
+    Plot the number of species over time.
+  \item
+    Plot the species abundance distribution at time 1, 100 and 2500
+  \item
+    Plot the map of individuals at those time steps.
+  \end{enumerate}
+\item
+  \textbf{{[}Extra Credit{]} With immigration:} Same parameters as (1)
+  but immigration rate greater than zero. Play with different abundance
+  distributions for the metacommunity.
+\end{enumerate}
+
+\newpage{}
+
+\section{Monitoring biodiversity}\label{monitoring-biodiversity}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Exploring the BBS dataset
+
+  \begin{enumerate}
+  \def\labelenumii{\alph{enumii}.}
+  \tightlist
+  \item
+    Load the file Florida.csv into R. Briefly describe the structure of
+    the dataset.
+  \item
+    Map the monitored transects/routes in Florida's map. Use the maps
+    library to plot the counties of florida as a base map.
+  \item
+    For transect 4 and transect 109 in year 2018 plot calculate the
+    species richness, Shannon diversity index H and evenness J of both
+    transects, with H being \[H=-\sum_i (p_i \ln p_i)\] where \(p_i\) is
+    defined as the proportion of individuals found in species \(i\).
+    Compare the two transects.
+  \item
+    Plot the species abundance distribution and abundance-rank for both
+    transects. What do you observe?
+  \item
+    Choose one transect and plot the species richness, Shannon
+    diversity, and geometric mean abundance over time
+  \item
+    \emph{Extra credit 1:} Produce a map of the trends of one these
+    metrics across Florida (for instance coloring different points
+    according to the trend)
+  \item
+    \emph{Extra credit 2:} Estimate the number of species in Florida by
+    combining the different transects and using one of the estimators.
+    Use bootstrap and/or jacknife to calculate confidence intervals.
+  \end{enumerate}
+\end{enumerate}
+
+\newpage{}
+
+
+\backmatter
+
+
+\end{document}

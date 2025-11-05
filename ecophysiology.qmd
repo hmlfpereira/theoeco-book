@@ -132,7 +132,7 @@ polygon(X,Y,col="green")
 Now that we have the climate space we can plot on top of it some empirical data of how the conditions are in the field during the day. We can for instance consider two micro-habitats, a rock (in the sun) and a bush (in the shade). Suppose we obtain some data from temperature loggers that were installed in each micro-habitat , recording every three hours the values of temperature and radiation as tabled below.
 
 | Time (hh:mm) | Radiation rock (cal/h) | Radiation bush (cal/h) | Temperature (ºC) |
-|------------------|------------------|------------------|------------------|
+|--------------|------------------------|------------------------|------------------|
 | 00:00        | 150                    | 150                    | 18               |
 | 03:00        | 150                    | 150                    | 13               |
 | 06:00        | 800                    | 450                    | 10               |
@@ -395,7 +395,7 @@ names(df)
 
 There are 29 different variables within `df`, but this exercise will focus only in a few of them including `context`, `perch`, `bodytemp.C`, `perch.temp.C`, `ambient.temp.C`, and `local.time.decimal` where `context` indicates if the lizard was captured in natural or urban spaces; `perch` refers to the microhabitat where the lizard was found; `bodytemp.C` is body temperature $b$; `perch.temp.C` is substrate temperature $T_s$; `ambient.temp.C` is air temperature $a$; and `local.time.decimal` is the time of the day in hours when the lizards was captured and measured.
 
-### Exploring the thermophysiological data of *A. cristatellus.*
+### Exploring the thermophysiological data of *A. cristatellus.* {#sec-anolis_cristatellus}
 
 As covered in the first chapter, $b$ increases proportionally to $a$ as indicated in equation (1.2). Let's check if the data confirms this equation.
 
