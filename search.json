@@ -276,7 +276,7 @@
     "href": "labs.html",
     "title": "Appendix B — Computational labs",
     "section": "",
-    "text": "B.1 Climate space of an ectotherm\nSolar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (f) into the animal is given by the heat flux equation:\n\\[f = q\\ –h*(b - a)\\]\nStart by reading the ?sec-tutorial. The tutorial has a data frame containing data on individuals A. cristatellus living in urban and forested areas in three cities in Puerto Rico, giving us the perfect opportunity to assess the potential thermal effects of habitat upon this species. To do this:\nHint: to filter the data you can use the subset function in R\n# example filtering data from anoles only from San Jose sites\ndf_sanjose &lt;- subset(df, Site == \"San Jose\")",
+    "text": "B.1 Climate space of an ectotherm\nSolar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (f) into the animal is given by the heat flux equation:\n\\[f = q\\ –h*(b - a)\\]\nSection 1.4.2 presents a data frame containing data on individuals A. cristatellus living in urban and forested areas in three cities in Puerto Rico, giving us the perfect opportunity to assess the potential thermal effects of habitat upon this species. To do this:\nHint: to filter the data you can use the subset function in R\n# example filtering data from anoles only from San Jose sites\ndf_sanjose &lt;- subset(df, Site == \"San Jose\")",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>B</span>  <span class='chapter-title'>Computational labs</span>"

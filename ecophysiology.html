@@ -307,7 +307,7 @@ window.Quarto = {
   <li><a href="#statistical-confrontation-regressing-the-climate-space" id="toc-statistical-confrontation-regressing-the-climate-space" class="nav-link" data-scroll-target="#statistical-confrontation-regressing-the-climate-space"><span class="header-section-number">1.4</span> Statistical confrontation: regressing the climate space</a>
   <ul class="collapse">
   <li><a href="#calling-the-dataset-from-dryad" id="toc-calling-the-dataset-from-dryad" class="nav-link" data-scroll-target="#calling-the-dataset-from-dryad"><span class="header-section-number">1.4.1</span> Calling the dataset from Dryad</a></li>
-  <li><a href="#exploring-the-thermophysiological-data-of-a.-cristatellus." id="toc-exploring-the-thermophysiological-data-of-a.-cristatellus." class="nav-link" data-scroll-target="#exploring-the-thermophysiological-data-of-a.-cristatellus."><span class="header-section-number">1.4.2</span> Exploring the thermophysiological data of <em>A. cristatellus.</em></a></li>
+  <li><a href="#sec-anolis_cristatellus" id="toc-sec-anolis_cristatellus" class="nav-link" data-scroll-target="#sec-anolis_cristatellus"><span class="header-section-number">1.4.2</span> Exploring the thermophysiological data of <em>A. cristatellus.</em></a></li>
   <li><a href="#interpreting-the-results-of-our-model." id="toc-interpreting-the-results-of-our-model." class="nav-link" data-scroll-target="#interpreting-the-results-of-our-model."><span class="header-section-number">1.4.3</span> Interpreting the results of our model.</a></li>
   <li><a href="#how-good-our-model-is-performing" id="toc-how-good-our-model-is-performing" class="nav-link" data-scroll-target="#how-good-our-model-is-performing"><span class="header-section-number">1.4.4</span> How good our model is performing?</a></li>
   </ul></li>
@@ -485,10 +485,10 @@ Table&nbsp;1.1: Hypothetical radiation values in two micro-habitats and air temp
 <div aria-describedby="tbl-temprad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 17%">
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 22%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -771,8 +771,8 @@ Figure&nbsp;1.7: The geographic space and climate space of Lacerta schreiberi.
 </div>
 <p>There are 29 different variables within <code>df</code>, but this exercise will focus only in a few of them including <code>context</code>, <code>perch</code>, <code>bodytemp.C</code>, <code>perch.temp.C</code>, <code>ambient.temp.C</code>, and <code>local.time.decimal</code> where <code>context</code> indicates if the lizard was captured in natural or urban spaces; <code>perch</code> refers to the microhabitat where the lizard was found; <code>bodytemp.C</code> is body temperature <span class="math inline">\(b\)</span>; <code>perch.temp.C</code> is substrate temperature <span class="math inline">\(T_s\)</span>; <code>ambient.temp.C</code> is air temperature <span class="math inline">\(a\)</span>; and <code>local.time.decimal</code> is the time of the day in hours when the lizards was captured and measured.</p>
 </section>
-<section id="exploring-the-thermophysiological-data-of-a.-cristatellus." class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="exploring-the-thermophysiological-data-of-a.-cristatellus."><span class="header-section-number">1.4.2</span> Exploring the thermophysiological data of <em>A. cristatellus.</em></h3>
+<section id="sec-anolis_cristatellus" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="sec-anolis_cristatellus"><span class="header-section-number">1.4.2</span> Exploring the thermophysiological data of <em>A. cristatellus.</em></h3>
 <p>As covered in the first chapter, <span class="math inline">\(b\)</span> increases proportionally to <span class="math inline">\(a\)</span> as indicated in equation (1.2). Let’s check if the data confirms this equation.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to call a variable directly from a data frame one must use $, indicating the name of the dataframe at the left and the name of the variable (columnt on the right).</span></span>
