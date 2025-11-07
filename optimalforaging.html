@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -206,12 +226,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conflict resolution in ecology and evolution: war and peace</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./movement.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Movement and dispersal<strong>:</strong> should I stay or should I go?</span></span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -226,7 +240,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./demography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Demography: boom or bust</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Demography: boom or bust</span></span></a>
   </div>
 </li>
       </ul>
@@ -243,11 +257,17 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modellingbiochange.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling biodiversity change: winners and losers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modelling biodiversity change: winners and losers</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -315,7 +335,7 @@ window.Quarto = {
 </header>
 
 
-<p>Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. This approach is rooted in the idea that natural selection, under certain conditions, maximize the average fitness of individuals in a population. It underpins many of the studies in behavioral ecology, and lead to the development during the 1980’s.of a sub-field dedicated to the study of foraging decisions, known as optimal foraging. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two “idealized” types of foragers: searching predator and sit-and-wait predators.</p>
+<p>Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. This approach is rooted in the idea that natural selection, under certain conditions, maximize the average fitness of individuals in a population. It underpins many of the studies in behavioral ecology, and lead to the development during the 1970’s and 1980’s.of a sub-field dedicated to the study of foraging decisions, known as optimal foraging <span class="citation" data-cites="pyke1984">(see for instance <a href="references.html#ref-pyke1984" role="doc-biblioref">Pyke 1984</a>)</span>. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two “idealized” types of foragers: searching predator and sit-and-wait predators.</p>
 <!--# Say something about the main theorem of natural selection and climbing the fitness landscape  or Fisher's fundamental theorem-->
 <section id="searching-predator" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="searching-predator"><span class="header-section-number">2.1</span> Searching predator</h2>
@@ -555,6 +575,7 @@ ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
 </div>
 </div>
 </div>
+<p>If you wanna read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden [@-shafir1998].</p>
 </section>
 <section id="does-natural-selection-maximizes-fitness" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="does-natural-selection-maximizes-fitness"><span class="header-section-number">2.3</span> Does natural selection maximizes fitness?</h2>
@@ -573,6 +594,11 @@ ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
 <h2 data-number="2.5" class="anchored" data-anchor-id="section"><span class="header-section-number">2.5</span> </h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-pyke1984" class="csl-entry" role="listitem">
+Pyke, Graham H. 1984. <span>“Optimal Foraging Theory: A Critical Review.”</span> <em>Annual Review of Ecology and Systematics</em> 15 (January): 523–75. <a href="http://www.jstor.org/stable/2096959">http://www.jstor.org/stable/2096959</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

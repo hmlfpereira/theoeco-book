@@ -50,7 +50,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./movement.html" rel="next">
+<link href="./demography.html" rel="next">
 <link href="./optimalforaging.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -192,12 +192,6 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conflict resolution in ecology and evolution: war and peace</span></span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./movement.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Movement and dispersal<strong>:</strong> should I stay or should I go?</span></span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -212,7 +206,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./demography.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Demography: boom or bust</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Demography: boom or bust</span></span></a>
   </div>
 </li>
       </ul>
@@ -229,11 +223,17 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./modellingbiochange.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Modelling biodiversity change: winners and losers</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Modelling biodiversity change: winners and losers</span></span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
@@ -268,7 +268,8 @@ window.Quarto = {
    
   <ul>
   <li><a href="#the-prisoners-dillema-and-the-evolution-of-cooperation" id="toc-the-prisoners-dillema-and-the-evolution-of-cooperation" class="nav-link active" data-scroll-target="#the-prisoners-dillema-and-the-evolution-of-cooperation"><span class="header-section-number">3.1</span> The prisoner’s dillema and the evolution of cooperation</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">3.2</span> References</a></li>
+  <li><a href="#the-hawk-dove-game-and-animal-contests" id="toc-the-hawk-dove-game-and-animal-contests" class="nav-link" data-scroll-target="#the-hawk-dove-game-and-animal-contests"><span class="header-section-number">3.2</span> The Hawk-Dove game and animal contests</a></li>
+  <li><a href="#the-war-of-atttrition" id="toc-the-war-of-atttrition" class="nav-link" data-scroll-target="#the-war-of-atttrition"><span class="header-section-number">3.3</span> The war of atttrition</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/hmlfpereira/theoeco-book/blob/main/gametheory.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
@@ -296,21 +297,41 @@ window.Quarto = {
 
 <p>In the previous chapter we looked at the decisions of individual animals assuming that the the decisions where taken by each forager alone. For instance, for the sit-and-wait predator we assumed that the territory could be as large as the predator wanted, and that the optimal territory size was the one where the energy per unit time was maximized. But what happens if the territory is so large that it starts intruding in the territory of the neighbors? Or in other words, what happens if the optimal territory size is for instance 1 <span class="math inline">\(m^2\)</span> , but the density of the predators is so high that there is more than 1 predator per square meter? Then there is a potential conflict between individuals and it may not be possible to have territory sizes that are optimal. More generally, one can say that the decision of an individual now affects the decisions of its conspecifics.</p>
 <p>In evolutionary contexts, where decisions or phenotypes are determined by genes, we enter the so called realm of frequency-dependent selection. In contrasts with frequency independent selection, where the fitness of a genotype depends only on the environment, in frequence-dependent selection the fitness of a genotype depends also on the frequency of the different genotypes in the population.</p>
-<p>The analysis of this kind of behavior conflict or evolutionary dynamics is the topic of game theory, particularly non-cooperative game theory. Some of the key concepts of game theory for animal behavior were developed by the biologist John Maynard Smith in the 1970’s and beautiful explained in his book “Evolution and the Theory of Games” <span class="citation" data-cites="maynardsmith1982">Maynard Smith (<a href="ecophysiology.html#ref-maynardsmith1982" role="doc-biblioref">1982</a>)</span>. We now know that similar ideas were developed independently by the mathematician John Nash, twenty years earlier in the 1950’s, ideas that would lead to Nash being awarded the Nobel Prize of Economics in 1994.</p>
-<p>In this chapter we examine three non-cooperative games that model situations of behavior or evolutionary conflict: the Prisionner’s dillema, the Hawk-Dove game, and the war of attrition. They are called non-cooperative because each “player” does not know what the other “player” is going to do in the game, and the players cannot discuss the strategy that they are going to take in any cooperative game.</p>
+<p>The analysis of this kind of behavior conflict or evolutionary dynamics is the topic of game theory, particularly non-cooperative game theory. Some of the key concepts of game theory for animal behavior were developed by the biologist John Maynard Smith in the 1970’s and beautiful explained in his book “Evolution and the Theory of Games” <span class="citation" data-cites="maynardsmith1982">Maynard Smith (<a href="references.html#ref-maynardsmith1982" role="doc-biblioref">1982</a>)</span>. We now know that similar ideas were developed independently by the mathematician John Nash, twenty years earlier in the 1950’s, ideas that would lead to Nash being awarded the Nobel Prize of Economics in 1994.</p>
+<p>In this chapter we examine three non-cooperative games that model situations of behavior or evolutionary conflict: the prisoner’s dillema, the Hawk-Dove game, and the war of attrition. They are called non-cooperative because each “player” does not know what the other “player” is going to do in the game, and the players cannot discuss the strategy that they are going to take in any cooperative game. They are also sometimes described as closed envelope games. This is, each player should write what “strategy” it adopts in each play without knowing the choice of the other player.</p>
 <section id="the-prisoners-dillema-and-the-evolution-of-cooperation" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="the-prisoners-dillema-and-the-evolution-of-cooperation"><span class="header-section-number">3.1</span> The prisoner’s dillema and the evolution of cooperation</h2>
-<p>Game theory and evolutionary stable strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic population model. 2 player games, discrete strategies: Hawk-Dove; Prisioner’s dillema</p>
+<p>A lot of the empahsis on evolutionary biology and ecology is place on competition, on the idea of “survival of the fittest” and that selection operates at the level of individuals favoring selfish behaviors. However, cooperation is super common in nature, from praire dogs taking turn as sentinels, informing the group of the arrival of a predator, to back scratching in primates. One beautiful explanation for such cooperation is based on the principles of kin selection, developed by Bill Hamilton, or the idea that it makes evolutionary sense to help others if they are genetically related to you, as this increases the probability of the same genes you have to be passed into the next generation. Hamilton’s contribution to this problem was seminal because he noted that genetic relatedness can be particularly high between females in haploid-diploid systems such as bees and ants, leading to a widespread of cooperating in rearing offspring and even the abdication of many individuals from reproducing in favor of assisting the queen. But can cooperation also evolve in the absence of genetic relatedness? This is the problem that can be studied with the prisoner’s dilemma.</p>
+<p>In the prisionner’s dilemma game there are two players. Each can choose one of two strategies in each round of the game, defect or cooperate. The pay-off matrix of the Prisionner’s Dillema, from the pespective of player 1 (rows), playing against player 2 (columns).</p>
+<p><span class="math display">\[
+\begin{array}{c|cc}\text{Player 1} \backslash \text{Player 2} &amp; C &amp; D \\
+\hline
+C &amp; 3 &amp; 0 \\D &amp; 5 &amp; 1\end{array}
+\]</span></p>
+<p>The Evolutionary Stable Strategy (also known as Nash Equilibrium<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>) is the best response to itself, this is is it is the strategy that when is dominant in the population cannot be invaded by any other strategy.</p>
 </section>
-<section id="references" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="references"><span class="header-section-number">3.2</span> References</h2>
+<section id="the-hawk-dove-game-and-animal-contests" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="the-hawk-dove-game-and-animal-contests"><span class="header-section-number">3.2</span> The Hawk-Dove game and animal contests</h2>
+</section>
+<section id="the-war-of-atttrition" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="the-war-of-atttrition"><span class="header-section-number">3.3</span> The war of atttrition</h2>
+<!--# Nash equilibrium, genetic population model-->
+
+
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-dugatkin1998" class="csl-entry" role="listitem">
+Dugatkin, Lee Alan, and Hudson Kern Reeve. 1998. <em>Game Theory &amp; Animal Behavior</em>. Oxford University Press.
+</div>
 <div id="ref-maynardsmith1982" class="csl-entry" role="listitem">
 Maynard Smith, J. 1982. <em>Evolution and the Theory of Games</em>. Cambridge: Cambridge University Press.
 </div>
 </div>
-
-
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>There’s a small difference between the two, see <span class="citation" data-cites="dugatkin1998">(<a href="references.html#ref-dugatkin1998" role="doc-biblioref">Dugatkin and Reeve 1998</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -741,8 +762,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./movement.html" class="pagination-link" aria-label="Movement and dispersal**:** should I stay or should I go?">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Movement and dispersal<strong>:</strong> should I stay or should I go?</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./demography.html" class="pagination-link" aria-label="Demography: boom or bust">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Demography: boom or bust</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
