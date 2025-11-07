@@ -5,7 +5,7 @@ execute:
 
 # Ecophysiology and the climate space: when to bask in the sun?
 
-We are now almost daily bombarded with news about climate change and its impacts on people and ecosystems. But how does climate mechanistically affects organisms? The basic foundations to address this question were laid out by ecophysiology research. Interestingly, at the time that some of seminal research on ecophysiology was carried out, back in the 1960's, climate change was not yet in the radar of most people. The research was driven by the interest in the basic understanding of how biophysical conditions affect organisms. Today the knowledge gained from this research has acquired new importance. This is an area whether the mechanistic knowledge learnt from theory and experiments is now sometimes overlooked because of the massive datasets and machine learning approaches available. But let's start with the basics.
+We are now almost daily bombarded with news about climate change and its impacts on people and ecosystems. But how does climate mechanistically affects organisms? The basic foundations to address this question were laid out by ecophysiology research. Interestingly, at the time that some of seminal research on ecophysiology was carried out, back in the 1940's (see review in [@huey1982]), climate change was not yet in the radar of most people. The research was driven by the interest in the basic understanding of how biophysical conditions affect organisms. Today the knowledge gained from this research has acquired new importance. This is an area whether the mechanistic knowledge learnt from theory and experiments is now sometimes overlooked because of the massive datasets and machine learning approaches available. But let's start with the basics.
 
 ## A model for the body temperature of an animal
 
@@ -132,7 +132,7 @@ polygon(X,Y,col="green")
 Now that we have the climate space we can plot on top of it some empirical data of how the conditions are in the field during the day. We can for instance consider two micro-habitats, a rock (in the sun) and a bush (in the shade). Suppose we obtain some data from temperature loggers that were installed in each micro-habitat , recording every three hours the values of temperature and radiation as tabled below.
 
 | Time (hh:mm) | Radiation rock (cal/h) | Radiation bush (cal/h) | Temperature (ºC) |
-|-----------------|--------------------|--------------------|-----------------|
+|--------------|------------------------|------------------------|------------------|
 | 00:00        | 150                    | 150                    | 18               |
 | 03:00        | 150                    | 150                    | 13               |
 | 06:00        | 800                    | 450                    | 10               |
@@ -344,9 +344,9 @@ ggplot(allpts_bioclim_plot, aes(x=wc2.1_10m_bio_19,y=wc2.1_10m_bio_3,shape=pres,
 
 <!--# author: "Andres Marmol" !-->
 
-Why anoles? Anoles are among the most studied reptile organisms. They are vastly diverse with more than 488 species described until today — circa 11% of all the squamates without considering snakes — due to their outstanding adaptive radiation, which has inspired many to dive-in-depth into understanding how evolution has operated within this group ([Lizards in an Evolutionary Tree](https://doi.org/10.1525/california/9780520255913.001.0001) by J. B. Losos is a highly recommended instructive reading for more info). As a result, very detailed data sets on many species of anoles, including information on micro habitat, field body temperature, activity patterns and morphological traits, performance, etc., can be found online in relatively few time.
+Why anoles? Anoles are among the most studied reptile organisms. They are vastly diverse with more than 488 species described until today — circa 11% of all the squamates without considering snakes — due to their outstanding adaptive radiation, which has inspired many to dive-in-depth into understanding how evolution has operated within this group (Lizards in an Evolutionary Tree by J. B. Losos [-@losos2009] is a highly recommended instructive reading for more info). As a result, very detailed data sets on many species of anoles, including information on micro habitat, field body temperature, activity patterns and morphological traits, performance, etc., can be found online in relatively few time.
 
-In the following steps we will be downloading from Dryad and using a data set created by Winchell et al. (2016) (https://doi.org/10.5061/dryad.h234n) on *Anolis cristatellus* making a pair-comparison of several morphological and thermal traits of individuals living in urban and forested areas at Puerto Rico. *A. cristatellus* is widely distributed across Puerto Rico and can be found in natural and human-intervened spaces easily. It can be seen over ground and laying on the trunks of trees in natural settings, and on walls and metal fences in more urban areas.
+In the following steps we will be downloading from Dryad and using a data set created by Winchell et al. [-@winchella2016] on *Anolis cristatellus* making a pair-comparison of several morphological and thermal traits of individuals living in urban and forested areas at Puerto Rico. *A. cristatellus* is widely distributed across Puerto Rico and can be found in natural and human-intervened spaces easily. It can be seen over ground and laying on the trunks of trees in natural settings, and on walls and metal fences in more urban areas.
 
 ### Calling the dataset from Dryad
 
@@ -505,8 +505,3 @@ In summary, our expectation that lizards body temperature increases depending on
 #| warning: false
 options(repos = c(CRAN = "https://cloud.r-project.org"))
 ```
-
-## References
-
-::: {#refs}
-:::

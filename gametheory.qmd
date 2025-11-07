@@ -11,13 +11,26 @@ In evolutionary contexts, where decisions or phenotypes are determined by genes,
 
 The analysis of this kind of behavior conflict or evolutionary dynamics is the topic of game theory, particularly non-cooperative game theory. Some of the key concepts of game theory for animal behavior were developed by the biologist John Maynard Smith in the 1970's and beautiful explained in his book "Evolution and the Theory of Games" @maynardsmith1982. We now know that similar ideas were developed independently by the mathematician John Nash, twenty years earlier in the 1950's, ideas that would lead to Nash being awarded the Nobel Prize of Economics in 1994.
 
-In this chapter we examine three non-cooperative games that model situations of behavior or evolutionary conflict: the Prisionner's dillema, the Hawk-Dove game, and the war of attrition. They are called non-cooperative because each "player" does not know what the other "player" is going to do in the game, and the players cannot discuss the strategy that they are going to take in any cooperative game.
+In this chapter we examine three non-cooperative games that model situations of behavior or evolutionary conflict: the prisoner's dillema, the Hawk-Dove game, and the war of attrition. They are called non-cooperative because each "player" does not know what the other "player" is going to do in the game, and the players cannot discuss the strategy that they are going to take in any cooperative game. They are also sometimes described as closed envelope games. This is, each player should write what "strategy" it adopts in each play without knowing the choice of the other player.
 
 ## The prisoner's dillema and the evolution of cooperation
 
-Game theory and evolutionary stable strategies. Non-cooperative games: payoffs, Nash equilibrium, genetic population model. 2 player games, discrete strategies: Hawk-Dove; Prisioner's dillema
+A lot of the empahsis on evolutionary biology and ecology is place on competition, on the idea of "survival of the fittest" and that selection operates at the level of individuals favoring selfish behaviors. However, cooperation is super common in nature, from praire dogs taking turn as sentinels, informing the group of the arrival of a predator, to back scratching in primates. One beautiful explanation for such cooperation is based on the principles of kin selection, developed by Bill Hamilton, or the idea that it makes evolutionary sense to help others if they are genetically related to you, as this increases the probability of the same genes you have to be passed into the next generation. Hamilton's contribution to this problem was seminal because he noted that genetic relatedness can be particularly high between females in haploid-diploid systems such as bees and ants, leading to a widespread of cooperating in rearing offspring and even the abdication of many individuals from reproducing in favor of assisting the queen. But can cooperation also evolve in the absence of genetic relatedness? This is the problem that can be studied with the prisoner's dilemma.
 
-## References
+In the prisionner's dilemma game there are two players. Each can choose one of two strategies in each round of the game, defect or cooperate. The pay-off matrix of the Prisionner's Dillema, from the pespective of player 1 (rows), playing against player 2 (columns).
 
-::: {#refs}
-:::
+$$
+\begin{array}{c|cc}\text{Player 1} \backslash \text{Player 2} & C & D \\ 
+\hline
+C & 3 & 0 \\D & 5 & 1\end{array}
+$$
+
+The Evolutionary Stable Strategy (also known as Nash Equilibrium[^gametheory-1]) is the best response to itself, this is is it is the strategy that when is dominant in the population cannot be invaded by any other strategy.
+
+[^gametheory-1]: There's a small difference between the two, see [@dugatkin1998].
+
+## The Hawk-Dove game and animal contests
+
+## The war of atttrition
+
+<!--# Nash equilibrium, genetic population model-->

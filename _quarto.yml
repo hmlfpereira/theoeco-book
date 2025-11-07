@@ -15,18 +15,22 @@ book:
         - ecophysiology.qmd
         - optimalforaging.qmd
         - gametheory.qmd
-        - movement.qmd
+       # - movement.qmd
     - part: "Ecology of populations"
       chapters:
         - demography.qmd
+      # - pva.qmd
+      #  - occupancy.qmd
+      #  - fisheries.qmd
+      #  - popspace.qmd
     - part: "Ecology of communities"
       chapters:
         - modellingbiochange.qmd
+    - references.qmd
   appendices:
     - intro_to_R.qmd
     - labs.qmd
   #  - labs_solutions.qmd     currently empty
-  #  - references.qmd
 
 bibliography: references.bib
 
