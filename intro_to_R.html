@@ -304,6 +304,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<blockquote class="blockquote">
+<p>🚧 <strong>This chapter is under construction. Content may change.</strong></p>
+</blockquote>
 <p>If you are new to <strong>R</strong> you can have a short dive into its main features by working through this tutorial. If you had learnt programming in another computer language, you will be able to skim over this tutorial to find the main differences from what you have learnt to how things are done in <strong>R.</strong></p>
 <section id="basic-data-structures" class="level2" data-number="A.1">
 <h2 data-number="A.1" class="anchored" data-anchor-id="basic-data-structures"><span class="header-section-number">A.1</span> Basic data structures</h2>
@@ -916,7 +919,7 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(lastx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.79</code></pre>
+<pre><code>[1] 4.222</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>d<span class="ot">&lt;-</span><span class="fu">sqrt</span>(lastx<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -929,7 +932,7 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 77.34</code></pre>
+<pre><code>[1] 79.27</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -937,7 +940,7 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 321</code></pre>
+<pre><code>[1] 329</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d[d<span class="sc">&lt;</span><span class="dv">20</span>],<span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -975,7 +978,7 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 <span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>end_time<span class="sc">-</span>start_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 0.005800009 secs</code></pre>
+<pre><code>Time difference of 0.009744167 secs</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1006,7 +1009,7 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 <span id="cb111-4"><a href="#cb111-4" aria-hidden="true" tabindex="-1"></a>end_time <span class="ot">&lt;-</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb111-5"><a href="#cb111-5" aria-hidden="true" tabindex="-1"></a>end_time<span class="sc">-</span>start_time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 0.002110004 secs</code></pre>
+<pre><code>Time difference of 0.004185915 secs</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1076,11 +1079,11 @@ F-statistic:   128 on 1 and 2 DF,  p-value: 0.007722</code></pre>
 <div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ dplyr     1.2.0     ✔ readr     2.1.5
 ✔ forcats   1.0.1     ✔ stringr   1.5.2
 ✔ ggplot2   4.0.0     ✔ tibble    3.3.0
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.2.0     
+✔ purrr     1.2.1     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -1242,10 +1245,19 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"hadley/genzplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ Loading metadata database</code></pre>
+<pre><code></code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>✔ Loading metadata database ... done</code></pre>
+<pre><code>✔ Updated metadata database: 8.00 MB in 10 files.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Updating metadata database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Updating metadata database ... done</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
@@ -1257,18 +1269,18 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 <pre><code>ℹ No downloads are needed</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>✔ 1 pkg + 15 deps: kept 16 [5.5s]</code></pre>
+<pre><code>✔ 1 pkg + 15 deps: kept 10 [50.7s]</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(genzplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(genzplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>genzplyr loaded fr fr 💅
 Your data wrangling is about to be bussin no cap</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
-<span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">yeet</span>(mpg <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
-<span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vibe_check</span>(mpg, cyl, hp) <span class="sc">|&gt;</span></span>
-<span id="cb141-4"><a href="#cb141-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glow_up</span>(<span class="at">kpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>) <span class="sc">|&gt;</span></span>
-<span id="cb141-5"><a href="#cb141-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slay</span>(<span class="fu">desc</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">yeet</span>(mpg <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">|&gt;</span></span>
+<span id="cb144-3"><a href="#cb144-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vibe_check</span>(mpg, cyl, hp) <span class="sc">|&gt;</span></span>
+<span id="cb144-4"><a href="#cb144-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glow_up</span>(<span class="at">kpg =</span> mpg <span class="sc">*</span> <span class="fl">1.6</span>) <span class="sc">|&gt;</span></span>
+<span id="cb144-5"><a href="#cb144-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slay</span>(<span class="fu">desc</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                mpg cyl  hp   kpg
 Toyota Corolla 33.9   4  65 54.24
@@ -1288,24 +1300,24 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete analysis that's absolutely bussin</span></span>
-<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
-<span id="cb143-3"><a href="#cb143-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">yeet</span>(hp <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">|&gt;</span>                    <span class="co"># Yeet the weak cars</span></span>
-<span id="cb143-4"><a href="#cb143-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vibe_check</span>(mpg, cyl, hp, wt) <span class="sc">|&gt;</span>      <span class="co"># Vibe check our columns</span></span>
-<span id="cb143-5"><a href="#cb143-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glow_up</span>(                              <span class="co"># Glow up the data</span></span>
-<span id="cb143-6"><a href="#cb143-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">hp_per_ton =</span> hp <span class="sc">/</span> (wt <span class="sc">/</span> <span class="dv">2</span>),</span>
-<span id="cb143-7"><a href="#cb143-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">efficiency =</span> mpg <span class="sc">/</span> (hp <span class="sc">/</span> <span class="dv">100</span>)</span>
-<span id="cb143-8"><a href="#cb143-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb143-9"><a href="#cb143-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">squad_up</span>(cyl) <span class="sc">|&gt;</span>                     <span class="co"># Squad up by cylinders</span></span>
-<span id="cb143-10"><a href="#cb143-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">no_cap</span>(                               <span class="co"># Get the real stats</span></span>
-<span id="cb143-11"><a href="#cb143-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_hp =</span> <span class="fu">mean</span>(hp),</span>
-<span id="cb143-12"><a href="#cb143-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_mpg =</span> <span class="fu">mean</span>(mpg),</span>
-<span id="cb143-13"><a href="#cb143-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_efficiency =</span> <span class="fu">mean</span>(efficiency),</span>
-<span id="cb143-14"><a href="#cb143-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">squad_size =</span> <span class="fu">n</span>()</span>
-<span id="cb143-15"><a href="#cb143-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb143-16"><a href="#cb143-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">disband</span>() <span class="sc">|&gt;</span>                         <span class="co"># Disband the squads</span></span>
-<span id="cb143-17"><a href="#cb143-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slay</span>(<span class="fu">desc</span>(avg_efficiency)) <span class="sc">|&gt;</span>        <span class="co"># Sort by slay factor</span></span>
-<span id="cb143-18"><a href="#cb143-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">send_it</span>(<span class="dv">10</span>)     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Complete analysis that's absolutely bussin</span></span>
+<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb146-3"><a href="#cb146-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">yeet</span>(hp <span class="sc">&gt;</span> <span class="dv">100</span>) <span class="sc">|&gt;</span>                    <span class="co"># Yeet the weak cars</span></span>
+<span id="cb146-4"><a href="#cb146-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vibe_check</span>(mpg, cyl, hp, wt) <span class="sc">|&gt;</span>      <span class="co"># Vibe check our columns</span></span>
+<span id="cb146-5"><a href="#cb146-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glow_up</span>(                              <span class="co"># Glow up the data</span></span>
+<span id="cb146-6"><a href="#cb146-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">hp_per_ton =</span> hp <span class="sc">/</span> (wt <span class="sc">/</span> <span class="dv">2</span>),</span>
+<span id="cb146-7"><a href="#cb146-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">efficiency =</span> mpg <span class="sc">/</span> (hp <span class="sc">/</span> <span class="dv">100</span>)</span>
+<span id="cb146-8"><a href="#cb146-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb146-9"><a href="#cb146-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">squad_up</span>(cyl) <span class="sc">|&gt;</span>                     <span class="co"># Squad up by cylinders</span></span>
+<span id="cb146-10"><a href="#cb146-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">no_cap</span>(                               <span class="co"># Get the real stats</span></span>
+<span id="cb146-11"><a href="#cb146-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_hp =</span> <span class="fu">mean</span>(hp),</span>
+<span id="cb146-12"><a href="#cb146-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_mpg =</span> <span class="fu">mean</span>(mpg),</span>
+<span id="cb146-13"><a href="#cb146-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_efficiency =</span> <span class="fu">mean</span>(efficiency),</span>
+<span id="cb146-14"><a href="#cb146-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">squad_size =</span> <span class="fu">n</span>()</span>
+<span id="cb146-15"><a href="#cb146-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb146-16"><a href="#cb146-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">disband</span>() <span class="sc">|&gt;</span>                         <span class="co"># Disband the squads</span></span>
+<span id="cb146-17"><a href="#cb146-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slay</span>(<span class="fu">desc</span>(avg_efficiency)) <span class="sc">|&gt;</span>        <span class="co"># Sort by slay factor</span></span>
+<span id="cb146-18"><a href="#cb146-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">send_it</span>(<span class="dv">10</span>)     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
     cyl avg_hp avg_mpg avg_efficiency squad_size
@@ -1320,9 +1332,9 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 <h3 data-number="A.6.3" class="anchored" data-anchor-id="introduction-to-gpplot2"><span class="header-section-number">A.6.3</span> Introduction to gpplot2</h3>
 <p>ggplot2 is based on ideas from the book “A grammar of graphics” by Leland Wilkinson and developed by Hadley Wickham, which also developed tidyverse.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb145-2"><a href="#cb145-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb145-3"><a href="#cb145-3" aria-hidden="true" tabindex="-1"></a>cars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb148-3"><a href="#cb148-3" aria-hidden="true" tabindex="-1"></a>cars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   speed dist
 1      4    2
@@ -1376,7 +1388,7 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 49    24  120
 50    25   85</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars<span class="sc">$</span>speed,cars<span class="sc">$</span>dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars<span class="sc">$</span>speed,cars<span class="sc">$</span>dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1384,7 +1396,7 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cars, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>speed,<span class="at">y=</span>dist)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">colour=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cars, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>speed,<span class="at">y=</span>dist)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">colour=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1394,9 +1406,9 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(cars, <span class="fu">aes</span>(speed,dist))<span class="sc">+</span></span>
-<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span><span class="fu">geom_line</span>()</span>
-<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(cars, <span class="fu">aes</span>(speed,dist))<span class="sc">+</span></span>
+<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span><span class="fu">geom_line</span>()</span>
+<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1404,10 +1416,10 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cars)</span>
-<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(cars, <span class="fu">aes</span>(speed,dist))<span class="sc">+</span></span>
-<span id="cb150-3"><a href="#cb150-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span>
-<span id="cb150-4"><a href="#cb150-4" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cars)</span>
+<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(cars, <span class="fu">aes</span>(speed,dist))<span class="sc">+</span></span>
+<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span>
+<span id="cb153-4"><a href="#cb153-4" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -1418,10 +1430,10 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cars)</span>
-<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(cars, <span class="fu">aes</span>(speed,dist))<span class="sc">+</span></span>
-<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)<span class="sc">+</span><span class="fu">scale_x_log10</span>()<span class="sc">+</span><span class="fu">scale_y_log10</span>()</span>
-<span id="cb152-4"><a href="#cb152-4" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cars)</span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(cars, <span class="fu">aes</span>(speed,dist))<span class="sc">+</span></span>
+<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span><span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">"lm"</span>)<span class="sc">+</span><span class="fu">scale_x_log10</span>()<span class="sc">+</span><span class="fu">scale_y_log10</span>()</span>
+<span id="cb155-4"><a href="#cb155-4" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -1435,10 +1447,10 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 </div>
 <p>With tidyplot</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyplots)</span>
-<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">|&gt;</span>  <span class="fu">tidyplot</span>(<span class="at">x=</span>speed,<span class="at">y=</span>dist) <span class="sc">|&gt;</span></span>
-<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_data_points_beeswarm</span>() <span class="sc">|&gt;</span></span>
-<span id="cb154-4"><a href="#cb154-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_curve_fit</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyplots)</span>
+<span id="cb157-2"><a href="#cb157-2" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">|&gt;</span>  <span class="fu">tidyplot</span>(<span class="at">x=</span>speed,<span class="at">y=</span>dist) <span class="sc">|&gt;</span></span>
+<span id="cb157-3"><a href="#cb157-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_data_points_beeswarm</span>() <span class="sc">|&gt;</span></span>
+<span id="cb157-4"><a href="#cb157-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_curve_fit</span>(<span class="at">method=</span><span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -1449,9 +1461,9 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">|&gt;</span>  <span class="fu">tidyplot</span>(<span class="at">x=</span>speed,<span class="at">y=</span>dist) <span class="sc">|&gt;</span></span>
-<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_data_points_beeswarm</span>() <span class="sc">|&gt;</span></span>
-<span id="cb156-3"><a href="#cb156-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_curve_fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a>cars <span class="sc">|&gt;</span>  <span class="fu">tidyplot</span>(<span class="at">x=</span>speed,<span class="at">y=</span>dist) <span class="sc">|&gt;</span></span>
+<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_data_points_beeswarm</span>() <span class="sc">|&gt;</span></span>
+<span id="cb159-3"><a href="#cb159-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_curve_fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
@@ -1465,14 +1477,14 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 </div>
 <p>With the florida data</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot</span></span>
-<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a>mat<span class="ot">=</span><span class="fu">cbind</span>(t,out[<span class="dv">10</span>,])</span>
-<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"time"</span>,<span class="st">"shannon"</span>)</span>
-<span id="cb158-4"><a href="#cb158-4" aria-hidden="true" tabindex="-1"></a>mat<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(mat)</span>
-<span id="cb158-5"><a href="#cb158-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb158-6"><a href="#cb158-6" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(mat, <span class="fu">aes</span>(time,shannon))<span class="sc">+</span></span>
-<span id="cb158-7"><a href="#cb158-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb158-8"><a href="#cb158-8" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot</span></span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>mat<span class="ot">=</span><span class="fu">cbind</span>(t,out[<span class="dv">10</span>,])</span>
+<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"time"</span>,<span class="st">"shannon"</span>)</span>
+<span id="cb161-4"><a href="#cb161-4" aria-hidden="true" tabindex="-1"></a>mat<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(mat)</span>
+<span id="cb161-5"><a href="#cb161-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-6"><a href="#cb161-6" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(mat, <span class="fu">aes</span>(time,shannon))<span class="sc">+</span></span>
+<span id="cb161-7"><a href="#cb161-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb161-8"><a href="#cb161-8" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1480,9 +1492,9 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(mat, <span class="fu">aes</span>(time,shannon))<span class="sc">+</span></span>
-<span id="cb159-2"><a href="#cb159-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
-<span id="cb159-3"><a href="#cb159-3" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb162"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>myplot <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(mat, <span class="fu">aes</span>(time,shannon))<span class="sc">+</span></span>
+<span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb162-3"><a href="#cb162-3" aria-hidden="true" tabindex="-1"></a>myplot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1498,23 +1510,23 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 <p>Authors: Corey Callaghan, Luise Quoss, Isabel Rosa.</p>
 <p>First we load the library rgbif</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgbif)</span>
-<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgbif)</span>
+<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we will download observations of a species. Let’s download observations of the common toad <em>Bufo bufo</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>matbufobufo<span class="ot">&lt;-</span><span class="fu">occ_search</span>(<span class="at">scientificName=</span><span class="st">"Bufo bufo"</span>, <span class="at">limit=</span><span class="dv">500</span>, <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>, <span class="at">hasGeospatialIssue =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb164"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a>matbufobufo<span class="ot">&lt;-</span><span class="fu">occ_search</span>(<span class="at">scientificName=</span><span class="st">"Bufo bufo"</span>, <span class="at">limit=</span><span class="dv">500</span>, <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>, <span class="at">hasGeospatialIssue =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in occ_search(scientificName = "Bufo bufo", limit = 500, hasCoordinate = TRUE, : could not find function "occ_search"</code></pre>
 </div>
 </div>
 <p>Let’s examine the object <em>matbufobufo</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(matbufobufo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(matbufobufo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: object 'matbufobufo' not found</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a>matbufobufo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a>matbufobufo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: object 'matbufobufo' not found</code></pre>
 </div>
@@ -1522,50 +1534,50 @@ Mazda RX4 Wag  21.0   6 110 33.60</code></pre>
 <p>It is a special object of class <code>gbif</code> which allows for the metadata and the actual data to all be included, as well as taxonomic hierarchy data, and media metadata. We won’t worry too much about the details of this object now.</p>
 <p>Let’s download data about octupusses. They are in the order “Octopoda”. First we need to find the GBIF search key for Octopoda.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">name_suggest</span>(<span class="at">q=</span><span class="st">"Octopoda"</span>,<span class="at">rank=</span><span class="st">"Order"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fu">name_suggest</span>(<span class="at">q=</span><span class="st">"Octopoda"</span>,<span class="at">rank=</span><span class="st">"Order"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in name_suggest(q = "Octopoda", rank = "Order"): could not find function "name_suggest"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>key<span class="ot">&lt;-</span>a<span class="sc">$</span>data<span class="sc">$</span>key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a>key<span class="ot">&lt;-</span>a<span class="sc">$</span>data<span class="sc">$</span>key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: object 'a' not found</code></pre>
 </div>
 </div>
 <p>We will only download 2000 observations to keep it simple for now. If you were doing this for real, you would download all data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>octopusses<span class="ot">&lt;-</span><span class="fu">occ_search</span>(<span class="at">orderKey=</span>key,<span class="at">limit=</span><span class="dv">2000</span>, <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>, <span class="at">hasGeospatialIssue =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a>octopusses<span class="ot">&lt;-</span><span class="fu">occ_search</span>(<span class="at">orderKey=</span>key,<span class="at">limit=</span><span class="dv">2000</span>, <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>, <span class="at">hasGeospatialIssue =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in occ_search(orderKey = key, limit = 2000, hasCoordinate = TRUE, : could not find function "occ_search"</code></pre>
 </div>
 </div>
 <p>Show the result</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a>octmat<span class="ot">&lt;-</span>octopusses<span class="sc">$</span>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a>octmat<span class="ot">&lt;-</span>octopusses<span class="sc">$</span>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: object 'octopusses' not found</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(octmat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(octmat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: object 'octmat' not found</code></pre>
 </div>
 </div>
 <p>Count the number of observations per species using tidyverse and pipes</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a>octmat <span class="sc">%&gt;%</span> </span>
-<span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(scientificName) <span class="sc">%&gt;%</span> </span>
-<span id="cb177-3"><a href="#cb177-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sample_size=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb177-4"><a href="#cb177-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sample_size)) <span class="sc">%&gt;%</span> </span>
-<span id="cb177-5"><a href="#cb177-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample_size_log=</span><span class="fu">log</span>(sample_size,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb177-6"><a href="#cb177-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sample_size_log)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a>octmat <span class="sc">%&gt;%</span> </span>
+<span id="cb180-2"><a href="#cb180-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(scientificName) <span class="sc">%&gt;%</span> </span>
+<span id="cb180-3"><a href="#cb180-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sample_size=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb180-4"><a href="#cb180-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(sample_size)) <span class="sc">%&gt;%</span> </span>
+<span id="cb180-5"><a href="#cb180-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample_size_log=</span><span class="fu">log</span>(sample_size,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb180-6"><a href="#cb180-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sample_size_log)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: object 'octmat' not found</code></pre>
 </div>
 </div>
 <p>Plot the records on an interactive map. First load the leaflet package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
-<span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(<span class="at">data=</span>octmat) <span class="sc">%&gt;%</span> <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb179-3"><a href="#cb179-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(<span class="at">lat=</span> <span class="sc">~</span>decimalLatitude, <span class="at">lng =</span> <span class="sc">~</span>decimalLongitude,<span class="at">popup=</span><span class="sc">~</span>scientificName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb182-2"><a href="#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>(<span class="at">data=</span>octmat) <span class="sc">%&gt;%</span> <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb182-3"><a href="#cb182-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(<span class="at">lat=</span> <span class="sc">~</span>decimalLatitude, <span class="at">lng =</span> <span class="sc">~</span>decimalLongitude,<span class="at">popup=</span><span class="sc">~</span>scientificName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="working-with-raster-and-shapefiles" class="level2" data-number="A.8">
