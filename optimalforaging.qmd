@@ -260,5 +260,3 @@ If you wanna read about an empirical test of this model, I suggest the paper by 
 ## Statistical confrontation: finding the maximum
 
 -   Explain how to find the maximum of a function with R. Parallel between genetic algorithms and optimization.
-
-## 

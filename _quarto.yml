@@ -25,6 +25,7 @@ book:
       #  - popspace.qmd
     - part: "Ecology of communities"
       chapters:
+        - bioscale.qmd
         - modellingbiochange.qmd
     - references.qmd
   appendices:
@@ -55,3 +56,4 @@ format:
     titlepage: true
     toc-depth: 2
 editor: visual
+

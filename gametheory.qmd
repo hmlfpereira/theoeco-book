@@ -19,7 +19,7 @@ A lot of the empahsis on evolutionary biology and ecology is place on competitio
 
 In the prisionner's dilemma game there are two players. it is inspired by a situation where two suspects of being accomplices in a crime are arrested and are being questioned in separate rooms without contact between them. They are faced with the dilemma of cooperating with each other by claimng inocence, or cutting a deal with the investigators by recognizing the responsibility for the crime and by denouncing the other player. If both cooperate they can potetinally get both away, but if one accomplice cooperates and the other defects, then the one that cooperated gets the maximum penalty.
 
-We can formalize the prisoner's dilemma game by stating that each player can choose one of two strategies in each round of the game, defect or cooperate The pay-off matrix of the Prisionner's Dillema, from the pespective of player 1 (rows), playing against player 2 (columns) is
+We can formalize the prisoner's dilemma game by stating that each player can choose one of two strategies in each round of the game, defect or cooperate. The pay-off matrix of the Prisionner's Dilemma, from the pespective of player 1 (rows), playing against player 2 (columns) is
 
 $$
 \begin{array}{c|cc}\text{Player 1} \backslash \text{Player 2} & C & D \\ 
