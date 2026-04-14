@@ -1,3 +1,5 @@
+> 🚧 **This book is under construction.**
+
 ::: {.content-visible when-format="pdf"}
 # Preface {.unnumbered}
 :::

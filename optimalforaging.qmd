@@ -3,6 +3,8 @@ execute:
   freeze: auto  # re-render only when source changes
 ---
 
+> 🚧 **This chapter is under construction. Content may change.**
+
 # Economic models of behavior: do animals optimize?
 
 Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. This approach is rooted in the idea that natural selection, under certain conditions, maximize the average fitness of individuals in a population. It underpins many of the studies in behavioral ecology, and lead to the development during the 1970's and 1980's.of a sub-field dedicated to the study of foraging decisions, known as optimal foraging [see for instance @pyke1984]. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two "idealized" types of foragers: searching predator and sit-and-wait predators.

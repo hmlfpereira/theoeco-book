@@ -3,6 +3,8 @@ execute:
   freeze: auto  # re-render only when source changes
 ---
 
+> 🚧 **This chapter is under construction. Content may change.**
+
 # Conflict resolution in ecology and evolution: war and peace
 
 In the previous chapter we looked at the decisions of individual animals assuming that the the decisions where taken by each forager alone. For instance, for the sit-and-wait predator we assumed that the territory could be as large as the predator wanted, and that the optimal territory size was the one where the energy per unit time was maximized. But what happens if the territory is so large that it starts intruding in the territory of the neighbors? Or in other words, what happens if the optimal territory size is for instance 1 $m^2$ , but the density of the predators is so high that there is more than 1 predator per square meter? Then there is a potential conflict between individuals and it may not be possible to have territory sizes that are optimal. More generally, one can say that the decision of an individual now affects the decisions of its conspecifics.
