@@ -144,18 +144,7 @@
     "href": "optimalforaging.html#statistical-confrontation-finding-the-maximum",
     "title": "2  Economic models of behavior: do animals optimize?",
     "section": "2.4 Statistical confrontation: finding the maximum",
-    "text": "2.4 Statistical confrontation: finding the maximum\n\nExplain how to find the maximum of a function with R. Parallel between genetic algorithms and optimization.",
-    "crumbs": [
-      "Ecology of individuals",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Economic models of behavior: do animals optimize?</span>"
-    ]
-  },
-  {
-    "objectID": "optimalforaging.html#section",
-    "href": "optimalforaging.html#section",
-    "title": "2  Economic models of behavior: do animals optimize?",
-    "section": "2.5 ",
-    "text": "2.5 \n\n\n\n\nPyke, Graham H. 1984. “Optimal Foraging Theory: A Critical Review.” Annual Review of Ecology and Systematics 15 (January): 523–75. http://www.jstor.org/stable/2096959.",
+    "text": "2.4 Statistical confrontation: finding the maximum\n\nExplain how to find the maximum of a function with R. Parallel between genetic algorithms and optimization.\n\n\n\n\n\nPyke, Graham H. 1984. “Optimal Foraging Theory: A Critical Review.” Annual Review of Ecology and Systematics 15 (January): 523–75. http://www.jstor.org/stable/2096959.",
     "crumbs": [
       "Ecology of individuals",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Economic models of behavior: do animals optimize?</span>"
@@ -166,7 +155,7 @@
     "href": "gametheory.html",
     "title": "3  Conflict resolution in ecology and evolution: war and peace",
     "section": "",
-    "text": "3.1 The prisoner’s dillema and the evolution of cooperation\nA lot of the empahsis on evolutionary biology and ecology is place on competition, on the idea of “survival of the fittest” and that selection operates at the level of individuals favoring selfish behaviors. However, cooperation is super common in nature, from praire dogs taking turn as sentinels, informing the group of the arrival of a predator, to back scratching in primates. One beautiful explanation for such cooperation is based on the principles of kin selection, developed by Bill Hamilton, or the idea that it makes evolutionary sense to help others if they are genetically related to you, as this increases the probability of the same genes you have to be passed into the next generation. Hamilton’s contribution to this problem was seminal because he noted that genetic relatedness can be particularly high between females in haploid-diploid systems such as bees and ants, leading to a widespread of cooperating in rearing offspring and even the abdication of many individuals from reproducing in favor of assisting the queen. But can cooperation also evolve in the absence of genetic relatedness? This is the problem that can be studied with the prisoner’s dilemma.\nIn the prisionner’s dilemma game there are two players. it is inspired by a situation where two suspects of being accomplices in a crime are arrested and are being questioned in separate rooms without contact between them. They are faced with the dilemma of cooperating with each other by claimng inocence, or cutting a deal with the investigators by recognizing the responsibility for the crime and by denouncing the other player. If both cooperate they can potetinally get both away, but if one accomplice cooperates and the other defects, then the one that cooperated gets the maximum penalty.\nWe can formalize the prisoner’s dilemma game by stating that each player can choose one of two strategies in each round of the game, defect or cooperate The pay-off matrix of the Prisionner’s Dillema, from the pespective of player 1 (rows), playing against player 2 (columns) is\n\\[\n\\begin{array}{c|cc}\\text{Player 1} \\backslash \\text{Player 2} & C & D \\\\\n\\hline\nC & 3 & 0 \\\\D & 5 & 1\\end{array}\n\\]\nYou can think of the pay-off points as a fitness gain in relation to the fitness before the play. The exact payoffs are not so important, and there are other variants of the game with different pay-offs. Instead, it is the relationship between the different pay-offs that determines the best strategy for the game. If the players knew what the other player would do, the best collective strategy would be to cooperate, as they both would receive 3 points for a total of 6 points. If one of the players defects while the other cooperate they accrue collectively only 5 points, while if both defect they would accrue together 2 points. But they don’t know what the other player is going to do (non-cooperative game) and need to make a decision that maximizes their individual fitness. What should they do?\nThe general solution that both Maynard Smith and Nash came up for these games is that one needs to identify which strategy is the best response to itself. This is called an Evolutionary Stable Strategy (ESS, also known as Nash Equilibrium1) because it is the strategy that when dominant in the population cannot be invaded by any other strategy. Mathematically speaking, the ESS is the strategy \\(S^*\\) that has the higher payoff when played against itself,\n\\[\n\\forall S_i  ,\\quad E(S^*,S^*) \\geq E(S_i,S^*)\n\\]",
+    "text": "3.1 The prisoner’s dillema and the evolution of cooperation\nA lot of the empahsis on evolutionary biology and ecology is place on competition, on the idea of “survival of the fittest” and that selection operates at the level of individuals favoring selfish behaviors. However, cooperation is super common in nature, from praire dogs taking turn as sentinels, informing the group of the arrival of a predator, to back scratching in primates. One beautiful explanation for such cooperation is based on the principles of kin selection, developed by Bill Hamilton, or the idea that it makes evolutionary sense to help others if they are genetically related to you, as this increases the probability of the same genes you have to be passed into the next generation. Hamilton’s contribution to this problem was seminal because he noted that genetic relatedness can be particularly high between females in haploid-diploid systems such as bees and ants, leading to a widespread of cooperating in rearing offspring and even the abdication of many individuals from reproducing in favor of assisting the queen. But can cooperation also evolve in the absence of genetic relatedness? This is the problem that can be studied with the prisoner’s dilemma.\nIn the prisionner’s dilemma game there are two players. it is inspired by a situation where two suspects of being accomplices in a crime are arrested and are being questioned in separate rooms without contact between them. They are faced with the dilemma of cooperating with each other by claimng inocence, or cutting a deal with the investigators by recognizing the responsibility for the crime and by denouncing the other player. If both cooperate they can potetinally get both away, but if one accomplice cooperates and the other defects, then the one that cooperated gets the maximum penalty.\nWe can formalize the prisoner’s dilemma game by stating that each player can choose one of two strategies in each round of the game, defect or cooperate. The pay-off matrix of the Prisionner’s Dilemma, from the pespective of player 1 (rows), playing against player 2 (columns) is\n\\[\n\\begin{array}{c|cc}\\text{Player 1} \\backslash \\text{Player 2} & C & D \\\\\n\\hline\nC & 3 & 0 \\\\D & 5 & 1\\end{array}\n\\]\nYou can think of the pay-off points as a fitness gain in relation to the fitness before the play. The exact payoffs are not so important, and there are other variants of the game with different pay-offs. Instead, it is the relationship between the different pay-offs that determines the best strategy for the game. If the players knew what the other player would do, the best collective strategy would be to cooperate, as they both would receive 3 points for a total of 6 points. If one of the players defects while the other cooperate they accrue collectively only 5 points, while if both defect they would accrue together 2 points. But they don’t know what the other player is going to do (non-cooperative game) and need to make a decision that maximizes their individual fitness. What should they do?\nThe general solution that both Maynard Smith and Nash came up for these games is that one needs to identify which strategy is the best response to itself. This is called an Evolutionary Stable Strategy (ESS, also known as Nash Equilibrium1) because it is the strategy that when dominant in the population cannot be invaded by any other strategy. Mathematically speaking, the ESS is the strategy \\(S^*\\) that has the higher payoff when played against itself,\n\\[\n\\forall S_i  ,\\quad E(S^*,S^*) \\geq E(S_i,S^*)\n\\]",
     "crumbs": [
       "Ecology of individuals",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conflict resolution in ecology and evolution: war and peace</span>"
@@ -206,14 +195,47 @@
     ]
   },
   {
+    "objectID": "bioscale.html",
+    "href": "bioscale.html",
+    "title": "5  Measuring biodiversity across scales",
+    "section": "",
+    "text": "5.1 Species-area relationship",
+    "crumbs": [
+      "Ecology of communities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measuring biodiversity across scales</span>"
+    ]
+  },
+  {
+    "objectID": "bioscale.html#species-abundance-distributions",
+    "href": "bioscale.html#species-abundance-distributions",
+    "title": "5  Measuring biodiversity across scales",
+    "section": "5.2 Species abundance distributions",
+    "text": "5.2 Species abundance distributions",
+    "crumbs": [
+      "Ecology of communities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measuring biodiversity across scales</span>"
+    ]
+  },
+  {
+    "objectID": "bioscale.html#estimating-diversity-indices",
+    "href": "bioscale.html#estimating-diversity-indices",
+    "title": "5  Measuring biodiversity across scales",
+    "section": "5.3 Estimating diversity indices",
+    "text": "5.3 Estimating diversity indices\n\n\n\n\nCBD. 1992. “Convention on Biological Diversity.”",
+    "crumbs": [
+      "Ecology of communities",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measuring biodiversity across scales</span>"
+    ]
+  },
+  {
     "objectID": "modellingbiochange.html",
     "href": "modellingbiochange.html",
-    "title": "5  Modelling biodiversity change: winners and losers",
+    "title": "6  Modelling biodiversity change: winners and losers",
     "section": "",
     "text": "Every minute about 2 football fields of native forest are cleared somewhere in the world. What are the consequences of land-use change for biodiversity?",
     "crumbs": [
       "Ecology of communities",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Modelling biodiversity change: winners and losers</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Modelling biodiversity change: winners and losers</span>"
     ]
   },
   {
@@ -221,7 +243,7 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "Dugatkin, Lee Alan, and Hudson Kern Reeve. 1998. Game Theory &\nAnimal Behavior. Oxford University Press.\n\n\nGuisan, Antoine, Wilfried Thuiller, and Niklaus E. Zimmermann. 2017.\nHabitat Suitability and Distribution Models: With Applications in\nr. Cambridge University Press.\n\n\nHilborn, Ray, and Marc Mangel. 1997. The Ecological Detective:\nConfronting Models with Data. 1st ed. Princeton University Press.\n\n\nHuey, B. 1982. “Temperature, Physiology, and the Ecology of\nReptiles.” In, edited by Carl Gans and F. Harvey. New York:\nAcademic Press.\n\n\nLosos, Jonathan B. 2009. Lizards in an Evolutionary TreeEcology and\nAdaptive Radiation of Anoles. University of California Press. https://doi.org/10.1525/california/9780520255913.001.0001.\n\n\nMaynard Smith, J. 1982. Evolution and the Theory of Games.\nCambridge: Cambridge University Press.\n\n\nOtto, Sarah P., and Troy Day. 2007. A Biologist’s Guide to\nMathematical Modeling in Ecology and Evolution. Princeton\nUniversity Press. https://doi.org/10.1515/9781400840915.\n\n\nPyke, Graham H. 1984. “Optimal Foraging Theory: A Critical\nReview.” Annual Review of Ecology and Systematics 15\n(January): 523–75. http://www.jstor.org/stable/2096959.\n\n\nRoughgarden, J. 1998. Primer of Ecological Theory. Upper Saddle\nRiver, New Jersey: Prentice Hall.\n\n\nWinchell, Kristin M., Robert Graham Reynolds, Sofia R. Prado-Irwin,\nAlberto R. Puente-Rolón, and Liam J. Revell. 2016. “Data from:\nPhenotypic Shifts in Urban Areas in the Tropical Lizard Anolis\nCristatellus.” https://doi.org/10.5061/DRYAD.H234N.",
+    "text": "CBD. 1992. “Convention on Biological Diversity.”\n\n\nDugatkin, Lee Alan, and Hudson Kern Reeve. 1998. Game Theory &\nAnimal Behavior. Oxford University Press.\n\n\nGuisan, Antoine, Wilfried Thuiller, and Niklaus E. Zimmermann. 2017.\nHabitat Suitability and Distribution Models: With Applications in\nr. Cambridge University Press.\n\n\nHilborn, Ray, and Marc Mangel. 1997. The Ecological Detective:\nConfronting Models with Data. 1st ed. Princeton University Press.\n\n\nHuey, B. 1982. “Temperature, Physiology, and the Ecology of\nReptiles.” In, edited by Carl Gans and F. Harvey. New York:\nAcademic Press.\n\n\nLosos, Jonathan B. 2009. Lizards in an Evolutionary TreeEcology and\nAdaptive Radiation of Anoles. University of California Press. https://doi.org/10.1525/california/9780520255913.001.0001.\n\n\nMaynard Smith, J. 1982. Evolution and the Theory of Games.\nCambridge: Cambridge University Press.\n\n\nOtto, Sarah P., and Troy Day. 2007. A Biologist’s Guide to\nMathematical Modeling in Ecology and Evolution. Princeton\nUniversity Press. https://doi.org/10.1515/9781400840915.\n\n\nPyke, Graham H. 1984. “Optimal Foraging Theory: A Critical\nReview.” Annual Review of Ecology and Systematics 15\n(January): 523–75. http://www.jstor.org/stable/2096959.\n\n\nRoughgarden, J. 1998. Primer of Ecological Theory. Upper Saddle\nRiver, New Jersey: Prentice Hall.\n\n\nWinchell, Kristin M., Robert Graham Reynolds, Sofia R. Prado-Irwin,\nAlberto R. Puente-Rolón, and Liam J. Revell. 2016. “Data from:\nPhenotypic Shifts in Urban Areas in the Tropical Lizard Anolis\nCristatellus.” https://doi.org/10.5061/DRYAD.H234N.",
     "crumbs": [
       "References"
     ]
