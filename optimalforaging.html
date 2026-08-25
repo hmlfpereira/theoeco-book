@@ -343,8 +343,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>🚧 <strong>This chapter is under construction. Content may change.</strong></p>
 </blockquote>
-<p>Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. This approach is rooted in the idea that natural selection, under certain conditions, maximize the average fitness of individuals in a population. It underpins many of the studies in behavioral ecology, and lead to the development during the 1970’s and 1980’s.of a sub-field dedicated to the study of foraging decisions, known as optimal foraging <span class="citation" data-cites="pyke1984">(see for instance <a href="references.html#ref-pyke1984" role="doc-biblioref">Pyke 1984</a>)</span>. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two “idealized” types of foragers: searching predator and sit-and-wait predators.</p>
-<!--# Say something about the main theorem of natural selection and climbing the fitness landscape  or Fisher's fundamental theorem-->
+<p>Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. This approach is rooted in the idea that natural selection, under certain conditions, maximize the average fitness of individuals in a population. It underpins many of the studies in behavioral ecology, and lead to the development during the 1970’s and 1980’s of a sub-field dedicated to the study of foraging decisions, known as optimal foraging <span class="citation" data-cites="pyke1984">(see for instance <a href="references.html#ref-pyke1984" role="doc-biblioref">Pyke 1984</a>)</span>. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two “idealized” types of foragers: searching predator and sit-and-wait predators.</p>
 <section id="searching-predator" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="searching-predator"><span class="header-section-number">2.1</span> Searching predator</h2>
 <p>The searching predator is typified as an animal that actively searchs for food. For instance, wolfs roam the landscape constantly searching for their prey (<a href="#fig-Canis_lupus" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>). The question is then, any time that a forager comes across a prey whether to spend the time catching and eating it, or continuing to search for another prey, for instance a larger or easier prey item. Joan Roughgarden also liked this type of foraging to the sushi-bar problem where dishes are coming one after the other on a moving tray, and a person needs to decide whether to pick a given dish. This decision is particularly akin to the searching predator situation when one assumes that a person can have only one dish at a time in her or his table, We consider two types of searching predators: time minimizers and energy maximizers.</p>
@@ -354,7 +353,7 @@ window.Quarto = {
 <img src="images/Canis_lupus.jpg" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Canis_lupus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2.1: A pack of wolf (<em>Canis lupus</em>) roaming around the landscape of Peneda-Gerês National Park, Portugal.
+Figure&nbsp;2.1: A pack of wolfs (<em>Canis lupus</em>) roaming around the landscape of Peneda-Gerês National Park, Portugal.
 </figcaption>
 </figure>
 </div>
@@ -514,15 +513,29 @@ Figure&nbsp;2.2: An Anolis gingivinus, a sit-and-wait predator, captures a prey 
 </div>
 <p>We will build on the model we developed for the energy per time maximizer searching predator to develop a model for the decisions of the sit-and-wait predator. The energy per prey item consumed is,</p>
 <p><span id="eq-energy_sit_and_wait"><span class="math display">\[
-E=e-ep t_p-e_w t_w
+E=e-e_p t_p-e_w t_w
 \tag{2.8}\]</span></span></p>
 <p>where <span class="math inline">\(e_p\)</span> is the energy per unit time while pursuing the prey, <span class="math inline">\(t_p\)</span> is the average time it takes to sprint to the prey and come back to the perch, <span class="math inline">\(e_w\)</span> is the energy per unit time while waiting for the prey, and <span class="math inline">\(t_w\)</span> is the average time it takes to wait for a prey item to show up within the home-range or territory of the predator. We will use these two terms interchangeably, although they are sometimes used in the literature differently.</p>
 <p>Let’s consider that the home-range of the lizard is shaped as a semi-circle centered in the perch. This is the lizard has a viewing angle of <span class="math inline">\(180\deg\)</span> from its perch (<a href="#fig-feedingterritory" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>). Then the total abundance of the the prey in the territory is the integral of the prey point density over the territory. So, using polar coordinates for the integral this can be written as,</p>
 <p><span class="math display">\[
 A=\int_{0}^{r_c}a \pi r dr
 \]</span></p>
+<p>This is an easy integral, but let’s see how we could solve it in R, as this will be handy for the next one. We can do symbolic math in R using the package Ryacas. We just say that <em>r</em> is a symbolic variable um the function ysym() and then integrate the product <span class="math inline">\(a \ \pi \ r\)</span> from 0 to <span class="math inline">\(r_c\)</span> with the function integrate(),</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"Integrate(r, 0, r_c) a * Pi * r"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y: (r _c^2*a*Pi)/2</code></pre>
+</div>
+</div>
+<p>Or more beatifully, using the TeX ouput,</p>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tex_quarto <span class="ot">=</span> <span class="cf">function</span> (x)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"$$"</span>, <span class="fu">tex</span>(x), <span class="st">"$$"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[ \frac{r_c ^{2} a \pi }{2} \]</span></p>
 <p>The waiting time is just the inverse of the total abundance.</p>
-<p><span class="math display">\[t_w=1/A=\frac{1}{\int_{0}^{r_c}a \pi r dr}\]</span></p>
+<p><span class="math display">\[t_w=1/A\]</span></p>
 <div id="fig-feedingterritory" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-feedingterritory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -533,7 +546,7 @@ Figure&nbsp;2.3: Feeding territory of a sit-and-wait predator with radius <span 
 </figcaption>
 </figure>
 </div>
-<p>The average pursuit time is a bit more complicated. For a prey landing at distance <span class="math inline">\(r\)</span> from the predator, the pursuit time is the time the lizards needs to run to that location and back. This is can be calculated by dividing the double of the distance by the speed of the lizard, <span class="math inline">\(2r/v\)</span>. We have now to average these sprint times over the range of possibile distance that the lizard can run, from 0 to the radius of its territory <span class="math inline">\(r_c\)</span>, weighted by the probability of a prey appearing at each distance. The probability of a prey appearing at distance <span class="math inline">\(r\)</span> is the length of the semi-circle with radius <span class="math inline">\(r\)</span> multiplied by the point density of prey divided by the total density of prey in the territory of the lizard, <span class="math inline">\(a \pi r / A\)</span>. So we now need to calculate the integral of the sprint times at each distance times the probability of running to a prey at that distance over the range of possible radius values,</p>
+<p>The average pursuit time is a bit more complicated. For a prey landing at distance <span class="math inline">\(r\)</span> from the predator, the pursuit time is the time the lizards needs to run to that location and back. This is can be calculated by dividing the double of the distance by the speed of the lizard, <span class="math inline">\(2r/v\)</span>. We have now to average these sprint times over the range of possible distance that the lizard can run, from 0 to the radius of its territory <span class="math inline">\(r_c\)</span>, weighted by the probability of a prey appearing at each distance. The probability of a prey appearing at distance <span class="math inline">\(r\)</span> is the length of the semi-circle with radius <span class="math inline">\(r\)</span> multiplied by the point density of prey divided by the total density of prey in the territory of the lizard, <span class="math inline">\(a \pi r / A\)</span>. So we now need to calculate the integral of the sprint times at each distance times the probability of running to a prey at that distance over the range of possible radius values,</p>
 <p><span class="math display">\[
 t_p=\int_{0}^{r_c} \frac{2r}{v} \frac{a \pi r}{A} \ dr
 \]</span></p>
@@ -547,49 +560,67 @@ ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
 \]</span></p>
 <p>where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius <span class="math inline">\(r_c\)</span>.</p>
 <p>The optimal decision is to find the cut-off radius <span class="math inline">\(r_c\)</span> that maximizes the energy per time,</p>
-<p><span class="math display">\[
+<p><span id="eq-maxet"><span class="math display">\[
 \max_{r_c}(ET)
-\]</span></p>
-<p>Let’s plot the energy per time as a function of the territory size,</p>
+\tag{2.10}\]</span></span></p>
+<p>Let’s plot the energy per time as a function of the territory size. This time, as we have some</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">&lt;-</span><span class="fl">0.1</span>                  <span class="co">#Energy per unit of time of waiting</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ep<span class="ot">&lt;-</span><span class="dv">1</span>                    <span class="co">#Energy per unit of time of pursuing the prey</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span><span class="fl">0.5</span>                   <span class="co">#Velocity of the predator in chase</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fl">0.005</span>                 <span class="co">#Abundance of prey</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>e<span class="ot">&lt;-</span><span class="dv">10</span>                    <span class="co">#Energy value of the prey</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>rc<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="fl">0.001</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)   <span class="co">#Radius of the hunting ground </span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>tw <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))   <span class="co">#Waiting time </span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">&lt;-</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v                <span class="co">#Pursuing time</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ti<span class="ot">&lt;-</span>tw<span class="sc">+</span>tp                   <span class="co">#Time per item </span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ei<span class="ot">&lt;-</span>e<span class="sc">-</span>ew<span class="sc">*</span>tw<span class="sc">-</span>ep<span class="sc">*</span>tp           <span class="co">#Energy per item</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>et<span class="ot">&lt;-</span>ei<span class="sc">/</span>ti                   <span class="co">#Energy per unit of time</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span><span class="cf">function</span>()</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  (e<span class="sc">-</span>ew<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)))<span class="sc">-</span>ep<span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))<span class="sc">+</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rc,<span class="fu">et</span>(),<span class="at">type=</span><span class="st">"l"</span>,</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Radius of the territory"</span>,</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Energy per unit of time (cal/sec) "</span>)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">&lt;-</span><span class="fl">0.1</span>                  <span class="co">#Energy per unit of time of waiting</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ep<span class="ot">&lt;-</span><span class="dv">1</span>                    <span class="co">#Energy per unit of time of pursuing the prey</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span><span class="fl">0.5</span>                   <span class="co">#Velocity of the predator in chase</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fl">0.005</span>                 <span class="co">#Abundance of prey</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>e<span class="ot">&lt;-</span><span class="dv">10</span>                    <span class="co">#Energy value of the prey</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>rc<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="fl">0.001</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)   <span class="co">#Radius of the hunting ground </span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>tw <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))   <span class="co">#Waiting time </span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">&lt;-</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v                <span class="co">#Pursuing time</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>ti<span class="ot">&lt;-</span>tw<span class="sc">+</span>tp                   <span class="co">#Time per item </span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>ei<span class="ot">&lt;-</span>e<span class="sc">-</span>ew<span class="sc">*</span>tw<span class="sc">-</span>ep<span class="sc">*</span>tp           <span class="co">#Energy per item</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>et<span class="ot">&lt;-</span>ei<span class="sc">/</span>ti                   <span class="co">#Energy per unit of time</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span><span class="cf">function</span>()</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  (e<span class="sc">-</span>ew<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)))<span class="sc">-</span>ep<span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))<span class="sc">+</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rc,<span class="fu">et</span>(),<span class="at">type=</span><span class="st">"l"</span>,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Radius of the territory"</span>,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Energy per unit of time (cal/sec) "</span>)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="optimalforaging_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="optimalforaging_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>If you wanna read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden [@-shafir1998].</p>
+<p>This plot shows that the energy per time, <span class="math inline">\(ET\)</span> is a uni-modal function of the territory size <span class="math inline">\(r_c\)</span>. At zero radius, the energy per time is negative and equals the energy per unit of time while waiting, i.e.&nbsp;there are only costs and no benefits of the territory. As the territory size increases, the energy per time starts to increase and becomes positive, reaching a maximum value at a bit more than 2m for the parameters above. Then, as the costs of running very far to chase prey start exceeding the benefits, the energy per unit time declines again. We can find the analytical solution of the maximum by differentiating <a href="#eq-maxet" class="quarto-xref">Equation&nbsp;<span>2.10</span></a> in order to the cut-off radius and equalizing it to zero,</p>
+<p><span class="math display">\[
+\frac{\mathrm{d}ET}{\mathrm{d}r_c}=0
+\]</span></p>
+<p>This means that we try to find the place in which the tangent to the function has slope zero, i.e.&nbsp;it is horizontal. This can be the maximum or the minimum of a function, and often one has to investigate further by looking at the sign of the second derivative, but not in this case. So, let’s solve this in R,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rm(list = ls())</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#et_sym = ysym("(e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)")</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#det_sym = deriv(et_sym,'rc')</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#myint = integrate(ysym("a*pi*rc"),"rc",0,2*pi)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#myint</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#rc_opt = solve(det_sym, 'rc')</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#eval(rc_opt, list()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you wanna read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden <span class="citation" data-cites="shafir1998a">(<a href="references.html#ref-shafir1998a" role="doc-biblioref">1998</a>)</span>.</p>
 </section>
 <section id="does-natural-selection-maximizes-fitness" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="does-natural-selection-maximizes-fitness"><span class="header-section-number">2.3</span> Does natural selection maximizes fitness?</h2>
+<p>Animals do not solve mathematical equations, at least in the way we do. So, how can animals find this optimal home-range sizes or choose the optimal strategy? One way of doing this is by learning, and there are simple models of reinforcement learning that can produce decisions that are optimal (see for instance Roughgarden <span class="citation" data-cites="roughgarden1998a">(<a href="references.html#ref-roughgarden1998a" role="doc-biblioref">1998</a>)</span>). Another way is through natural selection and evolutionary processes. The importance of evolution in shaping animal behavior was at the core of the research of Karl von Frisch, Konrad Lorenz and Nikolaas Tinbergen, who received the Nobel Prize in Physiology or Medicine in 1973. These three scientists played a key role in developing the science of ethology, the comparative study of behavior across species and ecological contexts. Until their work, studies of behavior were focusing on the dichotomy between stimulus-response behavior or the idea of the idea of learning as an explanation to all behavioral variations. Lorenz and Tinbergen’s work showed that fixed action patterns observed in many animals were the response to particular stimuli and were done without any previous learning. Lorenz and Timbergen often worked with birds, but my favorite fixed action patterns are the pushup displays of <em>Anolis</em> in response to predators or the presence of conspsefics. von Frish discovered the “bee language”, this is, how foraging bees communicate to nestmates upon their return to the nest the location of nectar an pollen resources.</p>
+<p>So the idea that some behaviors are genetically “programmed” allows us to model the dynamics of behavior acquisition in a population of individuals, and explore the question of whether natural selection maximizes fitness. We consider a very simple model of one genetic loci with two alleles in [for a diplod model see for instance Roughgarden et al]</p>
 <ul>
 <li><p>Simple models of population genetics for frequency independent selection.</p></li>
-<li><p>Something on Tinberger, Konrad Lorenz on the genetic basis of behavior</p></li>
+<li><p>main theorem of natural selection and climbing the fitness landscape or Fisher’s fundamental theorem-</p></li>
+<li><p>This approach is rooted in the idea that natural selection, under certain conditions, maximizes the average fitness of individuals in a population.</p></li>
 </ul>
 </section>
 <section id="statistical-confrontation-finding-the-maximum" class="level2" data-number="2.4">
@@ -602,6 +633,12 @@ ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-pyke1984" class="csl-entry" role="listitem">
 Pyke, Graham H. 1984. <span>“Optimal Foraging Theory: A Critical Review.”</span> <em>Annual Review of Ecology and Systematics</em> 15 (January): 523–75. <a href="http://www.jstor.org/stable/2096959">http://www.jstor.org/stable/2096959</a>.
+</div>
+<div id="ref-roughgarden1998a" class="csl-entry" role="listitem">
+Roughgarden, J. 1998. <em>Primer of Ecological Theory</em>. Upper Saddle River, New Jersey: Prentice Hall.
+</div>
+<div id="ref-shafir1998a" class="csl-entry" role="listitem">
+Shafir, S., and J. Roughgarden. 1998. <span>“Testing Predictions of Foraging Theory for a Sit-and-Wait Forager, <em></em>Anolis Gingivinus<span></span>.”</span> <em>Behav Ecol</em> 9 (1Shafir98): 74–84.
 </div>
 </div>
 </section>
