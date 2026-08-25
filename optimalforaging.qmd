@@ -7,9 +7,7 @@ execute:
 
 # Economic models of behavior: do animals optimize?
 
-Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. The importance of natural selection is shaping animal behavior was beautifully shown by the research of Karl von Frisch, Konrad Lorenz and Nikolaas Tinbergen, who received the Nobel Prize in Physiology or Medicine in 1973. These three scientists played a key role in developing the science of ethology, the comparative study of behavior across species and ecological contexts. Until their work, studies of behavior were focusing on the dichotomy between stimulus-response behavior or the idea of the idea of learning as an explanation to all behavioral variations. Lorenz and Tinbergen's work showed that fixed action patterns observed in many animals were the response to particular stimuli and were done without any previous learning. Lorenz and Timbergen often worked with birds, but my favorite fixed action patterns are the pushup displays of Anolis in response to predators or the presence of conspsefics. von Frish discovered the "bee language", this is, how foraging bees communicate to nestmates upon their return to the nest the location of nectar an pollen resources.
-
-The idea that the ecological context was important for studying behavior lead to the development of behavioral ecology in the 1970's that studies the survival value of behavior [@krebs1993], combining ethology, evolutionary biology and economics. One sub-field of behavioral ecology is the study of foraging decisions, known as optimal foraging [see for instance @pyke1984]. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two "idealized" types of foragers: searching predator and sit-and-wait predators.
+Animals have to make decisions all the time: where and when to move, when and what to eat, whom to mate, etc. How do animals make those decisions? One approach to study this question is to assume that animals take decisions that maximize their fitness. This approach is rooted in the idea that natural selection, under certain conditions, maximize the average fitness of individuals in a population. It underpins many of the studies in behavioral ecology, and lead to the development during the 1970’s and 1980’s of a sub-field dedicated to the study of foraging decisions, known as optimal foraging [see for instance @pyke1984]. The idea of optimal foraging is to develop economic models of foraging behavior, assessing the costs and benefits of different actions, and identifying in any particular circumstance the action that maximizes benefits and minimizes costs. This is, animals are seen as optimizer of decision-making. Here we consider models for two "idealized" types of foragers: searching predator and sit-and-wait predators.
 
 ## Searching predator
 
@@ -180,7 +178,7 @@ In contrast to the searching predator, the sit-and-wait predator forages by pati
 We will build on the model we developed for the energy per time maximizer searching predator to develop a model for the decisions of the sit-and-wait predator. The energy per prey item consumed is,
 
 $$
-E=e-ep t_p-e_w t_w
+E=e-e_p t_p-e_w t_w
 $$ {#eq-energy_sit_and_wait}
 
 where $e_p$ is the energy per unit time while pursuing the prey, $t_p$ is the average time it takes to sprint to the prey and come back to the perch, $e_w$ is the energy per unit time while waiting for the prey, and $t_w$ is the average time it takes to wait for a prey item to show up within the home-range or territory of the predator. We will use these two terms interchangeably, although they are sometimes used in the literature differently.
@@ -191,9 +189,27 @@ $$
 A=\int_{0}^{r_c}a \pi r dr
 $$
 
+This is an easy integral, but let's see how we could solve it in R, as this will be handy for the next one. We can do symbolic math in R using the package Ryacas. We just say that *r* is a symbolic variable um the function ysym() and then integrate the product $a \ \pi \ r$ from 0 to $r_c$ with the function integrate(),
+
+```{r}
+#| message: false
+library(Ryacas)
+A=ysym("Integrate(r, 0, r_c) a * Pi * r")
+A
+```
+
+Or more beatifully, using the TeX ouput,
+
+```{r}
+#| output: asis
+tex_quarto = function (x)
+  cat("$$", tex(x), "$$")
+tex_quarto(A)
+```
+
 The waiting time is just the inverse of the total abundance.
 
-$$t_w=1/A=\frac{1}{\int_{0}^{r_c}a \pi r dr}$$
+$$t_w=1/A$$
 
 ![Feeding territory of a sit-and-wait predator with radius $r_c$.](images/FeedingTerritory.jpg){#fig-feedingterritory}
 
@@ -221,9 +237,9 @@ The optimal decision is to find the cut-off radius $r_c$ that maximizes the ener
 
 $$
 \max_{r_c}(ET)
-$$
+$$ {#eq-maxet}
 
-Let's plot the energy per time as a function of the territory size,
+Let's plot the energy per time as a function of the territory size. This time, as we have some
 
 ```{r}
 ew<-0.1                  #Energy per unit of time of waiting
@@ -251,17 +267,38 @@ plot(rc,et(),type="l",
  abline(0,0)
 ```
 
+This plot shows that the energy per time, $ET$ is a uni-modal function of the territory size $r_c$. At zero radius, the energy per time is negative and equals the energy per unit of time while waiting, i.e. there are only costs and no benefits of the territory. As the territory size increases, the energy per time starts to increase and becomes positive, reaching a maximum value at a bit more than 2m for the parameters above. Then, as the costs of running very far to chase prey start exceeding the benefits, the energy per unit time declines again. We can find the analytical solution of the maximum by differentiating @eq-maxet in order to the cut-off radius and equalizing it to zero,
+
+$$
+ \frac{\mathrm{d}ET}{\mathrm{d}r_c}=0
+$$
+
+This means that we try to find the place in which the tangent to the function has slope zero, i.e. it is horizontal. This can be the maximum or the minimum of a function, and often one has to investigate further by looking at the sign of the second derivative, but not in this case. So, let's solve this in R,
+
+```{r}
+library(Ryacas)
+#rm(list = ls())
+#et_sym = ysym("(e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)")
+#det_sym = deriv(et_sym,'rc')
+#myint = integrate(ysym("a*pi*rc"),"rc",0,2*pi)
+#myint
+#rc_opt = solve(det_sym, 'rc')
+#eval(rc_opt, list()
+```
+
 If you wanna read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden [-@shafir1998a].
 
 ## Does natural selection maximizes fitness?
+
+Animals do not solve mathematical equations, at least in the way we do. So, how can animals find this optimal home-range sizes or choose the optimal strategy? One way of doing this is by learning, and there are simple models of reinforcement learning that can produce decisions that are optimal (see for instance Roughgarden [-@roughgarden1998a]). Another way is through natural selection and evolutionary processes. The importance of evolution in shaping animal behavior was at the core of the research of Karl von Frisch, Konrad Lorenz and Nikolaas Tinbergen, who received the Nobel Prize in Physiology or Medicine in 1973. These three scientists played a key role in developing the science of ethology, the comparative study of behavior across species and ecological contexts. Until their work, studies of behavior were focusing on the dichotomy between stimulus-response behavior or the idea of the idea of learning as an explanation to all behavioral variations. Lorenz and Tinbergen's work showed that fixed action patterns observed in many animals were the response to particular stimuli and were done without any previous learning. Lorenz and Timbergen often worked with birds, but my favorite fixed action patterns are the pushup displays of *Anolis* in response to predators or the presence of conspsefics. von Frish discovered the "bee language", this is, how foraging bees communicate to nestmates upon their return to the nest the location of nectar an pollen resources.
+
+So the idea that some behaviors are genetically "programmed" allows us to model the dynamics of behavior acquisition in a population of individuals, and explore the question of whether natural selection maximizes fitness. We consider a very simple model of one genetic loci with two alleles in \[for a diplod model see for instance Roughgarden et al\]
 
 -   Simple models of population genetics for frequency independent selection.
 
 -   main theorem of natural selection and climbing the fitness landscape or Fisher's fundamental theorem-
 
 -   This approach is rooted in the idea that natural selection, under certain conditions, maximizes the average fitness of individuals in a population.
-
--   Something on Tinberger, Konrad Lorenz on the genetic basis of behavior
 
 ## Statistical confrontation: finding the maximum
 
