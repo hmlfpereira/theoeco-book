@@ -517,10 +517,10 @@ E=e-e_p t_p-e_w t_w
 \tag{2.8}\]</span></span></p>
 <p>where <span class="math inline">\(e_p\)</span> is the energy per unit time while pursuing the prey, <span class="math inline">\(t_p\)</span> is the average time it takes to sprint to the prey and come back to the perch, <span class="math inline">\(e_w\)</span> is the energy per unit time while waiting for the prey, and <span class="math inline">\(t_w\)</span> is the average time it takes to wait for a prey item to show up within the home-range or territory of the predator. We will use these two terms interchangeably, although they are sometimes used in the literature differently.</p>
 <p>Let’s consider that the home-range of the lizard is shaped as a semi-circle centered in the perch. This is the lizard has a viewing angle of <span class="math inline">\(180\deg\)</span> from its perch (<a href="#fig-feedingterritory" class="quarto-xref">Figure&nbsp;<span>2.3</span></a>). Then the total abundance of the the prey in the territory is the integral of the prey point density over the territory. So, using polar coordinates for the integral this can be written as,</p>
-<p><span class="math display">\[
+<p><span id="eq-total-abundance"><span class="math display">\[
 A=\int_{0}^{r_c}a \pi r dr
-\]</span></p>
-<p>This is an easy integral, but let’s see how we could solve it in R, as this will be handy for the next one. We can do symbolic math in R using the package Ryacas. We just say that <em>r</em> is a symbolic variable um the function ysym() and then integrate the product <span class="math inline">\(a \ \pi \ r\)</span> from 0 to <span class="math inline">\(r_c\)</span> with the function integrate(),</p>
+\tag{2.9}\]</span></span></p>
+<p>This is an easy integral, but let’s see how we could solve it in R, as this will be handy for the next integral. We can do symbolic math in R using the package Ryacas. Ryacas provides an interface to Yacas, Yet Another Computer Algebra System. We use ysim() to tell Yacas to integrate the product <span class="math inline">\(a \ \pi \ r\)</span> from 0 to <span class="math inline">\(r_c\)</span> with the function integrate(),</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"Integrate(r, 0, r_c) a * Pi * r"</span>)</span>
@@ -529,13 +529,18 @@ A=\int_{0}^{r_c}a \pi r dr
 <pre><code>y: (r _c^2*a*Pi)/2</code></pre>
 </div>
 </div>
-<p>Or more beatifully, using the TeX ouput,</p>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tex_quarto <span class="ot">=</span> <span class="cf">function</span> (x)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"$$"</span>, <span class="fu">tex</span>(x), <span class="st">"$$"</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><span class="math display">\[ \frac{r_c ^{2} a \pi }{2} \]</span></p>
-<p>The waiting time is just the inverse of the total abundance.</p>
-<p><span class="math display">\[t_w=1/A\]</span></p>
+<p>Often we would like to see mathematical equations beautifully typeset. This can be done using TeX, and Ryacas does provide a way for layout the equation as a TeX command. However, for Quarto to recognize a TeX command, we need to start it and close it with a “$$”. As we will be doing this a lot, I wrote a little function, tex_quarto, that does this and also takes an optional prefix that can be put in the beginning (e.g.&nbsp;the variable name and an identity sign).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tex_quarto <span class="ot">=</span> <span class="cf">function</span> (x, <span class="at">prefix=</span><span class="cn">NULL</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"$$"</span>, prefix, <span class="fu">tex</span>(x), <span class="st">"$$"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, we can output the result of the integral from <a href="#eq-total-abundance" class="quarto-xref">Equation&nbsp;<span>2.9</span></a> in a beautiful way as<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>,</p>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(A, <span class="st">"A="</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[ A= \frac{r_c ^{2} a \pi }{2} \]</span></p>
+<p>The waiting time is just the inverse of the total abundance, <span class="math display">\[t_w=1/A\]</span> or in R code,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tw<span class="ot">=</span><span class="dv">1</span><span class="sc">/</span>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div id="fig-feedingterritory" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-feedingterritory-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -550,11 +555,16 @@ Figure&nbsp;2.3: Feeding territory of a sit-and-wait predator with radius <span 
 <p><span class="math display">\[
 t_p=\int_{0}^{r_c} \frac{2r}{v} \frac{a \pi r}{A} \ dr
 \]</span></p>
+<p>Let’s calculate this more complicated integral in R, substituting the value of the total abundance that we calculated above using the function with_value(), and simplifying the result with simplify(),</p>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"Integrate(r, 0, r_c) (2 * r / v) * (a * Pi * r) / A"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>tp <span class="ot">=</span> <span class="fu">with_value</span>(tp, <span class="fu">ysym</span>(<span class="st">"A"</span>), A) <span class="sc">|&gt;</span> <span class="fu">simplify</span>()</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(tp, <span class="st">"t_p="</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[ t_p= \frac{4 r_c}{3 v} \]</span></p>
 <p>The average time per prey item consumed is simply the sum of the average pursuit time, <span class="math inline">\(t_p\)</span>, and the average waiting time <span class="math inline">\(t_w\)</span>,</p>
 <p><span id="eq-time_sit_and_wait"><span class="math display">\[
 T=t_p+t_w
-\tag{2.9}\]</span></span></p>
-<p>Therefore the energy per time that the optimal sit-and-wait predator wants to maximize is obtained by dividing <a href="#eq-energy_sit_and_wait" class="quarto-xref">Equation&nbsp;<span>2.8</span></a> by <a href="#eq-time_sit_and_wait" class="quarto-xref">Equation&nbsp;<span>2.9</span></a>,</p>
+\tag{2.10}\]</span></span></p>
+<p>Therefore the energy per time that the optimal sit-and-wait predator wants to maximize is obtained by dividing <a href="#eq-energy_sit_and_wait" class="quarto-xref">Equation&nbsp;<span>2.8</span></a> by <a href="#eq-time_sit_and_wait" class="quarto-xref">Equation&nbsp;<span>2.10</span></a>,</p>
 <p><span class="math display">\[
 ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
 \]</span></p>
@@ -562,60 +572,60 @@ ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
 <p>The optimal decision is to find the cut-off radius <span class="math inline">\(r_c\)</span> that maximizes the energy per time,</p>
 <p><span id="eq-maxet"><span class="math display">\[
 \max_{r_c}(ET)
-\tag{2.10}\]</span></span></p>
+\tag{2.11}\]</span></span></p>
 <p>Let’s plot the energy per time as a function of the territory size. This time, as we have some</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">&lt;-</span><span class="fl">0.1</span>                  <span class="co">#Energy per unit of time of waiting</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ep<span class="ot">&lt;-</span><span class="dv">1</span>                    <span class="co">#Energy per unit of time of pursuing the prey</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span><span class="fl">0.5</span>                   <span class="co">#Velocity of the predator in chase</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fl">0.005</span>                 <span class="co">#Abundance of prey</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>e<span class="ot">&lt;-</span><span class="dv">10</span>                    <span class="co">#Energy value of the prey</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>rc<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="fl">0.001</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)   <span class="co">#Radius of the hunting ground </span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>tw <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))   <span class="co">#Waiting time </span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">&lt;-</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v                <span class="co">#Pursuing time</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>ti<span class="ot">&lt;-</span>tw<span class="sc">+</span>tp                   <span class="co">#Time per item </span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>ei<span class="ot">&lt;-</span>e<span class="sc">-</span>ew<span class="sc">*</span>tw<span class="sc">-</span>ep<span class="sc">*</span>tp           <span class="co">#Energy per item</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>et<span class="ot">&lt;-</span>ei<span class="sc">/</span>ti                   <span class="co">#Energy per unit of time</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span><span class="cf">function</span>()</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  (e<span class="sc">-</span>ew<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)))<span class="sc">-</span>ep<span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))<span class="sc">+</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v)</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rc,<span class="fu">et</span>(),<span class="at">type=</span><span class="st">"l"</span>,</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Radius of the territory"</span>,</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Energy per unit of time (cal/sec) "</span>)</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">&lt;-</span><span class="fl">0.1</span>                  <span class="co">#Energy per unit of time of waiting</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ep<span class="ot">&lt;-</span><span class="dv">1</span>                    <span class="co">#Energy per unit of time of pursuing the prey</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span><span class="fl">0.5</span>                   <span class="co">#Velocity of the predator in chase</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fl">0.005</span>                 <span class="co">#Abundance of prey</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>e<span class="ot">&lt;-</span><span class="dv">10</span>                    <span class="co">#Energy value of the prey</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>rc<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="fl">0.001</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)   <span class="co">#Radius of the hunting ground </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>tw <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))   <span class="co">#Waiting time </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">&lt;-</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v                <span class="co">#Pursuing time</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>ti<span class="ot">&lt;-</span>tw<span class="sc">+</span>tp                   <span class="co">#Time per item </span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>ei<span class="ot">&lt;-</span>e<span class="sc">-</span>ew<span class="sc">*</span>tw<span class="sc">-</span>ep<span class="sc">*</span>tp           <span class="co">#Energy per item</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>et<span class="ot">&lt;-</span>ei<span class="sc">/</span>ti                   <span class="co">#Energy per unit of time</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span><span class="cf">function</span>()</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  (e<span class="sc">-</span>ew<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)))<span class="sc">-</span>ep<span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))<span class="sc">+</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rc,<span class="fu">et</span>(),<span class="at">type=</span><span class="st">"l"</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Radius of the territory"</span>,</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Energy per unit of time (cal/sec) "</span>)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="optimalforaging_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="optimalforaging_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>This plot shows that the energy per time, <span class="math inline">\(ET\)</span> is a uni-modal function of the territory size <span class="math inline">\(r_c\)</span>. At zero radius, the energy per time is negative and equals the energy per unit of time while waiting, i.e.&nbsp;there are only costs and no benefits of the territory. As the territory size increases, the energy per time starts to increase and becomes positive, reaching a maximum value at a bit more than 2m for the parameters above. Then, as the costs of running very far to chase prey start exceeding the benefits, the energy per unit time declines again. We can find the analytical solution of the maximum by differentiating <a href="#eq-maxet" class="quarto-xref">Equation&nbsp;<span>2.10</span></a> in order to the cut-off radius and equalizing it to zero,</p>
+<p>This plot shows that the energy per time, <span class="math inline">\(ET\)</span> is a uni-modal function of the territory size <span class="math inline">\(r_c\)</span>. At zero radius, the energy per time is negative and equals the energy per unit of time while waiting, i.e.&nbsp;there are only costs and no benefits of the territory. As the territory size increases, the energy per time starts to increase and becomes positive, reaching a maximum value at a bit more than 2m for the parameters above. Then, as the costs of running very far to chase prey start exceeding the benefits, the energy per unit time declines again. We can find the analytical solution of the maximum by differentiating <a href="#eq-maxet" class="quarto-xref">Equation&nbsp;<span>2.11</span></a> in order to the cut-off radius and equalizing it to zero,</p>
 <p><span class="math display">\[
 \frac{\mathrm{d}ET}{\mathrm{d}r_c}=0
 \]</span></p>
 <p>This means that we try to find the place in which the tangent to the function has slope zero, i.e.&nbsp;it is horizontal. This can be the maximum or the minimum of a function, and often one has to investigate further by looking at the sign of the second derivative, but not in this case. So, let’s solve this in R,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rm(list = ls())</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#et_sym = ysym("(e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)")</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#det_sym = deriv(et_sym,'rc')</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#myint = integrate(ysym("a*pi*rc"),"rc",0,2*pi)</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#myint</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#rc_opt = solve(det_sym, 'rc')</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#eval(rc_opt, list()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#et_sym = ysym("(e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)")</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#det_sym = deriv(et_sym,'rc')</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#myint = integrate(ysym("a*pi*rc"),"rc",0,2*pi)</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#myint</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#rc_opt = solve(det_sym, 'rc')</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#eval(rc_opt, list()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you wanna read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden <span class="citation" data-cites="shafir1998a">(<a href="references.html#ref-shafir1998a" role="doc-biblioref">1998</a>)</span>.</p>
 </section>
 <section id="does-natural-selection-maximizes-fitness" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="does-natural-selection-maximizes-fitness"><span class="header-section-number">2.3</span> Does natural selection maximizes fitness?</h2>
-<p>Animals do not solve mathematical equations, at least in the way we do. So, how can animals find this optimal home-range sizes or choose the optimal strategy? One way of doing this is by learning, and there are simple models of reinforcement learning that can produce decisions that are optimal (see for instance Roughgarden <span class="citation" data-cites="roughgarden1998a">(<a href="references.html#ref-roughgarden1998a" role="doc-biblioref">1998</a>)</span>). Another way is through natural selection and evolutionary processes. The importance of evolution in shaping animal behavior was at the core of the research of Karl von Frisch, Konrad Lorenz and Nikolaas Tinbergen, who received the Nobel Prize in Physiology or Medicine in 1973. These three scientists played a key role in developing the science of ethology, the comparative study of behavior across species and ecological contexts. Until their work, studies of behavior were focusing on the dichotomy between stimulus-response behavior or the idea of the idea of learning as an explanation to all behavioral variations. Lorenz and Tinbergen’s work showed that fixed action patterns observed in many animals were the response to particular stimuli and were done without any previous learning. Lorenz and Timbergen often worked with birds, but my favorite fixed action patterns are the pushup displays of <em>Anolis</em> in response to predators or the presence of conspsefics. von Frish discovered the “bee language”, this is, how foraging bees communicate to nestmates upon their return to the nest the location of nectar an pollen resources.</p>
+<p>Animals do not solve mathematical equations, at least in the way we do. So, how can animals find this optimal home-range sizes or choose the optimal strategy? One way of doing this is by learning, and there are simple models of reinforcement learning that can produce decisions that are optimal (see for instance Roughgarden <span class="citation" data-cites="roughgarden1998a">(<a href="references.html#ref-roughgarden1998a" role="doc-biblioref">1998</a>)</span>). Another way is through natural selection and evolutionary processes. The importance of evolution in shaping animal behavior was at the core of the research of Karl von Frisch, Konrad Lorenz and Nikolaas Tinbergen, who received the Nobel Prize in Physiology or Medicine in 1973. These three scientists played a key role in developing the science of ethology, the comparative study of behavior across species and ecological contexts. Until their work, studies of behavior were focusing on the dichotomy between stimulus-response behavior or the idea of the idea of learning as an explanation to all behavioral variations. Lorenz and Tinbergen’s work showed that fixed action patterns observed in many animals were the response to particular stimuli and were done without any previous learning. Lorenz and Timbergen often worked with birds, but my favorite fixed action patterns are the pushup displays of <em>Anolis</em> in response to predators or the presence of conspesifics. von Frish discovered the “bee language”, this is, how foraging bees communicate to nestmates upon their return to the nest the location of nectar an pollen resources.</p>
 <p>So the idea that some behaviors are genetically “programmed” allows us to model the dynamics of behavior acquisition in a population of individuals, and explore the question of whether natural selection maximizes fitness. We consider a very simple model of one genetic loci with two alleles in [for a diplod model see for instance Roughgarden et al]</p>
 <ul>
 <li><p>Simple models of population genetics for frequency independent selection.</p></li>
@@ -641,6 +651,12 @@ Roughgarden, J. 1998. <em>Primer of Ecological Theory</em>. Upper Saddle River, 
 Shafir, S., and J. Roughgarden. 1998. <span>“Testing Predictions of Foraging Theory for a Sit-and-Wait Forager, <em></em>Anolis Gingivinus<span></span>.”</span> <em>Behav Ecol</em> 9 (1Shafir98): 74–84.
 </div>
 </div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Note that this only displays the typeset equation when you render the Quarto document into html or PDF, and it is not shown directly on the notebook output mode. You also need to add the command “#| output: asis” in the beginning of the R chunk to tell Quarto it needs to take the output literally.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
