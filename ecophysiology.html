@@ -490,10 +490,10 @@ Table&nbsp;1.1: Hypothetical radiation values in two micro-habitats and air temp
 <div aria-describedby="tbl-temprad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 30%">
-<col style="width: 30%">
-<col style="width: 22%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -611,143 +611,143 @@ Figure&nbsp;1.6: The Iberian emerald lizard, <em>Lacerta schreiberi</em>.
 </figcaption>
 </figure>
 </div>
-<p>I will illustrate this with one my favorite species, the Iberian emerald lizard, <em>Lacerta schreiberi</em>, a species endemic to the Iberian peninsula, often found near water streams in mountain landscapes, but also in other habitats. First we obtain the presences for a species from GBIF (Global Biodiversity Information Facility, <a href="http://www.gbif.org" class="uri">http://www.gbif.org</a>). GBIF is a repository for biodiversity observations, and has over three billions of occurrences of over a million species all over the world at the time I am writing these words. Natural history museums, citizen science platforms such as iNaturalist ( <a href="http://www.inaturalist.org" class="uri">http://www.inaturalist.org</a>) and eBird (<a href="http://www.ebird.org" class="uri">http://www.ebird.org</a>), and scientists, publish their species records in GBIF using a data format called Darwin Core. There is a R package that allows one to download observations from GBIF and also other relevant geodata, the <strong>geodata</strong> package. We will be doing some geospatial processing, so let’s load also the <strong>terra</strong> package.</p>
+<p>I will illustrate this with one my favorite species, the Iberian emerald lizard, <em>Lacerta schreiberi</em>, a species endemic to the Iberian peninsula, often found near water streams in mountain landscapes, but also in other habitats. First we obtain the presences for a species from GBIF (Global Biodiversity Information Facility, <a href="http://www.gbif.org" class="uri">http://www.gbif.org</a>). GBIF is a repository for biodiversity observations, and has over three billions of occurrences of over a million species all over the world at the time I am writing these words. Natural history museums, citizen science platforms such as iNaturalist ( <a href="http://www.inaturalist.org" class="uri">http://www.inaturalist.org</a>) and eBird (<a href="http://www.ebird.org" class="uri">http://www.ebird.org</a>), and scientists, publish their species records in GBIF using a data format called Darwin Core. There is a R package that allows one to download observations from GBIF and also other relevant geodata, the <strong>geodata</strong> package. We will be doing some geospatial processing and simple SDM analysis, so let’s load also the <strong>terra</strong> and the <strong>predicts</strong> packages.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geodata)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(predicts)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(predicts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We download the observations of <em>Lacerta schreiberi</em> from GBIF with the function <code>sp_occurence(genus,species)</code>. We also download a world map with the function <code>world(path)</code>, where path should point towards a local directory where we want to store the data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>occ <span class="ot">&lt;-</span> <span class="fu">sp_occurrence</span>(<span class="st">"Lacerta"</span>,<span class="st">"schreiberi"</span>) </span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>world_data <span class="ot">&lt;-</span> <span class="fu">world</span>(<span class="at">path =</span> <span class="st">"."</span>) <span class="co">#download world countries limits</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ext_eur <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>,<span class="dv">45</span>,<span class="dv">35</span>,<span class="dv">72</span>) <span class="co"># coordinates of European extent</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#download bioclim data</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>bioclim <span class="ot">&lt;-</span> <span class="fu">worldclim_global</span>(<span class="at">var =</span> <span class="st">'bioc'</span>, <span class="at">res =</span> <span class="dv">10</span>, <span class="at">path =</span> <span class="st">"."</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the map of Europe</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(world_data,  </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Longitude"</span>, <span class="at">ylab =</span> <span class="st">"Latitude"</span>, <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">ext=</span>ext_eur)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co"># add the species occurrences</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(occ<span class="sc">$</span>lon,occ<span class="sc">$</span>lat,<span class="at">cex=</span>.<span class="dv">1</span>,<span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># create pseudo-absences</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>eumask<span class="ot">&lt;-</span><span class="fu">crop</span>(bioclim[[<span class="dv">1</span>]], <span class="fu">ext</span>(ext_eur))</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>absences<span class="ot">&lt;-</span><span class="fu">backgroundSample</span>(eumask,<span class="fu">nrow</span>(occ),<span class="fu">vect</span>(occ),<span class="at">tryf=</span><span class="dv">10</span>)</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(absences,<span class="at">cex=</span>.<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the climate variables in geographic space</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bioclim[[<span class="dv">19</span>]],<span class="at">ext=</span>ext_eur)</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bioclim[[<span class="dv">3</span>]],<span class="at">ext=</span>ext_eur)</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the climate space figure</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="co"># first merge occurences and absences into a single matrix</span></span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>allpts <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">cbind</span>(occ<span class="sc">$</span>lon,occ<span class="sc">$</span>lat,<span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(occ))),</span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>                <span class="fu">cbind</span>(absences,<span class="fu">rep</span>(<span class="dv">0</span>,<span class="fu">nrow</span>(absences))))</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(allpts)[<span class="dv">3</span>]<span class="ot">&lt;-</span><span class="st">"pres"</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the climate variable values for all points</span></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>bioclim_sample<span class="ot">&lt;-</span><span class="fu">extract</span>(bioclim,allpts[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>allpts_bioclim <span class="ot">&lt;-</span> <span class="fu">cbind</span>(allpts,bioclim_sample)</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>allpts_bioclim_plot<span class="ot">&lt;-</span>allpts_bioclim</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>allpts_bioclim_plot<span class="sc">$</span>pres<span class="ot">&lt;-</span><span class="fu">as.factor</span>(allpts_bioclim_plot<span class="sc">$</span>pres)</span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allpts_bioclim_plot, <span class="fu">aes</span>(<span class="at">x=</span>wc2<span class="fl">.1</span>_10m_bio_19,<span class="at">y=</span>wc2<span class="fl">.1</span>_10m_bio_3,<span class="at">shape=</span>pres, <span class="at">col=</span>pres)) <span class="sc">+</span></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha=</span><span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"0"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"blue"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>world_data <span class="ot">&lt;-</span> <span class="fu">world</span>(<span class="at">path =</span> <span class="st">"."</span>) <span class="co">#download world countries limits</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="fig-geog-vs-climate" class="quarto-layout-panel">
+<p>The variable occ is a dataframe with thousands of observations (row) and several measurements/fields per observation. You can inspect those attributed in the environment window in R studio or using the function <code>names()</code>. We will be mainly interested in the fields <code>lat</code> and <code>lon</code>, which store the latitude and longitude of each observation. We can now plot the map of Europe and add the occurrences on top of it using <code>points()</code>, mapping the longitude to the x-axis and the latitude to the y-axis We crop the extent of the map to Europe, which is located between longitude 15º West and 35º East and between 35º and 72º North.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ext_eur <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">15</span>,<span class="dv">45</span>,<span class="dv">35</span>,<span class="dv">72</span>) <span class="co"># coordinates of European extent</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(world_data,  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Longitude"</span>, <span class="at">ylab =</span> <span class="st">"Latitude"</span>, <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">ext=</span>ext_eur)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add the species occurrences</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(occ<span class="sc">$</span>lon,occ<span class="sc">$</span>lat,<span class="at">cex=</span>.<span class="dv">1</span>,<span class="at">col=</span><span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-occ_schreiberi" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-geog-vs-climate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row">
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-geog-vs-climate" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-geog-vs-climate-1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-geog-vs-climate-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ecophysiology_files/figure-html/fig-geog-vs-climate-1.png" class="img-fluid figure-img" data-ref-parent="fig-geog-vs-climate" width="672">
+<div aria-describedby="fig-occ_schreiberi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ecophysiology_files/figure-html/fig-occ_schreiberi-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-geog-vs-climate-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a) Geographic space
-</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-geog-vs-climate" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-geog-vs-climate-2" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-geog-vs-climate-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ecophysiology_files/figure-html/fig-geog-vs-climate-2.png" class="img-fluid figure-img" data-ref-parent="fig-geog-vs-climate" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-geog-vs-climate-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b) Bioclim 19
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-occ_schreiberi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.7: Point occurences of <em>Lacerta schreiberi</em> from GBIF.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row">
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-geog-vs-climate" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-geog-vs-climate-3" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-geog-vs-climate-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ecophysiology_files/figure-html/fig-geog-vs-climate-3.png" class="img-fluid figure-img" data-ref-parent="fig-geog-vs-climate" width="672">
+<p>We can see that all occurrences of <em>L. schreiberi</em> are confined to the Iberian Peninsula, particularly the Northwest of it. What is the climate space of these occurrences? There is a global dataset, the WorldClim dataset (<a href="http://www.worldclim.org" class="uri">http://www.worldclim.org</a>), which has climate data<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> for a range of variables from minimum temperature to precipitation, monthly from 1970-2000, at a range of spatial resolutions, from 10 seconds (approximately 1 km<span class="math inline">\(^2\)</span>) to 10 minutes (c.&nbsp;18x18km<span class="math inline">\(^2\)</span>). This dataset also includes climate normals (i.e.&nbsp;historical averages) for 19 bioclimatic variables, i.e.&nbsp;climate variables that have been found to be particularly important for modelling the distribution of biodiversity. We can download the WorldClim database using the function <code>worldclim_global()</code>, specifying the variables (<code>"bio"</code> stands for all 19 bioclimatic variables), the resolution (<code>10</code>’’) and the path for the downloaded data (<code>"."</code> means the current working directory).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bioclim <span class="ot">&lt;-</span> <span class="fu">worldclim_global</span>(<span class="at">var =</span> <span class="st">'bio'</span>, <span class="at">res =</span> <span class="dv">10</span>, <span class="at">path =</span> <span class="st">"."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-geog-vs-climate-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(c) Bioclim 13
+<p>Let’s plot two of these variables, BIO3, the Isothermality which is the mean diurnal temperature range divided by annual temperature range (x 100), and BIO19, the precipitation of the coldest quarter. You can investigate what the other variables are at the WorldClim website which has a table with a brief description of all bioclimatic variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="co"># prepare R to receive two plots side by side</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bioclim[[<span class="dv">3</span>]],<span class="at">ext=</span>ext_eur, <span class="at">main =</span> <span class="st">"BIO3 - Isothermality"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bioclim[[<span class="dv">19</span>]],<span class="at">ext=</span>ext_eur, <span class="at">main =</span> <span class="st">"BIO19 -</span><span class="sc">\n</span><span class="st"> Precipitation coldest quarter"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-bioclim_geospace" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bioclim_geospace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ecophysiology_files/figure-html/fig-bioclim_geospace-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bioclim_geospace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.8: Climate variables BIO3 and BIO19 in geographic space
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-geog-vs-climate" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-geog-vs-climate-4" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-geog-vs-climate-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ecophysiology_files/figure-html/fig-geog-vs-climate-4.png" class="img-fluid figure-img" data-ref-parent="fig-geog-vs-climate" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-geog-vs-climate-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(d) Climate space
+<p>From a first inspection of <a href="#fig-bioclim_geospace" class="quarto-xref">Figure&nbsp;<span>1.8</span></a> it seems that our lizard occurs in areas with high isothermality and high precipitation on the coldest quarter of the year. Let’s plot the occurrences in climate space, mapping BIO19 to the x axis and BIO3 to the y axis. First we extract the values of those climatic variables at each occurrence,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bioclim_occ<span class="ot">&lt;-</span><span class="fu">extract</span>(bioclim,<span class="fu">cbind</span>(occ<span class="sc">$</span>lon, occ<span class="sc">$</span>lat))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bioclim_occ[,<span class="dv">19</span>],bioclim_occ[,<span class="dv">3</span>], <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">xlab=</span><span class="st">"BIO19"</span>, <span class="at">ylab=</span><span class="st">"BIO3"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-bioclim_presences" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bioclim_presences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ecophysiology_files/figure-html/fig-bioclim_presences-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bioclim_presences-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.9: Climate space of the presences of L. schreiberi
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>This figure show the climate space of the presences and has some conceptual similarities with <a href="#fig-climatespace2" class="quarto-xref">Figure&nbsp;<span>1.5</span></a>. However, without mapping the climate space of the absences, it is difficult to see where these two climatic variables really delimt the area of distribution of <em>Lacerta schreiberi</em> in climate space. The Darwin Core format, in which all observations are submitted to GBIF, was designed with museum collections in mind, and it had limited support for structured biodiversity surveys where absences and sampling effort are recorded. This has changed in the last few years with the advent of the Darwin Event extension <span class="citation" data-cites="wieczorek2014">(<a href="references.html#ref-wieczorek2014" role="doc-biblioref">Wieczorek et al. 2014</a>)</span>, but most data in GBIF is still on occurrences. Most SDMs need absences, so modellers came up with the idea of generating pseudo-absences, this is points that are randomly generated to produce a “background” signal of absences for the models to be trained on. The package <strong>predicts</strong> has a function backgroundSample which does this and takes a SpatRaster with grid to be sample, the number of points to be generated and a SpatVector with the occurrences that are known (so that no absences are generated in the same grid cells as the occurrences). First, in order to generate a <code>SpatRaster</code>, we crop the first bioclimatic variable to the extent of Europe, <code>ext_eur</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>eumask<span class="ot">&lt;-</span><span class="fu">crop</span>(bioclim[[<span class="dv">1</span>]], <span class="fu">ext</span>(ext_eur))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>absences<span class="ot">&lt;-</span><span class="fu">backgroundSample</span>(eumask,<span class="fu">nrow</span>(occ),<span class="fu">vect</span>(occ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-geog-vs-climate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.7: The geographic space and climate space of Lacerta schreiberi.
+<p>We can now plot the presences and absences together in geographic space,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(world_data,  </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Longitude"</span>, <span class="at">ylab =</span> <span class="st">"Latitude"</span>, <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">ext=</span>ext_eur)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># add the species occurrences</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(occ<span class="sc">$</span>lon,occ<span class="sc">$</span>lat,<span class="at">cex=</span>.<span class="dv">1</span>,<span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(absences,<span class="at">cex=</span>.<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ecophysiology_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And now in climate space,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bioclim_absences<span class="ot">&lt;-</span><span class="fu">extract</span>(bioclim,absences)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty=</span><span class="st">"s"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bioclim_occ[,<span class="dv">19</span>],bioclim_occ[,<span class="dv">3</span>], <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">xlab=</span><span class="st">"BIO19"</span>, <span class="at">ylab=</span><span class="st">"BIO3"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(bioclim_absences[,<span class="fu">c</span>(<span class="dv">19</span>,<span class="dv">3</span>)], <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-bioclim_all" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bioclim_all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ecophysiology_files/figure-html/fig-bioclim_all-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bioclim_all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.10: The climate space of <em>Lacerta schreiberi</em>. Presences in blue and absences in red.
 </figcaption>
 </figure>
 </div>
+</div>
+</div>
+<p>It is now apparent that these two bioclimatic variables separate relatively well points in Europe where the species occur from the points where the species is (pseudo)absent, although there is some limited overlap. This suggests that a species distribution model trained on this data would be able to separate both clouds of point and would have a good predictive power. However, we cannot tell whether this predictive power is due to chance (and spatial autocorrelation, see for instance <span class="citation" data-cites="f.dormann2007">(<a href="references.html#ref-f.dormann2007" role="doc-biblioref">2007</a>)</span>) or uncovers a causal mechanism. This correlative approach contrasts with the approach in the first sections of this chapter where we tried to develop a mechanistic model from first principles.</p>
 </section>
 <section id="statistical-confrontation-regressing-the-climate-space" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="statistical-confrontation-regressing-the-climate-space"><span class="header-section-number">1.4</span> Statistical confrontation: regressing the climate space</h2>
 <p><em>By Andres Marmol</em></p>
-<!--# author: "Andres Marmol" !-->
 <p>Why anoles? Anoles are among the most studied reptile organisms. They are vastly diverse with more than 488 species described until today — circa 11% of all the squamates without considering snakes — due to their outstanding adaptive radiation, which has inspired many to dive-in-depth into understanding how evolution has operated within this group (Lizards in an Evolutionary Tree by J. B. Losos <span class="citation" data-cites="losos2009">(<a href="references.html#ref-losos2009" role="doc-biblioref">2009</a>)</span> is a highly recommended instructive reading for more info). As a result, very detailed data sets on many species of anoles, including information on micro habitat, field body temperature, activity patterns and morphological traits, performance, etc., can be found online in relatively few time.</p>
 <p>In the following steps we will be downloading from Dryad and using a data set created by Winchell et al. <span class="citation" data-cites="winchella2016">(<a href="references.html#ref-winchella2016" role="doc-biblioref">2016</a>)</span> on <em>Anolis cristatellus</em> making a pair-comparison of several morphological and thermal traits of individuals living in urban and forested areas at Puerto Rico. <em>A. cristatellus</em> is widely distributed across Puerto Rico and can be found in natural and human-intervened spaces easily. It can be seen over ground and laying on the trunks of trees in natural settings, and on walls and metal fences in more urban areas.</p>
 <section id="calling-the-dataset-from-dryad" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="calling-the-dataset-from-dryad"><span class="header-section-number">1.4.1</span> Calling the dataset from Dryad</h3>
 <p>To download the dataset, it is necessary to install the R package <code>rdryad</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rdryad"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rdryad"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then we open the newly installed package and download the dataset by specifying the DOI associated to this dataset.</p>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling rdryad</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdryad)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the DOI</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>doi <span class="ot">&lt;-</span> <span class="st">"10.5061/dryad.h234n"</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the dataset using the dryad_download function</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>downloaded_file <span class="ot">&lt;-</span> <span class="fu">dryad_download</span>(<span class="at">dois =</span> doi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling rdryad</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdryad)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the DOI</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>doi <span class="ot">&lt;-</span> <span class="st">"10.5061/dryad.h234n"</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the dataset using the dryad_download function</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>downloaded_file <span class="ot">&lt;-</span> <span class="fu">dryad_download</span>(<span class="at">dois =</span> doi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The data sets are now downloaded on the paths indicated in the box below, although for this exercise only table [2] winchell_evol_phenshifts.csv” is needed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The downloaded_file will contain the file path where the dataset is saved</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(downloaded_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The downloaded_file will contain the file path where the dataset is saved</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(downloaded_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`10.5061/dryad.h234n`
 [1] "/Users/henrique/Library/Caches/R/rdryad/10_5061_dryad_h234n/winchell_evol_CG.csv"        
@@ -756,11 +756,11 @@ Figure&nbsp;1.7: The geographic space and climate space of Lacerta schreiberi.
 </div>
 <p>Once this is done, it is always good practice to check if the recently open data frame works by checking the columns within the data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling the dataset of interest as df</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(downloaded_file[[<span class="dv">1</span>]][<span class="dv">2</span>])</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># checking the columns (variables) available in the data frame df using the str function</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling the dataset of interest as df</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(downloaded_file[[<span class="dv">1</span>]][<span class="dv">2</span>])</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># checking the columns (variables) available in the data frame df using the str function</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "ID"                 "date"               "Site"              
  [4] "context"            "perch"              "bodytemp.C"        
@@ -780,15 +780,15 @@ Figure&nbsp;1.7: The geographic space and climate space of Lacerta schreiberi.
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="sec-anolis_cristatellus"><span class="header-section-number">1.4.2</span> Exploring the thermophysiological data of <em>A. cristatellus.</em></h3>
 <p>As covered in the first chapter, <span class="math inline">\(b\)</span> increases proportionally to <span class="math inline">\(a\)</span> as indicated in equation (1.2). Let’s check if the data confirms this equation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to call a variable directly from a data frame one must use $, indicating the name of the dataframe at the left and the name of the variable (columnt on the right).</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to call a variable directly from a data frame one must use $, indicating the name of the dataframe at the left and the name of the variable (columnt on the right).</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecophysiology_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ecophysiology_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -804,14 +804,14 @@ b = b_{0} + β*a + e
 <p>where <span class="math inline">\(b\)</span> is body temperature, <span class="math inline">\(a\)</span> is ambient temperature, and <span class="math inline">\(b_0\)</span> is the body temperature when <span class="math inline">\(a\)</span> is zero.</p>
 <p>Now lets model it using a least-squares linear regression using the <code>lm</code> function in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#define the linear model</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#the variable at the left of the tilde (~) is the dependent variable</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#data calls the specific dataframe to be used.</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bodytemp.C <span class="sc">~</span> ambient.temp.C, <span class="at">data=</span>df)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print model outputs</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#define the linear model</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#the variable at the left of the tilde (~) is the dependent variable</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#data calls the specific dataframe to be used.</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bodytemp.C <span class="sc">~</span> ambient.temp.C, <span class="at">data=</span>df)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print model outputs</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -828,11 +828,11 @@ Coefficients:
 <p>The results of our model indicates that if the air temperature (<span class="math inline">\(a\)</span>) is zero, <em>A. cristatellus</em> would show a body temperature (<span class="math inline">\(b\)</span>) of 8.7 °C, which increases in approximately 0.7 °C for each 1 °C increase in air temperature.</p>
 <p>Now it is also possible to draw a few predictions</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a number of possible ambient temperatures that can be found in Puerto Rico during the day</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>amb_temps <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">ambient.temp.C =</span> <span class="fu">seq</span>(<span class="dv">27</span>,<span class="dv">38</span>, <span class="dv">1</span>))<span class="co"># defines a vector with values from 27 to 38, with one unit increase</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model1, <span class="at">newdata=</span>amb_temps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a number of possible ambient temperatures that can be found in Puerto Rico during the day</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>amb_temps <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">ambient.temp.C =</span> <span class="fu">seq</span>(<span class="dv">27</span>,<span class="dv">38</span>, <span class="dv">1</span>))<span class="co"># defines a vector with values from 27 to 38, with one unit increase</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model1, <span class="at">newdata=</span>amb_temps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5        6        7        8 
 28.23967 28.96335 29.68702 30.41070 31.13437 31.85805 32.58172 33.30540 
@@ -845,17 +845,17 @@ Coefficients:
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="how-good-our-model-is-performing"><span class="header-section-number">1.4.4</span> How good our model is performing?</h3>
 <p>Graphically the linear model fits the data as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scatter plot</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add the line of fit from our recently created linear model "model1"</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(model1, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scatter plot</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add the line of fit from our recently created linear model "model1"</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(model1, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecophysiology_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ecophysiology_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -865,7 +865,7 @@ Coefficients:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ecophysiology_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ecophysiology_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -873,9 +873,9 @@ Coefficients:
 <p>What a least square linear regression does is to find the lowest sum of squares of the residuals (every green line in the plot) so that the least amount of error is kept in the linear model.</p>
 <p>Finally, how well the model fits the data? In our example, the body temperatures do not perfectly fall on the line of best fit, and many of them are scattered around it. A common metric assess this question in a simple regression model is the <span class="math inline">\(r^2\)</span>. <span class="math inline">\(r^2\)</span> values indicates how much of the variance of body temperature (our dependent variable) is explained by ambient temperature (our independent variable). A perfect fit is indicated by an <span class="math inline">\(r^2\)</span> of 1, while no fit would be zero. To check the <span class="math inline">\(r^2\)</span> in our model we can simply use the <code>summary</code> function in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># obtaining the r-squared of our model</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># obtaining the r-squared of our model</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5736088</code></pre>
 </div>
@@ -885,6 +885,12 @@ Coefficients:
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-f.dormann2007" class="csl-entry" role="listitem">
+F. Dormann, Carsten, Jana M. McPherson, Miguel B. Araújo, Roger Bivand, Janine Bolliger, Gudrun Carl, Richard G. Davies, et al. 2007. <span>“Methods to Account for Spatial Autocorrelation in the Analysis of Species Distributional Data: A Review.”</span> <em>Ecography</em> 30 (5): 609–28. <a href="https://doi.org/10.1111/j.2007.0906-7590.05171.x">https://doi.org/10.1111/j.2007.0906-7590.05171.x</a>.
+</div>
+<div id="ref-fick2017" class="csl-entry" role="listitem">
+Fick, Stephen E., and Robert J. Hijmans. 2017. <span>“WorldClim 2: New 1-Km Spatial Resolution Climate Surfaces for Global Land Areas.”</span> <em>International Journal of Climatology</em> 37 (12): 4302–15. <a href="https://doi.org/10.1002/joc.5086">https://doi.org/10.1002/joc.5086</a>.
+</div>
 <div id="ref-guisan2017" class="csl-entry" role="listitem">
 Guisan, Antoine, Wilfried Thuiller, and Niklaus E. Zimmermann. 2017. <em>Habitat Suitability and Distribution Models: With Applications in r</em>. Cambridge University Press.
 </div>
@@ -893,6 +899,9 @@ Huey, B. 1982. <span>“Temperature, Physiology, and the Ecology of Reptiles.”
 </div>
 <div id="ref-losos2009" class="csl-entry" role="listitem">
 Losos, Jonathan B. 2009. <em>Lizards in an Evolutionary TreeEcology and Adaptive Radiation of Anoles</em>. University of California Press. <a href="https://doi.org/10.1525/california/9780520255913.001.0001">https://doi.org/10.1525/california/9780520255913.001.0001</a>.
+</div>
+<div id="ref-wieczorek2014" class="csl-entry" role="listitem">
+Wieczorek, John, Olaf Bánki, Stan Blum, John Deck, Markus Döring, Gabriele Dröge, Dag Endresen, et al. 2014. <span>“Meeting Report: GBIF Hackathon-Workshop on Darwin Core and Sample Data (22-24 May 2013).”</span> <em>Standards in Genomic Sciences</em> 9 (3): 585–98. <a href="https://doi.org/10.4056/sigs.4898640">https://doi.org/10.4056/sigs.4898640</a>.
 </div>
 <div id="ref-winchella2016" class="csl-entry" role="listitem">
 Winchell, Kristin M., Robert Graham Reynolds, Sofia R. Prado-Irwin, Alberto R. Puente-Rolón, and Liam J. Revell. 2016. <span>“Data from: Phenotypic Shifts in Urban Areas in the Tropical Lizard Anolis Cristatellus.”</span> <a href="https://doi.org/10.5061/DRYAD.H234N">https://doi.org/10.5061/DRYAD.H234N</a>.
@@ -904,6 +913,7 @@ Winchell, Kristin M., Robert Graham Reynolds, Sofia R. Prado-Irwin, Alberto R. P
 <hr>
 <ol>
 <li id="fn1"><p>The concept of equilibrium is very important in ecological theory. It is often introduced in the context of differential equations and corresponds to the point at which the derivative of the variable of interest is zero. The heat equation can also be seen as a differential equation where <span class="math inline">\(f\)</span> corresponds to the derivative of the amount of heat <span class="math inline">\(Q\)</span> in the lizard through time <span class="math inline">\(t\)</span>, i.e.&nbsp;<span class="math inline">\(dQ/dt\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>WorldClim is based on spatial interpolation of tens of thousands of weather stations using models and covariates such as elevation.<span class="citation" data-cites="fick2017">(<a href="references.html#ref-fick2017" role="doc-biblioref">Fick and Hijmans 2017</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
