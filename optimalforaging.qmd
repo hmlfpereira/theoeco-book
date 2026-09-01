@@ -187,9 +187,9 @@ Let's consider that the home-range of the lizard is shaped as a semi-circle cent
 
 $$
 A=\int_{0}^{r_c}a \pi r dr
-$$
+$$ {#eq-total-abundance}
 
-This is an easy integral, but let's see how we could solve it in R, as this will be handy for the next one. We can do symbolic math in R using the package Ryacas. We just say that *r* is a symbolic variable um the function ysym() and then integrate the product $a \ \pi \ r$ from 0 to $r_c$ with the function integrate(),
+This is an easy integral, but let's see how we could solve it in R, as this will be handy for the next integral. We can do symbolic math in R using the package Ryacas. Ryacas provides an interface to Yacas, Yet Another Computer Algebra System. We use ysim() to tell Yacas to integrate the product $a \ \pi \ r$ from 0 to $r_c$ with the function integrate(),
 
 ```{r}
 #| message: false
@@ -198,18 +198,29 @@ A=ysym("Integrate(r, 0, r_c) a * Pi * r")
 A
 ```
 
-Or more beatifully, using the TeX ouput,
+Often we would like to see mathematical equations beautifully typeset. This can be done using TeX, and Ryacas does provide a way for layout the equation as a TeX command. However, for Quarto to recognize a TeX command, we need to start it and close it with a "\$\$". As we will be doing this a lot, I wrote a little function, tex_quarto, that does this and also takes an optional prefix that can be put in the beginning (e.g. the variable name and an identity sign).
+
+```{r}
+tex_quarto = function (x, prefix=NULL)
+  cat("$$", prefix, tex(x), "$$")
+```
+
+Now, we can output the result of the integral from @eq-total-abundance in a beautiful way as[^optimalforaging-1],
+
+[^optimalforaging-1]: Note that this only displays the typeset equation when you render the Quarto document into html or PDF, and it is not shown directly on the notebook output mode. You also need to add the command "#\| output: asis" in the beginning of the R chunk to tell Quarto it needs to take the output literally.
 
 ```{r}
 #| output: asis
-tex_quarto = function (x)
-  cat("$$", tex(x), "$$")
-tex_quarto(A)
+tex_quarto(A, "A=")
 ```
 
-The waiting time is just the inverse of the total abundance.
-
+The waiting time is just the inverse of the total abundance,
 $$t_w=1/A$$
+or in R code,
+
+```{r}
+tw=1/A
+```
 
 ![Feeding territory of a sit-and-wait predator with radius $r_c$.](images/FeedingTerritory.jpg){#fig-feedingterritory}
 
@@ -218,6 +229,15 @@ The average pursuit time is a bit more complicated. For a prey landing at distan
 $$
 t_p=\int_{0}^{r_c} \frac{2r}{v} \frac{a \pi r}{A} \ dr
 $$
+
+Let's calculate this more complicated integral in R, substituting the value of the total abundance that we calculated above using the function with_value(), and simplifying the result with simplify(),
+
+```{r}
+#| output: asis
+tp=ysym("Integrate(r, 0, r_c) (2 * r / v) * (a * Pi * r) / A")
+tp = with_value(tp, ysym("A"), A) |> simplify()
+tex_quarto(tp, "t_p=")
+```
 
 The average time per prey item consumed is simply the sum of the average pursuit time, $t_p$, and the average waiting time $t_w$,
 
@@ -277,7 +297,7 @@ This means that we try to find the place in which the tangent to the function ha
 
 ```{r}
 library(Ryacas)
-#rm(list = ls())
+rm(list = ls())
 #et_sym = ysym("(e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)")
 #det_sym = deriv(et_sym,'rc')
 #myint = integrate(ysym("a*pi*rc"),"rc",0,2*pi)
@@ -290,7 +310,7 @@ If you wanna read about an empirical test of this model, I suggest the paper by 
 
 ## Does natural selection maximizes fitness?
 
-Animals do not solve mathematical equations, at least in the way we do. So, how can animals find this optimal home-range sizes or choose the optimal strategy? One way of doing this is by learning, and there are simple models of reinforcement learning that can produce decisions that are optimal (see for instance Roughgarden [-@roughgarden1998a]). Another way is through natural selection and evolutionary processes. The importance of evolution in shaping animal behavior was at the core of the research of Karl von Frisch, Konrad Lorenz and Nikolaas Tinbergen, who received the Nobel Prize in Physiology or Medicine in 1973. These three scientists played a key role in developing the science of ethology, the comparative study of behavior across species and ecological contexts. Until their work, studies of behavior were focusing on the dichotomy between stimulus-response behavior or the idea of the idea of learning as an explanation to all behavioral variations. Lorenz and Tinbergen's work showed that fixed action patterns observed in many animals were the response to particular stimuli and were done without any previous learning. Lorenz and Timbergen often worked with birds, but my favorite fixed action patterns are the pushup displays of *Anolis* in response to predators or the presence of conspsefics. von Frish discovered the "bee language", this is, how foraging bees communicate to nestmates upon their return to the nest the location of nectar an pollen resources.
+Animals do not solve mathematical equations, at least in the way we do. So, how can animals find this optimal home-range sizes or choose the optimal strategy? One way of doing this is by learning, and there are simple models of reinforcement learning that can produce decisions that are optimal (see for instance Roughgarden [-@roughgarden1998a]). Another way is through natural selection and evolutionary processes. The importance of evolution in shaping animal behavior was at the core of the research of Karl von Frisch, Konrad Lorenz and Nikolaas Tinbergen, who received the Nobel Prize in Physiology or Medicine in 1973. These three scientists played a key role in developing the science of ethology, the comparative study of behavior across species and ecological contexts. Until their work, studies of behavior were focusing on the dichotomy between stimulus-response behavior or the idea of the idea of learning as an explanation to all behavioral variations. Lorenz and Tinbergen's work showed that fixed action patterns observed in many animals were the response to particular stimuli and were done without any previous learning. Lorenz and Timbergen often worked with birds, but my favorite fixed action patterns are the pushup displays of *Anolis* in response to predators or the presence of conspesifics. von Frish discovered the "bee language", this is, how foraging bees communicate to nestmates upon their return to the nest the location of nectar an pollen resources.
 
 So the idea that some behaviors are genetically "programmed" allows us to model the dynamics of behavior acquisition in a population of individuals, and explore the question of whether natural selection maximizes fitness. We consider a very simple model of one genetic loci with two alleles in \[for a diplod model see for instance Roughgarden et al\]
 

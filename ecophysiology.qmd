@@ -132,7 +132,7 @@ polygon(X,Y,col="green")
 Now that we have the climate space we can plot on top of it some empirical data of how the conditions are in the field during the day. We can for instance consider two micro-habitats, a rock (in the sun) and a bush (in the shade). Suppose we obtain some data from temperature loggers that were installed in each micro-habitat , recording every three hours the values of temperature and radiation as tabled below.
 
 | Time (hh:mm) | Radiation rock (cal/h) | Radiation bush (cal/h) | Temperature (ºC) |
-|--------------|------------------------|------------------------|------------------|
+|------------------|------------------|------------------|------------------|
 | 00:00        | 150                    | 150                    | 18               |
 | 03:00        | 150                    | 150                    | 13               |
 | 06:00        | 800                    | 450                    | 10               |
@@ -198,99 +198,128 @@ In the previous section we developed a simple mechanistic model for the climate 
 
 ![The Iberian emerald lizard, *Lacerta schreiberi*.](images/Lacerta_schreiberi.JPG){#fig-schreiberi}
 
-I will illustrate this with one my favorite species, the Iberian emerald lizard, *Lacerta schreiberi*, a species endemic to the Iberian peninsula, often found near water streams in mountain landscapes, but also in other habitats. First we obtain the presences for a species from GBIF (Global Biodiversity Information Facility, <http://www.gbif.org>). GBIF is a repository for biodiversity observations, and has over three billions of occurrences of over a million species all over the world at the time I am writing these words. Natural history museums, citizen science platforms such as iNaturalist ( <http://www.inaturalist.org>) and eBird (<http://www.ebird.org>), and scientists, publish their species records in GBIF using a data format called Darwin Core. There is a R package that allows one to download observations from GBIF and also other relevant geodata, the **geodata** package. We will be doing some geospatial processing, so let's load also the **terra** package.
+I will illustrate this with one my favorite species, the Iberian emerald lizard, *Lacerta schreiberi*, a species endemic to the Iberian peninsula, often found near water streams in mountain landscapes, but also in other habitats. First we obtain the presences for a species from GBIF (Global Biodiversity Information Facility, <http://www.gbif.org>). GBIF is a repository for biodiversity observations, and has over three billions of occurrences of over a million species all over the world at the time I am writing these words. Natural history museums, citizen science platforms such as iNaturalist ( <http://www.inaturalist.org>) and eBird (<http://www.ebird.org>), and scientists, publish their species records in GBIF using a data format called Darwin Core. There is a R package that allows one to download observations from GBIF and also other relevant geodata, the **geodata** package. We will be doing some geospatial processing and simple SDM analysis, so let's load also the **terra** and the **predicts** packages.
 
 ```{r}
-#| eval: false
+#| warning: false
 library(geodata)
 library(terra)
 library(predicts)
-library(ggplot2)
 ```
 
 We download the observations of *Lacerta schreiberi* from GBIF with the function `sp_occurence(genus,species)`. We also download a world map with the function `world(path)`, where path should point towards a local directory where we want to store the data.
 
 ```{r}
-#| eval: false
+#| eval: false 
 occ <- sp_occurrence("Lacerta","schreiberi") 
 world_data <- world(path = ".") #download world countries limits
-ext_eur <- c(-15,45,35,72) # coordinates of European extent
-
-#download bioclim data
-bioclim <- worldclim_global(var = 'bioc', res = 10, path = ".")
-
-# plot the map of Europe
-plot(world_data,  
-     xlab = "Longitude", ylab = "Latitude", axes = TRUE, ext=ext_eur)
-
-# add the species occurrences
-points(occ$lon,occ$lat,cex=.1,col="blue")
-
-# create pseudo-absences
-eumask<-crop(bioclim[[1]], ext(ext_eur))
-absences<-backgroundSample(eumask,nrow(occ),vect(occ),tryf=10)
-points(absences,cex=.1,col="red")
-
-
-# plot the climate variables in geographic space
-plot(bioclim[[19]],ext=ext_eur)
-plot(bioclim[[3]],ext=ext_eur)
-
-# plot the climate space figure
-# first merge occurences and absences into a single matrix
-allpts <- rbind(cbind(occ$lon,occ$lat,rep(1,nrow(occ))),
-                cbind(absences,rep(0,nrow(absences))))
-colnames(allpts)[3]<-"pres"
-
-# extract the climate variable values for all points
-bioclim_sample<-extract(bioclim,allpts[,1:2])
-allpts_bioclim <- cbind(allpts,bioclim_sample)
-
-allpts_bioclim_plot<-allpts_bioclim
-allpts_bioclim_plot$pres<-as.factor(allpts_bioclim_plot$pres)
-ggplot(allpts_bioclim_plot, aes(x=wc2.1_10m_bio_19,y=wc2.1_10m_bio_3,shape=pres, col=pres)) +
-  geom_point(size = 3, alpha=0.5) + scale_color_manual(values = c("0" = "red", "1" = "blue")) 
-
 ```
 
-```{r echo=FALSE}
-#| warning: false
-#| label: fig-geog-vs-climate
-#| fig-cap: "The geographic space and climate space of Lacerta schreiberi."
-#| fig-subcap: 
-#|   - "Geographic space"
-#|   - "Bioclim 19"
-#|   - "Bioclim 13"
-#|   - "Climate space"
-#| layout-ncol: 2
-library(terra)
-library(geodata)
-library(predicts)
-library(ggplot2)
-setwd("data")
+```{r}
+#| echo: FALSE
+occ = read.csv("data/occurences.csv")
+world_data <- world(path = "data") #download world countries limits
+```
 
-#occ = sp_occurrence("Lacerta","schreiberi") #download occurences from GBIF
-#write.csv(occ,"occurences.csv")
-occ = read.csv("occurences.csv")
+The variable occ is a dataframe with thousands of observations (rows) and several measurements/fields per observation (columns). You can inspect those attributed in the environment window in R studio or using the function `names()`. We will be mainly interested in the fields `lat` and `lon`, which store the latitude and longitude of each observation. We can now plot the map of Europe and add the occurrences on top of it using `points()`, mapping the longitude to the x-axis and the latitude to the y-axis. We crop the extent of the map to Europe, which is located between longitude 15º West and 35º East and between 35º and 72º North.
 
-world_data <- world(path = ".") #download world countries limits
+```{r}
+#| label: fig-occ_schreiberi
+#| fig-cap: "Point occurences of *Lacerta schreiberi* from GBIF."
 ext_eur <- c(-15,45,35,72) # coordinates of European extent
+plot(world_data,  
+     xlab = "Longitude", ylab = "Latitude", axes = TRUE, ext=ext_eur)
+# add the species occurrences
+points(occ$lon,occ$lat,cex=.1,col="blue")
+```
 
-#download bioclim data
-bioclim <- worldclim_global(var = 'bioc', res = 10, path = ".")
+We can see that all occurrences of *L. schreiberi* are confined to the Iberian Peninsula, particularly the Northwest of it. What is the climate space of these occurrences? There is a global dataset, the WorldClim dataset (<http://www.worldclim.org>), which has climate data[^ecophysiology-2] for a range of variables from minimum temperature to precipitation, monthly from 1970-2000, at a range of spatial resolutions, from 10 seconds (approximately 1 km$^2$) to 10 minutes (c. 18x18km$^2$). This dataset also includes climate normals (i.e. historical averages) for 19 bioclimatic variables, i.e. climate variables that have been found to be particularly important for modelling the distribution of biodiversity. We can download the WorldClim database using the function `worldclim_global()`, specifying the variables (`"bio"` stands for all 19 bioclimatic variables), the resolution (`10`'') and the path for the downloaded data (`"."` means the current working directory).
+
+[^ecophysiology-2]: WorldClim is based on spatial interpolation of tens of thousands of weather stations using models and covariates such as elevation.[@fick2017].
+
+```{r}
+#| echo: false 
+bioclim <- worldclim_global(var = 'bio', res = 10, path = "data")
+```
+
+```{r}
+#| eval: false 
+bioclim <- worldclim_global(var = 'bio', res = 10, path = ".")
+```
+
+Let's plot two of these variables, BIO3, the Isothermality which is the mean diurnal temperature range divided by annual temperature range (x 100), and BIO19, the precipitation of the coldest quarter. You can investigate what the other variables are at the WorldClim website which has a table with a brief description of all bioclimatic variables.
+
+```{r}
+#| label: fig-bioclim_geospace
+#| fig-cap: "Climate variables BIO3 and BIO19 in geographic space"
+par(mfrow=c(1,2)) # prepare R to receive two plots side by side
+plot(bioclim[[3]],ext=ext_eur, main = "BIO3 - Isothermality")
+plot(bioclim[[19]],ext=ext_eur, main = "BIO19 -\n Precipitation coldest quarter")
+```
+
+From a first inspection of @fig-bioclim_geospace it seems that our lizard occurs in areas with high isothermality and high precipitation on the coldest quarter of the year. Let's plot the occurrences in climate space, mapping BIO19 to the x axis and BIO3 to the y axis. First we extract the values of those climatic variables at each occurrence,
+
+```{r}
+#| label: fig-bioclim_presences
+#| fig-cap: "Climate space of the presences of L. schreiberi"
+bioclim_occ<-extract(bioclim,cbind(occ$lon, occ$lat))
+plot(bioclim_occ[,19],bioclim_occ[,3], col="blue", xlab="BIO19", ylab="BIO3") 
+```
+
+This figure show the climate space of the presences and has some conceptual similarities with @fig-climatespace2. However, without mapping the climate space of the absences, it is difficult to see whether these two climatic variables really delimt the area of distribution of *Lacerta schreiberi* in climate space. The GBIF Darwin Core format was designed with museum collections in mind, and it had limited support for structured biodiversity surveys where absences and sampling effort are recorded. This has changed in the last few years with the advent of the Darwin Event extension [@wieczorek2014], but most data in GBIF is still on occurrences. Most SDMs need absences, so modellers came up with the idea of generating pseudo-absences, this is points that are randomly generated to produce a "background" signal of absences for the models to be trained on. The package **predicts** has a function backgroundSample which does this and takes a SpatRaster with grid to be sample, the number of points to be generated and a SpatVector with the occurrences that are known (so that no absences are generated in the same grid cells as the occurrences). First, in order to generate a `SpatRaster`, we crop the first bioclimatic variable to the extent of Europe, `ext_eur`.
+
+```{r}
+eumask<-crop(bioclim[[1]], ext(ext_eur))
+absences<-backgroundSample(eumask,nrow(occ),vect(occ))
+```
+
+We can now plot the presences and absences together in geographic space,
+
+```{r}
+plot(world_data,  
+     xlab = "Longitude", ylab = "Latitude", axes = TRUE, ext=ext_eur)
+# add the species occurrences
+points(occ$lon,occ$lat,cex=.1,col="blue")
+points(absences,cex=.1,col="red")
+```
+
+And now in climate space,
+
+```{r}
+#| label: fig-bioclim_all
+#| fig-cap: "The climate space of *Lacerta schreiberi*. Presences in blue and absences in red."
+
+bioclim_absences<-extract(bioclim,absences)
+par(pty="s")
+plot(bioclim_occ[,19],bioclim_occ[,3], col="blue", xlab="BIO19", ylab="BIO3", ylim=c(0,50)) 
+points(bioclim_absences[,c(19,3)], col="red")
+```
+
+It is now apparent that these two bioclimatic variables separate relatively well points in Europe where the species occur from the points where the species is (pseudo)absent, although there is some limited overlap. This suggests that a species distribution model trained on this data would be able to separate both clouds of point and would have a good predictive power. However, we cannot tell whether this predictive power is due to chance (and spatial autocorrelation, see for instance Dormann et al [-@f.dormann2007]) or uncovers a causal mechanism. This correlative approach contrasts with the approach in the first sections of this chapter where we tried to develop a mechanistic model from first principles.
+
+```{r}
+#| echo: false
+#| warning: false
+#| eval: false
+# fig-subcap: 
+#   - "Geographic space"
+#   - "Bioclim 19"
+#   - "Bioclim 13"
+#   - "Climate space"
+# layout-ncol: 2
+
+# an older version of this with gpplot and exploratory analysis of the most 
+# important bioclimatic variables using lm
+
+library(ggplot2)
 
 # plot the map of Europe
 plot(world_data,  
      xlab = "Longitude", ylab = "Latitude", axes = TRUE, ext=ext_eur)
 
-# add the species occurrences
+# add the species occurrences and absences
 points(occ$lon,occ$lat,cex=.1,col="blue")
-
-# create pseudo-absences
-eumask<-crop(bioclim[[1]], ext(ext_eur))
-absences<-backgroundSample(eumask,nrow(occ),vect(occ),tryf=10)
 points(absences,cex=.1,col="red")
-
 
 # plot the climate variables in geographic space
 plot(bioclim[[19]],ext=ext_eur)
@@ -303,7 +332,7 @@ allpts <- rbind(cbind(occ$lon,occ$lat,rep(1,nrow(occ))),
 colnames(allpts)[3]<-"pres"
 
 # extract the climate variable values for all points
-bioclim_sample<-extract(bioclim,allpts[,1:2])
+bioclim_sample<-raster::extract(bioclim,allpts[,1:2])
 allpts_bioclim <- cbind(allpts,bioclim_sample)
 
 
@@ -334,15 +363,11 @@ allpts_bioclim_plot<-allpts_bioclim
 allpts_bioclim_plot$pres<-as.factor(allpts_bioclim_plot$pres)
 ggplot(allpts_bioclim_plot, aes(x=wc2.1_10m_bio_19,y=wc2.1_10m_bio_3,shape=pres, col=pres)) +
   geom_point(size = 3, alpha=0.5) + scale_color_manual(values = c("0" = "red", "1" = "blue")) 
-
-
 ```
 
 ## Statistical confrontation: regressing the climate space
 
 *By Andres Marmol*
-
-<!--# author: "Andres Marmol" !-->
 
 Why anoles? Anoles are among the most studied reptile organisms. They are vastly diverse with more than 488 species described until today — circa 11% of all the squamates without considering snakes — due to their outstanding adaptive radiation, which has inspired many to dive-in-depth into understanding how evolution has operated within this group (Lizards in an Evolutionary Tree by J. B. Losos [-@losos2009] is a highly recommended instructive reading for more info). As a result, very detailed data sets on many species of anoles, including information on micro habitat, field body temperature, activity patterns and morphological traits, performance, etc., can be found online in relatively few time.
 
