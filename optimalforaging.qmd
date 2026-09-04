@@ -303,14 +303,9 @@ $$
 This means that we try to find the place in which the tangent to the function has slope zero, i.e. it is horizontal. This can be the maximum or the minimum of a function, and often one has to investigate further by looking at the sign of the second derivative, but not in this case. So, let's solve this in R,
 
 ```{r}
-library(Ryacas)
-rm(list = ls())
-#et_sym = ysym("(e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)")
-#det_sym = deriv(et_sym,'rc')
-#myint = integrate(ysym("a*pi*rc"),"rc",0,2*pi)
-#myint
-#rc_opt = solve(det_sym, 'rc')
-#eval(rc_opt, list()
+dET = deriv(ET,"rc") 
+rcopt=solve(dET, "rc")
+simplify(rcopt)
 ```
 
 If you wanna read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden [-@shafir1998a].
