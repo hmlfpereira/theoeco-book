@@ -194,8 +194,7 @@ This is an easy integral, but let's see how we could solve it in R, as this will
 ```{r}
 #| message: false
 library(Ryacas)
-A=ysym("Integrate(r, 0, r_c) a * Pi * r")
-A
+A=ysym("Integrate(r, 0, rc) a * Pi * r")
 ```
 
 Often we would like to see mathematical equations beautifully typeset. This can be done using TeX, and Ryacas does provide a way for layout the equation as a TeX command. However, for Quarto to recognize a TeX command, we need to start it and close it with a "\$\$". As we will be doing this a lot, I wrote a little function, tex_quarto, that does this and also takes an optional prefix that can be put in the beginning (e.g. the variable name and an identity sign).
@@ -214,9 +213,7 @@ Now, we can output the result of the integral from @eq-total-abundance in a beau
 tex_quarto(A, "A=")
 ```
 
-The waiting time is just the inverse of the total abundance,
-$$t_w=1/A$$
-or in R code,
+The waiting time is just the inverse of the total abundance, $$t_w=1/A$$ or in R code,
 
 ```{r}
 tw=1/A
@@ -234,7 +231,7 @@ Let's calculate this more complicated integral in R, substituting the value of t
 
 ```{r}
 #| output: asis
-tp=ysym("Integrate(r, 0, r_c) (2 * r / v) * (a * Pi * r) / A")
+tp=ysym("Integrate(r, 0, rc) (2 * r / v) * (a * Pi * r) / A")
 tp = with_value(tp, ysym("A"), A) |> simplify()
 tex_quarto(tp, "t_p=")
 ```
@@ -251,43 +248,53 @@ $$
 ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
 $$
 
-where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius $r_c$.
-
-The optimal decision is to find the cut-off radius $r_c$ that maximizes the energy per time,
-
-$$
-\max_{r_c}(ET)
-$$ {#eq-maxet}
-
-Let's plot the energy per time as a function of the territory size. This time, as we have some
+where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius $r_c$. Let's calculate this expression in R,
 
 ```{r}
-ew<-0.1                  #Energy per unit of time of waiting
-ep<-1                    #Energy per unit of time of pursuing the prey
-v<-0.5                   #Velocity of the predator in chase
-a<-0.005                 #Abundance of prey
-e<-10                    #Energy value of the prey
+ET=ysym("(e-ep*tp-ew*tw)/(tp+tw)")
+ET=with_value(ET,ysym("tp"),tp)
+ET=with_value(ET,ysym("tw"),tw)
+simplify(ET)
+```
 
+Let's plot the energy per time as a function of the territory size. We have to start by giving some values to the different paramerters.
+
+```{r}
+ew=0.1
+ep=1
+v=0.5
+a=0.005
+e=10
+```
+
+Next we convert the yacas expresssion for ET into a R expression using `yac_expr()` and then write a function that evaluates that R expression for a given value of rc,
+
+```{r}
+ET_expr = yac_expr(ET)
+
+ETfun <- function(rc) 
+  eval(ET_expr)
+```
+
+We can now produce the plot by creating a vector with a range of values for $r_c$ and then plotting the function `ETfun,`
+
+```{r}
 rc<-seq(0.001,4,0.001)   #Radius of the hunting ground 
-
-tw <- 1/(a*pi*((rc^2)/2))   #Waiting time 
-tp<-4/3*rc/v                #Pursuing time
-ti<-tw+tp                   #Time per item 
-ei<-e-ew*tw-ep*tp           #Energy per item
-et<-ei/ti                   #Energy per unit of time
-
-et <-function()
-{
-  (e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)
-}
-
-plot(rc,et(),type="l",
+plot(rc,ETfun(rc),type="l",
      xlab="Radius of the territory",
      ylab="Energy per unit of time (cal/sec) ")
  abline(0,0)
 ```
 
-This plot shows that the energy per time, $ET$ is a uni-modal function of the territory size $r_c$. At zero radius, the energy per time is negative and equals the energy per unit of time while waiting, i.e. there are only costs and no benefits of the territory. As the territory size increases, the energy per time starts to increase and becomes positive, reaching a maximum value at a bit more than 2m for the parameters above. Then, as the costs of running very far to chase prey start exceeding the benefits, the energy per unit time declines again. We can find the analytical solution of the maximum by differentiating @eq-maxet in order to the cut-off radius and equalizing it to zero,
+This plot shows that the energy per time, $ET$ is a uni-modal function of the territory size $r_c$. At zero radius, the energy per time is negative and equals the energy per unit of time while waiting, i.e. there are only costs and no benefits of the territory. As the territory size increases, the energy per time starts to increase and becomes positive, reaching a maximum value at a bit more than 2m for the parameters above. Then, as the costs of running very far to chase prey start exceeding the benefits, the energy per unit time declines again.
+
+The optimal decision is to find the cut-off radius $r_c$ that maximizes the energy per time,
+
+$$
+\max_{r_c}(ET)
+$$
+
+We can find the analytical solution of the maximum by differentiating @eq-maxet in order to the cut-off radius and equalizing it to zero,
 
 $$
  \frac{\mathrm{d}ET}{\mathrm{d}r_c}=0
