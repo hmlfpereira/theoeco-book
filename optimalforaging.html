@@ -523,23 +523,19 @@ A=\int_{0}^{r_c}a \pi r dr
 <p>This is an easy integral, but let’s see how we could solve it in R, as this will be handy for the next integral. We can do symbolic math in R using the package Ryacas. Ryacas provides an interface to Yacas, Yet Another Computer Algebra System. We use ysim() to tell Yacas to integrate the product <span class="math inline">\(a \ \pi \ r\)</span> from 0 to <span class="math inline">\(r_c\)</span> with the function integrate(),</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"Integrate(r, 0, r_c) a * Pi * r"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>y: (r _c^2*a*Pi)/2</code></pre>
-</div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"Integrate(r, 0, rc) a * Pi * r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Often we would like to see mathematical equations beautifully typeset. This can be done using TeX, and Ryacas does provide a way for layout the equation as a TeX command. However, for Quarto to recognize a TeX command, we need to start it and close it with a “$$”. As we will be doing this a lot, I wrote a little function, tex_quarto, that does this and also takes an optional prefix that can be put in the beginning (e.g.&nbsp;the variable name and an identity sign).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tex_quarto <span class="ot">=</span> <span class="cf">function</span> (x, <span class="at">prefix=</span><span class="cn">NULL</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"$$"</span>, prefix, <span class="fu">tex</span>(x), <span class="st">"$$"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tex_quarto <span class="ot">=</span> <span class="cf">function</span> (x, <span class="at">prefix=</span><span class="cn">NULL</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"$$"</span>, prefix, <span class="fu">tex</span>(x), <span class="st">"$$"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, we can output the result of the integral from <a href="#eq-total-abundance" class="quarto-xref">Equation&nbsp;<span>2.9</span></a> in a beautiful way as<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>,</p>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(A, <span class="st">"A="</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><span class="math display">\[ A= \frac{r_c ^{2} a \pi }{2} \]</span></p>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(A, <span class="st">"A="</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[ A= \frac{rc ^{2} a \pi }{2} \]</span></p>
 <p>The waiting time is just the inverse of the total abundance, <span class="math display">\[t_w=1/A\]</span> or in R code,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tw<span class="ot">=</span><span class="dv">1</span><span class="sc">/</span>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tw<span class="ot">=</span><span class="dv">1</span><span class="sc">/</span>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-feedingterritory" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -556,10 +552,10 @@ Figure&nbsp;2.3: Feeding territory of a sit-and-wait predator with radius <span 
 t_p=\int_{0}^{r_c} \frac{2r}{v} \frac{a \pi r}{A} \ dr
 \]</span></p>
 <p>Let’s calculate this more complicated integral in R, substituting the value of the total abundance that we calculated above using the function with_value(), and simplifying the result with simplify(),</p>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"Integrate(r, 0, r_c) (2 * r / v) * (a * Pi * r) / A"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>tp <span class="ot">=</span> <span class="fu">with_value</span>(tp, <span class="fu">ysym</span>(<span class="st">"A"</span>), A) <span class="sc">|&gt;</span> <span class="fu">simplify</span>()</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(tp, <span class="st">"t_p="</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><span class="math display">\[ t_p= \frac{4 r_c}{3 v} \]</span></p>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"Integrate(r, 0, rc) (2 * r / v) * (a * Pi * r) / A"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>tp <span class="ot">=</span> <span class="fu">with_value</span>(tp, <span class="fu">ysym</span>(<span class="st">"A"</span>), A) <span class="sc">|&gt;</span> <span class="fu">simplify</span>()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(tp, <span class="st">"t_p="</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[ t_p= \frac{4 rc}{3 v} \]</span></p>
 <p>The average time per prey item consumed is simply the sum of the average pursuit time, <span class="math inline">\(t_p\)</span>, and the average waiting time <span class="math inline">\(t_w\)</span>,</p>
 <p><span id="eq-time_sit_and_wait"><span class="math display">\[
 T=t_p+t_w
@@ -568,58 +564,65 @@ T=t_p+t_w
 <p><span class="math display">\[
 ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
 \]</span></p>
-<p>where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius <span class="math inline">\(r_c\)</span>.</p>
-<p>The optimal decision is to find the cut-off radius <span class="math inline">\(r_c\)</span> that maximizes the energy per time,</p>
-<p><span id="eq-maxet"><span class="math display">\[
-\max_{r_c}(ET)
-\tag{2.11}\]</span></span></p>
-<p>Let’s plot the energy per time as a function of the territory size. This time, as we have some</p>
+<p>where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius <span class="math inline">\(r_c\)</span>. Let’s calculate this expression in R,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">&lt;-</span><span class="fl">0.1</span>                  <span class="co">#Energy per unit of time of waiting</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ep<span class="ot">&lt;-</span><span class="dv">1</span>                    <span class="co">#Energy per unit of time of pursuing the prey</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">&lt;-</span><span class="fl">0.5</span>                   <span class="co">#Velocity of the predator in chase</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>a<span class="ot">&lt;-</span><span class="fl">0.005</span>                 <span class="co">#Abundance of prey</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>e<span class="ot">&lt;-</span><span class="dv">10</span>                    <span class="co">#Energy value of the prey</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>rc<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="fl">0.001</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)   <span class="co">#Radius of the hunting ground </span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>tw <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))   <span class="co">#Waiting time </span></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">&lt;-</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v                <span class="co">#Pursuing time</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>ti<span class="ot">&lt;-</span>tw<span class="sc">+</span>tp                   <span class="co">#Time per item </span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>ei<span class="ot">&lt;-</span>e<span class="sc">-</span>ew<span class="sc">*</span>tw<span class="sc">-</span>ep<span class="sc">*</span>tp           <span class="co">#Energy per item</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>et<span class="ot">&lt;-</span>ei<span class="sc">/</span>ti                   <span class="co">#Energy per unit of time</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span><span class="cf">function</span>()</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  (e<span class="sc">-</span>ew<span class="sc">*</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>)))<span class="sc">-</span>ep<span class="sc">*</span>(<span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v))<span class="sc">/</span>(<span class="dv">1</span><span class="sc">/</span>(a<span class="sc">*</span>pi<span class="sc">*</span>((rc<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>))<span class="sc">+</span><span class="dv">4</span><span class="sc">/</span><span class="dv">3</span><span class="sc">*</span>rc<span class="sc">/</span>v)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rc,<span class="fu">et</span>(),<span class="at">type=</span><span class="st">"l"</span>,</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Radius of the territory"</span>,</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Energy per unit of time (cal/sec) "</span>)</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ET<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"(e-ep*tp-ew*tw)/(tp+tw)"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ET<span class="ot">=</span><span class="fu">with_value</span>(ET,<span class="fu">ysym</span>(<span class="st">"tp"</span>),tp)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ET<span class="ot">=</span><span class="fu">with_value</span>(ET,<span class="fu">ysym</span>(<span class="st">"tw"</span>),tw)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">simplify</span>(ET)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y: (3*e*rc^2*v*a*Pi-4*ep*rc^3*a*Pi-6*v*ew)/(2*(2*rc^3*a*Pi+3*v))</code></pre>
+</div>
+</div>
+<p>Let’s plot the energy per time as a function of the territory size. We have to start by giving some values to the different paramerters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">=</span><span class="fl">0.1</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ep<span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">=</span><span class="fl">0.5</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fl">0.005</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>e<span class="ot">=</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next we convert the yacas expresssion for ET into a R expression using <code>yac_expr()</code> and then write a function that evaluates that R expression for a given value of rc,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ET_expr <span class="ot">=</span> <span class="fu">yac_expr</span>(ET)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ETfun <span class="ot">&lt;-</span> <span class="cf">function</span>(rc) </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(ET_expr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now produce the plot by creating a vector with a range of values for <span class="math inline">\(r_c\)</span> and then plotting the function <code>ETfun,</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rc<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="fl">0.001</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)   <span class="co">#Radius of the hunting ground </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rc,<span class="fu">ETfun</span>(rc),<span class="at">type=</span><span class="st">"l"</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Radius of the territory"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Energy per unit of time (cal/sec) "</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="optimalforaging_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="optimalforaging_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>This plot shows that the energy per time, <span class="math inline">\(ET\)</span> is a uni-modal function of the territory size <span class="math inline">\(r_c\)</span>. At zero radius, the energy per time is negative and equals the energy per unit of time while waiting, i.e.&nbsp;there are only costs and no benefits of the territory. As the territory size increases, the energy per time starts to increase and becomes positive, reaching a maximum value at a bit more than 2m for the parameters above. Then, as the costs of running very far to chase prey start exceeding the benefits, the energy per unit time declines again. We can find the analytical solution of the maximum by differentiating <a href="#eq-maxet" class="quarto-xref">Equation&nbsp;<span>2.11</span></a> in order to the cut-off radius and equalizing it to zero,</p>
+<p>This plot shows that the energy per time, <span class="math inline">\(ET\)</span> is a uni-modal function of the territory size <span class="math inline">\(r_c\)</span>. At zero radius, the energy per time is negative and equals the energy per unit of time while waiting, i.e.&nbsp;there are only costs and no benefits of the territory. As the territory size increases, the energy per time starts to increase and becomes positive, reaching a maximum value at a bit more than 2m for the parameters above. Then, as the costs of running very far to chase prey start exceeding the benefits, the energy per unit time declines again.</p>
+<p>The optimal decision is to find the cut-off radius <span class="math inline">\(r_c\)</span> that maximizes the energy per time,</p>
+<p><span class="math display">\[
+\max_{r_c}(ET)
+\]</span></p>
+<p>We can find the analytical solution of the maximum by differentiating <span class="quarto-unresolved-ref">?eq-maxet</span> in order to the cut-off radius and equalizing it to zero,</p>
 <p><span class="math display">\[
 \frac{\mathrm{d}ET}{\mathrm{d}r_c}=0
 \]</span></p>
 <p>This means that we try to find the place in which the tangent to the function has slope zero, i.e.&nbsp;it is horizontal. This can be the maximum or the minimum of a function, and often one has to investigate further by looking at the sign of the second derivative, but not in this case. So, let’s solve this in R,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#et_sym = ysym("(e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)")</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#det_sym = deriv(et_sym,'rc')</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#myint = integrate(ysym("a*pi*rc"),"rc",0,2*pi)</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#myint</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#rc_opt = solve(det_sym, 'rc')</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#eval(rc_opt, list()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#et_sym = ysym("(e-ew*(1/(a*pi*((rc^2)/2)))-ep*(4/3*rc/v))/(1/(a*pi*((rc^2)/2))+4/3*rc/v)")</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#det_sym = deriv(et_sym,'rc')</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#myint = integrate(ysym("a*pi*rc"),"rc",0,2*pi)</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#myint</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#rc_opt = solve(det_sym, 'rc')</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#eval(rc_opt, list()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you wanna read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden <span class="citation" data-cites="shafir1998a">(<a href="references.html#ref-shafir1998a" role="doc-biblioref">1998</a>)</span>.</p>
 </section>
