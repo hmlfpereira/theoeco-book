@@ -16,30 +16,30 @@ $$f = q\ –h*(b - a)$$
 
 <!--# I have modified this to change air temperature and h so that's exactly not the same as in the book -->
 
-1.  ***Plotting the cimate space***
+### Plotting the climate space
 
-    a.  Assuming that air temperature is 21ºC, and **h** = 60 cal/h, plot the lizard's equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h
+a.  Assuming that air temperature is 21ºC, and **h** = 60 cal/h, plot the lizard's equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h
 
-    b.  Draw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (***bmax***) is 36ºC and the lower lethal limit for the body temperature (***bmin***) is 24ºC.
+b.  Draw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (***bmax***) is 36ºC and the lower lethal limit for the body temperature (***bmin***) is 24ºC.
 
-    c.  Plot the following values of air temperature and solar radiation that are available throughout a day in two locations.
+c.  Plot the following values of air temperature and solar radiation that are available throughout a day in two locations.
 
-    ```{r eval=FALSE}
-    t <- c("00:00","03:00","06:00","09:00",    # Times of the day 
-       "12:00","15:00","18:00","21:00")
+```{r eval=FALSE}
+t <- c("00:00","03:00","06:00","09:00",    # Times of the day 
+   "12:00","15:00","18:00","21:00")
 
-    # Rock habitat
-    rock_q <- c(150,150,800,1100,1300,1200,800,400,150) # solar radiation
-    rock_a <- c(18,13,10,14,21,24,22,20,18)             # air temperature
+# Rock habitat
+rock_q <- c(150,150,800,1100,1300,1200,800,400,150) # solar radiation
+rock_a <- c(18,13,10,14,21,24,22,20,18)             # air temperature
 
-    # Bush habitat
-    bush_q <- c(150,150,450,600,650,650,350,200,150)    # solar radiation
-    bush_a <- c(18,13,10,14,21,24,22,20,18)             # air temperature
-    ```
+# Bush habitat
+bush_q <- c(150,150,450,600,650,650,350,200,150)    # solar radiation
+bush_a <- c(18,13,10,14,21,24,22,20,18)             # air temperature
+```
 
-    d.  At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
+d.  At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
 
-2.  ***Statistcal modelling of body temperature***
+### Statistical modelling of body temperature
 
 @sec-anolis_cristatellus presents a data frame containing data on individuals *A. cristatellus* living in urban and forested areas in three cities in Puerto Rico, giving us the perfect opportunity to assess the potential thermal effects of habitat upon this species. To do this:
 
