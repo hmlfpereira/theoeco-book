@@ -1,4 +1,4 @@
-## Climate space of an ectotherm
+## Ecophysiology of an ectotherm
 
 Solar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (*f*) into the animal is given by the **heat flux equation**:
 
@@ -14,48 +14,32 @@ $$f = q\ –h*(b - a)$$
 
 -   $h$ = convection heat transfer coefficient (cal/h/ ºC)
 
-1.  ***Equilibrium body temperature***
-    a.  Assuming that air temperature is 18ºC, and **h** = 50 cal/h, plot the lizard's equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h
-2.  ***Climate space of a Lizard***
-    a.  Draw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (***bmax***) is 36ºC and the lower lethal limit for the body temperature (***bmin***) is 24ºC.
+<!--# I have modified this to change air temperature and h so that's exactly not the same as in the book -->
 
-        **Hint:** `polygon` - draws the polygons whose vertices are given in x and y.
-3.  ***Air Temperature and solar radiation throughout the day in two locations***
-    a.  Plot the following values of air temperature and solar radiation that are available throughout a day in two locations. For:
+1.  ***Plotting the cimate space***
 
-        -   Times of the day
+    a.  Assuming that air temperature is 21ºC, and **h** = 60 cal/h, plot the lizard's equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h
 
-            ``` r
-            t = c("00:00","03:00","06:00","09:00","12:00",
-              "15:00","18:00","21:00","00:00")
-            ```
+    b.  Draw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (***bmax***) is 36ºC and the lower lethal limit for the body temperature (***bmin***) is 24ºC.
 
-        -   Solar radiation in the rock habitat
+    c.  Plot the following values of air temperature and solar radiation that are available throughout a day in two locations.
 
-            ``` r
-            rock_q = c(150,150,800,1100,1300,1200,800,400,150)
-            ```
+    ```{r eval=FALSE}
+    t <- c("00:00","03:00","06:00","09:00",    # Times of the day 
+       "12:00","15:00","18:00","21:00")
 
-        -   Air temperature in the rock habitat
+    # Rock habitat
+    rock_q <- c(150,150,800,1100,1300,1200,800,400,150) # solar radiation
+    rock_a <- c(18,13,10,14,21,24,22,20,18)             # air temperature
 
-            ``` r
-            rock_a = c(18,13,10,14,21,24,22,20,18)
-            ```
+    # Bush habitat
+    bush_q <- c(150,150,450,600,650,650,350,200,150)    # solar radiation
+    bush_a <- c(18,13,10,14,21,24,22,20,18)             # air temperature
+    ```
 
-        -   Solar radiation in the bush habitat
+    d.  At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
 
-            ``` r
-            bush_q = c(150,150,450,600,650,650,350,200,150)
-            ```
-
-        -   Air temperature in the bush habitat
-
-            ``` r
-            bush_a = c(18,13,10,14,21,24,22,20,18)
-            ```
-
-    b.  At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?
-4.  ***Body temperature of A. cristatellus in two different habitats***
+2.  ***Statistcal modelling of body temperature***
 
 @sec-anolis_cristatellus presents a data frame containing data on individuals *A. cristatellus* living in urban and forested areas in three cities in Puerto Rico, giving us the perfect opportunity to assess the potential thermal effects of habitat upon this species. To do this:
 
