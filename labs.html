@@ -286,7 +286,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#climate-space-of-an-ectotherm" id="toc-climate-space-of-an-ectotherm" class="nav-link active" data-scroll-target="#climate-space-of-an-ectotherm"><span class="header-section-number">B.1</span> Climate space of an ectotherm</a></li>
+  <li><a href="#ecophysiology-of-an-ectotherm" id="toc-ecophysiology-of-an-ectotherm" class="nav-link active" data-scroll-target="#ecophysiology-of-an-ectotherm"><span class="header-section-number">B.1</span> Ecophysiology of an ectotherm</a></li>
   <li><a href="#optimal-foraging-theory" id="toc-optimal-foraging-theory" class="nav-link" data-scroll-target="#optimal-foraging-theory"><span class="header-section-number">B.2</span> Optimal foraging theory</a></li>
   <li><a href="#evolutionary-games" id="toc-evolutionary-games" class="nav-link" data-scroll-target="#evolutionary-games"><span class="header-section-number">B.3</span> Evolutionary games</a></li>
   <li><a href="#dispersal-and-the-random-walk" id="toc-dispersal-and-the-random-walk" class="nav-link" data-scroll-target="#dispersal-and-the-random-walk"><span class="header-section-number">B.4</span> Dispersal and the random-walk</a></li>
@@ -322,8 +322,8 @@ window.Quarto = {
 </header>
 
 
-<section id="climate-space-of-an-ectotherm" class="level2" data-number="B.1">
-<h2 data-number="B.1" class="anchored" data-anchor-id="climate-space-of-an-ectotherm"><span class="header-section-number">B.1</span> Climate space of an ectotherm</h2>
+<section id="ecophysiology-of-an-ectotherm" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="ecophysiology-of-an-ectotherm"><span class="header-section-number">B.1</span> Ecophysiology of an ectotherm</h2>
 <p>Solar radiation and convection are the two main pathways for animals such as small lizards. In this case, the total heat flux (<em>f</em>) into the animal is given by the <strong>heat flux equation</strong>:</p>
 <p><span class="math display">\[f = q\ –h*(b - a)\]</span></p>
 <ul>
@@ -333,35 +333,30 @@ window.Quarto = {
 <li><p><span class="math inline">\(a\)</span> = air temperature (ºC)</p></li>
 <li><p><span class="math inline">\(h\)</span> = convection heat transfer coefficient (cal/h/ ºC)</p></li>
 </ul>
+<!--# I have modified this to change air temperature and h so that's exactly not the same as in the book -->
 <ol type="1">
-<li><strong><em>Equilibrium body temperature</em></strong>
+<li><p><strong><em>Plotting the cimate space</em></strong></p>
 <ol type="a">
-<li>Assuming that air temperature is 18ºC, and <strong>h</strong> = 50 cal/h, plot the lizard’s equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h</li>
+<li><p>Assuming that air temperature is 21ºC, and <strong>h</strong> = 60 cal/h, plot the lizard’s equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h</p></li>
+<li><p>Draw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (<strong><em>bmax</em></strong>) is 36ºC and the lower lethal limit for the body temperature (<strong><em>bmin</em></strong>) is 24ºC.</p></li>
+<li><p>Plot the following values of air temperature and solar radiation that are available throughout a day in two locations.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"00:00"</span>,<span class="st">"03:00"</span>,<span class="st">"06:00"</span>,<span class="st">"09:00"</span>,    <span class="co"># Times of the day </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="st">"12:00"</span>,<span class="st">"15:00"</span>,<span class="st">"18:00"</span>,<span class="st">"21:00"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rock habitat</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>rock_q <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">150</span>,<span class="dv">800</span>,<span class="dv">1100</span>,<span class="dv">1300</span>,<span class="dv">1200</span>,<span class="dv">800</span>,<span class="dv">400</span>,<span class="dv">150</span>) <span class="co"># solar radiation</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>rock_a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">14</span>,<span class="dv">21</span>,<span class="dv">24</span>,<span class="dv">22</span>,<span class="dv">20</span>,<span class="dv">18</span>)             <span class="co"># air temperature</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Bush habitat</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>bush_q <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">150</span>,<span class="dv">450</span>,<span class="dv">600</span>,<span class="dv">650</span>,<span class="dv">650</span>,<span class="dv">350</span>,<span class="dv">200</span>,<span class="dv">150</span>)    <span class="co"># solar radiation</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>bush_a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">14</span>,<span class="dv">21</span>,<span class="dv">24</span>,<span class="dv">22</span>,<span class="dv">20</span>,<span class="dv">18</span>)             <span class="co"># air temperature</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="a">
+<li>At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?</li>
 </ol></li>
-<li><strong><em>Climate space of a Lizard</em></strong>
-<ol type="a">
-<li><p>Draw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (<strong><em>bmax</em></strong>) is 36ºC and the lower lethal limit for the body temperature (<strong><em>bmin</em></strong>) is 24ºC.</p>
-<p><strong>Hint:</strong> <code>polygon</code> - draws the polygons whose vertices are given in x and y.</p></li>
-</ol></li>
-<li><strong><em>Air Temperature and solar radiation throughout the day in two locations</em></strong>
-<ol type="a">
-<li><p>Plot the following values of air temperature and solar radiation that are available throughout a day in two locations. For:</p>
-<ul>
-<li><p>Times of the day</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"00:00"</span>,<span class="st">"03:00"</span>,<span class="st">"06:00"</span>,<span class="st">"09:00"</span>,<span class="st">"12:00"</span>,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"15:00"</span>,<span class="st">"18:00"</span>,<span class="st">"21:00"</span>,<span class="st">"00:00"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Solar radiation in the rock habitat</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rock_q <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">150</span>,<span class="dv">800</span>,<span class="dv">1100</span>,<span class="dv">1300</span>,<span class="dv">1200</span>,<span class="dv">800</span>,<span class="dv">400</span>,<span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Air temperature in the rock habitat</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rock_a <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">18</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">14</span>,<span class="dv">21</span>,<span class="dv">24</span>,<span class="dv">22</span>,<span class="dv">20</span>,<span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Solar radiation in the bush habitat</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bush_q <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">150</span>,<span class="dv">150</span>,<span class="dv">450</span>,<span class="dv">600</span>,<span class="dv">650</span>,<span class="dv">650</span>,<span class="dv">350</span>,<span class="dv">200</span>,<span class="dv">150</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Air temperature in the bush habitat</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bush_a <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">18</span>,<span class="dv">13</span>,<span class="dv">10</span>,<span class="dv">14</span>,<span class="dv">21</span>,<span class="dv">24</span>,<span class="dv">22</span>,<span class="dv">20</span>,<span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul></li>
-<li><p>At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?</p></li>
-</ol></li>
-<li><strong><em>Body temperature of A. cristatellus in two different habitats</em></strong></li>
+<li><p><strong><em>Statistcal modelling of body temperature</em></strong></p></li>
 </ol>
 <p><a href="ecophysiology.html#sec-anolis_cristatellus" class="quarto-xref"><span>Section 1.4.2</span></a> presents a data frame containing data on individuals <em>A. cristatellus</em> living in urban and forested areas in three cities in Puerto Rico, giving us the perfect opportunity to assess the potential thermal effects of habitat upon this species. To do this:</p>
 <ol type="a">
@@ -369,8 +364,8 @@ window.Quarto = {
 </ol>
 <p><strong>Hint:</strong> to filter the data you can use the <code>subset</code> function in R</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example filtering data from anoles only from San Jose sites</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_sanjose <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, Site <span class="sc">==</span> <span class="st">"San Jose"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example filtering data from anoles only from San Jose sites</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_sanjose <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, Site <span class="sc">==</span> <span class="st">"San Jose"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="2" type="a">
 <li><p>Is there a habitat where lizards are consistently warmer? If so, provide an ecological explanation (quantitatively) for this observation (assume an ambient temperature of 30 °C).</p></li>
@@ -407,36 +402,36 @@ Strategy 3: Chosing both preys</p>
 <li>Write a function that takes as parameters two vectors that account with the history of the previous plays and returns one play (i.e., Cooperate – “C” or defect – “D”). This play should try to be the best response to the history of past moves. One example of such a function is:</li>
 </ol></li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>    strat<span class="ot">&lt;-</span><span class="cf">function</span>(own,opponent)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        n <span class="ot">&lt;-</span> <span class="fu">length</span>(opponent)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>             <span class="cf">if</span>(n<span class="sc">==</span><span class="dv">0</span>) <span class="st">"D"</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span>(own[n]<span class="sc">==</span><span class="st">"D"</span>) opponent[n]</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>               <span class="cf">else</span> <span class="st">"C"</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    strat<span class="ot">&lt;-</span><span class="cf">function</span>(own,opponent)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        n <span class="ot">&lt;-</span> <span class="fu">length</span>(opponent)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>             <span class="cf">if</span>(n<span class="sc">==</span><span class="dv">0</span>) <span class="st">"D"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span>(own[n]<span class="sc">==</span><span class="st">"D"</span>) opponent[n]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>               <span class="cf">else</span> <span class="st">"C"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="a">
 <li><p>Use the function pd_sim (see below) to play your strategy with the strategy of the other groups (ask for each group their function(s)) and with itself, in an iterative game with x moves. Compare the results of the cumulative rewards as well as the sequence of moves. Report to the rest of groups the values of the rewards for each of the tournaments. What was the best strategy? What strategies are best responses to themselves?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pd_sim<span class="ot">&lt;-</span><span class="cf">function</span>(p1_strat,p2_strat,n)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a> w1<span class="ot">&lt;-</span><span class="dv">0</span>          <span class="co">#accumulated pay-off (fitness) of player 1</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> w2<span class="ot">&lt;-</span><span class="dv">0</span>          <span class="co">#accumulated pay-offs of player 2</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a> h1<span class="ot">&lt;-</span><span class="cn">NULL</span>       <span class="co">#history of plays of player 1</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> h2<span class="ot">&lt;-</span><span class="cn">NULL</span>       <span class="co">#history of plays of player 2</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n)            </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>   {</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    a1<span class="ot">&lt;-</span><span class="fu">p1_strat</span>(h1,h2) </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    a2<span class="ot">&lt;-</span><span class="fu">p2_strat</span>(h2,h1) </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    p1<span class="ot">&lt;-</span>mat[a1,a2] </span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    p2<span class="ot">&lt;-</span>mat[a2,a1]         </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    w1<span class="ot">&lt;-</span>w1<span class="sc">+</span>p1              </span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    w2<span class="ot">&lt;-</span>w2<span class="sc">+</span>p2             </span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    h1[t]<span class="ot">&lt;-</span>a1                   </span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>h2[t]<span class="ot">&lt;-</span>a2                   }   </span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">list</span>(<span class="at">w1=</span>w1,<span class="at">w2=</span>w2,<span class="at">h1=</span>h1,<span class="at">h2=</span>h2)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd_sim<span class="ot">&lt;-</span><span class="cf">function</span>(p1_strat,p2_strat,n)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> w1<span class="ot">&lt;-</span><span class="dv">0</span>          <span class="co">#accumulated pay-off (fitness) of player 1</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> w2<span class="ot">&lt;-</span><span class="dv">0</span>          <span class="co">#accumulated pay-offs of player 2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> h1<span class="ot">&lt;-</span><span class="cn">NULL</span>       <span class="co">#history of plays of player 1</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> h2<span class="ot">&lt;-</span><span class="cn">NULL</span>       <span class="co">#history of plays of player 2</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n)            </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>   {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    a1<span class="ot">&lt;-</span><span class="fu">p1_strat</span>(h1,h2) </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    a2<span class="ot">&lt;-</span><span class="fu">p2_strat</span>(h2,h1) </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    p1<span class="ot">&lt;-</span>mat[a1,a2] </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    p2<span class="ot">&lt;-</span>mat[a2,a1]         </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    w1<span class="ot">&lt;-</span>w1<span class="sc">+</span>p1              </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    w2<span class="ot">&lt;-</span>w2<span class="sc">+</span>p2             </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    h1[t]<span class="ot">&lt;-</span>a1                   </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>h2[t]<span class="ot">&lt;-</span>a2                   }   </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">list</span>(<span class="at">w1=</span>w1,<span class="at">w2=</span>w2,<span class="at">h1=</span>h1,<span class="at">h2=</span>h2)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 </ol>
 <div style="page-break-after: always;"></div>
@@ -467,25 +462,25 @@ Strategy 3: Chosing both preys</p>
 <ol type="a">
 <li>Load the cumulative infected individuals time series from the COVID-19 pandemic in five countries. Each time series starts after the first fifteen infections are detected.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 </ol>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>it <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">79</span>, <span class="dv">132</span>, <span class="dv">229</span>, <span class="dv">322</span>, <span class="dv">400</span>, <span class="dv">650</span>, <span class="dv">888</span>, <span class="dv">1128</span>, <span class="dv">1689</span>, <span class="dv">2036</span>, <span class="dv">2502</span>, </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3089</span>, <span class="dv">3858</span>, <span class="dv">4636</span>, <span class="dv">5883</span>, <span class="dv">7375</span>, <span class="dv">9172</span>, <span class="dv">10149</span>, <span class="dv">12462</span>, <span class="dv">15113</span>, <span class="dv">17660</span>, <span class="dv">21157</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="dv">23980</span>, <span class="dv">27980</span>, <span class="dv">31506</span>, <span class="dv">35713</span>, <span class="dv">41035</span>, <span class="dv">47021</span>, <span class="dv">53578</span>) <span class="co">#Feb22-March22</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>es <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">35</span>, <span class="dv">54</span>, <span class="dv">82</span>, <span class="dv">136</span>, <span class="dv">192</span>, <span class="dv">267</span>, <span class="dv">348</span>, <span class="dv">531</span>, <span class="dv">764</span>, <span class="dv">1094</span>, <span class="dv">1527</span>, <span class="dv">2299</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3274</span>, <span class="dv">4427</span>, <span class="dv">5958</span>, <span class="dv">7641</span>, <span class="dv">9785</span>, <span class="dv">11491</span>, <span class="dv">13994</span>, <span class="dv">17688</span>, <span class="dv">21735</span>, <span class="dv">26304</span>, <span class="dv">31750</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="dv">36616</span>, <span class="dv">41262</span>, <span class="dv">48953</span>, <span class="dv">57506</span>, <span class="dv">66460</span>, <span class="dv">75641</span>) <span class="co">#Feb27-March27</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>fr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">38</span>, <span class="dv">57</span>, <span class="dv">100</span>, <span class="dv">130</span>, <span class="dv">178</span>, <span class="dv">212</span>, <span class="dv">285</span>, <span class="dv">423</span>, <span class="dv">613</span>, <span class="dv">716</span>, <span class="dv">1126</span>, <span class="dv">1412</span>,</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="dv">1784</span>, <span class="dv">2281</span>, <span class="dv">2876</span>, <span class="dv">3661</span>, <span class="dv">4499</span>, <span class="dv">5423</span>, <span class="dv">6633</span>, <span class="dv">7730</span>, <span class="dv">9134</span>, <span class="dv">10995</span>, <span class="dv">12612</span>, <span class="dv">14459</span>, </span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="dv">16018</span>, <span class="dv">19856</span>, <span class="dv">22302</span>, <span class="dv">25233</span>, <span class="dv">29155</span>) <span class="co">#Feb27-March27</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>uk <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">42</span>, <span class="dv">47</span>, <span class="dv">69</span>, <span class="dv">109</span>, <span class="dv">164</span>, <span class="dv">220</span>, <span class="dv">271</span>, <span class="dv">352</span>, <span class="dv">412</span>, <span class="dv">469</span>, <span class="dv">617</span>, </span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="dv">876</span>, <span class="dv">1282</span>, <span class="dv">1766</span>, <span class="dv">2244</span>, <span class="dv">2605</span>, <span class="dv">3047</span>, <span class="dv">3658</span>, <span class="dv">4427</span>, <span class="dv">5426</span>, <span class="dv">6481</span>, <span class="dv">7736</span>, <span class="dv">8934</span>, </span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="dv">10312</span>, <span class="dv">12650</span>, <span class="dv">15025</span>, <span class="dv">17717</span>) <span class="co">#Feb27-March27</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>de <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">21</span>, <span class="dv">47</span>, <span class="dv">57</span>, <span class="dv">111</span>, <span class="dv">129</span>, <span class="dv">157</span>, <span class="dv">196</span>, <span class="dv">262</span>, <span class="dv">400</span>, <span class="dv">684</span>, <span class="dv">847</span>, <span class="dv">902</span>, <span class="dv">1139</span>, </span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="dv">1296</span>, <span class="dv">1567</span>, <span class="dv">2369</span>, <span class="dv">3062</span>, <span class="dv">3795</span>, <span class="dv">4838</span>, <span class="dv">6012</span>, <span class="dv">7156</span>, <span class="dv">8198</span>, <span class="dv">14138</span>, <span class="dv">18187</span>, <span class="dv">21463</span>, </span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="dv">24774</span>, <span class="dv">29212</span>, <span class="dv">31554</span>, <span class="dv">36508</span>) <span class="co">#Feb26-March26</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>it <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">79</span>, <span class="dv">132</span>, <span class="dv">229</span>, <span class="dv">322</span>, <span class="dv">400</span>, <span class="dv">650</span>, <span class="dv">888</span>, <span class="dv">1128</span>, <span class="dv">1689</span>, <span class="dv">2036</span>, <span class="dv">2502</span>, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3089</span>, <span class="dv">3858</span>, <span class="dv">4636</span>, <span class="dv">5883</span>, <span class="dv">7375</span>, <span class="dv">9172</span>, <span class="dv">10149</span>, <span class="dv">12462</span>, <span class="dv">15113</span>, <span class="dv">17660</span>, <span class="dv">21157</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dv">23980</span>, <span class="dv">27980</span>, <span class="dv">31506</span>, <span class="dv">35713</span>, <span class="dv">41035</span>, <span class="dv">47021</span>, <span class="dv">53578</span>) <span class="co">#Feb22-March22</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>es <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">35</span>, <span class="dv">54</span>, <span class="dv">82</span>, <span class="dv">136</span>, <span class="dv">192</span>, <span class="dv">267</span>, <span class="dv">348</span>, <span class="dv">531</span>, <span class="dv">764</span>, <span class="dv">1094</span>, <span class="dv">1527</span>, <span class="dv">2299</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3274</span>, <span class="dv">4427</span>, <span class="dv">5958</span>, <span class="dv">7641</span>, <span class="dv">9785</span>, <span class="dv">11491</span>, <span class="dv">13994</span>, <span class="dv">17688</span>, <span class="dv">21735</span>, <span class="dv">26304</span>, <span class="dv">31750</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="dv">36616</span>, <span class="dv">41262</span>, <span class="dv">48953</span>, <span class="dv">57506</span>, <span class="dv">66460</span>, <span class="dv">75641</span>) <span class="co">#Feb27-March27</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>fr <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">38</span>, <span class="dv">57</span>, <span class="dv">100</span>, <span class="dv">130</span>, <span class="dv">178</span>, <span class="dv">212</span>, <span class="dv">285</span>, <span class="dv">423</span>, <span class="dv">613</span>, <span class="dv">716</span>, <span class="dv">1126</span>, <span class="dv">1412</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="dv">1784</span>, <span class="dv">2281</span>, <span class="dv">2876</span>, <span class="dv">3661</span>, <span class="dv">4499</span>, <span class="dv">5423</span>, <span class="dv">6633</span>, <span class="dv">7730</span>, <span class="dv">9134</span>, <span class="dv">10995</span>, <span class="dv">12612</span>, <span class="dv">14459</span>, </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="dv">16018</span>, <span class="dv">19856</span>, <span class="dv">22302</span>, <span class="dv">25233</span>, <span class="dv">29155</span>) <span class="co">#Feb27-March27</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>uk <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">42</span>, <span class="dv">47</span>, <span class="dv">69</span>, <span class="dv">109</span>, <span class="dv">164</span>, <span class="dv">220</span>, <span class="dv">271</span>, <span class="dv">352</span>, <span class="dv">412</span>, <span class="dv">469</span>, <span class="dv">617</span>, </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="dv">876</span>, <span class="dv">1282</span>, <span class="dv">1766</span>, <span class="dv">2244</span>, <span class="dv">2605</span>, <span class="dv">3047</span>, <span class="dv">3658</span>, <span class="dv">4427</span>, <span class="dv">5426</span>, <span class="dv">6481</span>, <span class="dv">7736</span>, <span class="dv">8934</span>, </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="dv">10312</span>, <span class="dv">12650</span>, <span class="dv">15025</span>, <span class="dv">17717</span>) <span class="co">#Feb27-March27</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>de <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">21</span>, <span class="dv">47</span>, <span class="dv">57</span>, <span class="dv">111</span>, <span class="dv">129</span>, <span class="dv">157</span>, <span class="dv">196</span>, <span class="dv">262</span>, <span class="dv">400</span>, <span class="dv">684</span>, <span class="dv">847</span>, <span class="dv">902</span>, <span class="dv">1139</span>, </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="dv">1296</span>, <span class="dv">1567</span>, <span class="dv">2369</span>, <span class="dv">3062</span>, <span class="dv">3795</span>, <span class="dv">4838</span>, <span class="dv">6012</span>, <span class="dv">7156</span>, <span class="dv">8198</span>, <span class="dv">14138</span>, <span class="dv">18187</span>, <span class="dv">21463</span>, </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="dv">24774</span>, <span class="dv">29212</span>, <span class="dv">31554</span>, <span class="dv">36508</span>) <span class="co">#Feb26-March26</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="3" type="a">
 <li>Plot the data in a linear plot, coloring each country with a different colour. What do you observe?</li>
 <li>Plot the data in a semi-log plot (using the plot option <code>log=”y”</code>), coloring each country with a different color. What do you observe?</li>
@@ -527,18 +522,18 @@ Strategy 3: Chosing both preys</p>
 <li>Assume that based on previous work we know that occupancy is somewhat between 0.2 and 0.5. Using a Bayesian approach, calculate the posterior probability distribution for the occupancy <span class="math inline">\(P(\psi)\)</span>.</li>
 </ol>
 <p>Help: A function returning the <span class="math inline">\(P(\psi|data)\)</span> . It takes as parameters a vector <code>y</code> of presences/absences, a value for <code>psi</code>, and a function for the prior distribution of <span class="math inline">\(\psi\)</span> named <code>priorpsi</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>occupancybayesian <span class="ot">&lt;-</span> <span class="cf">function</span>(y,psi,priorpsi)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  integrand <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">occupancylikelihood</span>(y,x)<span class="sc">*</span><span class="fu">priorpsi</span>(x)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">occupancylikelihood</span>(y,psi)<span class="sc">*</span><span class="fu">priorpsi</span>(psi)<span class="sc">/</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">integrate</span>(integrand, <span class="at">lower =</span> <span class="fl">0.01</span>, <span class="at">upper =</span> <span class="fl">0.99</span>)<span class="sc">$</span>value</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>occupancybayesian <span class="ot">&lt;-</span> <span class="cf">function</span>(y,psi,priorpsi)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  integrand <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">occupancylikelihood</span>(y,x)<span class="sc">*</span><span class="fu">priorpsi</span>(x)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">occupancylikelihood</span>(y,psi)<span class="sc">*</span><span class="fu">priorpsi</span>(psi)<span class="sc">/</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">integrate</span>(integrand, <span class="at">lower =</span> <span class="fl">0.01</span>, <span class="at">upper =</span> <span class="fl">0.99</span>)<span class="sc">$</span>value</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A function returning <span class="math inline">\(P(\psi)\)</span>, the prior distribution of <span class="math inline">\(\psi\)</span> values. It takes as parameters a value for <code>psi.</code></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="cf">function</span>(psi) </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>{ </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dunif</span>(psi,<span class="fl">0.2</span>,<span class="fl">0.5</span>) </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="cf">function</span>(psi) </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>{ </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dunif</span>(psi,<span class="fl">0.2</span>,<span class="fl">0.5</span>) </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Case 2: Using a hierarchical model with detection probability</p>
 <ol type="a">
 <li>Using maximum-likelihood estimate the occupancy probability (<span class="math inline">\(\Psi\)</span>) and detection probability (<span class="math inline">\(p\)</span>).</li>
@@ -604,12 +599,12 @@ Strategy 3: Chosing both preys</p>
 <ol type="1">
 <li>Please install the following R packages</li>
 </ol>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fuzzySim)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fuzzySim)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol type="a">
 <li>Load the <em>roadkill</em> dataset.</li>
 <li>Explain the structure of the dataset.</li>
