@@ -286,8 +286,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#ecophysiology-of-an-ectotherm" id="toc-ecophysiology-of-an-ectotherm" class="nav-link active" data-scroll-target="#ecophysiology-of-an-ectotherm"><span class="header-section-number">B.1</span> Ecophysiology of an ectotherm</a></li>
-  <li><a href="#optimal-foraging-theory" id="toc-optimal-foraging-theory" class="nav-link" data-scroll-target="#optimal-foraging-theory"><span class="header-section-number">B.2</span> Optimal foraging theory</a></li>
+  <li><a href="#ecophysiology-of-an-ectotherm" id="toc-ecophysiology-of-an-ectotherm" class="nav-link active" data-scroll-target="#ecophysiology-of-an-ectotherm"><span class="header-section-number">B.1</span> Ecophysiology of an ectotherm</a>
+  <ul class="collapse">
+  <li><a href="#plotting-the-climate-space" id="toc-plotting-the-climate-space" class="nav-link" data-scroll-target="#plotting-the-climate-space"><span class="header-section-number">B.1.1</span> Plotting the climate space</a></li>
+  <li><a href="#statistical-modelling-of-body-temperature" id="toc-statistical-modelling-of-body-temperature" class="nav-link" data-scroll-target="#statistical-modelling-of-body-temperature"><span class="header-section-number">B.1.2</span> Statistical modelling of body temperature</a></li>
+  </ul></li>
+  <li><a href="#optimal-foraging-theory" id="toc-optimal-foraging-theory" class="nav-link" data-scroll-target="#optimal-foraging-theory"><span class="header-section-number">B.2</span> Optimal foraging theory</a>
+  <ul class="collapse">
+  <li><a href="#predator-with-a-strategy-for-maximizing-energy-per-time." id="toc-predator-with-a-strategy-for-maximizing-energy-per-time." class="nav-link" data-scroll-target="#predator-with-a-strategy-for-maximizing-energy-per-time."><span class="header-section-number">B.2.1</span> Predator with a strategy for maximizing energy <em>per time</em>.</a></li>
+  <li><a href="#predator-with-a-strategy-of-sit-and-wait." id="toc-predator-with-a-strategy-of-sit-and-wait." class="nav-link" data-scroll-target="#predator-with-a-strategy-of-sit-and-wait."><span class="header-section-number">B.2.2</span> Predator with a strategy of sit-and-wait.</a></li>
+  </ul></li>
   <li><a href="#evolutionary-games" id="toc-evolutionary-games" class="nav-link" data-scroll-target="#evolutionary-games"><span class="header-section-number">B.3</span> Evolutionary games</a></li>
   <li><a href="#dispersal-and-the-random-walk" id="toc-dispersal-and-the-random-walk" class="nav-link" data-scroll-target="#dispersal-and-the-random-walk"><span class="header-section-number">B.4</span> Dispersal and the random-walk</a></li>
   <li><a href="#pandemic-growth" id="toc-pandemic-growth" class="nav-link" data-scroll-target="#pandemic-growth"><span class="header-section-number">B.5</span> Pandemic growth</a></li>
@@ -334,8 +342,8 @@ window.Quarto = {
 <li><p><span class="math inline">\(h\)</span> = convection heat transfer coefficient (cal/h/ ºC)</p></li>
 </ul>
 <!--# I have modified this to change air temperature and h so that's exactly not the same as in the book -->
-<ol type="1">
-<li><p><strong><em>Plotting the cimate space</em></strong></p>
+<section id="plotting-the-climate-space" class="level3" data-number="B.1.1">
+<h3 data-number="B.1.1" class="anchored" data-anchor-id="plotting-the-climate-space"><span class="header-section-number">B.1.1</span> Plotting the climate space</h3>
 <ol type="a">
 <li><p>Assuming that air temperature is 21ºC, and <strong>h</strong> = 60 cal/h, plot the lizard’s equilibrium body temperature as a function of solar radiation. Assume that solar radiation varies between 0 and 1500 cal/h</p></li>
 <li><p>Draw the climate space of the lizard by drawing the polygon that is limited by the minimum and maximum temperatures that the lizard can support, as a function of solar radiation. Consider that the upper lethal limit for the body temperature (<strong><em>bmax</em></strong>) is 36ºC and the lower lethal limit for the body temperature (<strong><em>bmin</em></strong>) is 24ºC.</p></li>
@@ -355,9 +363,10 @@ window.Quarto = {
 </div>
 <ol start="4" type="a">
 <li>At which time of the day is the lizard on the rock, and at which time is it at the bush? Is there any time when the lizard cannot be at any of the locations?</li>
-</ol></li>
-<li><p><strong><em>Statistcal modelling of body temperature</em></strong></p></li>
 </ol>
+</section>
+<section id="statistical-modelling-of-body-temperature" class="level3" data-number="B.1.2">
+<h3 data-number="B.1.2" class="anchored" data-anchor-id="statistical-modelling-of-body-temperature"><span class="header-section-number">B.1.2</span> Statistical modelling of body temperature</h3>
 <p><a href="ecophysiology.html#sec-anolis_cristatellus" class="quarto-xref"><span>Section 1.4.2</span></a> presents a data frame containing data on individuals <em>A. cristatellus</em> living in urban and forested areas in three cities in Puerto Rico, giving us the perfect opportunity to assess the potential thermal effects of habitat upon this species. To do this:</p>
 <ol type="a">
 <li>Make a linear model for individuals of <em>A. cristatellus</em> living only in natural habitats (<code>context</code> = <code>natural</code>) and another for individuals living in urban habitats (<code>context</code> = <code>urban</code>).</li>
@@ -373,26 +382,36 @@ window.Quarto = {
 </ol>
 <div style="page-break-after: always;"></div>
 </section>
+</section>
 <section id="optimal-foraging-theory" class="level2" data-number="B.2">
 <h2 data-number="B.2" class="anchored" data-anchor-id="optimal-foraging-theory"><span class="header-section-number">B.2</span> Optimal foraging theory</h2>
-<ol type="1">
-<li><p><strong>Predator with a strategy for maximizing energy.</strong><br>
-Let <strong><em>ai</em></strong> be the point abundance per unit of time of prey type <strong><em>i</em></strong>, <strong><em>ei</em></strong> be the caloric content of prey type <strong><em>i</em></strong>, <strong><em>hi</em></strong> be the time it takes to consume prey type <strong><em>i</em></strong>, <strong><em>ew</em></strong> is the energy expended per unit of time by the predator while searching for prey, and <strong><em>eh</em></strong> is the energy expended per unit of time by the predator to ingest prey. Consider that there are only two types of prey and that:</p>
-<p>Strategy 1: Chosing prey of type 1<br>
-Strategy 2: Chosing prey of type 2<br>
-Strategy 3: Chosing both preys</p>
-<ol type="a">
-<li><p>Show that if <strong><em>e1&gt; e2</em></strong> and <strong><em>h1 &lt;h2</em></strong> then the second strategy is never a optimal strategy</p></li>
-<li><p>Plot and comment the graph of the energy gain per unit of time for the strategy of consuming both preys and for the strategy of consuming only the best prey. Make the abundances vary between 0.005 and 0.5 ind/s for the best prey. Consider the abundance of the worse prey to be 0.05 ind/s and 0.01 ind/s. Consider an active predator with the following physiological parameters:</p>
-<p><strong><em>e1</em></strong> = 10J; <strong><em>e2</em></strong> = 100J; <strong><em>h1</em></strong> = 1s; <strong><em>h2</em></strong> = 60s; <strong><em>ew</em></strong> = 1 J/s; <strong><em>eh</em></strong> = 1 J/S</p></li>
-</ol></li>
-<li><p><strong>Predator with a strategy of sit-and-wait.</strong><br>
-<strong><em>Ew</em></strong> is the energy expended per unit of time by the predator while waiting for its prey, <strong><em>ep</em></strong> is the energy expended per unit of time by the predator while chasing the prey, v is the velocity of the predator in chase and <strong><em>a</em></strong> is the point abundance of preys per unit of time.</p>
-<ol type="a">
-<li>Produce a graph of energy gain per unit of time in function of the size of the feeding territory. Consider the following values for the parameters of the predator and prey: <strong><em>ew</em></strong> = 0,1 J/s; <strong><em>ep</em></strong> = 1 J/S; <strong><em>v</em></strong> = 0,5 m/s; <strong><em>a</em></strong> = 0,005 ind/s/m2; and <strong><em>e</em></strong> = 10;</li>
-</ol></li>
-</ol>
+<section id="predator-with-a-strategy-for-maximizing-energy-per-time." class="level3" data-number="B.2.1">
+<h3 data-number="B.2.1" class="anchored" data-anchor-id="predator-with-a-strategy-for-maximizing-energy-per-time."><span class="header-section-number">B.2.1</span> Predator with a strategy for maximizing energy <em>per time</em>.</h3>
+<p>Let <span class="math inline">\(a_i\)</span> be the pontual abundance per unit of time of prey type <span class="math inline">\(i\)</span>, <span class="math inline">\(e_i\)</span> be the caloric content of prey type <span class="math inline">\(i\)</span>, <span class="math inline">\(h_i\)</span> be the time it takes to consume prey type <span class="math inline">\(i\)</span>, <span class="math inline">\(e_w\)</span> is the energy expended per unit of time by the predator while searching for prey, and <span class="math inline">\(e_h\)</span> is the energy expended per unit of time by the predator to ingest prey.</p>
+<p>Assume that there are only two types of prey and that:</p>
+<ul>
+<li>Strategy 1 – Chosing prey of type 1</li>
+<li>Strategy 2 – Chosing prey of type 2</li>
+<li>Strategy 3 – Chosing both preys</li>
+</ul>
+<p>a) Show that if <span class="math inline">\(e_1 &gt; e_2\)</span> and <span class="math inline">\(h_1 &lt; h_2\)</span> then the second strategy is never a optimal strategy (assume <span class="math inline">\(a_1 = a_2\)</span>).</p>
+<p>b) Consider an active predator with the following physiological parameters:</p>
+<p><span class="math inline">\(e_1\)</span> = 10J; <span class="math inline">\(e_2\)</span> = 100J; <span class="math inline">\(h_1\)</span>= 1s; <span class="math inline">\(h_2\)</span> = 60s; <span class="math inline">\(e_w\)</span> = 1 J/s; <span class="math inline">\(e_h\)</span> = 1 J/S</p>
+<p>Plot and comment the graph of the energy gain per unit of time for:</p>
+<ul>
+<li>the strategy of consuming both preys; and</li>
+<li>the strategy of consuming only the best prey.</li>
+</ul>
+<p>Allow the abundances vary between 0.005 and 0.5 ind/s for the best prey. Consider the abundance of the worse prey to be 0.05 ind/s and 0.01 ind/s.</p>
+</section>
+<section id="predator-with-a-strategy-of-sit-and-wait." class="level3" data-number="B.2.2">
+<h3 data-number="B.2.2" class="anchored" data-anchor-id="predator-with-a-strategy-of-sit-and-wait."><span class="header-section-number">B.2.2</span> Predator with a strategy of sit-and-wait.</h3>
+<p><span class="math inline">\(e_w\)</span> is the energy expended per unit of time by the predator while waiting for its prey, <span class="math inline">\(e_p\)</span> is the energy expended per unit of time by the predator while chasing the prey, <span class="math inline">\(v\)</span> is the velocity of the predator in chase and <span class="math inline">\(a\)</span> is the pontual abundance of preys per unit of time.</p>
+<p>Consider the following predator and prey parameters:</p>
+<p><span class="math inline">\(e_w\)</span> = 0.1 J/s; <span class="math inline">\(e_p\)</span> = 1 J/S; <span class="math inline">\(v\)</span> = 0.5 m/s; <span class="math inline">\(a\)</span> = 0.005 ind/s/m2; and <span class="math inline">\(e\)</span> = 10.</p>
+<p>Produce a graph showing the energy gain per unit of time as a function of the size of the feeding territory.</p>
 <div style="page-break-after: always;"></div>
+</section>
 </section>
 <section id="evolutionary-games" class="level2" data-number="B.3">
 <h2 data-number="B.3" class="anchored" data-anchor-id="evolutionary-games"><span class="header-section-number">B.3</span> Evolutionary games</h2>
