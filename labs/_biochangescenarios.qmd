@@ -1,0 +1,18 @@
+## Projecting biodiversity change
+
+### 1. Project biodiversity change following scenarios of land use change: Constructing a species-area relationship (SAR)
+
+a\) Load the moths dataset from the "primer of ecology" (`primer`) package and explain the structure of the dataset.
+
+```         
+library("primer")
+data(moths)
+```
+
+b\) Plot the number of species as a function of area on both log-log and linear-linear scales. What type of SAR is represented: island or nested?
+
+c\) Fit the SAR by calculating the $c$ and $z$ parameters. Add the fitted line to both plots.
+
+d\) Estimate the total number of moth species in the USA.
+
+e\) Plot the number and proportion of species extinctions projected as a function of the area of habitat loss, with habitat loss ranging from 0 to 100ha.
