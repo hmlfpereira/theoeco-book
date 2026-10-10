@@ -1,0 +1,49 @@
+## Evolutionary games
+
+### 1. The prisoners dilemma competition.
+
+In this class we will have a competition of algorithms for playing the prisoners dilemma.
+
+a\) Write a function that takes as parameters two vectors that account with the history of the previous plays and returns one play (i.e., Cooperate - "C" or defect - "D"). This play should try to be the best response to the history of past moves. One example of such a function is:
+
+```         
+strat<-function(own,opponent) #create a function with two arguments: my moves 
+                              # and my opponent's moves
+{
+    n<-length(opponent)   #check the number of moves from the opponent I know
+    if(n==0) "D"          # If the opponent didn't play, I defect
+    else 
+       if (own[n]=="D") opponent[n] # Else, if my last move was to defect,
+                                    # I copy the last move of the opponent            
+       else "C"                     # Else, I cooperate
+}
+```
+
+b\) Use the function `pd_sim` (see below) to play your strategy with the strategy of the other groups (ask for each group their function(s)) and with itself, in an iterative game with X moves. Compare the results of the cumulative rewards as well as the sequence of moves. Report to the rest of groups the values of the rewards for each of the tournaments. What was the best strategy? What strategies are best responses to themselves?
+
+```         
+pd_sim<-function(p1_strat,p2_strat,n)  # Be p1_strat and p2_strat any given strategy
+{
+  # you need to get a matrix (mat) of strategies
+  
+  w1<-0       #accumulated pay-off (fitness) of player 1
+  w2<-0       #accumulated pay-offs of player 2
+  h1<-NULL    #history of plays of player 1
+  h2<-NULL    #history of plays of player 2
+ 
+ for (t in 1:n)            # we will iterate the game for n times
+    {
+    a1<-p1_strat(h1,h2) # stores the play of player 1 based on the history of plays
+    a2<-p2_strat(h2,h1) # stores the play of player 2 based on the history of plays
+    p1<-mat[a1,a2]      # pay-off for player 1 of this play (based on the pay-off matrix)
+    p2<-mat[a2,a1]      # pay-off for player 2 of this play (based on the pay-off matrix)
+    w1<-w1+p1           # adds play's pay-off to the accumulated pay off of player 1
+    w2<-w2+p2           # adds play's pay-off to the accumulated pay off of player 2
+    h1[t]<-a1           # adds the play to the history of plays of player 1
+    h2[t]<-a2           # adds the play to the history of plays of player 2
+    }   
+  list(w1=w1,w2=w2,h1=h1,h2=h2)
+    # returns the accumulate payoffs of player 1 and player 2, 
+    # and the history of plays of player 1 and 2
+}
+```
