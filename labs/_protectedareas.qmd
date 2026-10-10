@@ -1,0 +1,13 @@
+## Management of protected areas
+
+### 1. Plan a protected area
+
+Imagine that you are the manager of a small fictional protected area in northern Portugal called Serra Bonita. You must decide how to zone the area in order to provide strict protection for the greatest possible number of species. The available data are provided in the file “**peneda_data.txt**” and represent presence–absence data for 99 bird, amphibian, and reptile species across 2 × 2 km² grid cells. The area is divided into 10 grid cells. In the dataset, grid cells are arranged in columns and species in rows.
+
+a\) Load the dataset and describe its structure.
+
+b\) Calculate species richness for each site and relative endemism at each site.
+
+c\) Assume that each grid cell has the same cost, equal to 1. What is the minimum cost required to protect all species? Write a function that returns the cost and verifies the optimisation constraint for a given set of protected sites (the argument should be a vector of xi​ values). Then use this function to explore the different possibilities.
+
+d\) Discuss how the area selection could be improved. What other criteria could be used to zone an area for biodiversity protection?
