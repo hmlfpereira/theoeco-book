@@ -1,0 +1,21 @@
+## Pandemic growth
+
+### 1. The exponential dynamics of the pandemic.
+
+In early 2020, the first wave of the global pandemic of COVID-19 hit several European countries. In this exercise, we will plot data for those countries and fit an exponential-growth model.
+
+a\) Load the time series of cumulative numbers of infected individuals during the COVID-19 pandemic in five countries. Each time series should begin when the first 15 infections have been detected.
+
+Data source: https://github.com/owid/covid-19-data/tree/master/public/data 8 Nov 2020
+
+b\) Plot the data on a linear plot, using a different colour for each country. What do you observe?
+
+c\) Plot the data on a semi-logarithmic scale using the plotting option `log=”y”`, again using a different colour for each country. What do you observe?
+
+d\) Perform a linear regression for each country using the logarithm of the $n$ values, and estimate the growth rate $R$. Are the values of R the same for all countries? Do they vary over time?
+
+e\) Given that $R_0=R^\tau$, and that the infectious period ($\tau$) lasts 10 days, calculate $R_0$ for each countries?
+
+f\) Write a `for` loop to simulate geometric (exponential) growth over the time period `t = 1:100`. Store the population size at each time step `t+1` in variable `n`, based on the population size at time `t`, using `n[t+1]<-R*n[t]`. Remember to initialise the population size before the loop: `n<-1`. Plot a couple of runs of the loop using different values of $R$, such as $R=1.01$ and $R=1.1$, on linear scale.
+
+g\) The solution of the geometric growth equation is $n(t)=n_0 R^t$. Using the same values of R as above, create vectors using this formula, starting with `n0 <- 2`, and overlay them on the plot.
