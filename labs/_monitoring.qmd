@@ -1,0 +1,17 @@
+## Monitoring biodiversity
+
+### 1. Exploring the North American Breeding Bird Survey (BBS) dataset
+
+a\) Load the file **Florida.csv** into R and briefly describe the structure of the dataset.
+
+b\) Map the monitored transects/routes in Florida. Use the **maps** library to plot Florida's counties as a base map.
+
+c\) For **transects 4** and **109** in 2018, calculate the species richness, Shannon index, $H^{'}$, and evenness $J$ for both transects, where $$ H^{'} =  - \sum p_i \ln p_i $$ and $p_i$ is the proportion of individuals belonging to species $i$. Compare the results for the two transects.
+
+d\) Plot the species-abundance distributions and abundance ranks for both transects. What do you observe?
+
+e\) Choose one transect and plot its species richness, Shannon index, and geometric mean abundance over time.
+
+f\) **Extra credit 1:** Produce a map showing the trends in one of these metrics across Florida, for instance, by coloring different points according to the trend.
+
+g\) **Extra credit 2:** Estimate the number of species in Florida by combining the different transects and using one of the available estimators. Use bootstrap and/or jacknife to calculate confidence intervals.
