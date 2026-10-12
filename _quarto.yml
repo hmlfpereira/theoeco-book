@@ -15,7 +15,7 @@ book:
         - ecophysiology.qmd
         - optimalforaging.qmd
         - gametheory.qmd
-       # - movement.qmd
+        - movement.qmd
     - part: "Ecology of populations"
       chapters:
         - demography.qmd
