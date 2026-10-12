@@ -31,5 +31,5 @@ figure figcaption {
 #| fig-cap: "Atlantic cod (*Gadus morhua*)"
 #| fig-align: center
 #| out-width: 80%
-knitr::include_graphics("picture_atlantic_cod.jpg")
+knitr::include_graphics("labs/picture_atlantic_cod.jpg")
 ```

@@ -21,7 +21,7 @@ figure figcaption {
 #| fig-cap: " "
 #| fig-align: center
 #| out-width: 60%
-knitr::include_graphics("picture_red_fox.jpg")
+knitr::include_graphics("labs/picture_red_fox.jpg")
 ```
 
 ### 1. Install the following R packages:

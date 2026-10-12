@@ -1,4 +1,4 @@
-## The unified neutral theory of  biodiversity and biogeography
+## The unified neutral theory of biodiversity and biogeography
 
 ### 1. Understanding neutral dynamics
 
@@ -21,7 +21,7 @@ figure figcaption {
 #| fig-cap: "Species-abundance distributions"
 #| fig-align: center
 #| out-width: 80%
-knitr::include_graphics("four_histograms.jpg")
+knitr::include_graphics("labs/four_histograms.jpg")
 ```
 
 Identify the communities in order of increasing immigration probability and explain your reasoning.
@@ -40,9 +40,9 @@ c\) Using the R function `vallade.houchmandzadeh.eq` plot the S.A.D. for local c
 
 *Warnings:*
 
-- The function is slow;
+-   The function is slow;
 
-- In some cases (typically for small values of 𝛳) you may get an error message!
+-   In some cases (typically for small values of 𝛳) you may get an error message!
 
 ```{r}
 vallade.houchmandzadeh.eq <- function(J=16000, theta=50, m=0.01){
