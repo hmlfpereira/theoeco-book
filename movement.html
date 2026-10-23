@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -296,11 +330,57 @@ window.Quarto = {
 <p>All animals move, at least at a given stage of they life. Animals can move to find food, mates or just a new territory to settle. Some animals even move across continents to track the seasonal changes in resources. A particularly important type of movement is natal dispersal, this is how animals disperse from their birth place to the place where they reproduce. Dispersal also occurs in plants when seeds are transported by wind or by animals. Some movement may be directional, for instance fish following a river or ocean current, while other movements may seem more random.</p>
 <section id="the-random-walk" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="the-random-walk"><span class="header-section-number">4.1</span> The random-walk</h2>
-<p>One may ask how animals take decisions on where to move and how this influences their distribution over time. One simple but yet effective model is the random-walk model. It assumes that individuals at each moment take a step in a random direction. The question is then, where will the individual be after a certain amount of time? Let’s start with a simple random-walk in one dimension. Consider that the initial position of an individual at time <span class="math inline">\(t=0\)</span> is <span class="math inline">\(x=0\)</span> and that it can either move a step to the right or a step to the left with probability <span class="math inline">\(p\)</span>, while the probability of staying still is <span class="math inline">\(q=1-p\)</span>. We keep track of how many individuals with are at each position x at time t with the function n(t,x). It’s easy to see that the number of individuals at position x at time t+1 is the number of individuals that stayed still, plus the individuals that came from the left plus the individuals that came from the right, this is,</p>
+<p>One may ask how animals take decisions on where to move and how this influences their distribution over time. One simple but yet effective model is the random-walk model. It assumes that individuals at each moment take a step in a random direction. The question is then, where will the individual be after a certain amount of time? Let’s start with a simple random-walk in one dimension. Consider that the initial position of an individual at time <span class="math inline">\(t=0\)</span> is <span class="math inline">\(x=0\)</span> and that it can either move a step to the right or a step to the left with probability <span class="math inline">\(p\)</span>, while the probability of staying still is <span class="math inline">\(q=1-p\)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/randomwalk.jpg" class="img-fluid figure-img"></p>
+<figcaption>A butterfly doing random-walk.</figcaption>
+</figure>
+</div>
+<p>We keep track of how many individuals with are at each position x at time t with the function n(t,x). It’s easy to see that the number of individuals at position x at time t+1 is the number of individuals that stayed still, plus the individuals that came from the left plus the individuals that came from the right, this is,</p>
 <p><span id="eq-rw1"><span class="math display">\[
 n(x,t+1)=n(x,t)q+n(x-1,t)p/2+n(x+1,t)p/2
 \tag{4.1}\]</span></span></p>
-<p>Diffusion dispersal models as random-walk.</p>
+<p>Diffusion dispersal models as random-walk. Relationship with normal distribution.</p>
+<p><span class="math display">\[
+\sigma^2 = 2\ D\ t
+\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Ryacas'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:stats':
+
+    integrate</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    %*%, det, diag, diag&lt;-, lower.tri, upper.tri</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">ysym</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Exp(-x^2/(4*D*t))/Sqrt(4*pi*D*t)"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>dn_dt <span class="ot">=</span> <span class="fu">deriv</span>(n,<span class="st">"t"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>dn_dt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y: ((4*Sqrt(4*pi*D*t)*Exp(-x^2/(4*D*t))*x^2*D)/(4*D*t)^2-(2*Exp(-x^2/(4*D*t))*pi*D)/Sqrt(4*pi*D*t))/(4*pi*D*t)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>d2n_dx2 <span class="ot">=</span> <span class="fu">deriv</span>(<span class="fu">deriv</span>(n, <span class="st">"x"</span>), <span class="st">"x"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>d2n_dx2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y: (-(Exp(-x^2/(4*D*t))-(Exp(-x^2/(4*D*t))*x^2)/(2*D*t))/(2*D*t))/Sqrt(4*pi*D*t)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>residual <span class="ot">=</span> <span class="fu">simplify</span>(dn_dt <span class="sc">-</span> <span class="fu">ysym</span>(<span class="st">"D"</span>) <span class="sc">*</span> d2n_dx2)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">simplify</span>(<span class="fu">simplify</span>(residual))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y: 0</code></pre>
+</div>
+</div>
 </section>
 <section id="habitat-selection" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="habitat-selection"><span class="header-section-number">4.2</span> Habitat selection</h2>
