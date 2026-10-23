@@ -42,6 +42,6 @@ But programming is not enough. In order to be able to effectively develop theory
 
 <!--# Explain structure of the book  -->
 
-This book can be used as the support for a semester course in Ecological Theory or Ecological Modelling. I have used many of these materials over the last decade in a similar course at iDiv/University of Halle-Wittenberg. But the book can also be used as self-learning tool or even as a reference tool. This book takes a lot of inspiration from the Primer of Ecological Theory of Joan Roughgarden [-@roughgarden1998] (the first two chapters draw heavily on her first chapters), that I was lucky to have as a mentor. As she used to say, one writes papers for the reviewers and books for the readers. This book is for you.
+This book can be used as the support for a semester course in Theoretical Ecology or Ecological Modelling. I have used many of these materials over the last decade in a similar course at iDiv/University of Halle-Wittenberg. But the book can also be used as self-learning tool or even as a reference tool. This book takes a lot of inspiration from the Primer of Ecological Theory of Joan Roughgarden [-@roughgarden1998] (the first two chapters draw heavily on her first chapters), that I was lucky to have as a mentor. As she used to say, one writes papers for the reviewers and books for the readers. This book is for you.
 
 <!--# to publish book in command prompt quarto publish gh-pages-->
