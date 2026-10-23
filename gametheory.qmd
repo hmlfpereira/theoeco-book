@@ -1,6 +1,8 @@
 ---
 execute:
   freeze: auto  # re-render only when source changes
+  warning: false
+  message: false
 bibliography: references.bib
 ---
 
@@ -32,34 +34,72 @@ $$
 
 You can think of the pay-off points as a fitness gain in relation to the fitness before the play. The exact payoffs are not so important, and there are other variants of the game with different pay-offs. Instead, it is the relationship between the different pay-offs that determines the best strategy for the game. If the players knew what the other player would do, the best collective strategy would be to cooperate, as they both would receive 3 points for a total of 6 points. If one of the players defects while the other cooperate they accrue collectively only 5 points, while if both defect they would accrue together 2 points. But they don't know what the other player is going to do (non-cooperative game) and need to make a decision that maximizes their individual fitness. What should they do?
 
-The general solution that both Maynard Smith and Nash came up for these games is that one needs to identify which strategy is the best response to itself. This is called an **Evolutionary Stable Strategy** (ESS, also known as Nash Equilibrium[^1]) because it is the strategy that when dominant in the population cannot be invaded by any other strategy. Mathematically speaking, the ESS is the strategy $S^*$ that has the higher payoff when played against itself,
+The general solution that both Maynard Smith and Nash came up for these games is that one needs to identify which strategy is the best response to itself. This is called an **Evolutionary Stable Strategy** (ESS, also known as Nash Equilibrium[^gametheory-1]) because it is the strategy that when dominant in the population cannot be invaded by any other strategy. Mathematically speaking, the ESS is the strategy $S^*$ that has the higher payoff when played against itself,
 
-[^1]: There's a small difference between the two, see [@dugatkin1998]. In reality the formula we give above is for the Nash Equilibrium. The ESS condition is stricter and requires that $\forall S_i  , E(S^*,S^*) > E(S_i,S^*)$, or if it exists an $S_i$ so that $E(S^*,S^*) = E(S_i,S^*)$, then $E(S^*,S_i) > E(S_i,S_i)$, meaning that if the ESS dominates in the population it resists an invasion by an individual playing another strategy.
+[^gametheory-1]: There's a small difference between the two, see [@dugatkin1998]. In reality the formula we give above is for the Nash Equilibrium. The ESS condition is stricter and requires that $\forall S_i  , E(S^*,S^*) > E(S_i,S^*)$, or if it exists an $S_i$ so that $E(S^*,S^*) = E(S_i,S^*)$, then $E(S^*,S_i) > E(S_i,S_i)$, meaning that if the ESS dominates in the population it resists an invasion by an individual playing another strategy.
 
 $$
 \forall S_i  ,\quad E(S^*,S^*) \geq E(S_i,S^*) 
-$$
+$$ {#eq-ESS}
 
 So let's examine what is the best strategy to itself for each of the two strategies. We need to look at each column of the pay-off matrix. If player 2 plays C, the best response from player 1 is D, as then player 1 receives 5 points instead of 3 if it plays also C. So cooperate is not an EES. What about defect? Well if player 2 plays D, the best response is for player 1 to also play D as it gets 1 point, while if it plays C it gets zero points. This means that defect is an ESS as it is the best response to itself.
 
 This result is somehow paradoxical: how can cooperation be so ubiquitous in nature if the ESS of the prisioner's dilemma is to defect? Well, the key is that most of these interactions between individuals are not one-off interactions. Instead, cooperation occurs often when there is repeated interactions between individuals. In this case the game takes another form and it is called the iterated prisionner's dilemma (IPD). For the iterated prisioner's dilemma, a second strategy emerges as an ESS, and that is the Tit-for-Tat strategy. In the Tit-for-Tat strategy, an individual starts by cooperating in the first interaction. In the following interactions, the individual reciprocates what is interaction partner has done in the last interaction. If the partner (or opponent, depending on the perspective) had played D, the individual plays D in the next interaction. If the partner had played C, then the individual plays C in the next interaction. This means that cooperation can evolve as an overall strategy as long as there are repeated interactions with other individuals and one remembers the results of the last interactions.
 
-I find this a particularly beautiful result. Cooperation can also evolve in nature under kin selection, between closely related individuals. Bill Hamilton was the first biologist to point out that the high relatedness between worker sisters in eusocial insects like ants and bees, which is due to their haplodiploid genetic systems, promotes kin selection ([@hamilton1964]). Almost two decades later, in a competition thrown by political scientist Robert Axelrod [@axelrod2006], where participants where invited to submit computer programs with strategies to play the iterated prisioner's dilemma, the winning strategy was Tit-for-Tat. It showed that cooperation can also evolve even in the absence of relatedness. The winning strategy was submitted by Anatol Rapoport, a mathematical psychologist.
+I find this a particularly beautiful result. Cooperation can also evolve in nature under kin selection, between closely related individuals. Bill Hamilton was the first biologist to point out that the high relatedness between worker sisters in eusocial insects like ants and bees, which is due to their haplodiploid genetic systems, promotes kin selection [@hamilton1964]. Almost two decades later, in a competition thrown by political scientist Robert Axelrod [@axelrod2006], where participants where invited to submit computer programs with strategies to play the iterated prisoner's dilemma, the winning strategy was Tit-for-Tat. It showed that cooperation can also evolve even in the absence of relatedness. The winning strategy was submitted by Anatol Rapoport, a mathematical psychologist.
 
-One way of thinking about evolutionary games is considering a population of haploid individuals with different alleles. The pay-off of playing the game is then the fitness of each individual which can be converted in offspring, or in the case of the iterated prisionner's dilemma, the fitness becomes the average pay-off of playing multiple rounds of the game with the same opponent. Let's imagine a population of individuals with the "D" allele meaning that they are defectors. A mutation happens, and the mutant is a tit-for-tater "T". Can the tit-for-tater invade the population by reproducing faster than the other individuals? Well, the T individual will be loosing all the matches (i.e. sequences of games) against its D partners as it will receive a lower fitness than its D partners who benefit from the first play of T which is to cooperate. So it is not likely to invade, unless there is a strong spatial structure in the game and it can get a couple of neighbors also playing T. If a strong spatial structure exists, a group of T neighbors playing among themselves will be receiving average pay-offs of 3. In contrast, D individuals playing against themselves with an average pay-off of 1, or D individuals playing against T individuals with an average pay-off tending to 0 (for the first game the pay-off for D is 5, but that tends rapidly to zero with more games being played as the tit-for-taters reciprocate D). But the criteria for an ESS is not to be able to invade when rare. It's to resist invasion when it's dominant. And if the population is dominated by tit-for-taters, than a mutant playing "D" cannot invade. This is because the individuals playing T against D, receive a lower pay-off than the individuals playing T against T.
+One way of thinking about evolutionary games is considering a population of haploid individuals with different alleles. The pay-off of playing the game is then the fitness of each individual which can be converted in offspring, or in the case of the iterated prisoner's dilemma, the fitness becomes the average pay-off of playing multiple rounds of the game with the same opponent. Let's imagine a population of individuals with the "D" allele meaning that they are defectors. A mutation happens, and the mutant is a tit-for-tater "T". Can the tit-for-tater invade the population by reproducing faster than the other individuals? Well, the T individual will be loosing all the matches (i.e. sequences of games) against its D partners as it will receive a lower fitness than its D partners who benefit from the first play of T which is to cooperate. So it is not likely to invade, unless there is a strong spatial structure in the game and it can get a couple of neighbors also playing T. If a strong spatial structure exists, a group of T neighbors playing among themselves will be receiving average pay-offs of 3. In contrast, D individuals playing against themselves with an average pay-off of 1, or D individuals playing against T individuals with an average pay-off tending to 0 (for the first game the pay-off for D is 5, but that tends rapidly to zero with more games being played as the tit-for-taters reciprocate D). But the criteria for an ESS is not to be able to invade when rare. It's to resist invasion when it's dominant. And if the population is dominated by tit-for-taters, than a mutant playing "D" cannot invade. This is because the individuals playing T against D, receive a lower pay-off than the individuals playing T against T.
+
+<!--# genetic population model-->
 
 ## The Hawk-Dove game and animal contests
 
-While in some situations animals cooperate, in many other situations animals fight. Individuals can fight to compete for territory, food, mates and other resources. Humans, unfortunately, also fight often, with many fights escalating to wars. So much of game theory was developed to think about whether to escalate a fight or retreat. The Hawk-Dove game was designed to study this problem. Consider two individuals fighting for a resource with value $V$. They can play the strategy "Hawk" and escalate the fight or "Dove" and retreat. If individual 1 plays Hawk and individual 2 plays Dove, the individual 1 gets the resource for itself obtaining a pay-off V. If invidual 2 responds also with Hawk, then the fight escalates, and assuming symmetric competitors (i.e. equivalent fighting abilities between the two individuals), then half of the time individual 1 wins receiving the resource while half of the time it loses paying the cost of getting into a fight. If individual 1 plays Dove and individual 2 plays Hawk, individual 1 gets away without anything but also does not pay a cost. Finally, if both individuals play Dove, they share the resource equally, each receiving $V/2$. Like in the prisionner's dillemma, this game is a symetrica game, so the payoffs of player 2 are the same as the payoffs of player 1 when they reverse roles (i.e. the payoff matrix is symmetric around the diagonal)
+While in some situations animals cooperate, in many other situations animals fight. Individuals can fight to compete for territory, food, mates and other resources. Humans, unfortunately, also fight often, with many fights escalating to wars. So much of game theory was developed to think about whether to escalate a fight or retreat. The Hawk-Dove game was designed to study this problem. Consider two individuals fighting for a resource with value $V$. They can play the strategy "Hawk" and escalate the fight or "Dove" and retreat. If individual 1 plays Hawk and individual 2 plays Dove, the individual 1 gets the resource for itself obtaining a pay-off V. If individual 2 responds also with Hawk, then the fight escalates, and assuming symmetric competitors (i.e. equivalent fighting abilities between the two individuals), then half of the time individual 1 wins receiving the resource while half of the time it loses paying the cost of being injured in the fight. If individual 1 plays Dove and individual 2 plays Hawk, individual 1 gets away without anything but also does not pay a cost. Finally, if both individuals play Dove, they share the resource equally, each receiving $V/2$. Like in the prisoner's dilemma, this game is a symetric game, so the payoffs of player 2 are the same as the payoffs of player 1 when they reverse roles (i.e. the payoff matrix is symmetric around the diagonal)
 
-The pay-off matrix of the Hawk-Dove game from the pespective of player 1 (rows), playing against player 2 (columns) is
+The pay-off matrix of the Hawk-Dove game from the perspective of player 1 (rows), playing against player 2 (columns) is
 
 $$
 \begin{array}{c|cc}\text{Player 1} \backslash \text{Player 2} & H & D \\ 
 \hline
 H & V/2-C/2 & V \\D & 0 & V/2\end{array}
-$$ 
+$$
 
-## The war of atttrition
+What is the ESS of the Hawk-Dove game? Let's examine each of the strategies in turn. For Hawk to be an ESS it has to be the best response to itself. However, if player 2 plays H then whether the best response is D or H depends on the value of the resource in relation to the cost of an injury in the fight. If the value of the resource is greater than the cost of injury, $V>C$, then the best response is to escalate and play H. Otherwise it is better to play D and retreat. Similarly, for Dove to be an ESS it has to be the best response to itself, but the best response to D is to play H, so D is never an ESS.
 
-<!--# genetic population model-->
+In the case that the cost of injury is greater than the value of the resource, $C>V$, there is no simple strategy that is an ESS. So what should an individual do? The trick is to behave a bit unpredictably. This is, sometimes play dove, sometimes play hawk. Pretty interesting, or? The ESS for an animal contest is to behave unpredictable so that our opponent never knows if you are going to escalate or not. But what should be the proportion of time that one should play Hawk? Well, that comes again for a formal game theoretical analysis. It can be shown [@maynardsmith1974] that in a game with two pure strategies (e.g Hawk and Dove), a mixed strategy $M$ is an ESS if,
+
+$$
+E(H,M)=E(D,M)=E(M,M)
+$$ {#eq-mixed}
+
+Let's assume that in the mixed strategy one plays Hawk with probability $p$ and Dove with probability $1-p$. Then the payoff of a Hawk playing against an individual with the mixed strategy, $E(H,M)$, is the payoff of playing against a Hawk with probability $p$ plus the payoff of playing against a Dove with probability $1-p$,
+
+$$
+E(H,M)=p(V/2-C/2)+(1-p)V
+$$ {#eq-hawkmix}
+
+Similarly the payoff of a Dove against M, $E(D,M)$, is
+
+$$
+E(D,M)=0+(1-p)V/2 
+$$ {#eq-dovemix}
+
+All we have to do now is some algebra to replace @eq-hawkmix and @eq-dovemix in @eq-mixed and solve it for $p$. One can do that by hand, or using `Ryacas` and solving @eq-hawkmix with solve(),
+
+```{r}
+library(Ryacas)
+sol=solve(ysym("p*(V/2-C/2)+(1-p)*V==0+(1-p)*V/2 "),"p")
+sol
+```
+
+This seems still a bit complicated, so let's try to simplify the solution. We first have to remove the variable name to force `simplify()` to focus on the right hand side of `sol,`
+
+```{r}
+simplify(y_rmvars(sol))
+```
+
+So the solution is $p=V/C$. Therefore one should play Hawk more often when the resource value is larger, and less often when the cost of injury is higher. If the cost of injury is much larger than the value of the resource, one should just retreat and play Dove. Interestingly, if one considers a population of Hawks and Doves where no one is playing this mixed strategy, the population itself will evolve to a stable genetic polymorphism where a proportion $p$ of the individuals play Hawk and a proportion $1-p$ plays Dove.
+
+<!--# genetic population model showing polymorphism-->
+
+## The war of attrition
