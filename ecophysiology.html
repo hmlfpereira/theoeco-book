@@ -496,10 +496,10 @@ Table&nbsp;1.1: Hypothetical radiation values in two micro-habitats and air temp
 <div aria-describedby="tbl-temprad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 30%">
-<col style="width: 30%">
-<col style="width: 22%">
+<col style="width: 23%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -691,14 +691,17 @@ Figure&nbsp;1.9: Climate space of the presences of L. schreiberi
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>eumask<span class="ot">&lt;-</span><span class="fu">crop</span>(bioclim[[<span class="dv">1</span>]], <span class="fu">ext</span>(ext_eur))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>absences<span class="ot">&lt;-</span><span class="fu">backgroundSample</span>(eumask,<span class="fu">nrow</span>(occ),<span class="fu">vect</span>(occ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: [vect] guessed crs</code></pre>
+</div>
 </div>
 <p>We can now plot the presences and absences together in geographic space,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(world_data,  </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Longitude"</span>, <span class="at">ylab =</span> <span class="st">"Latitude"</span>, <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">ext=</span>ext_eur)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># add the species occurrences</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(occ<span class="sc">$</span>lon,occ<span class="sc">$</span>lat,<span class="at">cex=</span>.<span class="dv">1</span>,<span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(absences,<span class="at">cex=</span>.<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(world_data,  </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Longitude"</span>, <span class="at">ylab =</span> <span class="st">"Latitude"</span>, <span class="at">axes =</span> <span class="cn">TRUE</span>, <span class="at">ext=</span>ext_eur)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># add the species occurrences</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(occ<span class="sc">$</span>lon,occ<span class="sc">$</span>lat,<span class="at">cex=</span>.<span class="dv">1</span>,<span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(absences,<span class="at">cex=</span>.<span class="dv">1</span>,<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -709,10 +712,10 @@ Figure&nbsp;1.9: Climate space of the presences of L. schreiberi
 </div>
 <p>And now in climate space,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bioclim_absences<span class="ot">&lt;-</span><span class="fu">extract</span>(bioclim,absences)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty=</span><span class="st">"s"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bioclim_occ[,<span class="dv">19</span>],bioclim_occ[,<span class="dv">3</span>], <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">xlab=</span><span class="st">"BIO19"</span>, <span class="at">ylab=</span><span class="st">"BIO3"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(bioclim_absences[,<span class="fu">c</span>(<span class="dv">19</span>,<span class="dv">3</span>)], <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>bioclim_absences<span class="ot">&lt;-</span><span class="fu">extract</span>(bioclim,absences)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty=</span><span class="st">"s"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bioclim_occ[,<span class="dv">19</span>],bioclim_occ[,<span class="dv">3</span>], <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">xlab=</span><span class="st">"BIO19"</span>, <span class="at">ylab=</span><span class="st">"BIO3"</span>, <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">50</span>)) </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(bioclim_absences[,<span class="fu">c</span>(<span class="dv">19</span>,<span class="dv">3</span>)], <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-bioclim_all" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -737,23 +740,23 @@ Figure&nbsp;1.10: The climate space of <em>Lacerta schreiberi</em>. Presences in
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="calling-the-dataset-from-dryad"><span class="header-section-number">1.4.1</span> Calling the dataset from Dryad</h3>
 <p>To download the dataset, it is necessary to install the R package <code>rdryad</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rdryad"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rdryad"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then we open the newly installed package and download the dataset by specifying the DOI associated to this dataset.</p>
 <div class="cell" data-warnings="false">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling rdryad</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdryad)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the DOI</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>doi <span class="ot">&lt;-</span> <span class="st">"10.5061/dryad.h234n"</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the dataset using the dryad_download function</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>downloaded_file <span class="ot">&lt;-</span> <span class="fu">dryad_download</span>(<span class="at">dois =</span> doi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling rdryad</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdryad)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the DOI</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>doi <span class="ot">&lt;-</span> <span class="st">"10.5061/dryad.h234n"</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the dataset using the dryad_download function</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>downloaded_file <span class="ot">&lt;-</span> <span class="fu">dryad_download</span>(<span class="at">dois =</span> doi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The data sets are now downloaded on the paths indicated in the box below, although for this exercise only table [2] winchell_evol_phenshifts.csv” is needed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The downloaded_file will contain the file path where the dataset is saved</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(downloaded_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The downloaded_file will contain the file path where the dataset is saved</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(downloaded_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`10.5061/dryad.h234n`
 [1] "/Users/henrique/Library/Caches/R/rdryad/10_5061_dryad_h234n/winchell_evol_CG.csv"        
@@ -762,11 +765,11 @@ Figure&nbsp;1.10: The climate space of <em>Lacerta schreiberi</em>. Presences in
 </div>
 <p>Once this is done, it is always good practice to check if the recently open data frame works by checking the columns within the data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling the dataset of interest as df</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(downloaded_file[[<span class="dv">1</span>]][<span class="dv">2</span>])</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># checking the columns (variables) available in the data frame df using the str function</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calling the dataset of interest as df</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(downloaded_file[[<span class="dv">1</span>]][<span class="dv">2</span>])</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># checking the columns (variables) available in the data frame df using the str function</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "ID"                 "date"               "Site"              
  [4] "context"            "perch"              "bodytemp.C"        
@@ -786,11 +789,11 @@ Figure&nbsp;1.10: The climate space of <em>Lacerta schreiberi</em>. Presences in
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="sec-anolis_cristatellus"><span class="header-section-number">1.4.2</span> Exploring the thermophysiological data of <em>A. cristatellus.</em></h3>
 <p>As covered in the first chapter, <span class="math inline">\(b\)</span> increases proportionally to <span class="math inline">\(a\)</span> as indicated in equation (1.2). Let’s check if the data confirms this equation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to call a variable directly from a data frame one must use $, indicating the name of the dataframe at the left and the name of the variable (columnt on the right).</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to call a variable directly from a data frame one must use $, indicating the name of the dataframe at the left and the name of the variable (columnt on the right).</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -810,14 +813,14 @@ b = b_{0} + β*a + e
 <p>where <span class="math inline">\(b\)</span> is body temperature, <span class="math inline">\(a\)</span> is ambient temperature, and <span class="math inline">\(b_0\)</span> is the body temperature when <span class="math inline">\(a\)</span> is zero.</p>
 <p>Now lets model it using a least-squares linear regression using the <code>lm</code> function in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#define the linear model</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#the variable at the left of the tilde (~) is the dependent variable</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#data calls the specific dataframe to be used.</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bodytemp.C <span class="sc">~</span> ambient.temp.C, <span class="at">data=</span>df)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print model outputs</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#define the linear model</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#the variable at the left of the tilde (~) is the dependent variable</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#data calls the specific dataframe to be used.</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(bodytemp.C <span class="sc">~</span> ambient.temp.C, <span class="at">data=</span>df)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># print model outputs</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -834,11 +837,11 @@ Coefficients:
 <p>The results of our model indicates that if the air temperature (<span class="math inline">\(a\)</span>) is zero, <em>A. cristatellus</em> would show a body temperature (<span class="math inline">\(b\)</span>) of 8.7 °C, which increases in approximately 0.7 °C for each 1 °C increase in air temperature.</p>
 <p>Now it is also possible to draw a few predictions</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a number of possible ambient temperatures that can be found in Puerto Rico during the day</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>amb_temps <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">ambient.temp.C =</span> <span class="fu">seq</span>(<span class="dv">27</span>,<span class="dv">38</span>, <span class="dv">1</span>))<span class="co"># defines a vector with values from 27 to 38, with one unit increase</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model1, <span class="at">newdata=</span>amb_temps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a number of possible ambient temperatures that can be found in Puerto Rico during the day</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>amb_temps <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">ambient.temp.C =</span> <span class="fu">seq</span>(<span class="dv">27</span>,<span class="dv">38</span>, <span class="dv">1</span>))<span class="co"># defines a vector with values from 27 to 38, with one unit increase</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model1, <span class="at">newdata=</span>amb_temps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       1        2        3        4        5        6        7        8 
 28.23967 28.96335 29.68702 30.41070 31.13437 31.85805 32.58172 33.30540 
@@ -851,13 +854,13 @@ Coefficients:
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="how-good-our-model-is-performing"><span class="header-section-number">1.4.4</span> How good our model is performing?</h3>
 <p>Graphically the linear model fits the data as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scatter plot</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add the line of fit from our recently created linear model "model1"</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(model1, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the scatter plot</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>ambient.temp.C, df<span class="sc">$</span>bodytemp.C,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"air temperature (°C)"</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"body temperature (°C)"</span>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co"># add the line of fit from our recently created linear model "model1"</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(model1, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -879,9 +882,9 @@ Coefficients:
 <p>What a least square linear regression does is to find the lowest sum of squares of the residuals (every green line in the plot) so that the least amount of error is kept in the linear model.</p>
 <p>Finally, how well the model fits the data? In our example, the body temperatures do not perfectly fall on the line of best fit, and many of them are scattered around it. A common metric assess this question in a simple regression model is the <span class="math inline">\(r^2\)</span>. <span class="math inline">\(r^2\)</span> values indicates how much of the variance of body temperature (our dependent variable) is explained by ambient temperature (our independent variable). A perfect fit is indicated by an <span class="math inline">\(r^2\)</span> of 1, while no fit would be zero. To check the <span class="math inline">\(r^2\)</span> in our model we can simply use the <code>summary</code> function in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># obtaining the r-squared of our model</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># obtaining the r-squared of our model</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)<span class="sc">$</span>r.squared</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5736088</code></pre>
 </div>

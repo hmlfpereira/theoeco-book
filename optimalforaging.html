@@ -526,22 +526,34 @@ E=e-e_p t_p-e_w t_w
 <p><span id="eq-total-abundance"><span class="math display">\[
 A=\int_{0}^{r_c}a \pi r dr
 \tag{2.9}\]</span></span></p>
-<p>This is an easy integral, but let’s see how we could solve it in R, as this will be handy for the next integral. We can do symbolic math in R using the package Ryacas. Ryacas provides an interface to Yacas, Yet Another Computer Algebra System. We use ysim() to tell Yacas to integrate the product <span class="math inline">\(a \ \pi \ r\)</span> from 0 to <span class="math inline">\(r_c\)</span> with the function integrate(),</p>
+<p>This is an easy integral, but let’s see how we could solve it in R, as this will be handy for the next integral. We can do symbolic math in R using the package <code>rim</code>. Rim provides an interface to Maxima, an open source computer algebra system (<a href="https://maxima.sourceforge.io" class="uri">https://maxima.sourceforge.io</a>). We first load the library, and setup some options to produce beautiful typeset output in LaTeX,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"Integrate(r, 0, rc) a * Pi * r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SBCL Maxima Lisp backend detected.</code></pre>
 </div>
-<p>Often we would like to see mathematical equations beautifully typeset. This can be done using TeX, and Ryacas does provide a way for layout the equation as a TeX command. However, for Quarto to recognize a TeX command, we need to start it and close it with a “$$”. As we will be doing this a lot, I wrote a little function, tex_quarto, that does this and also takes an optional prefix that can be put in the beginning (e.g.&nbsp;the variable name and an identity sign).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tex_quarto <span class="ot">=</span> <span class="cf">function</span> (x, <span class="at">prefix=</span><span class="cn">NULL</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"$$"</span>, prefix, <span class="fu">tex</span>(x), <span class="st">"$$"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Maxima successfully registered as knitr engine.</code></pre>
 </div>
-<p>Now, we can output the result of the integral from <a href="#eq-total-abundance" class="quarto-xref">Equation&nbsp;<span>2.9</span></a> in a beautiful way as<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>,</p>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(A, <span class="st">"A="</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><span class="math display">\[ A= \frac{rc ^{2} a \pi }{2} \]</span></p>
-<p>The waiting time is just the inverse of the total abundance, <span class="math display">\[t_w=1/A\]</span> or in R code,</p>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">maxima.options</span>(<span class="at">engine.format =</span> <span class="st">"latex"</span>, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">engine.label =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">inline.format =</span> <span class="st">"latex"</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">inline.label =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now do code chunks using Maxima. We just have to replace <code>{r}</code> with <code>{maxima}</code> in the beginning of the chunk. Let’s try to to integrate the product <span class="math inline">\(a \ \pi \ r\)</span> from 0 to <span class="math inline">\(r_c\)</span> with the function integrate()<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tw<span class="ot">=</span><span class="dv">1</span><span class="sc">/</span>A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{maxima}</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="in">A:integrate(a * %pi * r, r, 0, rc);</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[\frac{\pi\,a\,\textit{rc}^2}{2}\]</span></p>
+</div>
+<p>Note that in Maxima, assignments are done with the operator “<code>:</code>”, and that statements should be closed with a “<code>;</code>”.</p>
+<p>The waiting time is just the inverse of the total abundance,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{maxima}</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="in">tw:1/A;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[\frac{2}{\pi\,a\,\textit{rc}^2}\]</span></p>
 </div>
 <div id="fig-feedingterritory" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -557,55 +569,53 @@ Figure&nbsp;2.3: Feeding territory of a sit-and-wait predator with radius <span 
 <p><span class="math display">\[
 t_p=\int_{0}^{r_c} \frac{2r}{v} \frac{a \pi r}{A} \ dr
 \]</span></p>
-<p>Let’s calculate this more complicated integral in R, substituting the value of the total abundance that we calculated above using the function with_value(), and simplifying the result with simplify(),</p>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tp<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"Integrate(r, 0, rc) (2 * r / v) * (a * Pi * r) / A"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>tp <span class="ot">=</span> <span class="fu">with_value</span>(tp, <span class="fu">ysym</span>(<span class="st">"A"</span>), A) <span class="sc">|&gt;</span> <span class="fu">simplify</span>()</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tex_quarto</span>(tp, <span class="st">"t_p="</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><span class="math display">\[ t_p= \frac{4 rc}{3 v} \]</span></p>
+<p>Let’s calculate this more complicated integral in Maxima,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{maxima}</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="in">tp: integrate((2 * r / v) * (a * %pi * r) / A, r, 0, rc);</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[\frac{4\,\textit{rc}}{3\,v}\]</span></p>
+</div>
 <p>The average time per prey item consumed is simply the sum of the average pursuit time, <span class="math inline">\(t_p\)</span>, and the average waiting time <span class="math inline">\(t_w\)</span>,</p>
 <p><span id="eq-time_sit_and_wait"><span class="math display">\[
 T=t_p+t_w
 \tag{2.10}\]</span></span></p>
 <p>Therefore the energy per time that the optimal sit-and-wait predator wants to maximize is obtained by dividing <a href="#eq-energy_sit_and_wait" class="quarto-xref">Equation&nbsp;<span>2.8</span></a> by <a href="#eq-time_sit_and_wait" class="quarto-xref">Equation&nbsp;<span>2.10</span></a>,</p>
-<p><span class="math display">\[
+<p><span id="eq-ET_sit_and_wait"><span class="math display">\[
 ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
-\]</span></p>
-<p>where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius <span class="math inline">\(r_c\)</span>. Let’s calculate this expression in R,</p>
+\tag{2.11}\]</span></span></p>
+<p>where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius <span class="math inline">\(r_c\)</span>. Let’s calculate this expression on Maxima and bring it into R using the <code>output.var</code> option<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>,</p>
+<div class="cell" data-output.var="max.out">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{maxima, output.var="max.out"}</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="in">ET: (e - ep * tp - ew * tw) / (tp + tw);</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[\frac{-\left(\frac{4\,\textit{ep}\,\textit{rc}}{3\,v}\right)-\frac{2\,\textit{ew}}{\pi\,a\,\textit{rc}^2}+e}{\frac{4\,\textit{rc}}{3\,v}+\frac{2}{\pi\,a\,\textit{rc}^2}}\]</span></p>
+</div>
+<p>Let’s plot the energy per time as a function of the territory size. We have to start by giving some values to the different parameters and store the result from the return from Maxima max.out,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ET<span class="ot">=</span><span class="fu">ysym</span>(<span class="st">"(e-ep*tp-ew*tw)/(tp+tw)"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ET<span class="ot">=</span><span class="fu">with_value</span>(ET,<span class="fu">ysym</span>(<span class="st">"tp"</span>),tp)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ET<span class="ot">=</span><span class="fu">with_value</span>(ET,<span class="fu">ysym</span>(<span class="st">"tw"</span>),tw)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">simplify</span>(ET)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>y: (3*e*rc^2*v*a*Pi-4*ep*rc^3*a*Pi-6*v*ew)/(2*(2*rc^3*a*Pi+3*v))</code></pre>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">=</span><span class="fl">0.1</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>ep<span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">=</span><span class="fl">0.5</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fl">0.005</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>e<span class="ot">=</span><span class="dv">10</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>ET<span class="ot">=</span><span class="fu">rim_global</span>()<span class="sc">$</span>max.out[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>Let’s plot the energy per time as a function of the territory size. We have to start by giving some values to the different paramerters.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ew<span class="ot">=</span><span class="fl">0.1</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ep<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>v<span class="ot">=</span><span class="fl">0.5</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fl">0.005</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>e<span class="ot">=</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Next we convert the yacas expresssion for ET into a R expression using <code>yac_expr()</code> and then write a function that evaluates that R expression for a given value of rc,</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ET_expr <span class="ot">=</span> <span class="fu">yac_expr</span>(ET)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ETfun <span class="ot">&lt;-</span> <span class="cf">function</span>(rc) </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eval</span>(ET_expr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We can now produce the plot by creating a vector with a range of values for <span class="math inline">\(r_c\)</span> and then plotting the function <code>ETfun,</code></p>
+<p>We can now produce the plot by creating a vector with a range of values for <span class="math inline">\(r_c\)</span> and then using the function <code>eval()</code> to evalute the values of ET for each value of <span class="math inline">\(r_c\)</span>,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rc<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="fl">0.001</span>,<span class="dv">4</span>,<span class="fl">0.001</span>)   <span class="co">#Radius of the hunting ground </span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rc,<span class="fu">ETfun</span>(rc),<span class="at">type=</span><span class="st">"l"</span>,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rc,<span class="fu">eval</span>(ET),<span class="at">type=</span><span class="st">"l"</span>,</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">"Radius of the territory"</span>,</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">"Energy per unit of time (cal/sec) "</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="dv">0</span>,<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="optimalforaging_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-energy-sit-and-wait" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-energy-sit-and-wait-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="optimalforaging_files/figure-html/fig-energy-sit-and-wait-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-energy-sit-and-wait-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: The energy per unit of time as a function of the radius.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -615,20 +625,48 @@ ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
 <p><span class="math display">\[
 \max_{r_c}(ET)
 \]</span></p>
-<p>We can find the analytical solution of the maximum by differentiating <span class="quarto-unresolved-ref">?eq-maxet</span> in order to the cut-off radius and equalizing it to zero,</p>
+<p>We can find the analytical solution of the maximum by differentiating <a href="#eq-ET_sit_and_wait" class="quarto-xref">Equation&nbsp;<span>2.11</span></a> in order to the cut-off radius and equalizing it to zero,</p>
 <p><span class="math display">\[
 \frac{\mathrm{d}ET}{\mathrm{d}r_c}=0
 \]</span></p>
-<p>This means that we try to find the place in which the tangent to the function has slope zero, i.e.&nbsp;it is horizontal. This can be the maximum or the minimum of a function, and often one has to investigate further by looking at the sign of the second derivative, but not in this case. So, let’s solve this in R,</p>
+<p>This means that we try to find the place in which the tangent to the function has slope zero, i.e.&nbsp;it is horizontal. This can be the maximum or the minimum of a function, and often one has to investigate further by looking at the sign of the second derivative, but not in this case. So, let’s solve this in Maxima,</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dET <span class="ot">=</span> <span class="fu">deriv</span>(ET,<span class="st">"rc"</span>) </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>rcopt<span class="ot">=</span><span class="fu">solve</span>(dET, <span class="st">"rc"</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">simplify</span>(rcopt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{maxima}</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="in">dET: diff(ET, rc);</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[\frac{\frac{4\,\textit{ew}}{\pi\,a\,\textit{rc}^3}-\frac{4\,\textit{ep}}{3\,v}}{\frac{4\,\textit{rc}}{3\,v}+\frac{2}{\pi\,a\,\textit{rc}^2}}-\frac{\left(\frac{4}{3\,v}-\frac{4}{\pi\,a\,\textit{rc}^3}\right)\,\left(-\left(\frac{4\,\textit{ep}\,\textit{rc}}{3\,v}\right)-\frac{2\,\textit{ew}}{\pi\,a\,\textit{rc}^2}+e\right)}{\left(\frac{4\,\textit{rc}}{3\,v}+\frac{2}{\pi\,a\,\textit{rc}^2}\right)^2}\]</span></p>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{maxima}</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="in">rc_opt_sol: solve(dET = 0, rc);</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[\left[ \textit{rc}=\left(\frac{-1}{2}-\frac{\sqrt{3}\,i}{2}\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}-\frac{\left(\frac{\sqrt{3}\,i}{2}+\frac{-1}{2}\right)\,\left(6\,\textit{ep}-6\,\textit{ew}\right)}{3\,\left(e\,a\,\pi\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}} , \textit{rc}=\left(\frac{\sqrt{3}\,i}{2}+\frac{-1}{2}\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}-\frac{\left(\frac{-1}{2}-\frac{\sqrt{3}\,i}{2}\right)\,\left(6\,\textit{ep}-6\,\textit{ew}\right)}{3\,\left(e\,a\,\pi\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}} , \textit{rc}=\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}-\frac{6\,\textit{ep}-6\,\textit{ew}}{3\,\left(e\,a\,\pi\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}} , \textit{rc}=0 \right] \]</span></p>
+</div>
+<p>This is a messy formula, with four solutions. Let’s try to explore the numerical values. First we need to extract just the right hand side of each equality by mapping the function rhs to the expression above and storing the result in max_out,</p>
+<div class="cell" data-output.var="max.out">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{maxima, output.var="max.out"}</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="in">rc_opt : map(rhs, rc_opt_sol);</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[\left[ \left(\frac{-1}{2}-\frac{\sqrt{3}\,i}{2}\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}-\frac{\left(\frac{\sqrt{3}\,i}{2}+\frac{-1}{2}\right)\,\left(6\,\textit{ep}-6\,\textit{ew}\right)}{3\,\left(e\,a\,\pi\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}} , \left(\frac{\sqrt{3}\,i}{2}+\frac{-1}{2}\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}-\frac{\left(\frac{-1}{2}-\frac{\sqrt{3}\,i}{2}\right)\,\left(6\,\textit{ep}-6\,\textit{ew}\right)}{3\,\left(e\,a\,\pi\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}} , \left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}-\frac{6\,\textit{ep}-6\,\textit{ew}}{3\,\left(e\,a\,\pi\right)\,\left(\frac{\sqrt{\frac{9\,\pi\,a\,e^3\,v^2-32\,\textit{ew}^3+96\,\textit{ep}\,\textit{ew}^2-96\,\textit{ep}^2\,\textit{ew}+32\,\textit{ep}^3}{a\,e}}}{2\,\pi^{\frac{3}{2}}\,a\,e}+\frac{3\,v}{2\,\left(a\,\pi\right)}\right)^{\frac{1}{3}}} , 0 \right] \]</span></p>
+</div>
+<p>Next we just need to numerically evaluate the solution returned from Maxima in R,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>rc_opt <span class="ot">=</span> <span class="fu">rim_global</span>()<span class="sc">$</span>max.out[[<span class="dv">1</span>]]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">eval</span>(rc_opt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{rc-(((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3)-Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2))^(1/3)+(Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2)-(9*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(2*((-3)*e*v^3*a^6*Pi^6)^3))^(1/3))==0, rc+Complex(((Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2)-(9*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(2*((-3)*e*v^3*a^6*Pi^6)^3))^(1/3)+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3)-Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2))^(1/3))/2, -Sqrt(3/4)*((Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2)-(9*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(2*((-3)*e*v^3*a^6*Pi^6)^3))^(1/3)-((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3)-Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2))^(1/3)))==0, rc+Complex(((Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2)-(9*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(2*((-3)*e*v^3*a^6*Pi^6)^3))^(1/3)+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3)-Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2))^(1/3))/2, Sqrt(3/4)*((Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2)-(9*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(2*((-3)*e*v^3*a^6*Pi^6)^3))^(1/3)-((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3)-Sqrt(((-3*e*v^3*a^6*Pi^6*((-6)*ep*v^3*a^5*Pi^5+6*v^3*ew*a^5*Pi^5))/((-3)*e*v^3*a^6*Pi^6)^2)^3+((-243*((-3)*e*v^3*a^6*Pi^6)^2*e*v^4*a^5*Pi^5)/(54*((-3)*e*v^3*a^6*Pi^6)^3))^2))^(1/3)))==0} </code></pre>
+<pre><code>[[1]]
+[1] -1.191881-6.216044i
+
+[[2]]
+[1] -1.191881+6.216044i
+
+[[3]]
+[1] 2.383761
+
+[[4]]
+[1] 0</code></pre>
 </div>
 </div>
-<p>If you wanna read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden <span class="citation" data-cites="shafir1998a">(<a href="references.html#ref-shafir1998a" role="doc-biblioref">1998</a>)</span>.</p>
+<p>And voilà, the third root is the optimal cut-off radius that we can observe in <a href="#fig-energy-sit-and-wait" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> .</p>
+<p>If you would like read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden <span class="citation" data-cites="shafir1998a">(<a href="references.html#ref-shafir1998a" role="doc-biblioref">1998</a>)</span>.</p>
 </section>
 <section id="does-natural-selection-maximizes-fitness" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="does-natural-selection-maximizes-fitness"><span class="header-section-number">2.3</span> Does natural selection maximizes fitness?</h2>
@@ -662,7 +700,8 @@ Shafir, S., and J. Roughgarden. 1998. <span>“Testing Predictions of Foraging T
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Note that this only displays the typeset equation when you render the Quarto document into html or PDF, and it is not shown directly on the notebook output mode. You also need to add the command “#| output: asis” in the beginning of the R chunk to tell Quarto it needs to take the output literally.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Note that this only displays the equation in typeset mode when you render the Quarto document into html or PDF. In notebook output when you just run the chunk it outputs an ASCII expression.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Please note that the chunk below is shown in “source” mode to highlight the addition of the output.var option,<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
