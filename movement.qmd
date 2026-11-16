@@ -1,6 +1,8 @@
 ---
 execute:
   freeze: auto  # re-render only when source changes
+  warning: false
+  message: false
 ---
 
 > 🚧 **This chapter is under construction. Content may change.**

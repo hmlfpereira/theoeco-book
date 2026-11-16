@@ -1,0 +1,483 @@
+---
+title: "Hill numbers"
+format: html
+editor: visual
+---
+
+Missing: The gini coefficient. The mean power moments
+
+### Definition
+
+Hill (1973) ("Diversity and evenness: a unifying notation and its consequences") introduced to ecology the framework that is now commonly referred to (unsurprisingly) as "Hill numbers". Hill numbers are measures of diversity, in particular of the evenness (or unevenness) of species' relative abundances, and one of their advantages is that they unify several common diversity indices within a single formula.
+
+Consider a community consisting of $S$ species, with the relative abundance of each one being $p_i=n_i / N$, where $n_i$ is the number of individuals of species $i$ and $N = \sum_{i=1}^S n_i$, that is, the total number of individuals. Then the Hill numbers are defined as
+
+$$ {}^qD = \left( \sum_{i=1}^S p_i^q \right)^\frac{1}{1-q},$$ {#eq-hill-numbers}
+
+where $q$ is a parameter that can take any real number, $-\infty < q < +\infty$. When $q=1$ the exponent of [-@eq-hill-numbers] becomes $1/0$ and the above formula cannot be worked directly, as we discuss below.
+
+Often, the Hill numbers are defined in terms of the Rényi entropies defined as
+
+$$ {}^qH=\frac{1}{1-q} \ln \sum_{i=1}^S p_i^q,$$ and the caveat for $q=1$ applies as well. The Hill numbers are then
+
+$$ {}^qD = \exp({}^qH).$$
+
+### An example
+
+For a simple example, consider a community with three species, $S=3$ and total number of individuals $N=100$, partitioned from the most to the least abundant as (70,20,10). The corresponding relative abundances are therefore $p_1=0.7$, $p_2=0.2$, and $p_3=0.1$. For $q=2$, formula [-@eq-hill-numbers] becomes
+
+$$ {}^2D = \left( \sum_{i=1}^3 p_i^2 \right)^{-1},$$ {#eq-simpson-index} from where we obtain
+
+$$ {}^2D = \left( 0.7^2 +  0.2^2 + 0.1^2 \right)^{-1} = 0.54^{-1} \approx 1.85.$$
+
+### Hill numbers for a community of equally abundant species
+
+An important characteristics of the Hill numbers is that they reach their maximum for $q > 0$ when all species have the same abundance, $n$,
+
+$$ {}^qD = \left( \sum_{i=1}^S \left( \frac{n}{nS} \right)^q \right)^\frac{1}{1-q}=
+\left( \frac{1}{S^q}\sum_{i=1}^S 1 \right)^\frac{1}{1-q}=
+\left( \frac{S}{S^q}\right)^\frac{1}{1-q}=
+\left( S^{1-q}\right)^\frac{1}{1-q}=S.$$
+
+For example, returning to our previous example with 3 species and a total of 100 individuals, if species are equally abundant we obtain
+
+$$ {}^2D = \left( \left( \frac{1}{3}\right)^2 + \left(\frac{1}{3}\right)^2 + \left(\frac{1}{3}\right)^2 \right)^{-1} = (1/3)^{-1}= 3.$$
+
+### The Hill numbers for some special $q$ values
+
+You may have recognised formula [-@eq-simpson-index] as one of the definitions of the Simpson index, but, and remarkably, formula [-@eq-hill-numbers] combines other well known measures of diversity. For example, when $q=0$ we get ${}^0D = S$, that is, the number of species (species richness), when $q=1$, the Shannon diversity, and when $q=+ \infty$ the reciprocal of the Berger-Parker index. Contrarily to the Simpson index, however, obtaining the Shannon and Berger-Parker indices from [-@eq-hill-numbers] is not direct and requires some explanation.
+
+Starting with the Shannon index, note that when $q=1$, the exponent $\frac{1}{1-q}$ becomes $1/0$, that is, a division by zero. To circumvent this problem, we consider the limit when $q \to 1$, and the final result is
+
+$$
+{}^1D
+=
+\exp\left(-\sum_{i=1}^{S}p_i\ln(p_i)\right).
+$$ BOX 1 provides the details of the calculations.
+
+Although there is some inconsistency in the literature concerning the terminology, we call ${}^1D$ the "Shannon diversity" and $H'=-\sum_{i=1}^{S}p_i\ln(p_i)$ the "Shannon index", i.e., ${}^1D = \exp H'$; $H'$ is also called the Rényi entropy of order 1.
+
+Turning to the Berger-Parker index, recall that it is defined as the proportion of individuals belonging to the most abundant species, i.e., $p_{\max}=n_{\max}/N$. Now notice that the parameter $q$ determines which terms dominate the sum $\sum_{i=1} ^S p_i^q$. When $q$ grows, the largest values of $p_i$ dominate the sum. For instance, using the above example, a community with three species with abundances (70, 30, 10), we obtain for $q=2$, $\sum_{i=1}^{S} p_i^2 = 0.7^2 +  0.2^2 + 0.1^2 = 0.49 + 0.04 + 0.01$, but for $q=4$, $\sum_{i=1}^{S} p_i^4 = 0.7^4 +  0.2^4 + 0.1^4 \approx 0.058 + 0.0016 + 0.0001$, and observe that the term of the most abundance species is much larger than the other terms for $q=4$ than for $q=2$. In the limit $q \to +\infty$ only the most abundant species, $p_{\max}$, matters. Specifically, we obtain $$ {}^{\infty}D =\frac{1}{p_{\max}},$$ which is the inverse of the Berger-Parker index. A similar reasoning can be applied to when $q$ decreases, revealing that the smallest $p_i$s, i.e., the rarest species, dominate the sum. BOX 2 provides a detailed explanation.
+
+### Interpreting the Hill numbers
+
+*Hill numbers and moments*
+
+Let us first define "moments". Although the term may sound unfamiliar, you almost certainly use moments regularly in your analyses. The mean, for instance, is the first moment, or the moment of order 1. Suppose that your data consists of $N$ values observed with equal probability ($1/S$), $x_1$, $x_2$,...,$x_N$. The moments of the data, sometimes called the “raw moments”, $M^q$, are
+
+$$ M^q = \frac{1}{S}\sum_{i=1}^{N} x_i^q ,$$ {#eq-moments}
+
+where the order $q$ select the moment. For instance, for $q=1$ we obtain the mean $M^1 = \bar x = \frac{1}{n}\sum_{i=1}^{N} x_i$. The variance is also a moment, but a central one. It is the second moment about the mean, $\sigma^2 = \frac{1}{N}\sum_{i=1}^{N} (x_i-\bar x)^2 = M_2 - M_1^2$. (With the denominator $S$ rather than $S−1$, this is the biased, or population, variance.)
+
+Moments can also be written as a sum over the distinct values rather than over all observations. Let $k_1, k_2, ..., k_K$ be the $K \leq S$ distinct values taken by the $x_i$. Let $m_j$ be the number of observations equal to $k_j$, so that $\sum_j^K m_j = N$. Grouping equal terms gives,
+
+$$ M^q = \frac{1}{N}\sum_{i=1}^{N} x_i^q = \sum_{j=1}^{K} w_j k_j^q, \qquad w_j = \frac{m_j}{N},$$ {#eq-moments2}
+
+For example, suppose the$S=6$ observations are (1,1,1,3,3,10), then
+
+$$ M^q = \frac{1}{6} (1^q + 1^q +1^q + 3^q + 3^q + 10^q).$$ Grouping equal terms gives $K=3$ classes, $$M^q = \frac{1}{6} \Big( 3 (1^q) + 2(3^q) + 10^q \Big) = \frac{3}{6} (1^q) + \frac{2}{6}(3^q) + \frac{1}{6}10^q).$$ This formula is equivalent to [-@eq-moments], with $K = 3$, $k = (1,3,10)$, $m = (3,2,1)$, $w_j = (3/6, 2/6, 1/6)$ and $x_j = (1,3,10)$. In what follows, we use both forms.
+
+To see the relationship between the Hill numbers and the moments, concentrate on the sum $$ Z_q=\sum_{i=1}^S p_i^q.$$ Multiplying this formula by $S$ and $1/S$,
+
+$$ Z_q= S \left (\frac{1}{S} \sum_{i=1}^S p_i^q \right),$$ and comparing with [-@eq-moments], it shows that the term in brackets are the moments of $p_i$, that is, $M_q = \frac{1}{S} \sum_{i=1}^S p_i^q$. Hence,
+
+$$ Z_q= S \left (\frac{1}{S} \sum_{i=1}^S p_i^q \right) = S M_q,$$ {#eq-sppview} and, thus,
+
+$$ {}^qD = \left( \sum_{i=1}^S p_i^q \right)^\frac{1}{1-q} = \left( S M_q \right)^\frac{1}{1-q}.$$
+
+Call this interpretation the "species view" and let us elaborate on it, by writing
+
+$$
+M_q = \frac{1}{S}\sum_{i=1}^S p_i^q = \sum_{j=1}^K f_j\,p_j^q, \qquad f_j = \frac{m_j}{S}, 
+$$ {#eq-sppview2}
+
+where $f_j$ is the fraction of species that have abundance $p_j$ from which there are $K$ classes, and calculated using $f_j=m_j/S$, where $m_j$ is the number of species that have exactly $n$ individuals. Note that the second sum runs from $j=1$ to $K$. Under this interpretation, the sampling unit is a species, chosen at random with equal weight $1/S$, to which we can associate a random variable, $Y$, such that $P(Y=p_j) = f_j$, that is, the fraction of species that have abundance $p_j$.
+
+There are, however, other ways of rearranging $Z_q$, revealing that it admits, at least, another interpretation, which we call the "individual view":
+
+$$ Z_q=\sum_{i=1}^S p_i^q = \sum_{i=1}^S p_i \, p_i^{(q-1)}.$$ {#eq-indview} Comparing this formula with [-@eq-moments2] we identify $Z_q$ as the moment of order $q-1$ of $p_i$. (There is, however, a peculiarity in this formula: $p_i$ plays two roles. Usually, in an ordinary moment, [-@eq-moments2], the weights $w_j$ and the values $k_j$ are distinct things. Here the weight is the probability of meeting species $i$, and the value is how common species $i$ is.)
+
+Under this interpretation, the sampling unit is the individual and the random variable, $X$ is the relative abundance to which that individual belongs, that is, $P(X=p_i) = p_i$. Furthermore, in [-@eq-indview] $S$ plays the role that classes play in [-@eq-sppview2], because now the outcomes of the underlying random sampling are the species themselves, of which there are $S$.
+
+Of course, we can also write the expression for the individuals view, [-@eq-indview], as a sum over $K$ classes,
+
+$$ Z_q=\sum_{i=1}^S p_i^q = \sum_{i=1}^S p_i \, p_i^{(q-1)} = \sum_{j=1}^K m_j p_j \, p_j^{(q-1)} = \sum_{j=1}^K g_j \, p_j^{(q-1)}, \qquad g_j =m_j p_j.$$
+
+In summary, the two views can be distinguished by the sum $M_q$ and $Z_q$. In the species view the, $M_q$ corresponds to the moments when we choose one of the species at random and record its abundance class. There are $K$ possible outcomes, that is, there are $K$ different possible abundances. In other words, the $K$ classes are the categories into which species fall. Thus the second sum in [-@eq-sppview2] runs from 1 to $K$, and each outcome $j$ has probability $m_j/S$, and here $S$ is the normalizing total. Incidentally, it is under this view that the interpretation of a species abundance distribution as a frequency of frequencies can be seen more clearly.
+
+In the individuals view, the $Z_q$ correspond to moment of order $q-1$ of $p_i$. There are now $S$ possible outcomes (classes), and the sum runs over $S$. In other words, species are the categories into which individuals fall. Each outcome $i$ has probability $p_i=n_i/N$, and so now the normalizing total is $N$.
+
+Making the connection of the Hill numbers with the moments is conceptually important, because in the same way the mean and variance measure different characteristics of a distribution, location and spread, respectively, different orders of Hill numbers emphasise different aspects of an abundance distribution. Consequently, reporting only one Hill number can conceal important features of the data. Therefore, we suggest reporting and displaying Hill numbers for several values of $q$, the so called "diversity profiles".
+
+Note, however, that the relationship we established between the Hill numbers and the moments does not imply that they provide the same information. For instance, while the mean and variance are adequate to measure the location and spread of the data, Hill numbers provide information on how individuals are distributed among the different species and, thus, measure the *evenness* of a distribution. This has already been hinted at when we discuss that different values of $q$ favour different relative abundances. In this sense, higher-order moments such as skewness and kurtosis also carry information related to evenness, as they are sensitive to asymmetries and heavy tails in the distribution of relative abundances. However, unlike Hill numbers, these moments lack a direct ecological interpretation, such as an effective number of species (see below), and are not commonly used as formal diversity or evenness measures, despite sharing some conceptual similarities with high-order Hill numbers in their sensitivity to the tails of the distribution.
+
+The R code below estimates the Hill numbers and provides an example assuming three communities with three different levels of evenness and illustrate the application of the Hill numbers and the associate diversity profiles to describe the evenness (or lack thereof) of a community.
+
+```{r}
+
+# Generate a community of S species and N individuals with a specified
+# evenness. Relative abundances (p) follow a power-law rank-abundance
+# distribution whose steepness is controlled by 'evenness';
+# individual counts are then drawn as integers via a multinomial sample.
+
+make.community <- function(S = 100, N = 10000, evenness = 1, seed = NULL) {
+  
+  # evenness = Inf  -> perfectly even (all equal)
+  # large evenness  -> close to even
+  # small evenness  -> very uneven (dominance by few species)
+  
+  # just in case:
+  if (N < S) {
+    stop("N must be larger then S (got N = ", N, ", S = ", S, ").")
+  } 
+  
+  if (N %% S != 0) {
+    stop("N must be a multiple of S (got N = ", N, ", S = ", S, ").")
+  }  # because only in this case can we have a perfectly even distribution
+     # of the number of individuals, if desired.
+  
+  if (!is.null(seed)) set.seed(seed)
+
+  if (is.infinite(evenness)) {
+    ni <- rep(N / S, S)
+  } else {
+    ranks <- 1:S
+    p <- ranks^(-1 / evenness)
+    p <- p / sum(p)
+    # Guarantee every species has >= 1 individual, and randomly allocate the rest by
+    # drawing N-S individuals into S species according to probabilities p.
+    extra <- as.vector(rmultinom(1, size = N - S, prob = p)) # this generates a vector of length(p)
+    ni <- extra + 1
+    ni <- sort(ni,decreasing=T)
+  }
+
+  return(ni)
+}
+
+# Function to compute Hill numbers for a given community and q
+hill_number <- function(ni, q) {
+  N <- sum(ni)
+  p <- ni / N
+  p <- p[p > 0]  # avoid issues with zero proportions
+  
+  if (q == 1) { # Special case q = 1: Shannon index
+    return(exp(-sum(p * log(p))))
+  } else {
+    return( (sum(p^q))^(1 / (1 - q)) )
+  }
+}
+
+# Function to calculate several Hill numbers for a single community
+hill_profile <- function(ni, q_seq) {
+  sapply(q_seq, function(q) hill_number(ni, q))
+}
+
+# Now, that we have all the functions, create three communities with 
+
+S <- 100   #species and 
+N <- 10000 # individuals
+
+comm.0 <- make.community(S = S, N = N, evenness = Inf, seed = 999) # perfectly even
+comm.1 <- make.community(S = S, N = N, evenness = 1.5, seed = 999) # more even
+comm.2 <- make.community(S = S, N = N, evenness = 1,   seed = 999)   # less even
+
+# Just checking... because in some cases we may remove one individual from species with 1 individual already
+# sapply(list(comm.0 = comm.0, comm.1 = comm.1, comm.2 = comm.2), sum)   # should all be 10000
+# sapply(list(comm.0 = comm.0, comm.1 = comm.1, comm.2 = comm.2), length) # should all be 100
+
+# Two panels in the vertical
+layout(matrix(1:2,ncol=2))
+# rank abundance for the tree communities
+
+plot  (1:S,comm.2/N, pch=15, col="red", log="y", type="b", cex=0.9,
+       xlab="rank",
+       ylab=expression(italic(p[i])),
+       main="Rank abundance distributions")
+points(1:S,comm.1/N, pch=17, col="blue", cex=0.9, type="b")
+points(1:S,comm.0/N, pch=16, cex=0.9, type="b")
+
+legend("topright",
+       legend = c("comm.2 (less even)",
+                  "comm.1 (more even)",
+                  "comm.0 (perfectly even)"),
+       col = c("red", "blue", "black"),
+       pch = c(15,17,16), lty=1,
+       bty="n", cex=0.75)
+
+# Compute the diversity profiles, i.e., the Hill numbers for several values of 
+q <- seq(-10, 10, 1)
+# for each community
+H.comm0 <- hill_profile(comm.0, q)
+H.comm1 <- hill_profile(comm.1, q)
+H.comm2 <- hill_profile(comm.2, q)
+
+# Plot the diversity profiles
+plot(q, H.comm0, pch = 16, ylim = range(c(H.comm0, H.comm1, H.comm2)),
+     cex=0.75, type = "b", 
+     xlab = expression(italic(q)),
+     ylab = expression(italic(""^q*D)),
+     main = "Hill numbers (diversity profiles)")
+points(q, H.comm1, pch = 17, col = "blue", cex=0.75, type = "b")
+points(q, H.comm2, pch = 15, col = "red", cex=0.75, type = "b")
+
+# Draw vertical dashed lines only up to a certain height
+#y_top <- max(c(H.comm0, H.comm1, H.comm2)) * 0.85   # adjust the fraction as needed
+y_top <- 100
+segments(x0 = c(0, 1, 2), y0 = 0,
+         x1 = c(0, 1, 2), y1 = y_top,
+         lty = c(2,3,4))
+
+legend("topright",
+       legend = c(expression("Number of species ("*italic(q)*"=0)"),
+                  expression("Shannon index ("*italic(q)*"=1)"),
+                  expression("Simpson index ("*italic(q)*"=2)")),
+       lty=c(2,3,4),
+       bty="n", cex=0.75)
+
+
+```
+
+Figure xx. **Three communities with the same number of species,** $S=100$, and total number of individuals, $N=10,000$, but different degrees of evenness. The left plot shows the rank abundance distributions (RADs). The $x$ axis ranks species by abundance, from the most abundant on the left to the least abundant on the right, while the $y$ axis shows, on a logarithmic scale, the relative abundance of each species, calculated as $p_i = \frac{n_i}{N}$, where $n_i$ is the number of individuals of species $i$ and $N = \sum n_i$ is the total number of individuals. "comm.0" has a horizontal RAD, since all species have the same number of individuals. By contrast, "comm.1" and "comm.2" slope downwards, with "comm.2" showing the steeper decline, reflecting its greater unevenness. The right-hand plot shows the diversity profiles, that is, the Hill numbers evaluated across a range of $q$ values, in this case the integer values of $q$ from -10 to 10. The different degrees of evenness produce distinct diversity profiles. The diversity profile of the perfectly even comm.0 is horizontal, with all ${}^qD = S = 100$, whereas comm.1 exhibits a narrower range of ${}^qD$ values than comm.2, reflecting its greater evenness. Note that ${}^0D$, the number of species, is the same for all three communities, and that both the Shannon, ${}^1D$, and Simpson, ${}^2D$, indices increase with unevenness, as shown by the vertical lines.
+
+*Hill numbers as the equivalent number of equally common species, also called the effective number of species* - *Hill numbers as the effective number of species*
+
+Here, we consider the similarity of the Hill numbers and the diversity of a perfectly even community, i.e. a community where all species have the same number of individuals (Hill 1973, Jost 2006, MacArthur 1965 xx). The equivalent number of equally common species is called the effective number of species.
+
+We have shown before, that for $q \ne 1$ and a perfectly even community with $S_{eq}$ species that ${}^qD=S_{eq}$. The same is also true for Shannon index.
+
+The Shannon index for such a community with $N=nS_{eq}$, (thus $p_i = n/(nS_{eq})=1/S_{eq}$) is
+
+$$
+H'_{eq}=-\sum_{i=1}^{S_{eq}}p_i\ln(p_i)= - \ln (1/S_{eq}) \sum_{i=1}^{S_{eq}} 1/S_{eq} = \ln S_{eq}.
+$$ Now, for any community with Shannon entropy $H'$, we can ask how many equally abundant species, $S_{eq}$, a hypothetical community would need in order to reach the same Shannon entropy. That is
+
+$$
+H'_{eq}=\ln S_{eq}=H'=-\sum_{i=1}^{S_{}}p_i\ln(p_i),
+$$ or, $$
+S_{eq}=e^{-\sum_{i=1}^{S_{}}p_i\ln(p_i)},
+$$ but this is the previous definition of the Shannon diversity.
+
+$$
+{}^1D=e^{H'}=S_{eq}.
+$$
+
+In other words ${}^1D$ can be interpreted as the number of equally abundant species in a hypothetical community with the same Shannon entropy as that of the uneven community.
+
+The same reasoning applies to other values of $q \neq 1$. Consider the Rényi entropies,
+
+$$ {}^qH=\frac{1}{1-q} \ln \sum_{i=1}^S p_i^q.$$ If $p_i = 1/S$ then we know that
+
+$$ {}^qH_{eq} =\frac{1}{1-q} \ln \sum_{i=1}^{S_{eq}} p_i^q = \frac{1}{1-q} \ln [(1/S_{eq})^qS_{eq}]=\frac{1}{1-q} \ln (1/S_{eq})^{q-1}=\ln(S_{eq}),$$ for all $q$. Repeating the same question in terms of equivalent species, i.e., how many equally abundant species, $S_{eq}$ , a hypothetical community would need in order to reach the same entropy, ${}^qH$, we obtain
+
+$$\ln(S_{eq}) = \frac{1}{1-q} \ln \sum_{i=1}^S p_i^q$$ or $$S_{eq}=e^{\frac{1}{1-q} \ln \sum_{i=1}^S p_i^q}=\left( \sum_{i=1}^S p_i^q \right)^\frac{1}{1-q},$$
+
+which is the definition of Hill numbers, see formula [-@eq-hill-numbers], that is, $S_{eq} = {}^qD$. For example, for $q=2$ we get
+
+$${}^2D=\frac{1}{\sum_{i=1}^S p_i^2},$$ In summary, a Hill numbers can be interpreted as the equivalent number of species of a perfectly even community with the same Hill number. This equivalent number of species is also called the effective number of species.
+
+*Interpreting the Hill numbers as a measure of uncertainty*
+
+Another interpretation of the Hill numbers is as a measure of uncertainty (Pielou, 1969 xx). Consider two communities, A and B, both with three species, same number of individuals but one, call it A, with all species with the same abundance, and the other, call it B, with rather different relative abundances (such as the example at the beginning of this section). If one individual is picked at random from community A, it is equally likely to belong to any of the three species, since they have equal abundances. On the other hand, an individual picked randomly from community B has a higher probability of belonging to the most abundant species. Therefore, in the former case, community A, which we deemed more "diverse" (larger Hill numbers for $q>0$), there is greater uncertainty about the species identity of the sampled individual, while in the latter case, community B, which is less "diverse" (lower Hill numbers for $q>0$) there is less uncertainty about the identity of the individual.
+
+### Be careful with the terminology
+
+A final word of caution about terminology is in order, because a loose interpretation of the Hill numbers can lead to rather nonsensical conclusions.
+
+We showed earlier that, for a given number of species $S$ and for $q>0$ the Hill numbers reach their maximum value, $S$, when all species have the same number of individuals, that is, when all $p_i$ are equal. If we equate the Hill numbers with diversity, we must therefore conclude that, all else being equal, diversity is highest in communities where every species is equally abundant. This is a possible definition of "diversity", but it sits uneasily with the fact that most natural communities are highly uneven.
+
+The word "diversity" usually carries positive connotations and suggests something worth preserving; we speak, after all, of bio*diversity* conservation. A naive reading of the Hill numbers as a measure of "desirable" diversity can therefore be misleading. For example, a disturbed community whose species happen to have more even abundances may be described as more "diverse" than a comparable undisturbed community with more uneven abundances. Therefore, we recommend using Hill numbers as neutral descriptors of species abundance structure, without necessarily equating higher values with a more desirable, or ecologically healthier, state of a community.
+
+------------------------------------------------------------------------
+
+**BOX 1: The Hill numbers and the Shannon diversity**
+
+To obtain the Shannon diversity from formula [-@eq-hill-numbers], consider, first, its natural logarithm,
+
+$$
+\ln({}^qD)
+=
+\frac{\ln\left(\sum_{i=1}^{S}p_i^q\right)}{1-q},
+$$ This has the advantage of converting the exponent into a denominator, and when $q=1$ we get now $0 / 0$; the sum in the numerator $\sum_{i=1}^{S}p_i^1 = 1$ and, then, $\ln(1) = 0$. The advantage of having transformed the original division by zero in the exponent into a $0 / 0$ is that when considering the limit $q \to 1$ the l´Hôpital´s rule applies. This rule handles indeterminate forms as $\infty /\infty$ or $0/0$, as the above, and it consists of taking the derivative of the numerator and of the denominator, that is, in the present case
+
+$$
+\lim_{q\to 1}\ln({}^qD)
+=
+\lim_{q\to 1}
+\frac{
+\frac{d}{dq}
+\ln\left(\sum_{i=1}^{S}p_i^q\right)
+}{
+\frac{d}{dq}(1-q)
+}.
+$$
+
+The derivative of the numerator is,
+
+$$
+\frac{d}{dq}
+\ln\left(\sum_{i=1}^{S}p_i^q\right)
+=
+\frac{
+\displaystyle\sum_{i=1}^{S}p_i^q\ln(p_i)
+}{
+\displaystyle\sum_{i=1}^{S}p_i^q
+},
+$$ where we used the following results
+
+$$
+\frac{d}{dq}\ln\big(f(q)\big) = \frac{1}{f(q)}\cdot f'(q) = \frac{f'(q)}{f(q)} ,
+$$ and $$
+\frac{d}{dq}\,a^q = a^q \ln(a), \qquad a>0 .
+$$
+
+The derivative of the denominator is
+
+$$
+\frac{d}{dq}(1-q)=-1.
+$$
+
+Combining the two derivatives,
+
+$$
+\lim_{q\to 1}\ln({}^qD)
+=
+\lim_{q\to 1}
+\frac{
+\displaystyle\sum_{i=1}^{S}p_i^q\ln(p_i)
+}{
+-\displaystyle\sum_{i=1}^{S}p_i^q
+}.
+$$
+
+Substituting $q=1$, and using the fact that $\sum_i p_i=1$,
+
+$$
+\lim_{q\to 1}\ln({}^qD)
+=
+-\sum_{i=1}^{S}p_i\ln(p_i).
+$$
+
+Finally, exponentiating both sides gives
+
+$$
+\lim_{q\to 1}{}^qD
+=
+\exp\left(-\sum_{i=1}^{S}p_i\ln(p_i)\right) = \exp(-H').
+$$
+
+Incidentally, the term
+
+$$
+H'=-\sum_{i=1}^{S}p_i\ln(p_i)
+$$ we have called Shannon index, is also called the Shannon entropy.
+
+**END BOX 1**
+
+------------------------------------------------------------------------
+
+**BOX 2 The Hill numbers and the Berger-Parker index**
+
+By definition, the Berger-Parker index is equal to $p_{\max}=n_{\max}/N$. This suggests that a possible way to obtain this index from [-@eq-hill-numbers] consists of factor $p_{\max}^q$ out of the sum and write
+
+$$ {}^qD = p_{\max}^{\frac{q}{1-q}} \left( \sum_{i=1}^S \left(\frac{p_i}{p_{\max}}\right)^q \right)^{\frac{1}{1-q}}. $$ Note that this is still formula [-@eq-hill-numbers], what we achieved is to have the term $p_{\max}$ explicitly in it.
+
+As $q\to+\infty$, the exponent $q/(1-q)$ tends to $-1$, so the first factor tends to $1/p_{\max}$, so we have already established, partially, our result. We now need to deal with the second term and show that it is equal to 1 . In the second factor, every ratio $p_i/p_{\max}$ lies between $0$ and $1$, with equality to $1$ for the most abundant species. Therefore, for all $q \ge 0$, the sum is bounded between $1$ and $S$; it tends to $1$ as $q\to\infty$ whenever a single species is the most abundant, because all other terms vanish and it equals $S$ when all species are equally abundant. Since raising a bounded quantity to the power $1/(1-q)\to 0$ gives $1$, then the second factor tends to $1$ in either case. Thus, we have solely the first term, and
+
+$$ {}^{\infty}D =\frac{1}{p_{\max}},$$ which is the inverse of the Berger-Parker index.
+
+Conversely, when $q \to -\infty$ it can be shown that the sum is dominated by the least abundant species, i.e., $p_{\min}$. The derivation mirrors the one for $q \to +\infty$,
+
+$$ {}^qD = p_{\min}^{\frac{q}{1-q}} \left( \sum_{i=1}^S \left(\frac{p_i}{p_{\min}}\right)^q \right)^{\frac{1}{1-q}}. $$ Now the first factor tends to $1/p_{\min}$ and the the second factor tends to 1, because the sum is bounded between 1 and $S$, as before. This happens since we can substituted the sum by $\sum_{i=1}^S \left(\frac{p_{\min}}{p_i}\right)^{|q|}$ with $p_{\min}/p_i \le 1$, and, as discussed before, raising a bounded quantity to the power of zero ($\lim_{q\to -\infty}1/(1-q) = 0$) gives 1. Thus, $$ {}^{-\infty}D =\frac{1}{p_{\min}}.$$
+
+**END BOX 2**
+
+------------------------------------------------------------------------
+
+**BOX 3 The Shannon diversity as a very special case**
+
+The previous examples have shown the large values of $q$ emphasize the most abundant species, while small values of $q$ emphasize the rare species (and see also BOX 2). One obvious question is whether there a transition value of $q$ that favours neither the common nor the rare species. Given the title of this section, you may suspect, correctly, that this value is $q=1$.
+
+To understand why, let us re-write formula [-@eq-hill-numbers] in a slightly different way,
+
+$$ {}^qD = \left( \sum_{i=1}^S p_i^q \right)^\frac{1}{1-q} 
+= \left( \sum_{i=1}^S p_i p_i^{(q-1)} \right)^\frac{1}{1-q} 
+= \left( \sum_{i=1}^S p_i \left( \frac{1}{p_i} \right)^{(1-q)} \right)^\frac{1}{1-q}.$$
+
+Written like this, each species contributes its relative abundance, $p_i$, multiplied by a factor $p_i^{(q-1)}$ that favours abundant species when $q$ is large and rare species when $q$ is small (eventually a negative number, but large in absolute value). When $q=1$, the factor is $p_i^0 =1$, thus, each species contributes exactly in proportion to its relative abundance, with no bias towards either common or rare species. However, ${}^qD$ is not defined for $q=1$ but, as discussed above, taking the limit $q \to 1$, gives
+
+$$
+{}^1D
+=
+\exp\left(-\sum_{i=1}^{S}p_i\ln(p_i)\right)=
+\exp\left(\sum_{i=1}^{S}p_i\ln\frac{1}{p_i}\right).
+$$
+
+Observe that the sum $\sum_{i=1}^{S}p_i\ln\frac{1}{p_i}$ has the same form as the familiar weighted average of a set of values $y_i$, that is, $\sum_i p_i y_i$. Here $y_i=\ln\frac{1}{p_i}$, and the weights are simply the relative abundances $p_i$, with no additional factor. In other words, Shannon diversity is the only Hill number in which every species is weighted exactly by its relative abundance.
+
+END BOX 3
+
+------------------------------------------------------------------------
+
+**BOX 4 The Hill numbers as power mean of order** $q$
+
+Let us introduce the concept of the power mean of order $q$ of a real value random variable $X$ (e.g., Leinster 2021) as
+
+$$
+M_{q} (x_i,p_i)
+=
+\left(\sum_{i=1}^{S} p_i\,x_i^q\right)^{1/q} 
+$$ where $p_i$ are the frequencies of the several $x_i$.
+
+If $x_i = p_i$, then for $q-1$ we obtain $$
+M_{q-1}
+=
+\left(\sum_{i=1}^{S} p_i\,p_i^{\,q-1}\right)^{1/(q-1)}
+=
+\left(\sum_{i=1}^{S} p_i^q\right)^{1/(q-1)},
+$$ from where, and comparing with formula [-@eq-hill-numbers] reveals that
+
+$$
+{}^{q}D = \frac{1}{M_{q-1}},
+$$ hence, the Hill numbers are the inverse of the power mean of order $q-1$. Thus, ${}^{1}D = 1/M_0$ and notice that once again we run into a division by zero. Following the same strategy of taking the limit when $q \to 1$, we get 
+$$
+M_0
+=
+\exp\!\left(\sum_{i=1}^{S} p_i \ln p_i\right) = \prod_{i=1}^{S} p_i^{p_i}.
+$$
+
+This is the definition of the "weighted geometric mean". The important point is that all the $\ln p_i$ are equally weighted by their relative abundances, so this shows why $q=1$ is the transition point: the weighting remains proportional to species frequency, but the mean no longer disproportionately emphasises either low or high abundances.
+
+------------------------------------------------------------------------
+
+$$
+M_0
+=
+\exp\!\left(\sum_{i=1}^{S} \ln p_i^{p_i}\right)= \prod_{i=1}^{S} p_i^{p_i}.
+$$
+
+The order of this mean is $q-1$. When $q<1$, it is a negative-order mean, which is especially sensitive to small abundances; when $q>1$, it is a positive-order mean, which gives greater influence to large abundances. At $q=1$, the mean’s order is zero: the weighted generalised mean becomes the **weighted geometric mean**,
+
+$$
+M_0
+=
+\exp\!\left(\sum_{i=1}^{S} p_i \ln p_i\right).
+$$
+
+Taking its reciprocal gives the limiting Hill number:
+
+$$
+{}^{1}D
+=
+\frac{1}{M_0}
+=
+\exp\!\left(-\sum_{i=1}^{S}p_i\ln p_i\right)
+=
+\exp(H').
+$$
+
+This shows why $q=1$ is the transition point: the weighting remains proportional to species frequency, but the mean no longer disproportionately emphasises either low or high abundances.
+
+One nuance: species are frequency-weighted in the generalised-mean representation for **all** $q$. What changes with $q$ is the order of the mean—and therefore whether low or high abundances receive *disproportionate* influence. Also, the Hill-number formula is undefined at $q=1$ as written, but its limit exists and yields the expression above.
+
+END BOX 4
+

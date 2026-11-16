@@ -1,6 +1,6 @@
 ---
 execute:
-  freeze: auto  # re-render only when source changes
+  freeze: auto  # re-render only when source change
 ---
 
 # Ecophysiology and the climate space: when to bask in the sun?
@@ -27,15 +27,15 @@ The total flow of energy into the lizard, also known as the heat exchange equati
 
 where
 
--   $f$ is the energy flow (cal/h),
+- $f$ is the energy flow (cal/h),
 
--   $q$ is the quantity of heat in the solar radiation (cal/h),
+- $q$ is the quantity of heat in the solar radiation (cal/h),
 
--   $k$ is the convection coefficient (cal/h/ºC),
+- $k$ is the convection coefficient (cal/h/ºC),
 
--   $b$ is the body temperature (ºC) and
+- $b$ is the body temperature (ºC) and
 
--   $a$ is the air temperature (ºC).
+- $a$ is the air temperature (ºC).
 
 If the energy flow is positive, then the lizard is warming, while if it is negative then the lizard is cooling. The equilibrium[^ecophysiology-1] happens when the energy flow is zero and so the the lizard is neither cooling nor warming. If we solve @eq-heat for equilibrium by replacing $f$ with zero and expanding the right-hand side of the equation,
 
@@ -132,7 +132,7 @@ polygon(X,Y,col="green")
 Now that we have the climate space we can plot on top of it some empirical data of how the conditions are in the field during the day. We can for instance consider two micro-habitats, a rock (in the sun) and a bush (in the shade). Suppose we obtain some data from temperature loggers that were installed in each micro-habitat , recording every three hours the values of temperature and radiation as tabled below.
 
 | Time (hh:mm) | Radiation rock (cal/h) | Radiation bush (cal/h) | Temperature (ºC) |
-|--------------|------------------------|------------------------|------------------|
+|-----------------|-------------------|-------------------|-----------------|
 | 00:00        | 150                    | 150                    | 18               |
 | 03:00        | 150                    | 150                    | 13               |
 | 06:00        | 800                    | 450                    | 10               |

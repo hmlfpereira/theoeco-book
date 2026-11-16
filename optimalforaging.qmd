@@ -21,11 +21,11 @@ Many searching predators are themselves preys to other animals. For instance shr
 
 A searching predator can adopt one of the following three strategies:
 
--   Strategy 1: to consume only prey items of type 1
+- Strategy 1: to consume only prey items of type 1
 
--   Strategy 2: to consumer only prey items of type 2
+- Strategy 2: to consumer only prey items of type 2
 
--   Strategy 1&2: to consumer both types of prey
+- Strategy 1&2: to consumer both types of prey
 
 In order to find out which strategy should be adopted by the forager, one needs to calculate the average spent per food item in each of the strategies. For Strategy 1 the average time per item, $T_1$ is the sum of the amount of time the predator needs to encounter a prey with the amount of time that it takes to process that prey. As the abundance is measured in encounter rates, i.e. prey items per unit time, the inverse of that is the waiting time for a prey. Therefore we have for Strategy 1,
 
@@ -189,34 +189,32 @@ $$
 A=\int_{0}^{r_c}a \pi r dr
 $$ {#eq-total-abundance}
 
-This is an easy integral, but let's see how we could solve it in R, as this will be handy for the next integral. We can do symbolic math in R using the package Ryacas. Ryacas provides an interface to Yacas, Yet Another Computer Algebra System. We use ysim() to tell Yacas to integrate the product $a \ \pi \ r$ from 0 to $r_c$ with the function integrate(),
+This is an easy integral, but let's see how we could solve it in R, as this will be handy for the next integral. We can do symbolic math in R using the package `rim`. Rim provides an interface to Maxima, an open source computer algebra system (<https://maxima.sourceforge.io>). We first load the library, and setup some options to produce beautiful typeset output in LaTeX,
 
 ```{r}
-#| message: false
-library(Ryacas)
-A=ysym("Integrate(r, 0, rc) a * Pi * r")
+library(rim)
+maxima.options(engine.format = "latex", 
+               engine.label = FALSE,
+               inline.format = "latex", 
+               inline.label = FALSE)
 ```
 
-Often we would like to see mathematical equations beautifully typeset. This can be done using TeX, and Ryacas does provide a way for layout the equation as a TeX command. However, for Quarto to recognize a TeX command, we need to start it and close it with a "\$\$". As we will be doing this a lot, I wrote a little function, tex_quarto, that does this and also takes an optional prefix that can be put in the beginning (e.g. the variable name and an identity sign).
+We can now do code chunks using Maxima. We just have to replace `{r}` with `{maxima}` in the beginning of the chunk. Let's try to to integrate the product $a \ \pi \ r$ from 0 to $r_c$ with the function integrate()[^optimalforaging-1],
 
-```{r}
-tex_quarto = function (x, prefix=NULL)
-  cat("$$", prefix, tex(x), "$$")
+[^optimalforaging-1]: Note that this only displays the equation in typeset mode when you render the Quarto document into html or PDF. In notebook output when you just run the chunk it outputs an ASCII expression.
+
+```{maxima}
+#| echo: fenced
+A:integrate(a * %pi * r, r, 0, rc);
 ```
 
-Now, we can output the result of the integral from @eq-total-abundance in a beautiful way as[^optimalforaging-1],
+Note that in Maxima, assignments are done with the operator "`:`", and that statements should be closed with a "`;`".
 
-[^optimalforaging-1]: Note that this only displays the typeset equation when you render the Quarto document into html or PDF, and it is not shown directly on the notebook output mode. You also need to add the command "#\| output: asis" in the beginning of the R chunk to tell Quarto it needs to take the output literally.
+The waiting time is just the inverse of the total abundance,
 
-```{r}
-#| output: asis
-tex_quarto(A, "A=")
-```
-
-The waiting time is just the inverse of the total abundance, $$t_w=1/A$$ or in R code,
-
-```{r}
-tw=1/A
+```{maxima}
+#| echo: fenced
+tw:1/A;
 ```
 
 ![Feeding territory of a sit-and-wait predator with radius $r_c$.](images/FeedingTerritory.jpg){#fig-feedingterritory}
@@ -227,13 +225,11 @@ $$
 t_p=\int_{0}^{r_c} \frac{2r}{v} \frac{a \pi r}{A} \ dr
 $$
 
-Let's calculate this more complicated integral in R, substituting the value of the total abundance that we calculated above using the function with_value(), and simplifying the result with simplify(),
+Let's calculate this more complicated integral in Maxima,
 
-```{r}
-#| output: asis
-tp=ysym("Integrate(r, 0, rc) (2 * r / v) * (a * Pi * r) / A")
-tp = with_value(tp, ysym("A"), A) |> simplify()
-tex_quarto(tp, "t_p=")
+```{maxima}
+#| echo: fenced
+tp: integrate((2 * r / v) * (a * %pi * r) / A, r, 0, rc);
 ```
 
 The average time per prey item consumed is simply the sum of the average pursuit time, $t_p$, and the average waiting time $t_w$,
@@ -246,18 +242,18 @@ Therefore the energy per time that the optimal sit-and-wait predator wants to ma
 
 $$
 ET(r_c)=\frac{e-e_p t_p(r_c)-e_w t_w(r_c)}{t_p(r_c)+t_w(r_c)}
-$$
+$$ {#eq-ET_sit_and_wait}
 
-where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius $r_c$. Let's calculate this expression in R,
+where we highlighted that the wating time and the pursuit time are functions of the territory size or cut-off radius $r_c$. Let's calculate this expression on Maxima and bring it into R using the `output.var` option[^optimalforaging-2],
 
-```{r}
-ET=ysym("(e-ep*tp-ew*tw)/(tp+tw)")
-ET=with_value(ET,ysym("tp"),tp)
-ET=with_value(ET,ysym("tw"),tw)
-simplify(ET)
+[^optimalforaging-2]: Please note that the chunk below is shown in "source" mode to highlight the addition of the output.var option,
+
+```{maxima, output.var="max.out"}
+#| echo: fenced
+ET: (e - ep * tp - ew * tw) / (tp + tw);
 ```
 
-Let's plot the energy per time as a function of the territory size. We have to start by giving some values to the different paramerters.
+Let's plot the energy per time as a function of the territory size. We have to start by giving some values to the different parameters and store the result from the return from Maxima max.out,
 
 ```{r}
 ew=0.1
@@ -265,25 +261,20 @@ ep=1
 v=0.5
 a=0.005
 e=10
+ET=rim_global()$max.out[[1]]
 ```
 
-Next we convert the yacas expresssion for ET into a R expression using `yac_expr()` and then write a function that evaluates that R expression for a given value of rc,
+We can now produce the plot by creating a vector with a range of values for $r_c$ and then using the function `eval()` to evalute the values of ET for each value of $r_c$,
 
 ```{r}
-ET_expr = yac_expr(ET)
-
-ETfun <- function(rc) 
-  eval(ET_expr)
-```
-
-We can now produce the plot by creating a vector with a range of values for $r_c$ and then plotting the function `ETfun,`
-
-```{r}
+#| label: fig-energy-sit-and-wait
+#| fig-cap: "The energy per unit of time as a function of the radius."
+#| 
 rc<-seq(0.001,4,0.001)   #Radius of the hunting ground 
-plot(rc,ETfun(rc),type="l",
+plot(rc,eval(ET),type="l",
      xlab="Radius of the territory",
      ylab="Energy per unit of time (cal/sec) ")
- abline(0,0)
+abline(0,0)
 ```
 
 This plot shows that the energy per time, $ET$ is a uni-modal function of the territory size $r_c$. At zero radius, the energy per time is negative and equals the energy per unit of time while waiting, i.e. there are only costs and no benefits of the territory. As the territory size increases, the energy per time starts to increase and becomes positive, reaching a maximum value at a bit more than 2m for the parameters above. Then, as the costs of running very far to chase prey start exceeding the benefits, the energy per unit time declines again.
@@ -294,21 +285,40 @@ $$
 \max_{r_c}(ET)
 $$
 
-We can find the analytical solution of the maximum by differentiating @eq-maxet in order to the cut-off radius and equalizing it to zero,
+We can find the analytical solution of the maximum by differentiating @eq-ET_sit_and_wait in order to the cut-off radius and equalizing it to zero,
 
 $$
  \frac{\mathrm{d}ET}{\mathrm{d}r_c}=0
 $$
 
-This means that we try to find the place in which the tangent to the function has slope zero, i.e. it is horizontal. This can be the maximum or the minimum of a function, and often one has to investigate further by looking at the sign of the second derivative, but not in this case. So, let's solve this in R,
+This means that we try to find the place in which the tangent to the function has slope zero, i.e. it is horizontal. This can be the maximum or the minimum of a function, and often one has to investigate further by looking at the sign of the second derivative, but not in this case. So, let's solve this in Maxima,
 
-```{r}
-dET = deriv(ET,"rc") 
-rcopt=solve(dET, "rc")
-simplify(rcopt)
+```{maxima}
+#| echo: fenced
+
+dET: diff(ET, rc);
+rc_opt_sol: solve(dET = 0, rc);
+
 ```
 
-If you wanna read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden [-@shafir1998a].
+This is a messy formula, with four solutions. Let's try to explore the numerical values. First we need to extract just the right hand side of each equality by mapping the function rhs to the expression above and storing the result in max_out,
+
+```{maxima, output.var="max.out"}
+#| echo: fenced
+
+rc_opt : map(rhs, rc_opt_sol);
+```
+
+Next we just need to numerically evaluate the solution returned from Maxima in R,
+
+```{r}
+rc_opt = rim_global()$max.out[[1]]
+eval(rc_opt)
+```
+
+And voilà, the third root is the optimal cut-off radius that we can observe in @fig-energy-sit-and-wait .
+
+If you would like read about an empirical test of this model, I suggest the paper by Shaffir and Rougharden [-@shafir1998a].
 
 ## Does natural selection maximizes fitness?
 
@@ -316,12 +326,12 @@ Animals do not solve mathematical equations, at least in the way we do. So, how 
 
 So the idea that some behaviors are genetically "programmed" allows us to model the dynamics of behavior acquisition in a population of individuals, and explore the question of whether natural selection maximizes fitness. We consider a very simple model of one genetic loci with two alleles, represented by the letters A and a, in a a haploid species (for a diploid model see for instance Roughgarden et al).
 
--   Simple models of population genetics for frequency independent selection.
+- Simple models of population genetics for frequency independent selection.
 
--   main theorem of natural selection and climbing the fitness landscape or Fisher's fundamental theorem-
+- main theorem of natural selection and climbing the fitness landscape or Fisher's fundamental theorem-
 
--   This approach is rooted in the idea that natural selection, under certain conditions, maximizes the average fitness of individuals in a population.
+- This approach is rooted in the idea that natural selection, under certain conditions, maximizes the average fitness of individuals in a population.
 
 ## Statistical confrontation: finding the maximum
 
--   Explain how to find the maximum of a function with R. Parallel between genetic algorithms and optimization.
+- Explain how to find the maximum of a function with R. Parallel between genetic algorithms and optimization.
